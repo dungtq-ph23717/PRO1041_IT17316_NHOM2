@@ -5,7 +5,7 @@
 package Repository;
 
 //import repositores.DBContext;
-import DomainModels.Combo;
+import DomainModels.ComboModel;
 import Utilities.DBContext;
 import ViewModels.ComboReponse;
 import java.sql.*;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class ComboRepository {
 
-    public boolean add_cb(Combo cb) {
+    public boolean add_cb(ComboModel cb) {
         try ( Connection conn = DBContext.getConnection()) {
             String sql = "insert into Combo(MaCB,TenCB,GiaBan)values(?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class ComboRepository {
         }
     }
 
-    public boolean update_cb(Combo cb) {
+    public boolean update_cb(ComboModel cb) {
         try ( Connection conn = DBContext.getConnection()) {
             Statement st = conn.createStatement();
             String sql = "UPDATE Combo SET MACB = '" + cb.getMaCB() + "',TenCB = '" + cb.getTenCB() + "',GiaBan = '" + cb.getGiaBan() + "' WHERE ID = '" + cb.getId() + "'";
@@ -47,7 +47,7 @@ public class ComboRepository {
         }
     }
 
-    public boolean delete_cb(Combo obj) {
+    public boolean delete_cb(ComboModel obj) {
         try ( Connection conn = DBContext.getConnection()) {
             Statement st = conn.createStatement();
             String DELETE_COMBO = "DELETE FROM COMBO WHERE ID = '" + obj.getId() + "'";
