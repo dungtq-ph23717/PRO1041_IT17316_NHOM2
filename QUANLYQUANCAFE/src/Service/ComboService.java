@@ -5,7 +5,7 @@
 package Service;
 
 import ViewModels.ComboReponse;
-import DomainModels.Combo;
+import DomainModels.ComboModel;
 import java.util.List;
 /**
  *
@@ -13,8 +13,8 @@ import java.util.List;
  */
 public interface ComboService {
      List<ComboReponse>get_all();
-    String add(Combo a);
-    String update(Combo a);
-    String delete(Combo a);   
+    String add(ComboModel a);
+    String update(ComboModel a);
+    String delete(ComboModel a);   
     ComboReponse getById(String id);
 }
