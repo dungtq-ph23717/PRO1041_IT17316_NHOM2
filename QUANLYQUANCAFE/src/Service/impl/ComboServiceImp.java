@@ -8,7 +8,7 @@ import Service.ComboService;
 import ViewModels.ComboReponse;
 import java.util.ArrayList;
 import java.util.List;
-import DomainModels.Combo;
+import DomainModels.ComboModel;
 import Repository.ComboRepository;
 /**
  *
@@ -25,21 +25,21 @@ public class ComboServiceImp implements ComboService{
     }
 
     @Override
-    public String add(Combo a) {
+    public String add(ComboModel a) {
         if (_ComboRepository.add_cb(a)) {
             return "Thêm thành công";
         }return "Thêm thất bại";
     }
 
     @Override
-    public String update(Combo a) {
+    public String update(ComboModel a) {
        if (_ComboRepository.update_cb(a)) {
             return "Sửa thành công";
         }return "Sửa thất bại";
     }
 
     @Override
-    public String delete(Combo a) {
+    public String delete(ComboModel a) {
          if (_ComboRepository.delete_cb(a)) {
             return "Xóa thành công";
         }return "Xóa thất bại";
