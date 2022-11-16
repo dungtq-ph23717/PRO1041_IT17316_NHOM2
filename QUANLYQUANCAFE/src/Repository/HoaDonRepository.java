@@ -4,6 +4,7 @@
  */
 package Repository;
 
+import DomainModels.HoaDonChiTietModel;
 import DomainModels.HoaDonModel;
 import Utilities.DBContext;
 import ViewModels.HoaDon;
@@ -35,7 +36,7 @@ public class HoaDonRepository {
         return null;
     }
 
-    public boolean add(HoaDonModel hd) {
+    public boolean add(HoaDonModel hd, HoaDonChiTietModel hdct) {
         String query = "INSERT INTO [dbo].[HoaDon]\n"
                 + "           ([MaHD]\n"
                 + "           ,[NgayLapHD]\n"
@@ -56,7 +57,7 @@ public class HoaDonRepository {
         return check > 0;
     }
 
-    public boolean update(HoaDonModel hd, String ma) {
+    public boolean update(HoaDonModel hd, HoaDonChiTietModel hdct, String ma) {
         String query = "UPDATE [dbo].[HoaDon]\n"
                 + "   SET [MaHD] = ?\n"
                 + "      ,[NgayLapHD] = ?\n"
@@ -91,8 +92,8 @@ public class HoaDonRepository {
     }
 
     public static void main(String[] args) {
-        HoaDonModel hd = new HoaDonModel("hh", "ddc", "02/01/2002", 1, "chuyen khoan", "", "", "");
-       boolean add = new HoaDonRepository().add(hd);
+//        HoaDonModel hd = new HoaDonModel("hh", "ddc", "02/01/2002", 1, "chuyen khoan", "", "", "");
+//       boolean add = new HoaDonRepository().add(hd);
         //boolean update = new HoaDonRepository().update(hd, "cc");
         //boolean delete = new HoaDonRepository().delete("ddc");
         List<HoaDon> a = new HoaDonRepository().getAll();
