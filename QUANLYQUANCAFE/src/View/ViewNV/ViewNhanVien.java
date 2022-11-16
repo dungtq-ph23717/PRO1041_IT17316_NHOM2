@@ -4,7 +4,7 @@
  */
 package View;
 
-import View.ViewNV.ViewKhuyenMai;
+import View.ViewQL.ViewKhuyenMai;
 import View.ViewQL.*;
 import View.ViewLogin;
 import View.ViewNV.ViewLichSu;
@@ -59,8 +59,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         ThanhToan = new javax.swing.JPanel();
         txtThanhToan = new javax.swing.JLabel();
-        QuanLyKhuyenMai = new javax.swing.JPanel();
-        txtQuanLyKhuyenMai = new javax.swing.JLabel();
         LichSuOrder = new javax.swing.JPanel();
         txtLichSuOrder = new javax.swing.JLabel();
         QuanLyBan = new javax.swing.JPanel();
@@ -68,6 +66,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
         DangXuat = new javax.swing.JPanel();
         txtDangXuat = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        QuanLyKhuyenMai = new javax.swing.JPanel();
+        txtQuanLyKhuyenMai = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,44 +108,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThanhToanLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        QuanLyKhuyenMai.setBackground(new java.awt.Color(156, 132, 122));
-
-        txtQuanLyKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtQuanLyKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtQuanLyKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/promotion (1).png"))); // NOI18N
-        txtQuanLyKhuyenMai.setText("      Khuyến mãi");
-        txtQuanLyKhuyenMai.setToolTipText("");
-        txtQuanLyKhuyenMai.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                txtQuanLyKhuyenMaiMouseMoved(evt);
-            }
-        });
-        txtQuanLyKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtQuanLyKhuyenMaiMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtQuanLyKhuyenMaiMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout QuanLyKhuyenMaiLayout = new javax.swing.GroupLayout(QuanLyKhuyenMai);
-        QuanLyKhuyenMai.setLayout(QuanLyKhuyenMaiLayout);
-        QuanLyKhuyenMaiLayout.setHorizontalGroup(
-            QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 321, Short.MAX_VALUE)
-            .addGroup(QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyKhuyenMaiLayout.createSequentialGroup()
-                    .addGap(0, 74, Short.MAX_VALUE)
-                    .addComponent(txtQuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-        QuanLyKhuyenMaiLayout.setVerticalGroup(
-            QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-            .addGroup(QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(txtQuanLyKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
         );
 
         LichSuOrder.setBackground(new java.awt.Color(156, 132, 122));
@@ -256,6 +218,44 @@ public class ViewNhanVien extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/zyro-image (1).png"))); // NOI18N
         jLabel1.setText("DrinkPush");
 
+        QuanLyKhuyenMai.setBackground(new java.awt.Color(156, 132, 122));
+
+        txtQuanLyKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtQuanLyKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtQuanLyKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/promotion (1).png"))); // NOI18N
+        txtQuanLyKhuyenMai.setText("        Khuyến mãi");
+        txtQuanLyKhuyenMai.setToolTipText("");
+        txtQuanLyKhuyenMai.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                txtQuanLyKhuyenMaiMouseMoved(evt);
+            }
+        });
+        txtQuanLyKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtQuanLyKhuyenMaiMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtQuanLyKhuyenMaiMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout QuanLyKhuyenMaiLayout = new javax.swing.GroupLayout(QuanLyKhuyenMai);
+        QuanLyKhuyenMai.setLayout(QuanLyKhuyenMaiLayout);
+        QuanLyKhuyenMaiLayout.setHorizontalGroup(
+            QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyKhuyenMaiLayout.createSequentialGroup()
+                    .addGap(0, 37, Short.MAX_VALUE)
+                    .addComponent(txtQuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        QuanLyKhuyenMaiLayout.setVerticalGroup(
+            QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+            .addGroup(QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(txtQuanLyKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -268,7 +268,11 @@ public class ViewNhanVien extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(QuanLyKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(QuanLyKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,13 +283,16 @@ public class ViewNhanVien extends javax.swing.JFrame {
                 .addComponent(ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(LichSuOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(QuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(QuanLyBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(DangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(303, 303, 303)
+                    .addComponent(QuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(303, Short.MAX_VALUE)))
         );
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -298,7 +305,7 @@ public class ViewNhanVien extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 676, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
