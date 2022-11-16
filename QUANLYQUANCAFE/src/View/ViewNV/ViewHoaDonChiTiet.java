@@ -1,25 +1,23 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package View.ViewQL;
+package View.ViewNV;
 
-import javax.swing.plaf.basic.BasicInternalFrameUI;
+import DomainModels.HoaDonModel;
 
 /**
  *
  * @author Admin
  */
-public class ViewKhuyenMai extends javax.swing.JInternalFrame {
+public class ViewHoaDonChiTiet extends javax.swing.JDialog {
 
     /**
-     * Creates new form ViewKhuyenMai
+     * Creates new form ViewHoaDonChiTiet
      */
-    public ViewKhuyenMai() {
+    public ViewHoaDonChiTiet(java.awt.Frame parent, boolean modal, HoaDonModel hd) {
+        super(parent, modal);
         initComponents();
-        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        BasicInternalFrameUI uI = (BasicInternalFrameUI)this.getUI();
-        uI.setNorthPane(null);
     }
 
     /**
@@ -31,20 +29,26 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 846, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * @param args the command line arguments
+     */
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

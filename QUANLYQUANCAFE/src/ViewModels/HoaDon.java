@@ -15,7 +15,6 @@ public class HoaDon {
     private String ngayLapHD;
     private double thanhTien;
     private String phuongThucThanhToan;
-    private String IDKH;
     private String IDNV;
     private String IDKM;
     private String IDBan;
@@ -23,13 +22,12 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDKH, String IDNV, String IDKM, String IDBan) {
+    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDNV, String IDKM, String IDBan) {
         this.ID = ID;
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
         this.thanhTien = thanhTien;
         this.phuongThucThanhToan = phuongThucThanhToan;
-        this.IDKH = IDKH;
         this.IDNV = IDNV;
         this.IDKM = IDKM;
         this.IDBan = IDBan;
@@ -75,13 +73,6 @@ public class HoaDon {
         this.phuongThucThanhToan = phuongThucThanhToan;
     }
 
-    public String getIDKH() {
-        return IDKH;
-    }
-
-    public void setIDKH(String IDKH) {
-        this.IDKH = IDKH;
-    }
 
     public String getIDNV() {
         return IDNV;
@@ -109,7 +100,11 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", IDKH=" + IDKH + ", IDNV=" + IDNV + ", IDKM=" + IDKM + ", IDBan=" + IDBan + '}';
+        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", IDNV=" + IDNV + ", IDKM=" + IDKM + ", IDBan=" + IDBan + '}';
+    }
+
+    public Object[] toRowData() {
+        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan};
     }
 
 }
