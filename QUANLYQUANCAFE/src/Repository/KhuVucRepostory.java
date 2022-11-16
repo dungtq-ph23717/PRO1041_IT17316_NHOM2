@@ -10,6 +10,7 @@ import ViewModels.KhuVuc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class KhuVucRepostory {
                 list.add(ban);
             }
             return list;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return null;
@@ -54,7 +55,7 @@ public class KhuVucRepostory {
             ps.setObject(2, kv.getTenKV());
             ps.setObject(3, kv.getTrangThai());
             check = ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
@@ -67,7 +68,7 @@ public class KhuVucRepostory {
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ma);
             check = ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return check > 0;
@@ -86,7 +87,7 @@ public class KhuVucRepostory {
             ps.setObject(3, kv.getTrangThai());
             ps.setObject(4, ma);
             check = ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
         return check > 0;

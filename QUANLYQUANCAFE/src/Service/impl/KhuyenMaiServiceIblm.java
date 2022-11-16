@@ -4,10 +4,60 @@
  */
 package Service.impl;
 
+import DomainModels.KhuyenMaiModel;
+import Service.ServiceKhuyenMai;
+import ViewModels.KhuyenMai;
+import java.util.List;
+
 /**
  *
  * @author vietv
  */
-public class KhuyenMaiServiceIblm {
-    
+public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
+
+    private Repository.KhuyenMaiRepository resKM = new Repository.KhuyenMaiRepository();
+
+    @Override
+    public List<KhuyenMai> getAll() {
+        return resKM.getAll();
+    }
+
+    @Override
+    public List<KhuyenMai> searchTheoMaKM(String maKM) {
+        return resKM.searchMaKM(maKM);
+    }
+
+    @Override
+    public String add(KhuyenMaiModel km) {
+        if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || km.getMucGiam().isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
+            return "Khong dc de trong !";
+        }
+        boolean add = resKM.add(km);
+        if (add) {
+            return "Succesfully!";
+        } else {
+            return "Failed!";
+        }
+    }
+
+    @Override
+    public String update(KhuyenMaiModel km, String maKM) {
+        boolean update = resKM.update(km, maKM);
+        if (update) {
+            return "Succesfully!";
+        } else {
+            return "Failed!";
+        }
+    }
+
+    @Override
+    public String delete(String maKM) {
+        boolean delete = resKM.xoa(maKM);
+        if (delete) {
+            return "Succesfully!";
+        } else {
+            return "Failed!";
+        }
+    }
+
 }
