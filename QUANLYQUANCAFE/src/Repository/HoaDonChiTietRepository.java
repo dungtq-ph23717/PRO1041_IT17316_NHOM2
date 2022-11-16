@@ -18,18 +18,21 @@ import java.util.List;
  *
  * @author vietv
  */
-public class HoaDonRepository {
+public class HoaDonChiTietRepository {
 
-    public List<HoaDon> getAll() {
-        String query = "SELECT ID,MAHD,NgayLapHD,ThanhTien,PhuongThucThanhToan,Soluong,Giatien,Ghichu FROM HoaDon HD JOIN HoaDonChiTiet HDCT\n"
-                + "ON HD.ID = HDCT.IDHD";
+    public List<HoaDonChiTiet> getAll() {
+        String query = "SELECT [IDSP]\n"
+                + "      ,[IDHD]\n"
+                + "      ,[Soluong]\n"
+                + "      ,[Giatien]\n"
+                + "      ,[Ghichu]\n"
+                + "  FROM [dbo].[HoaDonChiTiet]";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
-            List<HoaDon> list = new ArrayList<>();
+            List<HoaDonChiTiet> list = new ArrayList<>();
             while (rs.next()) {
-                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(6), rs.getDouble(7), rs.getString(8));
-                HoaDon hd = new HoaDon(rs.getString(1), hdct, rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5));
-                list.add(hd);
+                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(1), rs.getDouble(2), rs.getString(3));
+                list.add(hdct);
             }
             return list;
         } catch (Exception e) {
@@ -94,13 +97,13 @@ public class HoaDonRepository {
     }
 
     public static void main(String[] args) {
-//        HoaDonModel hd = new HoaDonModel("hh", "ddc", "02/01/2002", 1, "chuyen khoan", "", "", "");
-//        boolean add = new HoaDonRepository().add(hd);
-//        //boolean update = new HoaDonRepository().update(hd, "cc");
-//        //boolean delete = new HoaDonRepository().delete("ddc");
+        HoaDonModel hd = new HoaDonModel("hh", "ddc", "02/01/2002", 1, "chuyen khoan", "", "", "");
+        boolean add = new HoaDonRepository().add(hd);
+        //boolean update = new HoaDonRepository().update(hd, "cc");
+        //boolean delete = new HoaDonRepository().delete("ddc");
         List<HoaDon> a = new HoaDonRepository().getAll();
         for (HoaDon hoaDon : a) {
-            System.out.println(hoaDon);
+            System.out.println(hoaDon.toString());
         }
 //        System.out.println(add);
     }

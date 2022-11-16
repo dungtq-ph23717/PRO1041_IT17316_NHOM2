@@ -11,6 +11,7 @@ package ViewModels;
 public class HoaDon {
 
     private String ID;
+    private HoaDonChiTiet hdct;
     private String maHD;
     private String ngayLapHD;
     private double thanhTien;
@@ -22,8 +23,18 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDNV, String IDKM, String IDBan) {
+    public HoaDon(String ID, HoaDonChiTiet hdct, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan) {
         this.ID = ID;
+        this.hdct = hdct;
+        this.maHD = maHD;
+        this.ngayLapHD = ngayLapHD;
+        this.thanhTien = thanhTien;
+        this.phuongThucThanhToan = phuongThucThanhToan;
+    }
+
+    public HoaDon(String ID, HoaDonChiTiet hdct, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDNV, String IDKM, String IDBan) {
+        this.ID = ID;
+        this.hdct = hdct;
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
         this.thanhTien = thanhTien;
@@ -39,6 +50,14 @@ public class HoaDon {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public HoaDonChiTiet getHdct() {
+        return hdct;
+    }
+
+    public void setHdct(HoaDonChiTiet hdct) {
+        this.hdct = hdct;
     }
 
     public String getMaHD() {
@@ -73,7 +92,6 @@ public class HoaDon {
         this.phuongThucThanhToan = phuongThucThanhToan;
     }
 
-
     public String getIDNV() {
         return IDNV;
     }
@@ -100,11 +118,11 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", IDNV=" + IDNV + ", IDKM=" + IDKM + ", IDBan=" + IDBan + '}';
+        return "HoaDon{" + "ID=" + ID + ", hdct=" + hdct + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", IDNV=" + IDNV + ", IDKM=" + IDKM + ", IDBan=" + IDBan + '}';
     }
 
     public Object[] toRowData() {
-        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan};
+        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, hdct.getSoLuong(), hdct.getGiaTien(), hdct.getGhiChu()};
     }
 
 }

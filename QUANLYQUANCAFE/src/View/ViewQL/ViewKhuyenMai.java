@@ -282,7 +282,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
                             .addComponent(bltAdd)
                             .addComponent(bltUpdate)
                             .addComponent(bltXoa))))
-                .addGap(45, 45, 45)
+                .addGap(40, 40, 40)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
