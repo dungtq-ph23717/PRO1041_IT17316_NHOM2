@@ -34,13 +34,11 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
 
         ThanhToan.setBackground(clickedColor);
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
 
         ViewThanhToan m = new ViewThanhToan();
         jDesktopPane1.removeAll();
@@ -66,8 +64,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         DangXuat = new javax.swing.JPanel();
         txtDangXuat = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        QuanLyKhuyenMai = new javax.swing.JPanel();
-        txtQuanLyKhuyenMai = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,7 +75,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         txtThanhToan.setBackground(new java.awt.Color(156, 132, 122));
         txtThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtThanhToan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/wallet (1).png"))); // NOI18N
         txtThanhToan.setText("     Bán hàng");
         txtThanhToan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -114,7 +109,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
 
         txtLichSuOrder.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtLichSuOrder.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtLichSuOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/history (1).png"))); // NOI18N
         txtLichSuOrder.setText("      Lịch sử order");
         txtLichSuOrder.setToolTipText("");
         txtLichSuOrder.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -150,7 +144,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
 
         txtQuanLyBan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtQuanLyBan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtQuanLyBan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/side-table (2).png"))); // NOI18N
         txtQuanLyBan.setText("      Bàn");
         txtQuanLyBan.setToolTipText("");
         txtQuanLyBan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -184,7 +177,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
 
         txtDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtDangXuat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logout (1).png"))); // NOI18N
         txtDangXuat.setText("      Đăng xuất");
         txtDangXuat.setToolTipText("");
         txtDangXuat.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -215,46 +207,7 @@ public class ViewNhanVien extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/zyro-image (1).png"))); // NOI18N
         jLabel1.setText("DrinkPush");
-
-        QuanLyKhuyenMai.setBackground(new java.awt.Color(156, 132, 122));
-
-        txtQuanLyKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtQuanLyKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtQuanLyKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/promotion (1).png"))); // NOI18N
-        txtQuanLyKhuyenMai.setText("        Khuyến mãi");
-        txtQuanLyKhuyenMai.setToolTipText("");
-        txtQuanLyKhuyenMai.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                txtQuanLyKhuyenMaiMouseMoved(evt);
-            }
-        });
-        txtQuanLyKhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtQuanLyKhuyenMaiMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtQuanLyKhuyenMaiMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout QuanLyKhuyenMaiLayout = new javax.swing.GroupLayout(QuanLyKhuyenMai);
-        QuanLyKhuyenMai.setLayout(QuanLyKhuyenMaiLayout);
-        QuanLyKhuyenMaiLayout.setHorizontalGroup(
-            QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyKhuyenMaiLayout.createSequentialGroup()
-                    .addGap(0, 37, Short.MAX_VALUE)
-                    .addComponent(txtQuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-        QuanLyKhuyenMaiLayout.setVerticalGroup(
-            QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-            .addGroup(QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(txtQuanLyKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -268,11 +221,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(QuanLyKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,14 +233,9 @@ public class ViewNhanVien extends javax.swing.JFrame {
                 .addComponent(LichSuOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(QuanLyBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
                 .addComponent(DangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(303, 303, 303)
-                    .addComponent(QuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(303, Short.MAX_VALUE)))
         );
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -333,7 +276,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtThanhToanMouseMoved
 
     private void txtThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtThanhToanMouseClicked
@@ -347,7 +289,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtThanhToanMousePressed
 
     private void txtLichSuOrderMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLichSuOrderMouseMoved
@@ -355,7 +296,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrder.setBackground(clickedColor);
         QuanLyBan.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtLichSuOrderMouseMoved
 
     private void txtLichSuOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLichSuOrderMouseClicked
@@ -369,7 +309,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrder.setBackground(clickedColor);
         QuanLyBan.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtLichSuOrderMousePressed
 
     private void txtQuanLyBanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyBanMouseMoved
@@ -377,7 +316,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(clickedColor);
         DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtQuanLyBanMouseMoved
 
     private void txtQuanLyBanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyBanMouseClicked
@@ -391,7 +329,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(clickedColor);
         DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtQuanLyBanMousePressed
 
     private void txtDangXuatMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDangXuatMouseMoved
@@ -399,7 +336,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(defaulColor);
         DangXuat.setBackground(clickedColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtDangXuatMouseMoved
 
     private void txtDangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDangXuatMouseClicked
@@ -413,30 +349,7 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(defaulColor);
         DangXuat.setBackground(clickedColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtDangXuatMousePressed
-
-    private void txtQuanLyKhuyenMaiMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyKhuyenMaiMouseMoved
-        ThanhToan.setBackground(defaulColor);
-        LichSuOrder.setBackground(defaulColor);
-        QuanLyBan.setBackground(defaulColor);
-        DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(clickedColor);
-    }//GEN-LAST:event_txtQuanLyKhuyenMaiMouseMoved
-
-    private void txtQuanLyKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyKhuyenMaiMouseClicked
-        ViewKhuyenMai m = new ViewKhuyenMai();
-        jDesktopPane1.removeAll();
-        jDesktopPane1.add(m).setVisible(true);
-    }//GEN-LAST:event_txtQuanLyKhuyenMaiMouseClicked
-
-    private void txtQuanLyKhuyenMaiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyKhuyenMaiMousePressed
-        ThanhToan.setBackground(defaulColor);
-        LichSuOrder.setBackground(defaulColor);
-        QuanLyBan.setBackground(defaulColor);
-        DangXuat.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(clickedColor);
-    }//GEN-LAST:event_txtQuanLyKhuyenMaiMousePressed
 
     /**
      * @param args the command line arguments
@@ -478,7 +391,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
     private javax.swing.JPanel DangXuat;
     private javax.swing.JPanel LichSuOrder;
     private javax.swing.JPanel QuanLyBan;
-    private javax.swing.JPanel QuanLyKhuyenMai;
     private javax.swing.JPanel ThanhToan;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
@@ -486,7 +398,6 @@ public class ViewNhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel txtDangXuat;
     private javax.swing.JLabel txtLichSuOrder;
     private javax.swing.JLabel txtQuanLyBan;
-    private javax.swing.JLabel txtQuanLyKhuyenMai;
     private javax.swing.JLabel txtThanhToan;
     // End of variables declaration//GEN-END:variables
 }
