@@ -138,6 +138,12 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Search theo MaKM: ");
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
         bltSearch.setText("Search");
         bltSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,6 +339,12 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         listKM = impl.getAll();
         showData(listKM);
     }//GEN-LAST:event_bltXoaActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        if (txtSearch.getText().isEmpty()) {
+            showData(listKM);
+        }
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

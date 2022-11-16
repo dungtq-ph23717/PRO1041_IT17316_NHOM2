@@ -6,6 +6,7 @@ import DomainModels.KhuVucModel;
 import DomainModels.SanPhamModel;
 import Utilities.DBContext;
 import ViewModels.Ban;
+import ViewModels.KhuVuc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,18 +16,36 @@ import java.util.List;
 public class BanRepostory {
 
     public List<Ban> getAll() {
-        String query = "SELECT [ID]\n"
-                + "      ,[MaBan]\n"
-                + "      ,[TenBan]\n"
-                + "      ,[Mota]\n"
-                + "      ,[Loaiban]\n"
-                + "      ,[IDKV]\n"
-                + "  FROM [dbo].[Ban]";
+        String query = "Select ban.ID, MaBan,TenBan,Mota, Loaiban, TenKV\n"
+                + "From Ban \n"
+                + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<Ban> list = new ArrayList<>();
             while (rs.next()) {
-                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                KhuVuc kv = new KhuVuc(rs.getString(6));
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), kv);
+                list.add(ban);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<Ban> Search(String ma) {
+        String query = "Select ban.ID, MaBan,TenBan,Mota, Loaiban, TenKV\n"
+                + "From Ban \n"
+                + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
+                + "where MaBan like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + ma + "%");
+            ResultSet rs = ps.executeQuery();
+            List<Ban> list = new ArrayList<>();
+            while (rs.next()) {
+                KhuVuc kv = new KhuVuc(rs.getString(6));
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), kv);
                 list.add(ban);
             }
             return list;
@@ -100,12 +119,12 @@ public class BanRepostory {
     }
 
     public static void main(String[] args) {
-//        List<Ban> list = new BanRepostory().getAll();
-//        for (BanModel x : list) {
-//            System.out.println(x.toString());
-//        }
-        BanModel ban = new BanModel("ban1", "ten2", "trong", "thuong", "0f2c1e5f-47fb-42c3-a158-c77dd3c32b50");
-        boolean add = new BanRepostory().delete("ban1");
-        System.out.println(add);
+        List<Ban> list = new BanRepostory().Search("B1");
+        for (Ban x : list) {
+            System.out.println(x.toString());
+        }
+//        BanModel ban = new BanModel("ban1", "ten2", "trong", "thuong", "0f2c1e5f-47fb-42c3-a158-c77dd3c32b50");
+//        boolean add = new BanRepostory().delete("ban1");
+//        System.out.println(add);
     }
 }

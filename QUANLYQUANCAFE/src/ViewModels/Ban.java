@@ -4,7 +4,6 @@
  */
 package ViewModels;
 
-
 /**
  *
  * @author Admin
@@ -16,13 +15,21 @@ public class Ban {
     private String tenBan;
     private String moTa;
     private String loaiBan;
-    private String IDKV;
+    private KhuVuc IDKV;
 
     public Ban() {
     }
 
-    public Ban(String id, String maBan, String tenBan, String moTa, String loaiBan, String IDKV) {
+    public Ban(String id, String maBan, String tenBan, String moTa, String loaiBan, KhuVuc IDKV) {
         this.id = id;
+        this.maBan = maBan;
+        this.tenBan = tenBan;
+        this.moTa = moTa;
+        this.loaiBan = loaiBan;
+        this.IDKV = IDKV;
+    }
+
+    public Ban(String maBan, String tenBan, String moTa, String loaiBan, KhuVuc IDKV) {
         this.maBan = maBan;
         this.tenBan = tenBan;
         this.moTa = moTa;
@@ -70,16 +77,20 @@ public class Ban {
         this.loaiBan = loaiBan;
     }
 
-    public String getIDKV() {
+    public KhuVuc getIDKV() {
         return IDKV;
     }
 
-    public void setIDKV(String IDKV) {
+    public void setIDKV(KhuVuc IDKV) {
         this.IDKV = IDKV;
     }
 
     @Override
     public String toString() {
         return "Ban{" + "id=" + id + ", maBan=" + maBan + ", tenBan=" + tenBan + ", moTa=" + moTa + ", loaiBan=" + loaiBan + ", IDKV=" + IDKV + '}';
+    }
+
+    public Object[] toRowData() {
+        return new Object[]{id, maBan, tenBan, moTa, loaiBan, IDKV.getTenKV()};
     }
 }

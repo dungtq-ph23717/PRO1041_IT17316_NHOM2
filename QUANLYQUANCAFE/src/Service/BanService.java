@@ -18,6 +18,8 @@ public interface BanService {
 
     Ban getOne(String ma);
 
+    List<Ban> Search(String ma);
+
     String add(BanModel ban);
 
     String update(BanModel ban, String ma);
