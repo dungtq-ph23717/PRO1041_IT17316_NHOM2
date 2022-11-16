@@ -27,6 +27,12 @@ public class HoaDonChiTiet {
         this.ghiChu = ghiChu;
     }
 
+    public HoaDonChiTiet(int soLuong, double giaTien, String ghiChu) {
+        this.soLuong = soLuong;
+        this.giaTien = giaTien;
+        this.ghiChu = ghiChu;
+    }
+
     public String getIDSP() {
         return IDSP;
     }
