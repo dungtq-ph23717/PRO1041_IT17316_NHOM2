@@ -20,21 +20,12 @@ import java.util.List;
 public class HoaDonRepository {
 
     public List<HoaDon> getAll() {
-        String query = "SELECT [ID]\n"
-                + "      ,[MaHD]\n"
-                + "      ,[NgayLapHD]\n"
-                + "      ,[ThanhTien]\n"
-                + "      ,[PhuongThucThanhToan]\n"
-                + "      ,[IDKH]\n"
-                + "      ,[IDNV]\n"
-                + "      ,[IDKM]\n"
-                + "      ,[IDBan]\n"
-                + "  FROM [dbo].[HoaDon]";
+        String query = "SELECT [ID],[MaHD],[NgayLapHD],[ThanhTien],[PhuongThucThanhToan],[IDNV],[IDKM],[IDBan] FROM [dbo].[HoaDon]";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getString(1), rs.getString(7), rs.getString(8));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
                 list.add(hd);
             }
             return list;
@@ -100,13 +91,13 @@ public class HoaDonRepository {
     }
 
     public static void main(String[] args) {
-        HoaDonModel hd = new HoaDonModel("hh", "ddc", "02/01/2002", 1, "chuyen khoan", "", "", "", "");
+        HoaDonModel hd = new HoaDonModel("hh", "ddc", "02/01/2002", 1, "chuyen khoan", "", "", "");
        boolean add = new HoaDonRepository().add(hd);
         //boolean update = new HoaDonRepository().update(hd, "cc");
         //boolean delete = new HoaDonRepository().delete("ddc");
         List<HoaDon> a = new HoaDonRepository().getAll();
         for (HoaDon hoaDon : a) {
-            System.out.println(hoaDon);
+            System.out.println(hoaDon.toString());
         }
 //        System.out.println(add);
     }
