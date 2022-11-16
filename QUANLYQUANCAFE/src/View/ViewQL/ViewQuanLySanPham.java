@@ -49,7 +49,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
     private void fillData(int index) {
         SanPham sp = listSanPham.get(index);
         txtMa.setText(sp.getMaSP());
-        txtTen.setText(sp.getMaSP());
+        txtTen.setText(sp.getTenSP());
         txtGiaBan.setText(String.valueOf(sp.getGiaBan()));
         txtSoLuong.setText(String.valueOf(sp.getSoLuong()));
     }
