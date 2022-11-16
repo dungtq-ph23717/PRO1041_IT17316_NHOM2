@@ -9,6 +9,7 @@ import View.ViewNV.ViewLichSu;
 import View.ViewNV.ViewThanhToan;
 import View.ViewNV.ViewQuanLyBan;
 import View.ViewNhanVien;
+import ViewModels.KhuyenMai;
 import java.awt.Color;
 
 /**
@@ -31,12 +32,13 @@ public class ViewQuanLy extends javax.swing.JFrame {
         QuanLyHoaDon.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
-
+        QuanLyKhuyenMai.setBackground(defaulColor);
         QuanLySanPham.setBackground(clickedColor);
         ThongKe.setBackground(defaulColor);
         QuanLyHoaDon.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(clickedColor);
 
         ViewQuanLySanPham m = new ViewQuanLySanPham();
         jDesktopPane1.removeAll();

@@ -33,6 +33,16 @@ public class KhuyenMaiModel {
         this.moTa = moTa;
     }
 
+    public KhuyenMaiModel(String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String moTa) {
+        this.maKM = maKM;
+        this.tenKM = tenKM;
+        this.hinhThucGG = hinhThucGG;
+        this.mucGiam = mucGiam;
+        this.tgBatDau = tgBatDau;
+        this.tgKetThuc = tgKetThuc;
+        this.moTa = moTa;
+    }
+
     public String getID() {
         return ID;
     }
@@ -95,6 +105,11 @@ public class KhuyenMaiModel {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
+    }
+
+    @Override
+    public String toString() {
+        return "KhuyenMaiModel{" + "ID=" + ID + ", maKM=" + maKM + ", tenKM=" + tenKM + ", hinhThucGG=" + hinhThucGG + ", mucGiam=" + mucGiam + ", tgBatDau=" + tgBatDau + ", tgKetThuc=" + tgKetThuc + ", moTa=" + moTa + '}';
     }
 
 }

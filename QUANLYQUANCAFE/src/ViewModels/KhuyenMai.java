@@ -97,4 +97,12 @@ public class KhuyenMai {
         this.moTa = moTa;
     }
 
+    @Override
+    public String toString() {
+        return "KhuyenMai{" + "ID=" + ID + ", maKM=" + maKM + ", tenKM=" + tenKM + ", hinhThucGG=" + hinhThucGG + ", mucGiam=" + mucGiam + ", tgBatDau=" + tgBatDau + ", tgKetThuc=" + tgKetThuc + ", moTa=" + moTa + '}';
+    }
+
+    public Object[] toRowData() {
+        return new Object[]{ID, maKM, tenKM, hinhThucGG, mucGiam, tgBatDau, tgKetThuc, moTa};
+    }
 }
