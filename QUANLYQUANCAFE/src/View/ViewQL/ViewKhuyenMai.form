@@ -115,7 +115,7 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtTenKM" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtMucGiam" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -246,6 +246,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSearch">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSearchKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bltSearch">
           <Properties>
