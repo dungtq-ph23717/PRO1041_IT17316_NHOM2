@@ -175,7 +175,7 @@ public class ViewLogin extends javax.swing.JFrame {
         try {
             if (user.equalsIgnoreCase(tk.getUsername()) && pass.equalsIgnoreCase(tk.getPassword()) && tk.getRole().equalsIgnoreCase("nv")) {
                 this.dispose();
-                ViewNhanVien v = new ViewNhanVien();
+                View.ViewNV.ViewNhanVien v = new View.ViewNV.ViewNhanVien();
                 v.setVisible(true);
             } else if (user.equalsIgnoreCase(tk.getUsername()) && pass.equalsIgnoreCase(tk.getPassword()) && tk.getRole().equalsIgnoreCase("ql")) {
                 this.dispose();
@@ -194,7 +194,7 @@ public class ViewLogin extends javax.swing.JFrame {
             TaiKhoanModel tk = impl.dangNhap(user, pass);
             if (user.equalsIgnoreCase(tk.getUsername()) && pass.equalsIgnoreCase(tk.getPassword()) && tk.getRole().equalsIgnoreCase("nv")) {
                 this.dispose();
-                ViewNhanVien v = new ViewNhanVien();
+                View.ViewNV.ViewNhanVien v = new View.ViewNV.ViewNhanVien();
                 v.setVisible(true);
             } else if (user.equalsIgnoreCase(tk.getUsername()) && pass.equalsIgnoreCase(tk.getPassword()) && tk.getRole().equalsIgnoreCase("ql")) {
                 this.dispose();
