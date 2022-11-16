@@ -69,7 +69,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="anh" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                   <Component id="QuanLySanPham" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="ThongKe" min="-2" max="-2" attributes="0"/>
@@ -122,9 +122,6 @@
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Image/promotion (1).png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="        Khuy&#x1ebf;n m&#xe3;i"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -171,9 +168,6 @@
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Image/coffee (1).png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="       S&#x1ea3;n ph&#x1ea9;m"/>
               </Properties>
               <Events>
@@ -216,9 +210,6 @@
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Image/bar-chart (1).png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="       Th&#x1ed1;ng k&#xea;"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -265,9 +256,6 @@
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Image/bill (1).png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="        Ho&#xe1; &#x111;&#x1a1;n"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -308,9 +296,6 @@
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Image/logout (1).png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="         &#x110;&#x103;ng xu&#x1ea5;t"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -360,9 +345,6 @@
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Image/team (1).png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="         Nh&#xe2;n vi&#xea;n"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -378,9 +360,6 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Image/zyro-image (1).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="DrinkPush"/>
           </Properties>
