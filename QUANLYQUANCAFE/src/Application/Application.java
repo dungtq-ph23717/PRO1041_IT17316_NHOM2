@@ -1,8 +1,10 @@
 package Application;
 
+import View.ViewLogin;
+
 public class Application {
 
     public static void main(String[] args) {
-        new View.ViewQL.ViewQuanLy().setVisible(true);
+        new ViewLogin().setVisible(true);
     }
 }
