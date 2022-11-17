@@ -8,9 +8,10 @@ import View.ViewLogin;
 import View.ViewNV.ViewLichSu;
 import View.ViewNV.ViewThanhToan;
 import View.ViewNV.ViewQuanLyBan;
-import View.ViewNhanVien;
+import View.ViewNV.ViewNhanVien;
 import ViewModels.KhuyenMai;
 import java.awt.Color;
+
 
 /**
  *
