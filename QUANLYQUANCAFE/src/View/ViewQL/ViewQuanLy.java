@@ -482,7 +482,7 @@ public class ViewQuanLy extends javax.swing.JFrame {
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
         QuanLyHoaDon.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(clickedColor);
+        QuanLyKhuyenMai.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(clickedColor);
         DangXuat.setBackground(defaulColor);
     }//GEN-LAST:event_txtQuanLyNhanVienMousePressed
