@@ -35,6 +35,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
      */
     public ViewQuanLyBan() {
         initComponents();
+        txtId.disable();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
