@@ -16,25 +16,28 @@ public class BanModel {
     private String moTa;
     private String loaiBan;
     private String IDKV;
+    private KhuVucModel tenKV;
 
     public BanModel() {
     }
 
-    public BanModel(String maBan, String tenBan, String moTa, String loaiBan, String IDKV) {
-        this.maBan = maBan;
-        this.tenBan = tenBan;
-        this.moTa = moTa;
-        this.loaiBan = loaiBan;
-        this.IDKV = IDKV;
-    }
-
-    public BanModel(String id, String maBan, String tenBan, String moTa, String loaiBan, String IDKV) {
+    public BanModel(String id, String maBan, String tenBan, String moTa, String loaiBan, String IDKV, KhuVucModel tenKV) {
         this.id = id;
         this.maBan = maBan;
         this.tenBan = tenBan;
         this.moTa = moTa;
         this.loaiBan = loaiBan;
         this.IDKV = IDKV;
+        this.tenKV = tenKV;
+    }
+
+    public BanModel(String maBan, String tenBan, String moTa, String loaiBan, String IDKV, KhuVucModel tenKV) {
+        this.maBan = maBan;
+        this.tenBan = tenBan;
+        this.moTa = moTa;
+        this.loaiBan = loaiBan;
+        this.IDKV = IDKV;
+        this.tenKV = tenKV;
     }
 
     public String getId() {
@@ -83,6 +86,14 @@ public class BanModel {
 
     public void setIDKV(String IDKV) {
         this.IDKV = IDKV;
+    }
+
+    public KhuVucModel getTenKV() {
+        return tenKV;
+    }
+
+    public void setTenKV(KhuVucModel tenKV) {
+        this.tenKV = tenKV;
     }
 
     @Override

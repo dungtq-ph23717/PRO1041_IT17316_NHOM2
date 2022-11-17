@@ -40,6 +40,25 @@ public class KhuVucRepostory {
         return null;
     }
 
+    public KhuVuc getOne(String ma) {
+        String query = "SELECT [ID]\n"
+                + "      ,[MaKV]\n"
+                + "      ,[TenKV]\n"
+                + "      ,[TrangThai]\n"
+                + "  FROM [dbo].[KhuVuc]"
+                + "Where TenKV like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ma);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                 return new KhuVuc(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public boolean add(KhuVucModel kv) {
         String query = "INSERT INTO [dbo].[KhuVuc]\n"
                 + "           ([MaKV]\n"
@@ -94,12 +113,10 @@ public class KhuVucRepostory {
     }
 
     public static void main(String[] args) {
-//        List<KhuVucModel> list = new KhuVucRepostory().getAll();
-//        for (KhuVucModel x : list) {
-//            System.out.println(x.toString());
-//        }
-        KhuVucModel ban = new KhuVucModel("kv1", "k", "trong");
-        boolean add = new KhuVucRepostory().delete("kv1");
-        System.out.println(add);
+        
+        KhuVuc one = new KhuVucRepostory().getOne("Tầng 1");System.out.println(one);
+//        KhuVucModel ban = new KhuVucModel("kv1", "k", "trong");
+//        boolean add = new KhuVucRepostory().delete("kv1");
+//        System.out.println(add);
     }
 }

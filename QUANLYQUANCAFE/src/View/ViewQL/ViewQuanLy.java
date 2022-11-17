@@ -34,7 +34,7 @@ public class ViewQuanLy extends javax.swing.JFrame {
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
         QuanLyKhuyenMai.setBackground(defaulColor);
-        
+
         QuanLySanPham.setBackground(clickedColor);
         ThongKe.setBackground(defaulColor);
         QuanLyHoaDon.setBackground(defaulColor);

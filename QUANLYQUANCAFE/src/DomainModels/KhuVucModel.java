@@ -17,8 +17,8 @@ public class KhuVucModel {
         this.trangThai = trangThai;
     }
 
-    public KhuVucModel(String id) {
-        this.id = id;
+    public KhuVucModel(String tenKV) {
+        this.tenKV = tenKV;
     }
 
     public KhuVucModel(String maKV, String tenKV, String trangThai) {
