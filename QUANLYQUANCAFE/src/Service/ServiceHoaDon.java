@@ -4,7 +4,7 @@
  */
 package Service;
 
-
+import DomainModels.HoaDonChiTietModel;
 import DomainModels.HoaDonModel;
 import java.util.List;
 
@@ -16,11 +16,10 @@ public interface ServiceHoaDon {
 
     List<ViewModels.HoaDon> getAll();
 
-    String add(HoaDonModel hd);
+    String add(HoaDonModel hd, HoaDonChiTietModel hdct);
 
-    String update(HoaDonModel hd, String maHD);
+    String update(HoaDonModel hd, HoaDonChiTietModel hdct, String maHD);
 
     String delete(String maHD);
 
-  
 }

@@ -21,5 +21,4 @@ public interface ServiceHoaDonChiTiet {
 
     boolean delete(String maHD);
 
-    List<ViewModels.HoaDonChiTiet> searchTheoMaHD(String maHD);
 }

@@ -58,4 +58,9 @@ public class BanServiceImpl implements BanService {
         }
     }
 
+    @Override
+    public List<Ban> Search(String ma) {
+        return rp.Search(ma);
+    }
+
 }

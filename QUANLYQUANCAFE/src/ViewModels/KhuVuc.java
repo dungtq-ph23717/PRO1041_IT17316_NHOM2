@@ -23,6 +23,10 @@ public class KhuVuc {
         this.trangThai = trangThai;
     }
 
+    public KhuVuc(String tenKV) {
+        this.tenKV = tenKV;
+    }
+
     public String getId() {
         return id;
     }

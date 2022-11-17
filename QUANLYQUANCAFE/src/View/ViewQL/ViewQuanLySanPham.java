@@ -32,6 +32,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
 
+
         tbSanPham.setModel(dtm);
         String[] header = {"Mã SP", "Tên SP", "Số Lượng", "Giá Bán"};
         dtm.setColumnIdentifiers(header);
@@ -69,6 +70,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtMa = new javax.swing.JTextField();
+
         txtTen = new javax.swing.JTextField();
         txtSoLuong = new javax.swing.JTextField();
         txtGiaBan = new javax.swing.JTextField();
@@ -78,9 +80,11 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         bltUpdate = new javax.swing.JButton();
         bltAdd = new javax.swing.JButton();
 
+
         setPreferredSize(new java.awt.Dimension(814, 678));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+
         jLabel1.setText("Sản Phẩm");
 
         jLabel2.setText("Mã Sp");
@@ -109,6 +113,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbSanPham);
 
+
         bltXoa.setText("Delete");
         bltXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,10 +135,12 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
             }
         });
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -176,6 +183,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
@@ -203,6 +211,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
 
     private void tbSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSanPhamMouseClicked
         // TODO add your handling code here:
