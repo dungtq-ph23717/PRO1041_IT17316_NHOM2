@@ -25,6 +25,9 @@ public class SanPhamServiceImpl implements SanPhamService {
 
     @Override
     public String add(SanPhamModel sp) {
+        if (sp.getMaSP().isEmpty()) {
+            return "Không được để trống";
+        }
         boolean add = rps.add(sp);
         if (add) {
             return "add thành công";
