@@ -47,7 +47,7 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
      private DomainModels.ChucVu  getdata(){
         DomainModels.ChucVu chucVu= new DomainModels.ChucVu();
         chucVu.setMacv(txtMACV.getText());
-       chucVu.setTenCV(cbbTenCv.getSelectedItem()+"");
+       chucVu.setTenCV(txtTenCv.getText());
         return chucVu;
     }
 
@@ -71,9 +71,8 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         btAdd = new javax.swing.JButton();
         btUpdate = new javax.swing.JButton();
-        btDelete = new javax.swing.JButton();
         btcler = new javax.swing.JButton();
-        cbbTenCv = new javax.swing.JComboBox<>();
+        txtTenCv = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableChucVu = new javax.swing.JTable();
@@ -104,13 +103,6 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
             }
         });
 
-        btDelete.setText("DELETE");
-        btDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDeleteActionPerformed(evt);
-            }
-        });
-
         btcler.setText("CLEAR");
         btcler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,7 +112,6 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
 
         jDesktopPane1.setLayer(btAdd, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btUpdate, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(btDelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btcler, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -129,14 +120,15 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                    .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                    .addComponent(btcler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 69, Short.MAX_VALUE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 69, Short.MAX_VALUE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(btcler, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,14 +137,10 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAdd)
                     .addComponent(btUpdate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btDelete)
-                    .addComponent(btcler))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(btcler)
+                .addGap(19, 19, 19))
         );
-
-        cbbTenCv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pha che", "order", "phu cvu", "thu ngan" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -170,9 +158,9 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtID)
+                            .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                             .addComponent(txtMACV)
-                            .addComponent(cbbTenCv, 0, 172, Short.MAX_VALUE))))
+                            .addComponent(txtTenCv))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -190,11 +178,11 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(cbbTenCv, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTenCv, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)))
                 .addGap(69, 69, 69)
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         tableChucVu.setModel(new javax.swing.table.DefaultTableModel(
@@ -297,15 +285,6 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
         }
     }//GEN-LAST:event_btAddActionPerformed
 
-    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
-       int chon = JOptionPane.showConfirmDialog((btDelete), "bạn có chắc chắn muốn xóa không", "xác nhận xóa", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (chon == JOptionPane.YES_OPTION) { 
-            chucVuService.delete(txtID.getText());
-          list=chucVuService.getAll();
-            showdata(list);
-        }
-    }//GEN-LAST:event_btDeleteActionPerformed
-
     private void btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateActionPerformed
        int chon = JOptionPane.showConfirmDialog((btUpdate), "bạn có chắc chắn muốn sửa không", "xác nhận sửa", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (chon == JOptionPane.YES_OPTION) { 
@@ -318,14 +297,14 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
     private void btclerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btclerActionPerformed
        txtID.setText("");
         txtMACV.setText("");
-        cbbTenCv.setSelectedIndex(0);
+        txtTenCv.setText("");
     }//GEN-LAST:event_btclerActionPerformed
 
     private void tableChucVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableChucVuMouseClicked
          int row=tableChucVu.getSelectedRow();
         txtID.setText(tableChucVu.getValueAt(row, 0).toString());
       txtMACV.setText(tableChucVu.getValueAt(row, 1).toString());
-        cbbTenCv.setSelectedItem(tableChucVu.getValueAt(row, 2).toString());
+       txtTenCv.setText(tableChucVu.getValueAt(row, 2).toString());
     }//GEN-LAST:event_tableChucVuMouseClicked
 
     private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
@@ -371,11 +350,9 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
-    private javax.swing.JButton btDelete;
     private javax.swing.JButton btThoat;
     private javax.swing.JButton btUpdate;
     private javax.swing.JButton btcler;
-    private javax.swing.JComboBox<String> cbbTenCv;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -388,5 +365,6 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
     private javax.swing.JTable tableChucVu;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtMACV;
+    private javax.swing.JTextField txtTenCv;
     // End of variables declaration//GEN-END:variables
 }
