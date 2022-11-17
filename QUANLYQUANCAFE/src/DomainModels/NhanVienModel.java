@@ -1,24 +1,31 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DomainModels;
 
-public class NhanVien {
-
-    private String id;
+/**
+ *
+ * @author hdo48
+ */
+public class NhanVienModel {
+     private String id;
     private String maNV;
     private String tenNV;
     private String ngaySinh;
     private String SDT;
     private String idCV;
 
-    public NhanVien() {
-    }
-
-    public NhanVien(String id, String maNV, String tenNV, String ngaySinh, String SDT, String idCV) {
+    public NhanVienModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String idCV) {
         this.id = id;
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.ngaySinh = ngaySinh;
         this.SDT = SDT;
         this.idCV = idCV;
+    }
+
+    public NhanVienModel() {
     }
 
     public String getId() {
@@ -73,5 +80,5 @@ public class NhanVien {
     public String toString() {
         return "NhanVienModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", idCV=" + idCV + '}';
     }
-
+    
 }

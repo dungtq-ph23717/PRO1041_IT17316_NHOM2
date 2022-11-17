@@ -1,24 +1,31 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package ViewModels;
 
-public class NhanVien {
-
-    private String id;
+/**
+ *
+ * @author hdo48
+ */
+public class NhanVienViewModel {
+     private String id;
     private String maNV;
     private String tenNV;
     private String ngaySinh;
     private String SDT;
-    private String idCV;
+    private String tencv;
 
-    public NhanVien() {
+    public NhanVienViewModel() {
     }
 
-    public NhanVien(String id, String maNV, String tenNV, String ngaySinh, String SDT, String idCV) {
+    public NhanVienViewModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String tencv) {
         this.id = id;
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.ngaySinh = ngaySinh;
         this.SDT = SDT;
-        this.idCV = idCV;
+        this.tencv = tencv;
     }
 
     public String getId() {
@@ -61,17 +68,19 @@ public class NhanVien {
         this.SDT = SDT;
     }
 
-    public String getIdCV() {
-        return idCV;
+    public String getTencv() {
+        return tencv;
     }
 
-    public void setIdCV(String idCV) {
-        this.idCV = idCV;
+    public void setTencv(String tencv) {
+        this.tencv = tencv;
     }
 
     @Override
     public String toString() {
-        return "NhanVienModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", idCV=" + idCV + '}';
+        return "NhanVienViewModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", tencv=" + tencv + '}';
     }
-
+    public Object[] toRowData(){
+        return new Object[]{id,maNV,tenNV,ngaySinh,SDT,tencv};
+    }
 }

@@ -5,6 +5,6 @@ import View.ViewLogin;
 public class Application {
 
     public static void main(String[] args) {
-        new ViewLogin().setVisible(true);
-    }
+        new ViewLogin().setVisible(true);    }
 }
+    
