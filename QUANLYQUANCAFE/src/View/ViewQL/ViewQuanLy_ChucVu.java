@@ -27,6 +27,7 @@ private ChucVuService chucVuService= new ChucVuServiceImpl();
      */
     public ViewQuanLy_ChucVu() {
         initComponents();
+        setLocationRelativeTo(null);
         tableChucVu.setModel(dtm);
          String[] header = {"ID", "MÃ NV", "TÊN NV"};
          dtm.setColumnIdentifiers(header);

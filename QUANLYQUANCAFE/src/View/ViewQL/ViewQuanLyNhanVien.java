@@ -42,10 +42,11 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
      */
     public ViewQuanLyNhanVien() {
         initComponents();
+         
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-
+        
         txtID.disable();
         tableNhanVien.setModel(dtm);
         String[] header = {"ID", "MÃ NV", "TÊN NV", "NGÀY SINH", "SĐT", "TÊN CV"};
@@ -497,6 +498,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
     private void btChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChucVuActionPerformed
       ViewQuanLy_ChucVu chucVu= new ViewQuanLy_ChucVu();
       chucVu.setVisible(true);
+      
     }//GEN-LAST:event_btChucVuActionPerformed
 
     
