@@ -31,15 +31,7 @@ private ChucVuRepository chucVuRepository= new ChucVuRepository();
        }
     }
 
-    @Override
-    public String delete(String id) {
-        boolean DELETE=chucVuRepository.delete(id);
-        if(DELETE){
-            return "DELETE THÀNH CÔNG";
-        }else{
-            return "DELETE THẤT BẠI";
-        }
-    }
+   
 
     @Override
     public String update(ChucVu chucVu, String id) {

@@ -14,6 +14,6 @@ import java.util.List;
 public interface ChucVuService {
     List<ChucVu> getAll();
     String add(ChucVu chucVu);
-    String delete(String id);
+   
     String update(ChucVu chucVu,String id);
 }
