@@ -36,21 +36,13 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
 
     @Override
     public String add(HoaDonModel hd, HoaDonChiTietModel hdct) {
-        boolean add = rps.add(hd, hdct);
-        if (add) {
-            return "add thanh cong";
-        } else {
-            return "add that bai";
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public String update(HoaDonModel hd, HoaDonChiTietModel hdct, String maHD) {
-        boolean update = rps.update(hd, hdct, maHD);
-        if (update) {
-            return "update thành công";
-        } else {
-            return "update thất bại";
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+   
 }
