@@ -96,7 +96,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
 
         setPreferredSize(new java.awt.Dimension(814, 678));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel3.setBackground(new java.awt.Color(102, 51, 0));
@@ -112,6 +112,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         cbbHinhThucGG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         bltXoa.setBackground(new java.awt.Color(255, 0, 0));
+        bltXoa.setForeground(new java.awt.Color(0, 255, 51));
         bltXoa.setText("Delete");
         bltXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +130,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         jLabel7.setText("TGKetThuc: ");
 
         bltAdd.setBackground(new java.awt.Color(255, 0, 0));
+        bltAdd.setForeground(new java.awt.Color(0, 255, 51));
         bltAdd.setText("Add");
         bltAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +142,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         jLabel4.setText("HinhThucGG: ");
 
         bltUpdate.setBackground(new java.awt.Color(255, 0, 0));
+        bltUpdate.setForeground(new java.awt.Color(0, 255, 51));
         bltUpdate.setText("Update");
         bltUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +157,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         jLabel8.setText("Mota: ");
 
         btClear.setBackground(new java.awt.Color(255, 0, 0));
+        btClear.setForeground(new java.awt.Color(0, 255, 51));
         btClear.setText("Clear");
         btClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,7 +300,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setForeground(new java.awt.Color(204, 0, 51));
+        jLabel1.setForeground(new java.awt.Color(0, 255, 51));
         jLabel1.setText("Search theo MaKM: ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
