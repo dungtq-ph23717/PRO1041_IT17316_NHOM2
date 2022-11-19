@@ -20,4 +20,6 @@ public interface SanPhamService {
     String delete(String ma);
 
     String update(SanPhamModel sp, String ma);
+    
+     List<ViewModels.SanPham> search(String ma);
 }

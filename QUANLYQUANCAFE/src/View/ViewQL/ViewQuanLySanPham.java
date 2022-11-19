@@ -32,7 +32,6 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
 
-
         tbSanPham.setModel(dtm);
         String[] header = {"Mã SP", "Tên SP", "Số Lượng", "Giá Bán"};
         dtm.setColumnIdentifiers(header);
@@ -70,7 +69,6 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtMa = new javax.swing.JTextField();
-
         txtTen = new javax.swing.JTextField();
         txtSoLuong = new javax.swing.JTextField();
         txtGiaBan = new javax.swing.JTextField();
@@ -79,12 +77,11 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         bltXoa = new javax.swing.JButton();
         bltUpdate = new javax.swing.JButton();
         bltAdd = new javax.swing.JButton();
-
+        txtSearch = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(814, 678));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-
         jLabel1.setText("Sản Phẩm");
 
         jLabel2.setText("Mã Sp");
@@ -113,7 +110,6 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbSanPham);
 
-
         bltXoa.setText("Delete");
         bltXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,12 +131,16 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
             }
         });
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -175,7 +175,10 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
                         .addGap(132, 132, 132)
                         .addComponent(bltUpdate)
                         .addGap(94, 94, 94)
-                        .addComponent(bltXoa)))
+                        .addComponent(bltXoa))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,7 +186,6 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
@@ -197,16 +199,18 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
                             .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(105, 105, 105)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(186, 186, 186)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bltAdd)
                             .addComponent(bltUpdate)
                             .addComponent(bltXoa))))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93))
         );
 
         pack();
@@ -248,6 +252,12 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         showData(listSanPham);
     }//GEN-LAST:event_bltUpdateActionPerformed
 
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        List<SanPham> Search = spService.search(txtSearch.getText());
+        showData(Search);
+    }//GEN-LAST:event_txtSearchKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bltAdd;
@@ -262,6 +272,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
     private javax.swing.JTable tbSanPham;
     private javax.swing.JTextField txtGiaBan;
     private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables

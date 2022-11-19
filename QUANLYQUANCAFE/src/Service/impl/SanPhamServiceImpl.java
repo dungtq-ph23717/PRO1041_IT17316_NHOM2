@@ -56,4 +56,9 @@ public class SanPhamServiceImpl implements SanPhamService {
         }
     }
 
+    @Override
+    public List<SanPham> search(String ma) {
+        return rps.search(ma);
+    }
+
 }
