@@ -138,7 +138,7 @@ public class KhuyenMaiRepository {
     }
 
     public static void main(String[] args) {
-        List<KhuyenMai> show = new KhuyenMaiRepository().getAll();
+        List<KhuyenMai> show = new KhuyenMaiRepository().searchMaKM("km");
         for (KhuyenMai x : show) {
             System.out.println(x);
         }

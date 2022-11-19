@@ -13,10 +13,15 @@ import java.util.List;
  * @author hdo48
  */
 public interface NhanVienService {
-      List<NhanVienViewModel> getAll();
+
+    List<NhanVienViewModel> getAll();
+
     String add(NhanVienModel nhanVien);
+
     String delete(String id);
-    String update(NhanVienModel nhanVien,String id);
+
+    String update(NhanVienModel nhanVien, String id);
+
     List<NhanVienViewModel> getTimkiem(String ma);
-    
+
 }

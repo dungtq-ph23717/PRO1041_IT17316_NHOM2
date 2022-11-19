@@ -9,5 +9,5 @@ package Service;
  * @author Admin
  */
 public interface Ban_HoaDonService {
-    
+
 }

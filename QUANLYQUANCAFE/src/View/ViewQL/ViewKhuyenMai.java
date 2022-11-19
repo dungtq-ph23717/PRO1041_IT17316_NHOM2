@@ -449,7 +449,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         if (txtSearch.getText().isEmpty()) {
             showData(listKM);
         } else {
-            List<KhuyenMai> search = impl.searchTheoMaKM(txtSearch.getText());
+            List<KhuyenMai> search = impl.searchTheoMaKM("%" + txtSearch.getText() + "%");
             showData(search);
         }
     }//GEN-LAST:event_txtSearchKeyReleased
