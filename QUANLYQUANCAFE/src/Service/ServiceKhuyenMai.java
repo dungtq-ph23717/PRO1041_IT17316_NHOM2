@@ -17,9 +17,9 @@ public interface ServiceKhuyenMai {
 
     String add(KhuyenMaiModel km);
 
-    String update(KhuyenMaiModel km, String maKM);
+    String update(KhuyenMaiModel km, String IDKM);
 
-    String delete(String maKM);
+    String delete(String IDKM);
 
     List<ViewModels.KhuyenMai> searchTheoMaKM(String maKM);
 }

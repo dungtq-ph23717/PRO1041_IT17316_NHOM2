@@ -97,7 +97,7 @@ public class KhuyenMaiRepository {
         return check > 0;
     }
 
-    public boolean update(KhuyenMaiModel km, String maKM) {
+    public boolean update(KhuyenMaiModel km, String IDKM) {
         int check = 0;
         String query = "UPDATE [dbo].[KhuyenMai]\n"
                 + "   SET [MaKM] = ?\n"
@@ -106,8 +106,8 @@ public class KhuyenMaiRepository {
                 + "      ,[MucGiam] = ?\n"
                 + "      ,[TGBatDau] = ?\n"
                 + "      ,[TGKetThuc] = ?\n"
-                + "      ,[Mota] =?\n"
-                + " WHERE MaKM = ?";
+                + "      ,[Mota] = ?\n"
+                + " WHERE ID = ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, km.getMaKM());
             ps.setObject(2, km.getTenKM());
@@ -116,7 +116,7 @@ public class KhuyenMaiRepository {
             ps.setObject(5, km.getTgBatDau());
             ps.setObject(6, km.getTgKetThuc());
             ps.setObject(7, km.getMoTa());
-            ps.setString(8, maKM);
+            ps.setString(8, IDKM);
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,12 +124,12 @@ public class KhuyenMaiRepository {
         return check > 0;
     }
 
-    public boolean xoa(String maKM) {
+    public boolean xoa(String IDKM) {
         int check = 0;
         String query = "DELETE FROM [dbo].[KhuyenMai]\n"
-                + "      WHERE MaKM = ?";
+                + "      WHERE ID = ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setString(1, maKM);
+            ps.setString(1, IDKM);
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
