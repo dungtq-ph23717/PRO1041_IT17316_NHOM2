@@ -84,7 +84,7 @@ public class BanRepostory {
 
     public boolean delete(String ma) {
         String query = "DELETE FROM [dbo].[Ban]\n"
-                + "      WHERE MaBan = ?";
+                + "      WHERE ID = ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ma);
@@ -119,12 +119,11 @@ public class BanRepostory {
     }
 
     public static void main(String[] args) {
-        List<Ban> list = new BanRepostory().Search("B1");
-        for (Ban x : list) {
-            System.out.println(x.toString());
-        }
-//        BanModel ban = new BanModel("ban1", "ten2", "trong", "thuong", "0f2c1e5f-47fb-42c3-a158-c77dd3c32b50");
-//        boolean add = new BanRepostory().delete("ban1");
-//        System.out.println(add);
+//        List<Ban> list = new BanRepostory().Search("B1");
+//        for (Ban x : list) {
+//            System.out.println(x.toString());
+//        }
+        boolean add = new BanRepostory().delete("74021EA2-43FE-4472-B795-1EA8B5714FF2");
+        System.out.println(add);
     }
 }
