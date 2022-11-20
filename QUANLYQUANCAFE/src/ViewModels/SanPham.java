@@ -57,4 +57,7 @@ public class SanPham {
         this.giaBan = giaBan;
     }
 
+    public Object[] toRowData() {
+        return new Object[]{maSP, tenSP, soLuong, giaBan};
+    }
 }

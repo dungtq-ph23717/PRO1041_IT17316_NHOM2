@@ -1,14 +1,18 @@
 package DomainModels;
 
-public class Size {
+public class SizeModels {
 
     private String id;
     private String size;
 
-    public Size() {
+    public SizeModels() {
     }
 
-    public Size(String id, String size) {
+    public SizeModels(String size) {
+        this.size = size;
+    }
+
+    public SizeModels(String id, String size) {
         this.id = id;
         this.size = size;
     }
