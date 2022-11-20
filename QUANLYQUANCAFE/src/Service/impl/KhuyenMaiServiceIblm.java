@@ -41,8 +41,8 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     }
 
     @Override
-    public String update(KhuyenMaiModel km, String maKM) {
-        boolean update = resKM.update(km, maKM);
+    public String update(KhuyenMaiModel km, String IDKM) {
+        boolean update = resKM.update(km, IDKM);
         if (update) {
             return "Succesfully!";
         } else {
@@ -51,8 +51,8 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     }
 
     @Override
-    public String delete(String maKM) {
-        boolean delete = resKM.xoa(maKM);
+    public String delete(String IDKM) {
+        boolean delete = resKM.xoa(IDKM);
         if (delete) {
             return "Succesfully!";
         } else {

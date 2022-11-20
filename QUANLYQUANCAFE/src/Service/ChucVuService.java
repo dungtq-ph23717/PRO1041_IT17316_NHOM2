@@ -12,8 +12,10 @@ import java.util.List;
  * @author hdo48
  */
 public interface ChucVuService {
+
     List<ChucVu> getAll();
+
     String add(ChucVu chucVu);
-   
-    String update(ChucVu chucVu,String id);
+
+    String update(ChucVu chucVu, String id);
 }
