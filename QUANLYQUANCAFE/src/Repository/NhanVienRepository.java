@@ -108,7 +108,7 @@ public class NhanVienRepository {
         String sql = "SELECT dbo.NhanVien.ID, dbo.NhanVien.MaNV, dbo.NhanVien.TenNV, dbo.NhanVien.NgaySinh, dbo.NhanVien.SDT, dbo.ChucVu.TenCV\n"
                 + "FROM   dbo.NhanVien INNER JOIN\n"
                 + "             dbo.ChucVu ON dbo.NhanVien.IDCV = dbo.ChucVu.ID\n"
-                + "			 where MaNV=?";
+                + "			 where MaNV = ?";
         try (Connection con = DBContext.getConnection();
                 PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, ma);
@@ -129,7 +129,7 @@ public class NhanVienRepository {
 
     }
      public static void main(String[] args) {
-         System.out.println(new NhanVienRepository().timkiem("manv2"));
+         System.out.println(new NhanVienRepository().timkiem("Manv3"));
     }
 
    

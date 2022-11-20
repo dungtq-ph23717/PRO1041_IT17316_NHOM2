@@ -4,6 +4,7 @@
  */
 package Repository;
 
+import DomainModels.HoaDonChiTietModel;
 import DomainModels.HoaDonModel;
 import Utilities.DBContext;
 import ViewModels.HoaDon;
@@ -21,17 +22,15 @@ import java.util.List;
 public class HoaDonChiTietRepository {
 
     public List<HoaDonChiTiet> getAll() {
-        String query = "SELECT [IDSP]\n"
-                + "      ,[IDHD]\n"
-                + "      ,[Soluong]\n"
-                + "      ,[Giatien]\n"
-                + "      ,[Ghichu]\n"
-                + "  FROM [dbo].[HoaDonChiTiet]";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        String query = "SELECT dbo.SanPham.TenSP, dbo.HoaDon.MaHD, dbo.HoaDonChiTiet.Soluong, dbo.HoaDonChiTiet.Giatien, dbo.HoaDonChiTiet.Ghichu\n"
+                + "FROM   dbo.SanPham INNER JOIN\n"
+                + "             dbo.HoaDon ON dbo.SanPham.ID = dbo.HoaDon.ID INNER JOIN\n"
+                + "             dbo.HoaDonChiTiet ON dbo.SanPham.ID = dbo.HoaDonChiTiet.IDSP AND dbo.HoaDon.ID = dbo.HoaDonChiTiet.IDHD";
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDonChiTiet> list = new ArrayList<>();
             while (rs.next()) {
-                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(1), rs.getDouble(2), rs.getString(3));
+                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getString(5));
                 list.add(hdct);
             }
             return list;
@@ -41,20 +40,23 @@ public class HoaDonChiTietRepository {
         return null;
     }
 
-    public boolean add(HoaDonModel hd) {
-        String query = "INSERT INTO [dbo].[HoaDon]\n"
-                + "           ([MaHD]\n"
-                + "           ,[NgayLapHD]\n"
-                + "           ,[ThanhTien]\n"
-                + "           ,[PhuongThucThanhToan])\n"
+    public boolean add(HoaDonChiTietModel hd) {
+        String query = "INSERT INTO [dbo].[HoaDonChiTiet]\n"
+                + "           ([IDSP]\n"
+                + "           ,[IDHD]\n"
+                + "           ,[Soluong]\n"
+                + "           ,[Giatien]\n"
+                + "           ,[Ghichu])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?)";
+                + "           (?,?,?,?,?)";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, hd.getMaHD());
-            ps.setObject(2, hd.getNgayLapHD());
-            ps.setObject(3, hd.getThanhTien());
-            ps.setObject(4, hd.getPhuongThucThanhToan());
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hd.getIDSP());
+            ps.setObject(2, hd.getIDHD());
+            ps.setObject(3, hd.getSoLuong());
+            ps.setObject(4, hd.getGiaTien());
+            ps.setObject(5, hd.getGiaTien());
+            
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -63,14 +65,9 @@ public class HoaDonChiTietRepository {
     }
 
     public boolean update(HoaDonModel hd, String ma) {
-        String query = "UPDATE [dbo].[HoaDon]\n"
-                + "   SET [MaHD] = ?\n"
-                + "      ,[NgayLapHD] = ?\n"
-                + "      ,[ThanhTien] = ?\n"
-                + "      ,[PhuongThucThanhToan] = ?\n"
-                + " WHERE MaHD = ?";
+        String query = "";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getMaHD());
             ps.setObject(2, hd.getNgayLapHD());
             ps.setObject(3, hd.getThanhTien());
@@ -87,7 +84,7 @@ public class HoaDonChiTietRepository {
         String query = "DELETE FROM [dbo].[HoaDon]\n"
                 + "      WHERE MaHD = ?";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ma);
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -96,15 +93,6 @@ public class HoaDonChiTietRepository {
         return check > 0;
     }
 
-    public static void main(String[] args) {
-        HoaDonModel hd = new HoaDonModel("hh", "ddc", "02/01/2002", 1, "chuyen khoan", "", "", "");
-        boolean add = new HoaDonRepository().add(hd);
-        //boolean update = new HoaDonRepository().update(hd, "cc");
-        //boolean delete = new HoaDonRepository().delete("ddc");
-        List<HoaDon> a = new HoaDonRepository().getAll();
-        for (HoaDon hoaDon : a) {
-            System.out.println(hoaDon.toString());
-        }
-//        System.out.println(add);
-    }
+   
+    
 }
