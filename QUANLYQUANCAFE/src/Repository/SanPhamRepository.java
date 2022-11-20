@@ -40,6 +40,28 @@ public class SanPhamRepository {
         return null;
     }
 
+    public List<SanPham> search(String ma) {
+        String query = "SELECT [MaSP]\n"
+                + "      ,[TenSP]\n"
+                + "      ,[Soluong]\n"
+                + "      ,[Giaban]\n"
+                + "  FROM [dbo].[SanPham]\n"
+                + "  WHERE MaSP like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + ma + "%");
+            ResultSet rs = ps.executeQuery();
+            List<SanPham> list = new ArrayList<>();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4));
+                list.add(sp);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public boolean add(SanPhamModel sp) {
         String query = "INSERT INTO [dbo].[SanPham]\n"
                 + "           ([MaSP]\n"
@@ -96,12 +118,17 @@ public class SanPhamRepository {
     }
 
     public static void main(String[] args) {
-//        List<SanPham> list = new SanPhamRepostory().getAll();
+        List<SanPham> list = new SanPhamRepository().search("SP2");
+        for (SanPham x : list) {
+            System.out.println(x.toString());
+        }
+//        SanPhamModel sp = new SanPhamModel("Sp001", "Tra`", 100, 10000);
+//        boolean add = new SanPhamRepository().add(sp);
+//        System.out.println(add);
+//    }
+//        List<SanPham> list = new SanPhamRepository().search("SP1");
 //        for (SanPham x : list) {
-//            System.out.println(x.toString());
+//            System.out.println(x);
 //        }
-        SanPhamModel sp = new SanPhamModel("Sp001", "Tra`", 100, 10000);
-        boolean add = new SanPhamRepository().add(sp);
-        System.out.println(add);
     }
 }

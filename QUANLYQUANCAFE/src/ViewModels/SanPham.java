@@ -57,4 +57,9 @@ public class SanPham {
         this.giaBan = giaBan;
     }
 
+    @Override
+    public String toString() {
+        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", soLuong=" + soLuong + ", giaBan=" + giaBan + '}';
+    }
+
 }
