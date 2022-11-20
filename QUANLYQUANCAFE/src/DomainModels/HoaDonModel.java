@@ -15,21 +15,21 @@ public class HoaDonModel {
     private String ngayLapHD;
     private double thanhTien;
     private String phuongThucThanhToan;
-    private String IDNV;
     private String IDKM;
+    private String IDNV;
     private String IDBan;
 
     public HoaDonModel() {
     }
 
-    public HoaDonModel(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDNV, String IDKM, String IDBan) {
+    public HoaDonModel(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDKM, String IDNV, String IDBan) {
         this.ID = ID;
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
         this.thanhTien = thanhTien;
         this.phuongThucThanhToan = phuongThucThanhToan;
-        this.IDNV = IDNV;
         this.IDKM = IDKM;
+        this.IDNV = IDNV;
         this.IDBan = IDBan;
     }
 
@@ -73,20 +73,20 @@ public class HoaDonModel {
         this.phuongThucThanhToan = phuongThucThanhToan;
     }
 
-    public String getIDNV() {
-        return IDNV;
-    }
-
-    public void setIDNV(String IDNV) {
-        this.IDNV = IDNV;
-    }
-
     public String getIDKM() {
         return IDKM;
     }
 
     public void setIDKM(String IDKM) {
         this.IDKM = IDKM;
+    }
+
+    public String getIDNV() {
+        return IDNV;
+    }
+
+    public void setIDNV(String IDNV) {
+        this.IDNV = IDNV;
     }
 
     public String getIDBan() {
@@ -99,9 +99,11 @@ public class HoaDonModel {
 
     @Override
     public String toString() {
-        return "HoaDonModel{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan +  ", IDNV=" + IDNV + ", IDKM=" + IDKM + ", IDBan=" + IDBan + '}';
+        return "HoaDonModel{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", IDKM=" + IDKM + ", IDNV=" + IDNV + ", IDBan=" + IDBan + '}';
     }
 
-   
+    public Object[] toRowData() {
+        return new Object[]{ID, maHD, ngayLapHD, thanhTien, phuongThucThanhToan, IDKM, IDNV, IDBan};
 
+    }
 }

@@ -11,37 +11,26 @@ package ViewModels;
 public class HoaDon {
 
     private String ID;
-    private HoaDonChiTiet hdct;
     private String maHD;
     private String ngayLapHD;
     private double thanhTien;
     private String phuongThucThanhToan;
-    private String IDNV;
-    private String IDKM;
-    private String IDBan;
+    private String MAKM;
+    private String MANV;
+    private String MABan;
 
     public HoaDon() {
     }
 
-    public HoaDon(String ID, HoaDonChiTiet hdct, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan) {
+    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String MAKM, String MANV, String MABan) {
         this.ID = ID;
-        this.hdct = hdct;
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
         this.thanhTien = thanhTien;
         this.phuongThucThanhToan = phuongThucThanhToan;
-    }
-
-    public HoaDon(String ID, HoaDonChiTiet hdct, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDNV, String IDKM, String IDBan) {
-        this.ID = ID;
-        this.hdct = hdct;
-        this.maHD = maHD;
-        this.ngayLapHD = ngayLapHD;
-        this.thanhTien = thanhTien;
-        this.phuongThucThanhToan = phuongThucThanhToan;
-        this.IDNV = IDNV;
-        this.IDKM = IDKM;
-        this.IDBan = IDBan;
+        this.MAKM = MAKM;
+        this.MANV = MANV;
+        this.MABan = MABan;
     }
 
     public String getID() {
@@ -50,14 +39,6 @@ public class HoaDon {
 
     public void setID(String ID) {
         this.ID = ID;
-    }
-
-    public HoaDonChiTiet getHdct() {
-        return hdct;
-    }
-
-    public void setHdct(HoaDonChiTiet hdct) {
-        this.hdct = hdct;
     }
 
     public String getMaHD() {
@@ -92,37 +73,34 @@ public class HoaDon {
         this.phuongThucThanhToan = phuongThucThanhToan;
     }
 
-    public String getIDNV() {
-        return IDNV;
+    public String getMAKM() {
+        return MAKM;
     }
 
-    public void setIDNV(String IDNV) {
-        this.IDNV = IDNV;
+    public void setMAKM(String MAKM) {
+        this.MAKM = MAKM;
     }
 
-    public String getIDKM() {
-        return IDKM;
+    public String getMANV() {
+        return MANV;
     }
 
-    public void setIDKM(String IDKM) {
-        this.IDKM = IDKM;
+    public void setMANV(String MANV) {
+        this.MANV = MANV;
     }
 
-    public String getIDBan() {
-        return IDBan;
+    public String getMABan() {
+        return MABan;
     }
 
-    public void setIDBan(String IDBan) {
-        this.IDBan = IDBan;
+    public void setMABan(String MABan) {
+        this.MABan = MABan;
     }
 
-    @Override
-    public String toString() {
-        return "HoaDon{" + "ID=" + ID + ", hdct=" + hdct + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", IDNV=" + IDNV + ", IDKM=" + IDKM + ", IDBan=" + IDBan + '}';
-    }
+  
 
     public Object[] toRowData() {
-        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, hdct.getSoLuong(), hdct.getGiaTien(), hdct.getGhiChu()};
+        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, MAKM, MANV, MABan};
     }
 
 }

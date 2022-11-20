@@ -10,8 +10,8 @@ package ViewModels;
  */
 public class HoaDonChiTiet {
 
-    private String IDSP;
-    private String IDHD;
+    private String TenSP;
+    private String MAHD;
     private int soLuong;
     private double giaTien;
     private String ghiChu;
@@ -19,34 +19,28 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String IDSP, String IDHD, int soLuong, double giaTien, String ghiChu) {
-        this.IDSP = IDSP;
-        this.IDHD = IDHD;
+    public HoaDonChiTiet(String TenSP, String MAHD, int soLuong, double giaTien, String ghiChu) {
+        this.TenSP = TenSP;
+        this.MAHD = MAHD;
         this.soLuong = soLuong;
         this.giaTien = giaTien;
         this.ghiChu = ghiChu;
     }
 
-    public HoaDonChiTiet(int soLuong, double giaTien, String ghiChu) {
-        this.soLuong = soLuong;
-        this.giaTien = giaTien;
-        this.ghiChu = ghiChu;
+    public String getTenSP() {
+        return TenSP;
     }
 
-    public String getIDSP() {
-        return IDSP;
+    public void setTenSP(String TenSP) {
+        this.TenSP = TenSP;
     }
 
-    public void setIDSP(String IDSP) {
-        this.IDSP = IDSP;
+    public String getMAHD() {
+        return MAHD;
     }
 
-    public String getIDHD() {
-        return IDHD;
-    }
-
-    public void setIDHD(String IDHD) {
-        this.IDHD = IDHD;
+    public void setMAHD(String MAHD) {
+        this.MAHD = MAHD;
     }
 
     public int getSoLuong() {
@@ -72,5 +66,16 @@ public class HoaDonChiTiet {
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
+
+    @Override
+    public String toString() {
+        return "HoaDonChiTiet{" + "TenSP=" + TenSP + ", MAHD=" + MAHD + ", soLuong=" + soLuong + ", giaTien=" + giaTien + ", ghiChu=" + ghiChu + '}';
+    }
+
+    
+    public Object[]toRowdata(){
+        return new Object[]{TenSP,MAHD,soLuong,giaTien,ghiChu};
+    }
+    
 
 }
