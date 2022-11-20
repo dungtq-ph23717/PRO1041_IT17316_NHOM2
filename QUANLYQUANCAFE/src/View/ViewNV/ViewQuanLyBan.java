@@ -54,7 +54,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         showDataKV(listKV);
         cbbKhuVuc.setModel(boxModel);
         for (KhuVuc x : listKV) {
-            boxModel.addElement(x.getTenKV());
+            boxModel.addElement(x.getMaKV());
         }
     }
 
@@ -73,16 +73,26 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     }
 
     private void fillData(int index) {
-        Ban ban = listBan.get(index);
-        txtId.setText(ban.getId());
-        txtMa.setText(ban.getMaBan());
-        txtMota.setText(ban.getMoTa());
-        txtName.setText(ban.getTenBan());
-        cbbBan.setSelectedItem(ban.getLoaiBan());
-        KhuVuc kv = listKV.get(index);
-        KhuVuc ten1 = impl1.getOne(cbbKhuVuc.getSelectedItem().toString());
-        txtTenKV.setText(kv.getTenKV());
-        cbbKhuVuc.setSelectedItem(kv.getTenKV());
+        try {
+            Ban ban = listBan.get(index);
+            txtId.setText(ban.getId());
+            txtMa.setText(ban.getMaBan());
+            txtMota.setText(ban.getMoTa());
+            txtName.setText(ban.getTenBan());
+            cbbBan.setSelectedItem(ban.getLoaiBan());
+            KhuVuc kv = listKV.get(index);
+            KhuVuc ten1 = impl1.getOne(cbbKhuVuc.getSelectedItem().toString());
+            cbbKhuVuc.setSelectedItem(kv.getMaKV());
+            txtTenKV.setText(kv.getTenKV());
+            String tt = kv.getTrangThai();
+            if (tt.equalsIgnoreCase("Trống")) {
+                rbtTrong.setSelected(true);
+            } else {
+                rbtDay.setSelected(true);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Khu vực này không có bàn");
+        }
     }
 
     /**
@@ -100,7 +110,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         jTable2 = new javax.swing.JTable();
         btThem1 = new javax.swing.JButton();
         btCapNhat2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -140,6 +150,11 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         btThem1.setText("Thêm");
@@ -157,6 +172,12 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             }
         });
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -171,7 +192,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -181,7 +202,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -382,15 +403,16 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btThem, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(46, 46, 46)
                                 .addComponent(btCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(41, 41, 41)
+                                .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)))
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -411,7 +433,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                             .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                 .addGap(44, 44, 44))
         );
 
@@ -451,7 +473,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         String moTa = txtMota.getText();
         String loai = (String) cbbBan.getSelectedItem();
         String khuVuc = cbbKhuVuc.getSelectedItem().toString();
-        KhuVuc ten1 = impl1.getOne(cbbKhuVuc.getSelectedItem().toString());
+        KhuVuc ten1 = impl1.getOne(txtTenKV.getText());
         KhuVucModel kv = new KhuVucModel(khuVuc);
         BanModel ban = new BanModel(ma, ten, moTa, loai, ten1.getId(), kv);
         JOptionPane.showMessageDialog(this, impl.add(ban));
@@ -485,8 +507,35 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btThem1ActionPerformed
 
     private void btCapNhat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhat2ActionPerformed
-        // TODO add your handling code here:
+        String ten = txtTenKV.getText();
+        boolean trangThai = rbtDay.isSelected();
+        String tt = "";
+        if (trangThai) {
+            tt = "Đầy";
+        } else {
+            tt = "Trống";
+        }
+        String khuVuc = cbbKhuVuc.getSelectedItem().toString();
+        KhuVucModel kv = new KhuVucModel(ten, tt);
+        JOptionPane.showMessageDialog(this, impl1.update(kv, khuVuc));
+        listKV = impl1.getAll();
+        showDataKV(listKV);
     }//GEN-LAST:event_btCapNhat2ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        int row = jTable2.getSelectedRow();
+        fillData(row);
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        if (txtSearch.getText().isEmpty()) {
+            listKV = impl1.getAll();
+            showDataKV(listKV);
+        } else {
+            List<KhuVuc> Search = impl1.Search(txtSearch.getText());
+            showDataKV(Search);
+        }
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -513,7 +562,6 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JRadioButton rbtDay;
     private javax.swing.JRadioButton rbtTrong;
     private javax.swing.JTextField txtId;
@@ -521,6 +569,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMaSearch;
     private javax.swing.JTextField txtMota;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTenKV;
     // End of variables declaration//GEN-END:variables
 }
