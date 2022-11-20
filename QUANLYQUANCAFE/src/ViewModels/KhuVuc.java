@@ -64,4 +64,7 @@ public class KhuVuc {
         return "KhuVuc{" + "id=" + id + ", maKV=" + maKV + ", tenKV=" + tenKV + ", trangThai=" + trangThai + '}';
     }
 
+    public Object[] toRowData() {
+        return new Object[]{id, maKV, tenKV, trangThai};
+    }
 }

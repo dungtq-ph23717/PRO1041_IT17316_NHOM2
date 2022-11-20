@@ -27,6 +27,11 @@ public class KhuVucModel {
         this.trangThai = trangThai;
     }
 
+    public KhuVucModel(String tenKV, String trangThai) {
+        this.tenKV = tenKV;
+        this.trangThai = trangThai;
+    }
+
     public String getId() {
         return id;
     }
