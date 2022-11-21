@@ -54,6 +54,24 @@ public class KhuVucRepostory {
         }
         return null;
     }
+    
+    public List<KhuVuc> SearchTT(String TrangThai) {
+        String query = "SELECT [ID],[MaKV],[TenKV],[TrangThai]FROM [dbo].[KhuVuc]\n"
+                + "Where TrangThai like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + TrangThai + "%");
+            ResultSet rs = ps.executeQuery();
+            List<KhuVuc> list = new ArrayList<>();
+            while (rs.next()) {
+                KhuVuc ban = new KhuVuc(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                list.add(ban);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 
     public KhuVuc getOne(String ma) {
         String query = "SELECT [ID]\n"

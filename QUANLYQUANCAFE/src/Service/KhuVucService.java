@@ -20,6 +20,8 @@ public interface KhuVucService {
 
     List<KhuVuc> Search(String ma);
 
+    List<KhuVuc> SearchTT(String tt);
+
     String add(KhuVucModel ban);
 
     String update(KhuVucModel ban, String ma);
