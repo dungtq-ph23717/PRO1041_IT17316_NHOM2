@@ -15,18 +15,24 @@ public class NhanVienViewModel {
     private String ngaySinh;
     private String SDT;
     private String tencv;
+    private String TrangThai;
+    private String anh;
 
     public NhanVienViewModel() {
     }
 
-    public NhanVienViewModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String tencv) {
+    public NhanVienViewModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String tencv, String TrangThai, String anh) {
         this.id = id;
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.ngaySinh = ngaySinh;
         this.SDT = SDT;
         this.tencv = tencv;
+        this.TrangThai = TrangThai;
+        this.anh = anh;
     }
+
+  
 
     public String getId() {
         return id;
@@ -76,11 +82,31 @@ public class NhanVienViewModel {
         this.tencv = tencv;
     }
 
+    public String getTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(String TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
+    }
+
     @Override
     public String toString() {
-        return "NhanVienViewModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", tencv=" + tencv + '}';
+        return "NhanVienViewModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", tencv=" + tencv + ", TrangThai=" + TrangThai + ", anh=" + anh + '}';
     }
+    
+
+   
+    
     public Object[] toRowData(){
-        return new Object[]{id,maNV,tenNV,ngaySinh,SDT,tencv};
+        return new Object[]{id,maNV,tenNV,ngaySinh,SDT,tencv,TrangThai,anh};
     }
 }

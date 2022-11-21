@@ -15,15 +15,21 @@ public class NhanVienModel {
     private String ngaySinh;
     private String SDT;
     private String idCV;
+    private String trangThai;
+    private String anh;
 
-    public NhanVienModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String idCV) {
+    public NhanVienModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String idCV, String trangThai, String anh) {
         this.id = id;
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.ngaySinh = ngaySinh;
         this.SDT = SDT;
         this.idCV = idCV;
+        this.trangThai = trangThai;
+        this.anh = anh;
     }
+
+    
 
     public NhanVienModel() {
     }
@@ -76,9 +82,27 @@ public class NhanVienModel {
         this.idCV = idCV;
     }
 
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
+    }
+
     @Override
     public String toString() {
-        return "NhanVienModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", idCV=" + idCV + '}';
+        return "NhanVienModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", idCV=" + idCV + ", trangThai=" + trangThai + ", anh=" + anh + '}';
     }
+
+    
     
 }
