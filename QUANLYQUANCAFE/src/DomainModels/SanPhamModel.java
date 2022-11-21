@@ -17,11 +17,14 @@ public class SanPhamModel {
     private double giaBan;
     private String idQL;
     private String idSize;
+    private String idCB;
+    private String idDM;
+    private DanhMucModel tenDM;
 
     public SanPhamModel() {
     }
 
-    public SanPhamModel(String id, String maSP, String tenSP, Integer soLuong, double giaBan, String idQL, String idSize) {
+    public SanPhamModel(String id, String maSP, String tenSP, Integer soLuong, double giaBan, String idQL, String idSize, String idDM) {
         this.id = id;
         this.maSP = maSP;
         this.tenSP = tenSP;
@@ -29,13 +32,24 @@ public class SanPhamModel {
         this.giaBan = giaBan;
         this.idQL = idQL;
         this.idSize = idSize;
+        this.idDM = idDM;
     }
 
-    public SanPhamModel(String maSP, String tenSP, Integer soLuong, double giaBan) {
+    public SanPhamModel(String maSP, String tenSP, Integer soLuong, double giaBan, String idDM, DanhMucModel tenDM) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
+        this.idDM = idDM;
+        this.tenDM = tenDM;
+    }
+
+    public String getIdDM() {
+        return idDM;
+    }
+
+    public void setIdDM(String idDM) {
+        this.idDM = idDM;
     }
 
     public String getId() {

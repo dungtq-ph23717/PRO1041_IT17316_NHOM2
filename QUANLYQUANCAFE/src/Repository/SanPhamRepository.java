@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import Utilities.DBContext;
+import ViewModels.DanhMuc;
 
 /**
  *
@@ -20,17 +21,13 @@ import Utilities.DBContext;
 public class SanPhamRepository {
 
     public List<SanPham> getAll() {
-        String query = "SELECT [MaSP]\n"
-                + "      ,[TenSP]\n"
-                + "      ,[Soluong]\n"
-                + "      ,[Giaban]\n"
-                + "\n"
-                + "  FROM [dbo].[SanPham]";
+        String query = "SELECT MaSP, TenSP, Soluong, Giaban, TenDM FROM SanPham sp \n"
+                + "INNER JOIN DanhMuc dm ON sp.IDDM = dm.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<SanPham> list = new ArrayList<>();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4), new DanhMuc(rs.getString(5)));
                 list.add(sp);
             }
             return list;
@@ -52,7 +49,7 @@ public class SanPhamRepository {
             ResultSet rs = ps.executeQuery();
             List<SanPham> list = new ArrayList<>();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4), new DanhMuc(rs.getString(5)));
                 list.add(sp);
             }
             return list;
@@ -67,15 +64,17 @@ public class SanPhamRepository {
                 + "           ([MaSP]\n"
                 + "           ,[TenSP]\n"
                 + "           ,[Soluong]\n"
-                + "           ,[Giaban])\n"
+                + "           ,[Giaban]\n"
+                + "           ,[IDDM])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?)";
+                + "           (?,?,?,?,?)";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, sp.getMaSP());
             ps.setObject(2, sp.getTenSP());
             ps.setObject(3, sp.getSoLuong());
             ps.setObject(4, sp.getGiaBan());
+            ps.setObject(5, sp.getIdDM());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -118,7 +117,7 @@ public class SanPhamRepository {
     }
 
     public static void main(String[] args) {
-        List<SanPham> list = new SanPhamRepository().search("SP2");
+        List<SanPham> list = new SanPhamRepository().getAll();
         for (SanPham x : list) {
             System.out.println(x.toString());
         }

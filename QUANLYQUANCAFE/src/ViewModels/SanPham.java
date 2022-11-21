@@ -14,15 +14,17 @@ public class SanPham {
     private String tenSP;
     private Integer soLuong;
     private double giaBan;
+    private DanhMuc danhMuc;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String tenSP, Integer soLuong, double giaBan) {
+    public SanPham(String maSP, String tenSP, Integer soLuong, double giaBan, DanhMuc danhMuc) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
+        this.danhMuc = danhMuc;
     }
 
     public String getMaSP() {
@@ -57,9 +59,17 @@ public class SanPham {
         this.giaBan = giaBan;
     }
 
+    public DanhMuc getDanhMuc() {
+        return danhMuc;
+    }
+
+    public void setDanhMuc(DanhMuc danhMuc) {
+        this.danhMuc = danhMuc;
+    }
+
     @Override
     public String toString() {
-        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", soLuong=" + soLuong + ", giaBan=" + giaBan + '}';
+        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", soLuong=" + soLuong + ", giaBan=" + giaBan + ", danhMuc=" + danhMuc + '}';
     }
 
 }
