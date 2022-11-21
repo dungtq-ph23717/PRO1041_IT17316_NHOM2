@@ -90,7 +90,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         nhanVien.setSDT(txtSDT.getText());
         ChucVu chucVu = listcv.get(indextencv);
         nhanVien.setIdCV(chucVu.getID());
-        nhanVien.setTrangThai(nhanVien.getTrangThai());
+        nhanVien.setTrangThai(cbbtrangThai.getSelectedItem()+"");
         nhanVien.setAnh(nhanVien.getAnh());
         return nhanVien;
 
@@ -669,6 +669,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         }
         txtSDT.setText(tableNhanVien.getValueAt(row, 4).toString());
         cbbChucVu.setSelectedItem(tableNhanVien.getValueAt(row, 5).toString());
+        cbbtrangThai.setSelectedItem(tableNhanVien.getValueAt(row, 6).toString());
 
     }//GEN-LAST:event_tableNhanVienMouseClicked
 
