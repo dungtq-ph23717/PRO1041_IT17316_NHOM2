@@ -80,7 +80,7 @@ public class KhuVucRepostory {
                 + "           ,[TenKV]\n"
                 + "           ,[TrangThai])\n"
                 + "     VALUES\n"
-                + "           ('KV'+?\n"
+                + "           (?\n"
                 + "           ,?\n"
                 + "           ,?)";
         int check = 0;
@@ -129,13 +129,13 @@ public class KhuVucRepostory {
 
     public static void main(String[] args) {
 
-        List<KhuVuc> one = new KhuVucRepostory().Search("Tầng 1");
-        for (KhuVuc khuVuc : one) {
-            System.out.println(khuVuc.toString());
-        }
+//        List<KhuVuc> one = new KhuVucRepostory().Search("Tầng 1");
+//        for (KhuVuc khuVuc : one) {
+//            System.out.println(khuVuc.toString());
+//        }
 
-//        KhuVucModel ban = new KhuVucModel("kv1", "k", "trong");
-//        boolean add = new KhuVucRepostory().add(ban);
-//        System.out.println(add);
+        KhuVucModel ban = new KhuVucModel("kv1", "k", "trong");
+        boolean add = new KhuVucRepostory().add(ban);
+        System.out.println(add);
     }
 }
