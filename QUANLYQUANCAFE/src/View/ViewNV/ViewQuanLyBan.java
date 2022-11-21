@@ -23,10 +23,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewQuanLyBan extends javax.swing.JInternalFrame {
-
+    
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultTableModel dtm1 = new DefaultTableModel();
-    private DefaultComboBoxModel boxModel = new DefaultComboBoxModel();
+    private DefaultComboBoxModel boxModel4 = new DefaultComboBoxModel();
+    private DefaultComboBoxModel boxModel1 = new DefaultComboBoxModel();
+    private DefaultComboBoxModel boxModel2 = new DefaultComboBoxModel();
+    private DefaultComboBoxModel boxModel3 = new DefaultComboBoxModel();
     private List<Ban> listBan = new ArrayList<>();
     private List<KhuVuc> listKV = new ArrayList<>();
     private BanServiceImpl impl = new BanServiceImpl();
@@ -46,20 +49,30 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         dtm.setColumnIdentifiers(headers);
         listBan = impl.getAll();
         showData(listBan);
-        
-        cbbKhuVuc.setModel(boxModel);
+        listKV = impl1.getAll();
+        cbbKhuVuc.setModel(boxModel1);
         for (KhuVuc x : listKV) {
-            boxModel.addElement(x.getTenKV());
+            boxModel1.addElement(x.getTenKV());
+        }
+        cbbKhuVuc1.setModel(boxModel2);
+        boxModel2.addElement(" ");
+        for (KhuVuc x : listKV) {
+            boxModel2.addElement(x.getTenKV());
+        }
+        cbbTen.setModel(boxModel3);
+        boxModel3.addElement(" ");
+        for (Ban x : listBan) {
+            boxModel3.addElement(x.getTenBan());
         }
     }
-
+    
     private void showData(List<Ban> listBan) {
         dtm.setRowCount(0);
         for (Ban ban : listBan) {
             dtm.addRow(ban.toRowData());
         }
     }
-
+    
     private void fillData(int index) {
         Ban ban = listBan.get(index);
         txtId.setText(ban.getId());
@@ -67,7 +80,9 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         txtMota.setText(ban.getMoTa());
         txtName.setText(ban.getTenBan());
         cbbBan.setSelectedItem(ban.getLoaiBan());
-
+        KhuVuc kv = listKV.get(index);
+        KhuVuc ten1 = impl1.getOne(cbbKhuVuc.getSelectedItem().toString());
+        cbbKhuVuc.setSelectedItem(kv.getTenKV());
     }
 
     /**
@@ -269,10 +284,25 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         jLabel10.setToolTipText("");
 
         cbbKhuVuc1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbKhuVuc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbKhuVuc1ActionPerformed(evt);
+            }
+        });
 
-        cbbLoaiBan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbLoaiBan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Nhỏ", "Vừa", "Lớn" }));
+        cbbLoaiBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbLoaiBanActionPerformed(evt);
+            }
+        });
 
         cbbTen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbTen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbTenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -314,6 +344,11 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         );
 
         jButton1.setText("Khu vực");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -325,7 +360,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,7 +389,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                 .addGap(54, 54, 54))
         );
 
@@ -409,6 +444,26 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         listBan = impl.getAll();
         showData(listBan);
     }//GEN-LAST:event_btXoaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ViewKhuVuc v = new ViewKhuVuc();
+        v.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbbTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbTenActionPerformed
+        List<Ban> SearchTen = impl.SearchTen((String) cbbTen.getSelectedItem());
+        showData(SearchTen);
+    }//GEN-LAST:event_cbbTenActionPerformed
+
+    private void cbbLoaiBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLoaiBanActionPerformed
+        List<Ban> SearchTen = impl.SearchLoaiBan((String) cbbLoaiBan.getSelectedItem());
+        showData(SearchTen);
+    }//GEN-LAST:event_cbbLoaiBanActionPerformed
+
+    private void cbbKhuVuc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuVuc1ActionPerformed
+        List<Ban> SearchTen = impl.SearchKV((String) cbbKhuVuc1.getSelectedItem());
+        showData(SearchTen);
+    }//GEN-LAST:event_cbbKhuVuc1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

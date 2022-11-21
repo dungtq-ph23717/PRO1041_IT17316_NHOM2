@@ -17,7 +17,7 @@ public interface KhuVucService {
     List<KhuVuc> getAll();
 
     KhuVuc getOne(String ma);
-    
+
     List<KhuVuc> Search(String ma);
 
     String add(KhuVucModel ban);
