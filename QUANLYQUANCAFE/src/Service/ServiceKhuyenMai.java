@@ -22,4 +22,7 @@ public interface ServiceKhuyenMai {
     String delete(String IDKM);
 
     List<ViewModels.KhuyenMai> searchTheoMaKM(String maKM);
+
+    List<ViewModels.KhuyenMai> searchTheoHinhThucGG(String htgg);
+
 }

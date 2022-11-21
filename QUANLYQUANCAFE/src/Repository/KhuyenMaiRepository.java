@@ -28,13 +28,14 @@ public class KhuyenMaiRepository {
                 + "      ,[MucGiam]\n"
                 + "      ,[TGBatDau]\n"
                 + "      ,[TGKetThuc]\n"
+                + "      ,[TrangThai]\n"
                 + "      ,[Mota]\n"
                 + "  FROM [dbo].[KhuyenMai]";
         List<KhuyenMai> listKM = new ArrayList<>();
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                KhuyenMai km = new KhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                KhuyenMai km = new KhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
                 listKM.add(km);
             }
             return listKM;
@@ -52,6 +53,7 @@ public class KhuyenMaiRepository {
                 + "      ,[MucGiam]\n"
                 + "      ,[TGBatDau]\n"
                 + "      ,[TGKetThuc]\n"
+                + "      ,[TrangThai]\n"
                 + "      ,[Mota]\n"
                 + "  FROM [dbo].[KhuyenMai]\n"
                 + "  WHERE MaKM LIKE ?";
@@ -60,7 +62,34 @@ public class KhuyenMaiRepository {
             ps.setString(1, "%" + maKM + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                KhuyenMai km = new KhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                KhuyenMai km = new KhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                listKM.add(km);
+            }
+            return listKM;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<KhuyenMai> searchTheoHinhThucGG(String htgg) {
+        String query = "SELECT [ID]\n"
+                + "      ,[MaKM]\n"
+                + "      ,[TenKM]\n"
+                + "      ,[HinhThucGG]\n"
+                + "      ,[MucGiam]\n"
+                + "      ,[TGBatDau]\n"
+                + "      ,[TGKetThuc]\n"
+                + "      ,[TrangThai]\n"
+                + "      ,[Mota]\n"
+                + "  FROM [dbo].[KhuyenMai]\n"
+                + "  WHERE HinhThucGG LIKE ?";
+        List<KhuyenMai> listKM = new ArrayList<>();
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, "%" + htgg + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                KhuyenMai km = new KhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
                 listKM.add(km);
             }
             return listKM;
@@ -79,9 +108,10 @@ public class KhuyenMaiRepository {
                 + "           ,[MucGiam]\n"
                 + "           ,[TGBatDau]\n"
                 + "           ,[TGKetThuc]\n"
+                + "           ,[TrangThai]\n"
                 + "           ,[Mota])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?)";
+                + "           (?,?,?,?,?,?,?,?)";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, km.getMaKM());
             ps.setObject(2, km.getTenKM());
@@ -89,7 +119,8 @@ public class KhuyenMaiRepository {
             ps.setObject(4, km.getMucGiam());
             ps.setObject(5, km.getTgBatDau());
             ps.setObject(6, km.getTgKetThuc());
-            ps.setObject(7, km.getMoTa());
+            ps.setObject(7, km.getTrangThai());
+            ps.setObject(8, km.getMoTa());
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,15 +130,16 @@ public class KhuyenMaiRepository {
 
     public boolean update(KhuyenMaiModel km, String IDKM) {
         int check = 0;
-        String query = "UPDATE [dbo].[KhuyenMai]\n"
-                + "   SET [MaKM] = ?\n"
-                + "      ,[TenKM] = ?\n"
-                + "      ,[HinhThucGG] = ?\n"
-                + "      ,[MucGiam] = ?\n"
-                + "      ,[TGBatDau] = ?\n"
-                + "      ,[TGKetThuc] = ?\n"
-                + "      ,[Mota] = ?\n"
-                + " WHERE ID = ?";
+        String query = "UPDATE [dbo].[KhuyenMai]\\n\"\n"
+                + "                + \"   SET [MaKM] = ?\\n\"\n"
+                + "                + \"      ,[TenKM] = ?\\n\"\n"
+                + "                + \"      ,[HinhThucGG] = ?\\n\"\n"
+                + "                + \"      ,[MucGiam] = ?\\n\"\n"
+                + "                + \"      ,[TGBatDau] = ?\\n\"\n"
+                + "                + \"      ,[TGKetThuc] = ?\\n\"\n"
+                + "                + \"      ,[TrangThai] = ?\\n\"\n"
+                + "                + \"      ,[Mota] = ?\\n\"\n"
+                + "                + \" WHERE ID = ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, km.getMaKM());
             ps.setObject(2, km.getTenKM());
@@ -115,8 +147,9 @@ public class KhuyenMaiRepository {
             ps.setObject(4, km.getMucGiam());
             ps.setObject(5, km.getTgBatDau());
             ps.setObject(6, km.getTgKetThuc());
-            ps.setObject(7, km.getMoTa());
-            ps.setString(8, IDKM);
+            ps.setObject(7, km.getTrangThai());
+            ps.setObject(8, km.getMoTa());
+            ps.setObject(9, IDKM);
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,9 +171,12 @@ public class KhuyenMaiRepository {
     }
 
     public static void main(String[] args) {
-        List<KhuyenMai> show = new KhuyenMaiRepository().searchMaKM("km");
+        List<KhuyenMai> show = new KhuyenMaiRepository().searchTheoHinhThucGG("Giảm theo số tiền");
         for (KhuyenMai x : show) {
             System.out.println(x);
         }
+//        KhuyenMaiModel km = new KhuyenMaiModel("KM01", "Giam 10 k", "Giảm theo số tiền", "10000", "10/10/2022", "11/11/2022", "Đang kích hoạt", "null");
+//        boolean add = new KhuyenMaiRepository().update(km, "KM02");
+//        System.out.println(add);
     }
 }
