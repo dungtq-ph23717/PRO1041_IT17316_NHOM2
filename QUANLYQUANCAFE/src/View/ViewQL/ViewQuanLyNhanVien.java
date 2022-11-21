@@ -91,7 +91,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         ChucVu chucVu = listcv.get(indextencv);
         nhanVien.setIdCV(chucVu.getID());
         nhanVien.setTrangThai(cbbtrangThai.getSelectedItem()+"");
-        nhanVien.setAnh(nhanVien.getAnh());
+        nhanVien.setAnh(null);
+        
         return nhanVien;
 
     }

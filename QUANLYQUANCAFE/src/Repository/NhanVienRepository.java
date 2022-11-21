@@ -40,14 +40,13 @@ public class NhanVienRepository {
 
     public boolean add(NhanVienModel nhanVien) {
         String query = "INSERT INTO [dbo].[NhanVien]\n"
-                + "           ( [MaNV]\n"
+                + "           ([MaNV]\n"
                 + "           ,[TenNV]\n"
                 + "           ,[NgaySinh]\n"
                 + "           ,[SDT]\n"
                 + "           ,[IDCV]\n"
                 + "           ,[TrangThai])\n"
-                + "           ,[Anh]\n"
-                + "     VALUES  (?,?,?,?,?,?,?)";
+                + "     VALUES (?,?,?,?,?,?)";
         int check = 0;
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, nhanVien.getMaNV());
@@ -56,7 +55,6 @@ public class NhanVienRepository {
             ps.setObject(4, nhanVien.getSDT());
             ps.setObject(5, nhanVien.getIdCV());
             ps.setObject(6, nhanVien.getTrangThai());
-            ps.setObject(7, nhanVien.getAnh());
 
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -132,7 +130,7 @@ public class NhanVienRepository {
     }
 
     public static void main(String[] args) {
-        System.out.println(new NhanVienRepository().getAll());
+        System.out.println(new NhanVienRepository().add(new NhanVienModel("", "nv02", "hung", "02-12-2003", "0345571727", "682F38AA-5EE3-44AA-A1E8-2E2ED27D19C1", "Đang làm", null)));
     }
 
 }
