@@ -54,6 +54,24 @@ public class KhuVucRepostory {
         }
         return null;
     }
+    
+    public List<KhuVuc> SearchTT(String TrangThai) {
+        String query = "SELECT [ID],[MaKV],[TenKV],[TrangThai]FROM [dbo].[KhuVuc]\n"
+                + "Where TrangThai like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + TrangThai + "%");
+            ResultSet rs = ps.executeQuery();
+            List<KhuVuc> list = new ArrayList<>();
+            while (rs.next()) {
+                KhuVuc ban = new KhuVuc(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                list.add(ban);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 
     public KhuVuc getOne(String ma) {
         String query = "SELECT [ID]\n"
@@ -80,7 +98,7 @@ public class KhuVucRepostory {
                 + "           ,[TenKV]\n"
                 + "           ,[TrangThai])\n"
                 + "     VALUES\n"
-                + "           ('KV'+?\n"
+                + "           (?\n"
                 + "           ,?\n"
                 + "           ,?)";
         int check = 0;
@@ -129,13 +147,13 @@ public class KhuVucRepostory {
 
     public static void main(String[] args) {
 
-        List<KhuVuc> one = new KhuVucRepostory().Search("Tầng 1");
-        for (KhuVuc khuVuc : one) {
-            System.out.println(khuVuc.toString());
-        }
+//        List<KhuVuc> one = new KhuVucRepostory().Search("Tầng 1");
+//        for (KhuVuc khuVuc : one) {
+//            System.out.println(khuVuc.toString());
+//        }
 
-//        KhuVucModel ban = new KhuVucModel("kv1", "k", "trong");
-//        boolean add = new KhuVucRepostory().add(ban);
-//        System.out.println(add);
+        KhuVucModel ban = new KhuVucModel("kv1", "k", "trong");
+        boolean add = new KhuVucRepostory().add(ban);
+        System.out.println(add);
     }
 }

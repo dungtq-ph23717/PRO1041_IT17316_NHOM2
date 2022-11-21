@@ -54,6 +54,69 @@ public class BanRepostory {
         }
         return null;
     }
+    
+    public List<Ban> SearchKV(String TenKV) {
+        String query = "Select ban.ID, MaBan,TenBan,Mota, Loaiban, TenKV\n"
+                + "From Ban \n"
+                + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
+                + "where TenKV like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + TenKV + "%");
+            ResultSet rs = ps.executeQuery();
+            List<Ban> list = new ArrayList<>();
+            while (rs.next()) {
+                KhuVuc kv = new KhuVuc(rs.getString(6));
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), kv);
+                list.add(ban);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+    
+    public List<Ban> SearchTen(String ten) {
+        String query = "Select ban.ID, MaBan,TenBan,Mota, Loaiban, TenKV\n"
+                + "From Ban \n"
+                + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
+                + "where TenBan like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + ten + "%");
+            ResultSet rs = ps.executeQuery();
+            List<Ban> list = new ArrayList<>();
+            while (rs.next()) {
+                KhuVuc kv = new KhuVuc(rs.getString(6));
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), kv);
+                list.add(ban);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+    
+    public List<Ban> SearchLoaiBan(String loai) {
+        String query = "Select ban.ID, MaBan,TenBan,Mota, Loaiban, TenKV\n"
+                + "From Ban \n"
+                + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
+                + "where Loaiban like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + loai + "%");
+            ResultSet rs = ps.executeQuery();
+            List<Ban> list = new ArrayList<>();
+            while (rs.next()) {
+                KhuVuc kv = new KhuVuc(rs.getString(6));
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), kv);
+                list.add(ban);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 
     public boolean add(BanModel ban) {
         String query = "INSERT INTO [dbo].[Ban]\n"

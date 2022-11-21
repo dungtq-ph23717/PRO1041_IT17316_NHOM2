@@ -17,8 +17,10 @@ public interface KhuVucService {
     List<KhuVuc> getAll();
 
     KhuVuc getOne(String ma);
-    
+
     List<KhuVuc> Search(String ma);
+
+    List<KhuVuc> SearchTT(String tt);
 
     String add(KhuVucModel ban);
 
