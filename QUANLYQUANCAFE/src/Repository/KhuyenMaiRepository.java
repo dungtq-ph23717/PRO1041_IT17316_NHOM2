@@ -83,10 +83,10 @@ public class KhuyenMaiRepository {
                 + "      ,[TrangThai]\n"
                 + "      ,[Mota]\n"
                 + "  FROM [dbo].[KhuyenMai]\n"
-                + "  WHERE HinhThucGG LIKE ?";
+                + "  WHERE HinhThucGG = ?";
         List<KhuyenMai> listKM = new ArrayList<>();
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setString(1, "%" + htgg + "%");
+            ps.setString(1, htgg);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 KhuyenMai km = new KhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
