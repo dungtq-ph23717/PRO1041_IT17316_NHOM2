@@ -55,6 +55,12 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         }
     }
 
+//    private void showDataDM(List<DanhMuc> list) {
+//        dtm.setRowCount(0);
+//        for (DanhMuc dm : list) {
+//            dtm.addRow(new Object[]{dm.getId(), dm.getMaDanhMuc(), dm.getTenDanhMuc()});
+//        }
+//    }
     private void fillData(int index) {
         SanPham sp = listSanPham.get(index);
         txtMa.setText(sp.getMaSP());
@@ -377,7 +383,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         String DanhMuc = (String) cbbDanhMuc.getSelectedItem();
         DanhMuc dm = dmService.getOne(cbbDanhMuc.getSelectedItem().toString());
         DanhMucModel dmModel = new DanhMucModel(DanhMuc);
-        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(sl), Double.valueOf(gia), "CE87025D-EA33-4C85-B754-6D3BD92F0049", dmModel);
+        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(sl), Double.valueOf(gia), dm.getId(), dmModel);
         JOptionPane.showMessageDialog(this, spService.add(sp));
         listSanPham = spService.getAll();
         listDanhMuc = dmService.getAll();
@@ -392,7 +398,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         String DanhMuc = (String) cbbDanhMuc.getSelectedItem();
         DanhMuc dm = dmService.getOne(cbbDanhMuc.getSelectedItem().toString());
         DanhMucModel dmModel = new DanhMucModel(DanhMuc);
-        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(sl), Double.valueOf(gia), "CE87025D-EA33-4C85-B754-6D3BD92F0049", dmModel);
+        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(sl), Double.valueOf(gia), dm.getId(), dmModel);
         JOptionPane.showMessageDialog(this, spService.update(sp, ma));
         listSanPham = spService.getAll();
         showDataSP(listSanPham);
