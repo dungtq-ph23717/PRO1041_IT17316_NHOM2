@@ -29,11 +29,7 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        String[] headers = {"Mã","Ngày","Thành tiền","Phương thức thanh toán"};
-        jTable1.setModel(dtm);
-        dtm.setColumnIdentifiers(headers);
-        list = impl.getAll();
-        showData(list);
+        
     }
 
     /**
