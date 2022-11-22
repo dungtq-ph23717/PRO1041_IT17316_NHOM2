@@ -34,6 +34,24 @@ public class BanRepostory {
         return null;
     }
 
+    public List<Ban> getAllTT() {
+        String query = "Select TenBan,Loaiban\n"
+                + "From Ban \n"
+                + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<Ban> list = new ArrayList<>();
+            while (rs.next()) {
+                Ban ban = new Ban(rs.getString(1), rs.getString(2));
+                list.add(ban);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<Ban> Search(String ma) {
         String query = "Select ban.ID, MaBan,TenBan,Mota, Loaiban, TenKV\n"
                 + "From Ban \n"
@@ -54,7 +72,7 @@ public class BanRepostory {
         }
         return null;
     }
-    
+
     public List<Ban> SearchKV(String TenKV) {
         String query = "Select ban.ID, MaBan,TenBan,Mota, Loaiban, TenKV\n"
                 + "From Ban \n"
@@ -75,7 +93,7 @@ public class BanRepostory {
         }
         return null;
     }
-    
+
     public List<Ban> SearchTen(String ten) {
         String query = "Select ban.ID, MaBan,TenBan,Mota, Loaiban, TenKV\n"
                 + "From Ban \n"
@@ -96,7 +114,7 @@ public class BanRepostory {
         }
         return null;
     }
-    
+
     public List<Ban> SearchLoaiBan(String loai) {
         String query = "Select ban.ID, MaBan,TenBan,Mota, Loaiban, TenKV\n"
                 + "From Ban \n"
@@ -182,11 +200,11 @@ public class BanRepostory {
     }
 
     public static void main(String[] args) {
-//        List<Ban> list = new BanRepostory().Search("B1");
-//        for (Ban x : list) {
-//            System.out.println(x.toString());
-//        }
-        boolean add = new BanRepostory().delete("74021EA2-43FE-4472-B795-1EA8B5714FF2");
-        System.out.println(add);
+        List<Ban> list = new BanRepostory().getAllTT();
+        for (Ban x : list) {
+            System.out.println(x.toString());
+        }
+//        boolean add = new BanRepostory().delete("74021EA2-43FE-4472-B795-1EA8B5714FF2");
+//        System.out.println(add);
     }
 }

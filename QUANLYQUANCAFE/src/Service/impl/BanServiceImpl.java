@@ -78,4 +78,9 @@ public class BanServiceImpl implements BanService {
         return rp.SearchLoaiBan(loai);
     }
 
+    @Override
+    public List<Ban> getAllTT() {
+        return rp.getAllTT();
+    }
+
 }

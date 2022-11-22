@@ -4,7 +4,14 @@
  */
 package View.ViewNV;
 
+import Service.impl.BanServiceImpl;
+import Service.impl.GioHangServiceImpl;
+import Service.impl.HoaDonServiceIblm;
+import Service.impl.SanPhamServiceImpl;
 import ViewModels.Ban;
+import ViewModels.GioHang;
+import ViewModels.HoaDon;
+import ViewModels.SanPham;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -21,8 +28,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
     private DefaultTableModel dtmHoaDon = new DefaultTableModel();
     private List<Ban> listBan = new ArrayList<>();
-    
-    
+    private List<GioHang> listGioHang = new ArrayList<>();
+    private List<HoaDon> listHoaDon = new ArrayList<>();
+    private List<SanPham> listSanPham = new ArrayList<>();
+    private BanServiceImpl implBan = new BanServiceImpl();
+    private SanPhamServiceImpl implSP = new SanPhamServiceImpl();
+    private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
+    private GioHangServiceImpl implGH = new GioHangServiceImpl();
+
     /**
      * Creates new form Menu1
      */
@@ -31,8 +44,20 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
+        
+        String[] headersBan = {"Tên bàn","Loại bàn"};
+        jTable3.setModel(dtmBan);
+        dtmBan.setColumnIdentifiers(headersBan);
+        listBan = implBan.getAllTT();
+        showData(listBan);
     }
 
+    private void showData(List<Ban> listBan){
+        dtmBan.setRowCount(0);
+        for (Ban x : listBan) {
+            dtmBan.addRow(x.toRowDataTT());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -327,7 +352,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jCheckBox1))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Bàn"));
@@ -415,9 +440,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -425,7 +450,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
