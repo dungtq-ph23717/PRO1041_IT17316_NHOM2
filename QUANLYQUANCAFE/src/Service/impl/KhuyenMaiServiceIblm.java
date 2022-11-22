@@ -60,4 +60,8 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
         }
     }
 
+    @Override
+    public List<KhuyenMai> searchTheoHinhThucGG(String htgg) {
+        return resKM.searchMaKM(htgg);
+    }
 }
