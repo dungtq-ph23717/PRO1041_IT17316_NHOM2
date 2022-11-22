@@ -32,6 +32,7 @@ public class ViewLoad extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tientrinh = new javax.swing.JProgressBar();
         phantram = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,26 +52,35 @@ public class ViewLoad extends javax.swing.JFrame {
         phantram.setText("%");
         phantram.setAlignmentY(1.0F);
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/coffee (1).png"))); // NOI18N
+
         javax.swing.GroupLayout chayLayout = new javax.swing.GroupLayout(chay);
         chay.setLayout(chayLayout);
         chayLayout.setHorizontalGroup(
             chayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tientrinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, chayLayout.createSequentialGroup()
+                .addContainerGap(90, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
             .addGroup(chayLayout.createSequentialGroup()
-                .addGap(278, 278, 278)
+                .addGap(271, 271, 271)
                 .addComponent(phantram)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, chayLayout.createSequentialGroup()
-                .addContainerGap(128, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100))
         );
         chayLayout.setVerticalGroup(
             chayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(chayLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGroup(chayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(chayLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel3))
+                    .addGroup(chayLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(phantram, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tientrinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -94,16 +104,16 @@ public class ViewLoad extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        ViewLoad s=new ViewLoad();
+        ViewLoad s = new ViewLoad();
         s.setVisible(true);
         try {
             for (int i = 0; i <= 100; i++) {
                 Thread.sleep(100);
                 s.tientrinh.setValue(i);
-                s.phantram.setText(i+"%");              
+                s.phantram.setText(i + "%");
             }
         } catch (Exception e) {
-            
+
         }
         new ViewLogin().setVisible(true);
         s.dispose();
@@ -112,6 +122,7 @@ public class ViewLoad extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chay;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel phantram;
     private javax.swing.JProgressBar tientrinh;
     // End of variables declaration//GEN-END:variables
