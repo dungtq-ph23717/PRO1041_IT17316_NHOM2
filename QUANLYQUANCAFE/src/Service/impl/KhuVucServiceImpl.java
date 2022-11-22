@@ -58,4 +58,14 @@ public class KhuVucServiceImpl implements KhuVucService {
         }
     }
 
+    @Override
+    public List<KhuVuc> Search(String ma) {
+        return rp.Search(ma);
+    }
+
+    @Override
+    public List<KhuVuc> SearchTT(String tt) {
+        return rp.SearchTT(tt);
+    }
+
 }

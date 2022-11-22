@@ -63,4 +63,19 @@ public class BanServiceImpl implements BanService {
         return rp.Search(ma);
     }
 
+    @Override
+    public List<Ban> SearchKV(String TenKV) {
+        return rp.SearchKV(TenKV);
+    }
+
+    @Override
+    public List<Ban> SearchTen(String ten) {
+        return rp.SearchTen(ten);
+    }
+
+    @Override
+    public List<Ban> SearchLoaiBan(String loai) {
+        return rp.SearchLoaiBan(loai);
+    }
+
 }

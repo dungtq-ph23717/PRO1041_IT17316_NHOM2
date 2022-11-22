@@ -21,12 +21,45 @@ import java.util.List;
 public class KhuVucRepostory {
 
     public List<KhuVuc> getAll() {
-        String query = "SELECT [ID]\n"
-                + "      ,[MaKV]\n"
-                + "      ,[TenKV]\n"
-                + "      ,[TrangThai]\n"
-                + "  FROM [dbo].[KhuVuc]";
+        String query = "SELECT [ID],[MaKV],[TenKV],[TrangThai]FROM [dbo].[KhuVuc]\n"
+                + "order by TenKV";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<KhuVuc> list = new ArrayList<>();
+            while (rs.next()) {
+                KhuVuc ban = new KhuVuc(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                list.add(ban);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<KhuVuc> Search(String ten) {
+        String query = "SELECT [ID],[MaKV],[TenKV],[TrangThai]FROM [dbo].[KhuVuc]\n"
+                + "Where TenKV like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + ten + "%");
+            ResultSet rs = ps.executeQuery();
+            List<KhuVuc> list = new ArrayList<>();
+            while (rs.next()) {
+                KhuVuc ban = new KhuVuc(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                list.add(ban);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+    
+    public List<KhuVuc> SearchTT(String TrangThai) {
+        String query = "SELECT [ID],[MaKV],[TenKV],[TrangThai]FROM [dbo].[KhuVuc]\n"
+                + "Where TrangThai like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + TrangThai + "%");
             ResultSet rs = ps.executeQuery();
             List<KhuVuc> list = new ArrayList<>();
             while (rs.next()) {
@@ -51,7 +84,7 @@ public class KhuVucRepostory {
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                 return new KhuVuc(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                return new KhuVuc(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
             }
         } catch (SQLException e) {
             e.printStackTrace(System.out);
@@ -113,10 +146,14 @@ public class KhuVucRepostory {
     }
 
     public static void main(String[] args) {
-        
-        KhuVuc one = new KhuVucRepostory().getOne("Tầng 1");System.out.println(one);
-//        KhuVucModel ban = new KhuVucModel("kv1", "k", "trong");
-//        boolean add = new KhuVucRepostory().delete("kv1");
-//        System.out.println(add);
+
+//        List<KhuVuc> one = new KhuVucRepostory().Search("Tầng 1");
+//        for (KhuVuc khuVuc : one) {
+//            System.out.println(khuVuc.toString());
+//        }
+
+        KhuVucModel ban = new KhuVucModel("kv1", "k", "trong");
+        boolean add = new KhuVucRepostory().add(ban);
+        System.out.println(add);
     }
 }
