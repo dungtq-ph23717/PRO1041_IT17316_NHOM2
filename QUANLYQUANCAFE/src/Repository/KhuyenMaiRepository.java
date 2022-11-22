@@ -130,16 +130,16 @@ public class KhuyenMaiRepository {
 
     public boolean update(KhuyenMaiModel km, String IDKM) {
         int check = 0;
-        String query = "UPDATE [dbo].[KhuyenMai]\\n\"\n"
-                + "                + \"   SET [MaKM] = ?\\n\"\n"
-                + "                + \"      ,[TenKM] = ?\\n\"\n"
-                + "                + \"      ,[HinhThucGG] = ?\\n\"\n"
-                + "                + \"      ,[MucGiam] = ?\\n\"\n"
-                + "                + \"      ,[TGBatDau] = ?\\n\"\n"
-                + "                + \"      ,[TGKetThuc] = ?\\n\"\n"
-                + "                + \"      ,[TrangThai] = ?\\n\"\n"
-                + "                + \"      ,[Mota] = ?\\n\"\n"
-                + "                + \" WHERE ID = ?";
+        String query = "UPDATE [dbo].[KhuyenMai]\n"
+                + "   SET [MaKM] = ?\n"
+                + "      ,[TenKM] = ?\n"
+                + "      ,[HinhThucGG] = ?\n"
+                + "      ,[MucGiam] = ?\n"
+                + "      ,[TGBatDau] = ?\n"
+                + "      ,[TGKetThuc] = ?\n"
+                + "      ,[TrangThai] = ?\n"
+                + "      ,[Mota] = ?\n"
+                + " WHERE ID = ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, km.getMaKM());
             ps.setObject(2, km.getTenKM());

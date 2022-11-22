@@ -264,9 +264,9 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         jLabel11.setText("Tìm Kiếm Mã Giảm Giá:");
 
         cbbSearchHinhThucGG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbbSearchHinhThucGG.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                cbbSearchHinhThucGGKeyReleased(evt);
+        cbbSearchHinhThucGG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbSearchHinhThucGGActionPerformed(evt);
             }
         });
 
@@ -411,7 +411,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -512,8 +512,12 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bltXoaActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        List<KhuyenMai> searchTheoHinhThucGG = impl.searchTheoHinhThucGG(cbbSearchHinhThucGG.getSelectedItem().toString());
-        showData(searchTheoHinhThucGG);
+        if (txtSearch.getText().isEmpty()) {
+            showData(listKM);
+        } else {
+            List<KhuyenMai> search = impl.searchTheoMaKM("%" + txtSearch.getText() + "%");
+            showData(search);
+        }
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
@@ -529,14 +533,15 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         rdoHetHieuLuc.setSelected(false);
     }//GEN-LAST:event_btClearActionPerformed
 
-    private void cbbSearchHinhThucGGKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbbSearchHinhThucGGKeyReleased
-        if (txtSearch.getText().isEmpty()) {
+    private void cbbSearchHinhThucGGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbSearchHinhThucGGActionPerformed
+        if (cbbSearchHinhThucGG.getSelectedItem().toString().equalsIgnoreCase("All")) {
+            listKM = impl.getAll();
             showData(listKM);
         } else {
-            List<KhuyenMai> search = impl.searchTheoMaKM("%" + txtSearch.getText() + "%");
-            showData(search);
+            List<KhuyenMai> searchTheoHinhThucGG = impl.searchTheoHinhThucGG(cbbSearchHinhThucGG.getSelectedItem().toString());
+            showData(searchTheoHinhThucGG);
         }
-    }//GEN-LAST:event_cbbSearchHinhThucGGKeyReleased
+    }//GEN-LAST:event_cbbSearchHinhThucGGActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
