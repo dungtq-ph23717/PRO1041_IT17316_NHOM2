@@ -57,12 +57,6 @@ public class ViewQuanLy extends javax.swing.JFrame {
         txtQuanLyKhuyenMai = new javax.swing.JLabel();
         QuanLySanPham = new javax.swing.JPanel();
         txtThanhToan = new javax.swing.JLabel();
-        QuanLyBan = new javax.swing.JPanel();
-        txtQuanLyBan = new javax.swing.JLabel();
-        LichSuOrder = new javax.swing.JPanel();
-        txtLichSuOrder1 = new javax.swing.JLabel();
-        ThanhToan = new javax.swing.JPanel();
-        txtThanhToan1 = new javax.swing.JLabel();
         ThongKe = new javax.swing.JPanel();
         txtLichSuOrder = new javax.swing.JLabel();
         DangXuat = new javax.swing.JPanel();
@@ -70,6 +64,12 @@ public class ViewQuanLy extends javax.swing.JFrame {
         QuanLyNhanVien = new javax.swing.JPanel();
         txtQuanLyNhanVien = new javax.swing.JLabel();
         anh = new javax.swing.JLabel();
+        QuanLyBan = new javax.swing.JPanel();
+        txtQuanLyBan = new javax.swing.JLabel();
+        LichSuOrder = new javax.swing.JPanel();
+        txtLichSuOrder1 = new javax.swing.JLabel();
+        ThanhToan = new javax.swing.JPanel();
+        txtThanhToan1 = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -138,109 +138,6 @@ public class ViewQuanLy extends javax.swing.JFrame {
             }
         });
 
-        QuanLyBan.setBackground(new java.awt.Color(156, 132, 122));
-
-        txtQuanLyBan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtQuanLyBan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtQuanLyBan.setText("      Bàn");
-        txtQuanLyBan.setToolTipText("");
-        txtQuanLyBan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                txtQuanLyBanMouseMoved(evt);
-            }
-        });
-        txtQuanLyBan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtQuanLyBanMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtQuanLyBanMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout QuanLyBanLayout = new javax.swing.GroupLayout(QuanLyBan);
-        QuanLyBan.setLayout(QuanLyBanLayout);
-        QuanLyBanLayout.setHorizontalGroup(
-            QuanLyBanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyBanLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtQuanLyBan, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        QuanLyBanLayout.setVerticalGroup(
-            QuanLyBanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtQuanLyBan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-        );
-
-        LichSuOrder.setBackground(new java.awt.Color(156, 132, 122));
-
-        txtLichSuOrder1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtLichSuOrder1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtLichSuOrder1.setText("      Lịch sử order");
-        txtLichSuOrder1.setToolTipText("");
-        txtLichSuOrder1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                txtLichSuOrder1MouseMoved(evt);
-            }
-        });
-        txtLichSuOrder1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtLichSuOrder1MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtLichSuOrder1MousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout LichSuOrderLayout = new javax.swing.GroupLayout(LichSuOrder);
-        LichSuOrder.setLayout(LichSuOrderLayout);
-        LichSuOrderLayout.setHorizontalGroup(
-            LichSuOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LichSuOrderLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtLichSuOrder1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        LichSuOrderLayout.setVerticalGroup(
-            LichSuOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LichSuOrderLayout.createSequentialGroup()
-                .addComponent(txtLichSuOrder1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        ThanhToan.setBackground(new java.awt.Color(156, 132, 122));
-
-        txtThanhToan1.setBackground(new java.awt.Color(156, 132, 122));
-        txtThanhToan1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtThanhToan1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtThanhToan1.setText("     Bán hàng");
-        txtThanhToan1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                txtThanhToan1MouseMoved(evt);
-            }
-        });
-        txtThanhToan1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtThanhToan1MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtThanhToan1MousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout ThanhToanLayout = new javax.swing.GroupLayout(ThanhToan);
-        ThanhToan.setLayout(ThanhToanLayout);
-        ThanhToanLayout.setHorizontalGroup(
-            ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThanhToanLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtThanhToan1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        ThanhToanLayout.setVerticalGroup(
-            ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThanhToanLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtThanhToan1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         javax.swing.GroupLayout QuanLySanPhamLayout = new javax.swing.GroupLayout(QuanLySanPham);
         QuanLySanPham.setLayout(QuanLySanPhamLayout);
         QuanLySanPhamLayout.setHorizontalGroup(
@@ -248,19 +145,10 @@ public class ViewQuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLySanPhamLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(ThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(LichSuOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(QuanLyBan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         QuanLySanPhamLayout.setVerticalGroup(
             QuanLySanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLySanPhamLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(LichSuOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(QuanLyBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -376,6 +264,109 @@ public class ViewQuanLy extends javax.swing.JFrame {
         anh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         anh.setText("CoffeeShop");
 
+        QuanLyBan.setBackground(new java.awt.Color(156, 132, 122));
+
+        txtQuanLyBan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtQuanLyBan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtQuanLyBan.setText("      Bàn");
+        txtQuanLyBan.setToolTipText("");
+        txtQuanLyBan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                txtQuanLyBanMouseMoved(evt);
+            }
+        });
+        txtQuanLyBan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtQuanLyBanMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtQuanLyBanMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout QuanLyBanLayout = new javax.swing.GroupLayout(QuanLyBan);
+        QuanLyBan.setLayout(QuanLyBanLayout);
+        QuanLyBanLayout.setHorizontalGroup(
+            QuanLyBanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyBanLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtQuanLyBan, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        QuanLyBanLayout.setVerticalGroup(
+            QuanLyBanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtQuanLyBan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+        );
+
+        LichSuOrder.setBackground(new java.awt.Color(156, 132, 122));
+
+        txtLichSuOrder1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtLichSuOrder1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtLichSuOrder1.setText("      Lịch sử order");
+        txtLichSuOrder1.setToolTipText("");
+        txtLichSuOrder1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                txtLichSuOrder1MouseMoved(evt);
+            }
+        });
+        txtLichSuOrder1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtLichSuOrder1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtLichSuOrder1MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout LichSuOrderLayout = new javax.swing.GroupLayout(LichSuOrder);
+        LichSuOrder.setLayout(LichSuOrderLayout);
+        LichSuOrderLayout.setHorizontalGroup(
+            LichSuOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LichSuOrderLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtLichSuOrder1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        LichSuOrderLayout.setVerticalGroup(
+            LichSuOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LichSuOrderLayout.createSequentialGroup()
+                .addComponent(txtLichSuOrder1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        ThanhToan.setBackground(new java.awt.Color(156, 132, 122));
+
+        txtThanhToan1.setBackground(new java.awt.Color(156, 132, 122));
+        txtThanhToan1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtThanhToan1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtThanhToan1.setText("     Bán hàng");
+        txtThanhToan1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                txtThanhToan1MouseMoved(evt);
+            }
+        });
+        txtThanhToan1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtThanhToan1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtThanhToan1MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ThanhToanLayout = new javax.swing.GroupLayout(ThanhToan);
+        ThanhToan.setLayout(ThanhToanLayout);
+        ThanhToanLayout.setHorizontalGroup(
+            ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThanhToanLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtThanhToan1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        ThanhToanLayout.setVerticalGroup(
+            ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThanhToanLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtThanhToan1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -389,13 +380,22 @@ public class ViewQuanLy extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
+            .addComponent(ThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(LichSuOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(QuanLyBan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(anh)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(LichSuOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(QuanLyBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(QuanLySanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
