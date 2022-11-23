@@ -16,10 +16,12 @@ public interface BanService {
 
     List<Ban> getAll();
 
+    List<Ban> getAllTT();
+
     Ban getOne(String ma);
 
     List<Ban> Search(String ma);
-    
+
     List<Ban> SearchKV(String TenKV);
 
     List<Ban> SearchTen(String ten);

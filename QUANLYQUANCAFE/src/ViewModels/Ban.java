@@ -20,6 +20,11 @@ public class Ban {
     public Ban() {
     }
 
+    public Ban(String tenBan, String loaiBan) {
+        this.tenBan = tenBan;
+        this.loaiBan = loaiBan;
+    }
+
     public Ban(String id, String maBan, String tenBan, String moTa, String loaiBan, KhuVuc IDKV) {
         this.id = id;
         this.maBan = maBan;
@@ -92,5 +97,9 @@ public class Ban {
 
     public Object[] toRowData() {
         return new Object[]{id, maBan, tenBan, moTa, loaiBan, IDKV.getTenKV()};
+    }
+
+    public Object[] toRowDataTT() {
+        return new Object[]{tenBan, loaiBan};
     }
 }

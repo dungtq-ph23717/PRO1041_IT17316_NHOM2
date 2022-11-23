@@ -17,12 +17,13 @@ public class KhuyenMaiModel {
     private String mucGiam;
     private String tgBatDau;
     private String tgKetThuc;
+    private String trangThai;
     private String moTa;
 
     public KhuyenMaiModel() {
     }
 
-    public KhuyenMaiModel(String ID, String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String moTa) {
+    public KhuyenMaiModel(String ID, String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa) {
         this.ID = ID;
         this.maKM = maKM;
         this.tenKM = tenKM;
@@ -30,16 +31,18 @@ public class KhuyenMaiModel {
         this.mucGiam = mucGiam;
         this.tgBatDau = tgBatDau;
         this.tgKetThuc = tgKetThuc;
+        this.trangThai = trangThai;
         this.moTa = moTa;
     }
 
-    public KhuyenMaiModel(String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String moTa) {
+    public KhuyenMaiModel(String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa) {
         this.maKM = maKM;
         this.tenKM = tenKM;
         this.hinhThucGG = hinhThucGG;
         this.mucGiam = mucGiam;
         this.tgBatDau = tgBatDau;
         this.tgKetThuc = tgKetThuc;
+        this.trangThai = trangThai;
         this.moTa = moTa;
     }
 
@@ -99,6 +102,14 @@ public class KhuyenMaiModel {
         this.tgKetThuc = tgKetThuc;
     }
 
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
     public String getMoTa() {
         return moTa;
     }
@@ -109,7 +120,7 @@ public class KhuyenMaiModel {
 
     @Override
     public String toString() {
-        return "KhuyenMaiModel{" + "ID=" + ID + ", maKM=" + maKM + ", tenKM=" + tenKM + ", hinhThucGG=" + hinhThucGG + ", mucGiam=" + mucGiam + ", tgBatDau=" + tgBatDau + ", tgKetThuc=" + tgKetThuc + ", moTa=" + moTa + '}';
+        return "KhuyenMai{" + "ID=" + ID + ", maKM=" + maKM + ", tenKM=" + tenKM + ", hinhThucGG=" + hinhThucGG + ", mucGiam=" + mucGiam + ", tgBatDau=" + tgBatDau + ", tgKetThuc=" + tgKetThuc + ", trangThai=" + trangThai + ", moTa=" + moTa + '}';
     }
 
 }
