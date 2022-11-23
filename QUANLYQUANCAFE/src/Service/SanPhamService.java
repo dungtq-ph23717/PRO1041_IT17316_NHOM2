@@ -5,6 +5,7 @@
 package Service;
 
 import DomainModels.SanPhamModel;
+import ViewModels.SanPham;
 import java.util.List;
 
 /**
@@ -20,6 +21,8 @@ public interface SanPhamService {
     String delete(String ma);
 
     String update(SanPhamModel sp, String ma);
-    
-     List<ViewModels.SanPham> search(String ma);
+
+    List<ViewModels.SanPham> search(String tenSP);
+
+    List<SanPham> searchTenDanhMuc(String tenDanhMuc);
 }

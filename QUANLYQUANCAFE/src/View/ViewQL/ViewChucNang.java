@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package View.ViewNV;
+package View.ViewQL;
 
+import View.ViewNV.*;
 import DomainModels.KhuVucModel;
 import Service.impl.KhuVucServiceImpl;
 import ViewModels.KhuVuc;
@@ -138,12 +139,12 @@ public class ViewChucNang extends javax.swing.JDialog {
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btUpdate))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rbtTrong)
                         .addComponent(rbtDay)
-                        .addComponent(btClose)))
+                        .addComponent(btClose))
+                    .addComponent(jLabel2))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 

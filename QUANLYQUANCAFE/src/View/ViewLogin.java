@@ -180,7 +180,7 @@ public class ViewLogin extends javax.swing.JFrame {
                 v.setVisible(true);
             } else if (user.equalsIgnoreCase(tk.getUsername()) && pass.equalsIgnoreCase(tk.getPassword()) && tk.getRole().equalsIgnoreCase("ql")) {
                 this.dispose();
-                View.ViewQL.ViewQuanLy v = new View.ViewQL.ViewQuanLy();
+                View.ViewQL.ViewQuanLySanPham v = new View.ViewQL.ViewQuanLySanPham();
                 v.setVisible(true);
             }
         } catch (Exception e) {
@@ -199,7 +199,7 @@ public class ViewLogin extends javax.swing.JFrame {
                 v.setVisible(true);
             } else if (user.equalsIgnoreCase(tk.getUsername()) && pass.equalsIgnoreCase(tk.getPassword()) && tk.getRole().equalsIgnoreCase("ql")) {
                 this.dispose();
-                View.ViewQL.ViewQuanLy v = new View.ViewQL.ViewQuanLy();
+                View.ViewQL.ViewQuanLySanPham v = new View.ViewQL.ViewQuanLySanPham();
                 v.setVisible(true);
             }
         } catch (Exception e) {

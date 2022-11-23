@@ -12,17 +12,32 @@ public class SanPham {
 
     private String maSP;
     private String tenSP;
-    private Integer soLuong;
     private double giaBan;
+    private String moTa;
+    private String anh;
+    private DanhMuc danhMuc;
+    private String trangThai;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String tenSP, Integer soLuong, double giaBan) {
+    public SanPham(String maSP, String tenSP, double giaBan, String moTa, String anh, DanhMuc danhMuc, String trangThai) {
         this.maSP = maSP;
         this.tenSP = tenSP;
-        this.soLuong = soLuong;
         this.giaBan = giaBan;
+        this.moTa = moTa;
+        this.anh = anh;
+        this.danhMuc = danhMuc;
+        this.trangThai = trangThai;
+    }
+
+    public SanPham(String maSP, String tenSP, double giaBan, String moTa, DanhMuc danhMuc, String trangThai) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.giaBan = giaBan;
+        this.moTa = moTa;
+        this.danhMuc = danhMuc;
+        this.trangThai = trangThai;
     }
 
     public String getMaSP() {
@@ -41,14 +56,6 @@ public class SanPham {
         this.tenSP = tenSP;
     }
 
-    public Integer getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(Integer soLuong) {
-        this.soLuong = soLuong;
-    }
-
     public double getGiaBan() {
         return giaBan;
     }
@@ -57,9 +64,41 @@ public class SanPham {
         this.giaBan = giaBan;
     }
 
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
+    }
+
+    public DanhMuc getDanhMuc() {
+        return danhMuc;
+    }
+
+    public void setDanhMuc(DanhMuc danhMuc) {
+        this.danhMuc = danhMuc;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
     @Override
     public String toString() {
-        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", soLuong=" + soLuong + ", giaBan=" + giaBan + '}';
+        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", giaBan=" + giaBan + ", moTa=" + moTa + ", anh=" + anh + ", danhMuc=" + danhMuc + ", trangThai=" + trangThai + '}';
     }
 
 }

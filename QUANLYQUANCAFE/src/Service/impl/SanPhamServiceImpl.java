@@ -24,15 +24,16 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
+
     public String add(SanPhamModel sp) {
-        if (sp.getMaSP().isEmpty()) {
+        if (sp.getMaSP().isEmpty() || sp.getTenSP().isEmpty() || sp.getMoTa().isEmpty() || String.valueOf(sp.getGiaBan()).isEmpty()) {
             return "Không được để trống";
         }
         boolean add = rps.add(sp);
         if (add) {
-            return "add thành công";
+            return "Đã thêm thành công";
         } else {
-            return "add thất bại";
+            return "Đã thêm thất bại";
         }
     }
 
@@ -40,9 +41,9 @@ public class SanPhamServiceImpl implements SanPhamService {
     public String delete(String ma) {
         boolean add = rps.delete(ma);
         if (add) {
-            return "delete thành công";
+            return "Đã xóa thành công";
         } else {
-            return "delete thất bại";
+            return "Đã xóa thất bại";
         }
     }
 
@@ -50,15 +51,20 @@ public class SanPhamServiceImpl implements SanPhamService {
     public String update(SanPhamModel sp, String ma) {
         boolean add = rps.update(sp, ma);
         if (add) {
-            return "update thành công";
+            return "Đã sửa thành công";
         } else {
-            return "update thất bại";
+            return "Đã sửa thất bại";
         }
     }
 
     @Override
-    public List<SanPham> search(String ma) {
-        return rps.search(ma);
+    public List<SanPham> search(String tenSP) {
+        return rps.search(tenSP);
+    }
+
+    @Override
+    public List<SanPham> searchTenDanhMuc(String tenDanhMuc) {
+        return rps.searchTenDanhMuc(tenDanhMuc);
     }
 
 }

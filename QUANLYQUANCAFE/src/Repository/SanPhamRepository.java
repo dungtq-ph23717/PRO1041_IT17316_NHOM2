@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import Utilities.DBContext;
+import ViewModels.DanhMuc;
 
 /**
  *
@@ -20,17 +21,13 @@ import Utilities.DBContext;
 public class SanPhamRepository {
 
     public List<SanPham> getAll() {
-        String query = "SELECT [MaSP]\n"
-                + "      ,[TenSP]\n"
-                + "      ,[Soluong]\n"
-                + "      ,[Giaban]\n"
-                + "\n"
-                + "  FROM [dbo].[SanPham]";
+        String query = "SELECT MaSP, TenSP, Giaban, MoTa, DanhMuc.TenDM, TrangThai FROM SanPham\n"
+                + "INNER JOIN DanhMuc ON SanPham.IDDM = DanhMuc.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<SanPham> list = new ArrayList<>();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6));
                 list.add(sp);
             }
             return list;
@@ -40,19 +37,35 @@ public class SanPhamRepository {
         return null;
     }
 
-    public List<SanPham> search(String ma) {
-        String query = "SELECT [MaSP]\n"
-                + "      ,[TenSP]\n"
-                + "      ,[Soluong]\n"
-                + "      ,[Giaban]\n"
-                + "  FROM [dbo].[SanPham]\n"
-                + "  WHERE MaSP like ?";
+    public List<SanPham> search(String ten) {
+        String query = "SELECT MaSP, TenSP, Giaban, MoTa, DanhMuc.TenDM, TrangThai FROM SanPham\n"
+                + "INNER JOIN DanhMuc ON SanPham.IDDM = DanhMuc.ID\n"
+                + "WHERE SanPham.TenSP like ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, "%" + ma + "%");
+            ps.setObject(1, "%" + ten + "%");
             ResultSet rs = ps.executeQuery();
             List<SanPham> list = new ArrayList<>();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getDouble(4));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6));
+                list.add(sp);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<SanPham> searchTenDanhMuc(String tenDanhMuc) {
+        String query = "SELECT MaSP,TenSP,Giaban,MoTa,dm.TenDM,TrangThai FROM SanPham sp\n"
+                + "INNER JOIN DanhMuc dm ON dm.ID = sp.IDDM\n"
+                + "WHERE dm.TenDM like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + tenDanhMuc + "%");
+            ResultSet rs = ps.executeQuery();
+            List<SanPham> list = new ArrayList<>();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6));
                 list.add(sp);
             }
             return list;
@@ -66,16 +79,22 @@ public class SanPhamRepository {
         String query = "INSERT INTO [dbo].[SanPham]\n"
                 + "           ([MaSP]\n"
                 + "           ,[TenSP]\n"
-                + "           ,[Soluong]\n"
-                + "           ,[Giaban])\n"
+                + "           ,[Giaban]\n"
+                + "           ,[MoTa]\n"
+                + "           ,[Anh]\n"
+                + "           ,[IDDM]\n"
+                + "           ,[TrangThai])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?)";
+                + "           (?,?,?,?,?,?,?)";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, sp.getMaSP());
             ps.setObject(2, sp.getTenSP());
-            ps.setObject(3, sp.getSoLuong());
-            ps.setObject(4, sp.getGiaBan());
+            ps.setObject(3, sp.getGiaBan());
+            ps.setObject(4, sp.getMoTa());
+            ps.setObject(5, sp.getAnh());
+            ps.setObject(6, sp.getIdDM());
+            ps.setObject(7, sp.getTrangThai());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -100,16 +119,22 @@ public class SanPhamRepository {
         String query = "UPDATE [dbo].[SanPham]\n"
                 + "   SET [MaSP] = ?\n"
                 + "      ,[TenSP] = ?\n"
-                + "      ,[Soluong] = ?\n"
                 + "      ,[Giaban] = ?\n"
+                + "      ,[MoTa] = ?\n"
+                + "      ,[Anh] = ?\n"
+                + "      ,[IDDM] =?\n"
+                + "      ,[TrangThai] =?\n"
                 + " WHERE MaSP = ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, sp.getMaSP());
             ps.setObject(2, sp.getTenSP());
-            ps.setObject(3, sp.getSoLuong());
-            ps.setObject(4, sp.getGiaBan());
-            ps.setObject(5, ma);
+            ps.setObject(3, sp.getGiaBan());
+            ps.setObject(4, sp.getMoTa());
+            ps.setObject(5, sp.getAnh());
+            ps.setObject(6, sp.getIdDM());
+            ps.setObject(7, sp.getTrangThai());
+            ps.setObject(8, ma);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -118,15 +143,19 @@ public class SanPhamRepository {
     }
 
     public static void main(String[] args) {
-        List<SanPham> list = new SanPhamRepository().search("SP2");
-        for (SanPham x : list) {
-            System.out.println(x.toString());
-        }
-//        SanPhamModel sp = new SanPhamModel("Sp001", "Tra`", 100, 10000);
-//        boolean add = new SanPhamRepository().add(sp);
-//        System.out.println(add);
-//    }
-//        List<SanPham> list = new SanPhamRepository().search("SP1");
+//        List<SanPham> list = new SanPhamRepository().getAll();
+//        for (SanPham x : list) {
+//            System.out.println(x.toString());
+//        }
+        SanPhamModel sp = new SanPhamModel("SP03", "Trân Châu Đen", 5000, "Ngọt", "4ca4e804-4817-46c4-afdb-11181cfa8d82", "Ngừng bán");
+        boolean add = new SanPhamRepository().update(sp, "SP03");
+        System.out.println(add);
+
+//        List<SanPham> list = new SanPhamRepository().search("Bạc Xỉu");
+//        for (SanPham x : list) {
+//            System.out.println(x);
+//        }
+//        List<SanPham> list = new SanPhamRepository().searchTenDanhMuc("Topping");
 //        for (SanPham x : list) {
 //            System.out.println(x);
 //        }
