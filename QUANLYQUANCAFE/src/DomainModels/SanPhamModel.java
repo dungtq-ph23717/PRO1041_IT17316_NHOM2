@@ -13,43 +13,47 @@ public class SanPhamModel {
     private String id;
     private String maSP;
     private String tenSP;
-    private Integer soLuong;
     private double giaBan;
-    private String idQL;
+    private String moTa;
+    private String anh;
     private String idSize;
     private String idCB;
     private String idDM;
-    private DanhMucModel tenDM;
+    private String trangThai;
 
     public SanPhamModel() {
     }
 
-    public SanPhamModel(String id, String maSP, String tenSP, Integer soLuong, double giaBan, String idQL, String idSize, String idDM) {
+    public SanPhamModel(String maSP, String tenSP, double giaBan, String moTa, String idDM, String trangThai) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.giaBan = giaBan;
+        this.moTa = moTa;
+        this.idDM = idDM;
+        this.trangThai = trangThai;
+    }
+
+    public SanPhamModel(String id, String maSP, String tenSP, double giaBan, String moTa, String anh, String idSize, String idCB, String idDM, String trangThai) {
         this.id = id;
         this.maSP = maSP;
         this.tenSP = tenSP;
-        this.soLuong = soLuong;
         this.giaBan = giaBan;
-        this.idQL = idQL;
+        this.moTa = moTa;
+        this.anh = anh;
         this.idSize = idSize;
+        this.idCB = idCB;
         this.idDM = idDM;
+        this.trangThai = trangThai;
     }
 
-    public SanPhamModel(String maSP, String tenSP, Integer soLuong, double giaBan, String idDM, DanhMucModel tenDM) {
+    public SanPhamModel(String maSP, String tenSP, double giaBan, String moTa, String anh, String idDM, String trangThai) {
         this.maSP = maSP;
         this.tenSP = tenSP;
-        this.soLuong = soLuong;
         this.giaBan = giaBan;
+        this.moTa = moTa;
+        this.anh = anh;
         this.idDM = idDM;
-        this.tenDM = tenDM;
-    }
-
-    public String getIdDM() {
-        return idDM;
-    }
-
-    public void setIdDM(String idDM) {
-        this.idDM = idDM;
+        this.trangThai = trangThai;
     }
 
     public String getId() {
@@ -76,14 +80,6 @@ public class SanPhamModel {
         this.tenSP = tenSP;
     }
 
-    public Integer getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(Integer soLuong) {
-        this.soLuong = soLuong;
-    }
-
     public double getGiaBan() {
         return giaBan;
     }
@@ -92,12 +88,20 @@ public class SanPhamModel {
         this.giaBan = giaBan;
     }
 
-    public String getIdQL() {
-        return idQL;
+    public String getMoTa() {
+        return moTa;
     }
 
-    public void setIdQL(String idQL) {
-        this.idQL = idQL;
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
+    public String getAnh() {
+        return anh;
+    }
+
+    public void setAnh(String anh) {
+        this.anh = anh;
     }
 
     public String getIdSize() {
@@ -106,6 +110,30 @@ public class SanPhamModel {
 
     public void setIdSize(String idSize) {
         this.idSize = idSize;
+    }
+
+    public String getIdCB() {
+        return idCB;
+    }
+
+    public void setIdCB(String idCB) {
+        this.idCB = idCB;
+    }
+
+    public String getIdDM() {
+        return idDM;
+    }
+
+    public void setIdDM(String idDM) {
+        this.idDM = idDM;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
     }
 
 }

@@ -6,6 +6,7 @@ package Repository;
 
 import Utilities.DBContext;
 import ViewModels.DanhMuc;
+import ViewModels.SanPham;
 import java.util.List;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -37,6 +38,24 @@ public class DanhMucRepository {
         return null;
     }
 
+    public boolean add(DanhMuc danhMuc) {
+        String query = "INSERT INTO [dbo].[DanhMuc]\n"
+                + "           ([MaDM]\n"
+                + "           ,[TenDM])\n"
+                + "     VALUES\n"
+                + "           (?,?)";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, danhMuc.getMaDanhMuc());
+            ps.setObject(2, danhMuc.getTenDanhMuc());
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+
     public DanhMuc getOne(String ten) {
         String query = "SELECT [ID]\n"
                 + "      ,[MaDM]\n"
@@ -55,9 +74,11 @@ public class DanhMucRepository {
         return null;
     }
 
-    public static void main(String[] args) {
-        DanhMuc dm = new DanhMucRepository().getOne("Cà phê");
-        System.out.println(dm);
-    }
+//    public static void main(String[] args) {
+//        List<DanhMuc> list = new DanhMucRepository().searchTenDanhMuc("Trà sữa");
+//        for (DanhMuc x : list) {
+//            System.out.println(x);
+//        }
+//    }
 
 }

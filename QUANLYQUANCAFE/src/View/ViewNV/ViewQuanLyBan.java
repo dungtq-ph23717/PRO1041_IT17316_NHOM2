@@ -12,7 +12,6 @@ import ViewModels.Ban;
 import ViewModels.KhuVuc;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
