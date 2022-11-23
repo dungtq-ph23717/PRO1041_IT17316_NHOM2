@@ -26,19 +26,25 @@ public class ViewQuanLy extends javax.swing.JFrame {
         initComponents();
         defaulColor = new Color(145, 94, 65);
         clickedColor = new Color(156, 132, 122);
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
         QuanLyKhuyenMai.setBackground(defaulColor);
 
-        QuanLySanPham.setBackground(clickedColor);
+        ThanhToan.setBackground(clickedColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
+        QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
         QuanLyKhuyenMai.setBackground(defaulColor);
 
-        ViewQuanLySanPham m = new ViewQuanLySanPham();
+        ViewThanhToan m = new ViewThanhToan();
         jDesktopPane1.removeAll();
         jDesktopPane1.add(m).setVisible(true);
     }
@@ -56,9 +62,9 @@ public class ViewQuanLy extends javax.swing.JFrame {
         QuanLyKhuyenMai = new javax.swing.JPanel();
         txtQuanLyKhuyenMai = new javax.swing.JLabel();
         QuanLySanPham = new javax.swing.JPanel();
-        txtThanhToan = new javax.swing.JLabel();
+        txtSanPham = new javax.swing.JLabel();
         ThongKe = new javax.swing.JPanel();
-        txtLichSuOrder = new javax.swing.JLabel();
+        txtThongKe = new javax.swing.JLabel();
         DangXuat = new javax.swing.JPanel();
         txtDangXuat = new javax.swing.JLabel();
         QuanLyNhanVien = new javax.swing.JPanel();
@@ -120,21 +126,21 @@ public class ViewQuanLy extends javax.swing.JFrame {
 
         QuanLySanPham.setBackground(new java.awt.Color(156, 132, 122));
 
-        txtThanhToan.setBackground(new java.awt.Color(156, 132, 122));
-        txtThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtThanhToan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtThanhToan.setText("       Sản phẩm");
-        txtThanhToan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        txtSanPham.setBackground(new java.awt.Color(156, 132, 122));
+        txtSanPham.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtSanPham.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtSanPham.setText("       Sản phẩm");
+        txtSanPham.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                txtThanhToanMouseMoved(evt);
+                txtSanPhamMouseMoved(evt);
             }
         });
-        txtThanhToan.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtThanhToanMouseClicked(evt);
+                txtSanPhamMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtThanhToanMousePressed(evt);
+                txtSanPhamMousePressed(evt);
             }
         });
 
@@ -144,32 +150,32 @@ public class ViewQuanLy extends javax.swing.JFrame {
             QuanLySanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLySanPhamLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         QuanLySanPhamLayout.setVerticalGroup(
             QuanLySanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLySanPhamLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         ThongKe.setBackground(new java.awt.Color(156, 132, 122));
 
-        txtLichSuOrder.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtLichSuOrder.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtLichSuOrder.setText("       Thống kê");
-        txtLichSuOrder.setToolTipText("");
-        txtLichSuOrder.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        txtThongKe.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtThongKe.setText("       Thống kê");
+        txtThongKe.setToolTipText("");
+        txtThongKe.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                txtLichSuOrderMouseMoved(evt);
+                txtThongKeMouseMoved(evt);
             }
         });
-        txtLichSuOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtLichSuOrderMouseClicked(evt);
+                txtThongKeMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtLichSuOrderMousePressed(evt);
+                txtThongKeMousePressed(evt);
             }
         });
 
@@ -179,12 +185,12 @@ public class ViewQuanLy extends javax.swing.JFrame {
             ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThongKeLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtLichSuOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         ThongKeLayout.setVerticalGroup(
             ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThongKeLayout.createSequentialGroup()
-                .addComponent(txtLichSuOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -389,7 +395,7 @@ public class ViewQuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(anh)
-                .addGap(18, 18, 18)
+                .addGap(40, 40, 40)
                 .addComponent(ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(LichSuOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -403,10 +409,12 @@ public class ViewQuanLy extends javax.swing.JFrame {
                 .addComponent(QuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(QuanLyNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addGap(49, 49, 49)
                 .addComponent(DangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
+
+        jDesktopPane1.setPreferredSize(new java.awt.Dimension(1079, 731));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -432,58 +440,73 @@ public class ViewQuanLy extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jDesktopPane1)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtThanhToanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtThanhToanMouseMoved
+    private void txtSanPhamMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSanPhamMouseMoved
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(clickedColor);
         ThongKe.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
         QuanLyKhuyenMai.setBackground(defaulColor);
-    }//GEN-LAST:event_txtThanhToanMouseMoved
+    }//GEN-LAST:event_txtSanPhamMouseMoved
 
-    private void txtThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtThanhToanMouseClicked
+    private void txtSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSanPhamMouseClicked
         ViewQuanLySanPham m = new ViewQuanLySanPham();
         jDesktopPane1.removeAll();
         jDesktopPane1.add(m).setVisible(true);
-    }//GEN-LAST:event_txtThanhToanMouseClicked
+    }//GEN-LAST:event_txtSanPhamMouseClicked
 
-    private void txtThanhToanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtThanhToanMousePressed
+    private void txtSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSanPhamMousePressed
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(clickedColor);
         ThongKe.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
         QuanLyKhuyenMai.setBackground(defaulColor);
-    }//GEN-LAST:event_txtThanhToanMousePressed
+    }//GEN-LAST:event_txtSanPhamMousePressed
 
-    private void txtLichSuOrderMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLichSuOrderMouseMoved
+    private void txtThongKeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtThongKeMouseMoved
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(clickedColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
         QuanLyKhuyenMai.setBackground(defaulColor);
-    }//GEN-LAST:event_txtLichSuOrderMouseMoved
+    }//GEN-LAST:event_txtThongKeMouseMoved
 
-    private void txtLichSuOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLichSuOrderMouseClicked
+    private void txtThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtThongKeMouseClicked
         ViewThongKe m = new ViewThongKe();
         jDesktopPane1.removeAll();
         jDesktopPane1.add(m).setVisible(true);
-    }//GEN-LAST:event_txtLichSuOrderMouseClicked
+    }//GEN-LAST:event_txtThongKeMouseClicked
 
-    private void txtLichSuOrderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLichSuOrderMousePressed
+    private void txtThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtThongKeMousePressed
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(clickedColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
         QuanLyKhuyenMai.setBackground(defaulColor);
-    }//GEN-LAST:event_txtLichSuOrderMousePressed
+    }//GEN-LAST:event_txtThongKeMousePressed
 
     private void txtDangXuatMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDangXuatMouseMoved
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(defaulColor);
@@ -498,6 +521,9 @@ public class ViewQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDangXuatMouseClicked
 
     private void txtDangXuatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDangXuatMousePressed
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(defaulColor);
@@ -506,6 +532,9 @@ public class ViewQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDangXuatMousePressed
 
     private void txtQuanLyNhanVienMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyNhanVienMouseMoved
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(clickedColor);
@@ -520,35 +549,47 @@ public class ViewQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuanLyNhanVienMouseClicked
 
     private void txtQuanLyNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyNhanVienMousePressed
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(clickedColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtQuanLyNhanVienMousePressed
 
     private void jPanel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseMoved
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
         QuanLyNhanVien.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_jPanel2MouseMoved
 
     private void txtQuanLyKhuyenMaiMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyKhuyenMaiMouseMoved
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(clickedColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(clickedColor);
     }//GEN-LAST:event_txtQuanLyKhuyenMaiMouseMoved
 
     private void txtQuanLyKhuyenMaiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyKhuyenMaiMousePressed
+        ThanhToan.setBackground(defaulColor);
+        LichSuOrder.setBackground(defaulColor);
+        QuanLyBan.setBackground(defaulColor);
         QuanLySanPham.setBackground(defaulColor);
         ThongKe.setBackground(defaulColor);
-        QuanLyKhuyenMai.setBackground(clickedColor);
         QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(clickedColor);
     }//GEN-LAST:event_txtQuanLyKhuyenMaiMousePressed
 
     private void txtQuanLyKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyKhuyenMaiMouseClicked
@@ -561,7 +602,11 @@ public class ViewQuanLy extends javax.swing.JFrame {
         ThanhToan.setBackground(clickedColor);
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(defaulColor);
+        QuanLySanPham.setBackground(defaulColor);
+        ThongKe.setBackground(defaulColor);
+        QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtThanhToan1MouseMoved
 
     private void txtThanhToan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtThanhToan1MouseClicked
@@ -574,14 +619,22 @@ public class ViewQuanLy extends javax.swing.JFrame {
         ThanhToan.setBackground(clickedColor);
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(defaulColor);
+        QuanLySanPham.setBackground(defaulColor);
+        ThongKe.setBackground(defaulColor);
+        QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtThanhToan1MousePressed
 
     private void txtLichSuOrder1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLichSuOrder1MouseMoved
         ThanhToan.setBackground(defaulColor);
         LichSuOrder.setBackground(clickedColor);
         QuanLyBan.setBackground(defaulColor);
+        QuanLySanPham.setBackground(defaulColor);
+        ThongKe.setBackground(defaulColor);
+        QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtLichSuOrder1MouseMoved
 
     private void txtLichSuOrder1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLichSuOrder1MouseClicked
@@ -594,14 +647,22 @@ public class ViewQuanLy extends javax.swing.JFrame {
         ThanhToan.setBackground(defaulColor);
         LichSuOrder.setBackground(clickedColor);
         QuanLyBan.setBackground(defaulColor);
+        QuanLySanPham.setBackground(defaulColor);
+        ThongKe.setBackground(defaulColor);
+        QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtLichSuOrder1MousePressed
 
     private void txtQuanLyBanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyBanMouseMoved
         ThanhToan.setBackground(defaulColor);
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(clickedColor);
+        QuanLySanPham.setBackground(defaulColor);
+        ThongKe.setBackground(defaulColor);
+        QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtQuanLyBanMouseMoved
 
     private void txtQuanLyBanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtQuanLyBanMouseClicked
@@ -614,7 +675,11 @@ public class ViewQuanLy extends javax.swing.JFrame {
         ThanhToan.setBackground(defaulColor);
         LichSuOrder.setBackground(defaulColor);
         QuanLyBan.setBackground(clickedColor);
+        QuanLySanPham.setBackground(defaulColor);
+        ThongKe.setBackground(defaulColor);
+        QuanLyNhanVien.setBackground(defaulColor);
         DangXuat.setBackground(defaulColor);
+        QuanLyKhuyenMai.setBackground(defaulColor);
     }//GEN-LAST:event_txtQuanLyBanMousePressed
 
     /**
@@ -666,12 +731,12 @@ public class ViewQuanLy extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel txtDangXuat;
-    private javax.swing.JLabel txtLichSuOrder;
     private javax.swing.JLabel txtLichSuOrder1;
     private javax.swing.JLabel txtQuanLyBan;
     private javax.swing.JLabel txtQuanLyKhuyenMai;
     private javax.swing.JLabel txtQuanLyNhanVien;
-    private javax.swing.JLabel txtThanhToan;
+    private javax.swing.JLabel txtSanPham;
     private javax.swing.JLabel txtThanhToan1;
+    private javax.swing.JLabel txtThongKe;
     // End of variables declaration//GEN-END:variables
 }
