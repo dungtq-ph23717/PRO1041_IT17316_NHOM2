@@ -180,8 +180,8 @@ public class ViewLogin extends javax.swing.JFrame {
                 v.setVisible(true);
             } else if (user.equalsIgnoreCase(tk.getUsername()) && pass.equalsIgnoreCase(tk.getPassword()) && tk.getRole().equalsIgnoreCase("ql")) {
                 this.dispose();
-                View.ViewQL.ViewQuanLySanPham v = new View.ViewQL.ViewQuanLySanPham();
-                v.setVisible(true);
+                View.ViewQL.ViewQuanLy q = new View.ViewQL.ViewQuanLy();
+                q.setVisible(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu");
