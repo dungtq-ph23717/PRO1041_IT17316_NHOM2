@@ -6,7 +6,6 @@ package Repository;
 
 import Utilities.DBContext;
 import ViewModels.DanhMuc;
-import ViewModels.SanPham;
 import java.util.List;
 import java.sql.ResultSet;
 import java.sql.Connection;
