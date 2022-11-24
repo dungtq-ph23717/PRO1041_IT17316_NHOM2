@@ -45,6 +45,30 @@ public class KhuyenMaiRepository {
         return null;
     }
 
+    public KhuyenMai getOne(String ten) {
+        String query = "SELECT [ID]\n"
+                + "      ,[MaKM]\n"
+                + "      ,[TenKM]\n"
+                + "      ,[HinhThucGG]\n"
+                + "      ,[MucGiam]\n"
+                + "      ,[TGBatDau]\n"
+                + "      ,[TGKetThuc]\n"
+                + "      ,[TrangThai]\n"
+                + "      ,[Mota]\n"
+                + "  FROM [dbo].[KhuyenMai]"
+                + "Where TenKM like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, ten);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new KhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<KhuyenMai> searchMaKM(String maKM) {
         String query = "SELECT [ID]\n"
                 + "      ,[MaKM]\n"
@@ -171,10 +195,12 @@ public class KhuyenMaiRepository {
     }
 
     public static void main(String[] args) {
-        List<KhuyenMai> show = new KhuyenMaiRepository().searchTheoHinhThucGG("Giảm theo số tiền");
-        for (KhuyenMai x : show) {
-            System.out.println(x);
-        }
+//        List<KhuyenMai> show = new KhuyenMaiRepository().searchTheoHinhThucGG("Giảm theo số tiền");
+//        for (KhuyenMai x : show) {
+//            System.out.println(x);
+//        }
+        KhuyenMai km = new KhuyenMaiRepository().getOne("King");
+        System.out.println(km);
 //        KhuyenMaiModel km = new KhuyenMaiModel("KM01", "Giam 10 k", "Giảm theo số tiền", "10000", "10/10/2022", "11/11/2022", "Đang kích hoạt", "null");
 //        boolean add = new KhuyenMaiRepository().update(km, "KM02");
 //        System.out.println(add);

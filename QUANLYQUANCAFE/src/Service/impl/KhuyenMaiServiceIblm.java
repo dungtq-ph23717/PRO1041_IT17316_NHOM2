@@ -64,4 +64,9 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     public List<KhuyenMai> searchTheoHinhThucGG(String htgg) {
         return resKM.searchTheoHinhThucGG(htgg);
     }
+
+    @Override
+    public KhuyenMai getOne(String ten) {
+        return resKM.getOne(ten);
+    }
 }

@@ -5,6 +5,7 @@
 package Service;
 
 import DomainModels.KhuyenMaiModel;
+import ViewModels.KhuyenMai;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ import java.util.List;
 public interface ServiceKhuyenMai {
 
     List<ViewModels.KhuyenMai> getAll();
+
+    KhuyenMai getOne(String ten);
 
     String add(KhuyenMaiModel km);
 

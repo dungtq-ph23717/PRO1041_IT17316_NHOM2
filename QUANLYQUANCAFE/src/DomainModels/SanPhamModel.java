@@ -20,6 +20,19 @@ public class SanPhamModel {
     private String idCB;
     private String idDM;
     private String trangThai;
+    private String idKM;
+
+    public SanPhamModel(String idKM) {
+        this.idKM = idKM;
+    }
+
+    public String getIdKM() {
+        return idKM;
+    }
+
+    public void setIdKM(String idKM) {
+        this.idKM = idKM;
+    }
 
     public SanPhamModel() {
     }

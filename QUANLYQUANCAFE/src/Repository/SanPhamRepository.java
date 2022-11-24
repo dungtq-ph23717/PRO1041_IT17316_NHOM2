@@ -29,7 +29,23 @@ public class SanPhamRepository {
             ResultSet rs = ps.executeQuery();
             List<SanPham> list = new ArrayList<>();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6),new Size(rs.getString(7)));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6), new Size(rs.getString(7)));
+                list.add(sp);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<SanPham> getAllKM() {
+        String query = "SELECT MaSP, TenSP FROM SanPham";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<SanPham> list = new ArrayList<>();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2));
                 list.add(sp);
             }
             return list;
@@ -144,14 +160,29 @@ public class SanPhamRepository {
         return check > 0;
     }
 
-    public static void main(String[] args) {
-        List<SanPham> list = new SanPhamRepository().getAll();
-        for (SanPham x : list) {
-            System.out.println(x.toString());
+    public boolean addID(SanPhamModel sp, String ma) {
+        String query = "UPDATE [dbo].[SanPham]\n"
+                + "   SET [IDKM] = ?\n"
+                + " WHERE MaSP like ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, sp.getIdKM());
+            ps.setObject(2, ma);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
-//        SanPhamModel sp = new SanPhamModel("SP03", "Trân Châu Đen", 5000, "Ngọt", "4ca4e804-4817-46c4-afdb-11181cfa8d82", "Ngừng bán");
-//        boolean add = new SanPhamRepository().update(sp, "SP03");
-//        System.out.println(add);
+        return check > 0;
+    }
+
+    public static void main(String[] args) {
+//        List<SanPham> list = new SanPhamRepository().getAllKM();
+//        for (SanPham x : list) {
+//            System.out.println(x.toString());
+//        }
+        SanPhamModel sp = new SanPhamModel("ae539fd9-0cd8-4818-addd-87cce30342d9");
+        boolean add = new SanPhamRepository().addID(sp, "SP1");
+        System.out.println(add);
 
 //        List<SanPham> list = new SanPhamRepository().search("Bạc Xỉu");
 //        for (SanPham x : list) {
