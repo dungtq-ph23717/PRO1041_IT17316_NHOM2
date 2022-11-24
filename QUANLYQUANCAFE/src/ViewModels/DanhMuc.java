@@ -11,7 +11,6 @@ package ViewModels;
 public class DanhMuc {
 
     private String id;
-    private String maDanhMuc;
     private String tenDanhMuc;
 
     public DanhMuc() {
@@ -21,18 +20,9 @@ public class DanhMuc {
         this.tenDanhMuc = tenDanhMuc;
     }
 
-    public DanhMuc(String id, String maDanhMuc, String tenDanhMuc) {
+    public DanhMuc(String id, String tenDanhMuc) {
         this.id = id;
-        this.maDanhMuc = maDanhMuc;
         this.tenDanhMuc = tenDanhMuc;
-    }
-
-    public String getMaDanhMuc() {
-        return maDanhMuc;
-    }
-
-    public void setMaDanhMuc(String maDanhMuc) {
-        this.maDanhMuc = maDanhMuc;
     }
 
     public String getId() {
@@ -53,7 +43,7 @@ public class DanhMuc {
 
     @Override
     public String toString() {
-        return "DanhMuc{" + "id=" + id + ", maDanhMuc=" + maDanhMuc + ", tenDanhMuc=" + tenDanhMuc + '}';
+        return "DanhMuc{" + "id=" + id + ", tenDanhMuc=" + tenDanhMuc + '}';
     }
 
 }
