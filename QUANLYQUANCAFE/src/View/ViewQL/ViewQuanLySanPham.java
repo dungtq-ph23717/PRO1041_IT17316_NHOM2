@@ -461,10 +461,12 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         String ten = txtName.getText();
         String gia = txtGia.getText();
         String moTa = txtMota.getText();
+        String size = (String) cbbSize.getSelectedItem();
         String danhMuc = (String) cbbDanhMuc.getSelectedItem();
         String trangThai = (String) cbbTrangThai.getSelectedItem();
+        Size sizeImpl = impl.getOne(cbbSize.getSelectedItem().toString());
         DanhMuc dm = danhMucService.getOne(cbbDanhMuc.getSelectedItem().toString());
-        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(gia), moTa, dm.getId(), trangThai);
+        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(gia), moTa, sizeImpl.getId(), dm.getId(), trangThai);
         JOptionPane.showMessageDialog(this, spService.update(sp, ma));
         listDanhMuc = danhMucService.getAll();
         listSanPham = spService.getAll();
@@ -489,10 +491,12 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         String ten = txtName.getText();
         String gia = txtGia.getText();
         String moTa = txtMota.getText();
+        String size = (String) cbbSize.getSelectedItem();
         String danhMuc = (String) cbbDanhMuc.getSelectedItem();
         String trangThai = (String) cbbTrangThai.getSelectedItem();
+        Size sizeImpl = impl.getOne(cbbSize.getSelectedItem().toString());
         DanhMuc dm = danhMucService.getOne(cbbDanhMuc.getSelectedItem().toString());
-        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(gia), moTa, dm.getId(), trangThai);
+        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(gia), moTa, sizeImpl.getId(), dm.getId(), trangThai);
         JOptionPane.showMessageDialog(this, spService.add(sp));
         listDanhMuc = danhMucService.getAll();
         listSanPham = spService.getAll();
@@ -521,6 +525,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         txtGia.setText("");
         cbbDanhMuc.setSelectedIndex(0);
         cbbTrangThai.setSelectedIndex(0);
+        cbbSize.setSelectedIndex(0);
     }//GEN-LAST:event_btnClearActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

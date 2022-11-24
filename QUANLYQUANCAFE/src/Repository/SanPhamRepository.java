@@ -84,10 +84,11 @@ public class SanPhamRepository {
                 + "           ,[Giaban]\n"
                 + "           ,[MoTa]\n"
                 + "           ,[Anh]\n"
+                + "           ,[IDSize]\n"
                 + "           ,[IDDM]\n"
                 + "           ,[TrangThai])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?)";
+                + "           (?,?,?,?,?,?,?,?)";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, sp.getMaSP());
@@ -95,8 +96,9 @@ public class SanPhamRepository {
             ps.setObject(3, sp.getGiaBan());
             ps.setObject(4, sp.getMoTa());
             ps.setObject(5, sp.getAnh());
-            ps.setObject(6, sp.getIdDM());
-            ps.setObject(7, sp.getTrangThai());
+            ps.setObject(6, sp.getIdSize());
+            ps.setObject(7, sp.getIdDM());
+            ps.setObject(8, sp.getTrangThai());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -120,12 +122,13 @@ public class SanPhamRepository {
     public boolean update(SanPhamModel sp, String ma) {
         String query = "UPDATE [dbo].[SanPham]\n"
                 + "   SET [MaSP] = ?\n"
-                + "      ,[TenSP] = ?\n"
+                + "      ,[TenSP] =?\n"
                 + "      ,[Giaban] = ?\n"
                 + "      ,[MoTa] = ?\n"
                 + "      ,[Anh] = ?\n"
+                + "      ,[IDSize] = ?\n"
                 + "      ,[IDDM] =?\n"
-                + "      ,[TrangThai] =?\n"
+                + "      ,[TrangThai] = ?\n"
                 + " WHERE MaSP = ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
@@ -134,9 +137,10 @@ public class SanPhamRepository {
             ps.setObject(3, sp.getGiaBan());
             ps.setObject(4, sp.getMoTa());
             ps.setObject(5, sp.getAnh());
-            ps.setObject(6, sp.getIdDM());
-            ps.setObject(7, sp.getTrangThai());
-            ps.setObject(8, ma);
+            ps.setObject(6, sp.getIdSize());
+            ps.setObject(7, sp.getIdDM());
+            ps.setObject(8, sp.getTrangThai());
+            ps.setObject(9, ma);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -164,8 +168,8 @@ public class SanPhamRepository {
 //        for (SanPham x : list) {
 //            System.out.println(x.toString());
 //        }
-//        SanPhamModel sp = new SanPhamModel("SP03", "Trân Châu Đen", 5000, "Ngọt", "4ca4e804-4817-46c4-afdb-11181cfa8d82", "Ngừng bán");
-//        boolean add = new SanPhamRepository().delete("SP01")
+//        SanPhamModel sp = new SanPhamModel(maSP, tenSP, 0, moTa, idSize, idDM, trangThai);
+//        boolean add = new SanPhamRepository().add(sp);
 //        System.out.println(add);
 
 //        List<SanPham> list = new SanPhamRepository().search("Bạc Xỉu");

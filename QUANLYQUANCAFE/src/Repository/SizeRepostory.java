@@ -27,4 +27,21 @@ public class SizeRepostory {
         }
         return null;
     }
+
+    public Size getOne(String ten) {
+        String query = "SELECT [ID]\n"
+                + "      ,[Size]\n"
+                + "  FROM [dbo].[Size]"
+                + "  WHERE Size like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ten);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Size(rs.getString(1), rs.getString(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 }

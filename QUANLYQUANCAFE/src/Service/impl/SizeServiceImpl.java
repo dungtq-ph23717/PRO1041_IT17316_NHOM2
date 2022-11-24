@@ -22,4 +22,8 @@ public class SizeServiceImpl implements SizeService {
         return rp.getAll();
     }
 
+    @Override
+    public Size getOne(String ten) {
+        return rp.getOne(ten);
+    }
 }

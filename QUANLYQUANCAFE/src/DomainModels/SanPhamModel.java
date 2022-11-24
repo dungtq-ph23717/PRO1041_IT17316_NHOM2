@@ -24,15 +24,6 @@ public class SanPhamModel {
     public SanPhamModel() {
     }
 
-    public SanPhamModel(String maSP, String tenSP, double giaBan, String moTa, String idDM, String trangThai) {
-        this.maSP = maSP;
-        this.tenSP = tenSP;
-        this.giaBan = giaBan;
-        this.moTa = moTa;
-        this.idDM = idDM;
-        this.trangThai = trangThai;
-    }
-
     public SanPhamModel(String id, String maSP, String tenSP, double giaBan, String moTa, String anh, String idSize, String idCB, String idDM, String trangThai) {
         this.id = id;
         this.maSP = maSP;
@@ -46,12 +37,12 @@ public class SanPhamModel {
         this.trangThai = trangThai;
     }
 
-    public SanPhamModel(String maSP, String tenSP, double giaBan, String moTa, String anh, String idDM, String trangThai) {
+    public SanPhamModel(String maSP, String tenSP, double giaBan, String moTa, String idSize, String idDM, String trangThai) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.giaBan = giaBan;
         this.moTa = moTa;
-        this.anh = anh;
+        this.idSize = idSize;
         this.idDM = idDM;
         this.trangThai = trangThai;
     }

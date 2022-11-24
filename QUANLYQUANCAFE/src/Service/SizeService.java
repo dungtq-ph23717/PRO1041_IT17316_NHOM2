@@ -14,4 +14,6 @@ import java.util.List;
 public interface SizeService {
 
     List<Size> getAll();
+    
+    Size getOne(String ten);
 }
