@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewQuanLyBan extends javax.swing.JInternalFrame {
-    
+
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultTableModel dtm1 = new DefaultTableModel();
     private DefaultComboBoxModel boxModel4 = new DefaultComboBoxModel();
@@ -43,7 +43,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        
+
         String[] headers = {"Mã", "Tên", "Mô tả", "Loại bàn", "Khu vực"};
         jTable1.setModel(dtm);
         dtm.setColumnIdentifiers(headers);
@@ -55,19 +55,19 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             boxModel1.addElement(x.getTenKV());
         }
         cbbKhuVuc1.setModel(boxModel2);
-        boxModel2.addElement(" ");
+        boxModel2.addElement("");
         for (KhuVuc x : listKV) {
             boxModel2.addElement(x.getTenKV());
         }
     }
-    
+
     private void showData(List<Ban> listBan) {
         dtm.setRowCount(0);
         for (Ban ban : listBan) {
             dtm.addRow(ban.toRowData());
         }
     }
-    
+
     private void fillData(int index) {
         Ban ban = listBan.get(index);
         txtMa.setText(ban.getMaBan());
@@ -99,6 +99,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         cbbBan = new javax.swing.JComboBox<>();
         cbbKhuVuc = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        btReset = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -135,6 +136,13 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             }
         });
 
+        btReset.setText("Reset");
+        btReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btResetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -154,14 +162,16 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                             .addComponent(txtMota, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbbKhuVuc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbbBan, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbbBan, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btReset)
+                                    .addComponent(cbbKhuVuc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(46, 46, Short.MAX_VALUE))
@@ -190,7 +200,9 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(cbbKhuVuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btReset)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Bàn"));
@@ -226,7 +238,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 983, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
@@ -352,7 +364,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addGap(54, 54, 54))
         );
 
@@ -422,9 +434,19 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         showData(SearchTen);
     }//GEN-LAST:event_cbbKhuVuc1ActionPerformed
 
+    private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
+
+        cbbKhuVuc.setModel(boxModel1);
+        for (KhuVuc x : listKV) {
+            boxModel1.addElement(x.getTenKV());
+        }
+        listKV = impl1.getAll();
+    }//GEN-LAST:event_btResetActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCapNhat;
+    private javax.swing.JButton btReset;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
     private javax.swing.ButtonGroup buttonGroup1;
