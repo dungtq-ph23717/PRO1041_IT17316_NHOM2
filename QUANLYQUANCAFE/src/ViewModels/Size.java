@@ -1,15 +1,19 @@
 package ViewModels;
 
-public class SizeModel {
+public class Size {
 
     private String id;
     private String size;
 
-    public SizeModel() {
+    public Size() {
     }
 
-    public SizeModel(String id, String size) {
+    public Size(String id, String size) {
         this.id = id;
+        this.size = size;
+    }
+
+    public Size(String size) {
         this.size = size;
     }
 

@@ -17,6 +17,7 @@ public class SanPham {
     private String anh;
     private DanhMuc danhMuc;
     private String trangThai;
+    private Size size;
 
     public SanPham() {
     }
@@ -39,6 +40,25 @@ public class SanPham {
         this.danhMuc = danhMuc;
         this.trangThai = trangThai;
     }
+
+    public SanPham(String maSP, String tenSP, double giaBan, String moTa, DanhMuc danhMuc, String trangThai, Size size) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.giaBan = giaBan;
+        this.moTa = moTa;
+        this.danhMuc = danhMuc;
+        this.trangThai = trangThai;
+        this.size = size;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+    
 
     public String getMaSP() {
         return maSP;
@@ -98,7 +118,9 @@ public class SanPham {
 
     @Override
     public String toString() {
-        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", giaBan=" + giaBan + ", moTa=" + moTa + ", anh=" + anh + ", danhMuc=" + danhMuc + ", trangThai=" + trangThai + '}';
+        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", giaBan=" + giaBan + ", moTa=" + moTa + ", anh=" + anh + ", danhMuc=" + danhMuc + ", trangThai=" + trangThai + ", size=" + size + '}';
     }
+
+    
 
 }

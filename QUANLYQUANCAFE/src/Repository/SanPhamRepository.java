@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import Utilities.DBContext;
 import ViewModels.DanhMuc;
+import ViewModels.Size;
 
 /**
  *
@@ -21,13 +22,14 @@ import ViewModels.DanhMuc;
 public class SanPhamRepository {
 
     public List<SanPham> getAll() {
-        String query = "SELECT MaSP, TenSP, Giaban, MoTa, DanhMuc.TenDM, TrangThai FROM SanPham\n"
-                + "INNER JOIN DanhMuc ON SanPham.IDDM = DanhMuc.ID";
+        String query = "SELECT MaSP, TenSP, Giaban, MoTa, DanhMuc.TenDM, TrangThai, Size FROM SanPham\n"
+                + "INNER JOIN DanhMuc ON SanPham.IDDM = DanhMuc.ID\n"
+                + "inner join Size on SanPham.IDSize = Size.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<SanPham> list = new ArrayList<>();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6),new Size(rs.getString(7)));
                 list.add(sp);
             }
             return list;
@@ -143,13 +145,13 @@ public class SanPhamRepository {
     }
 
     public static void main(String[] args) {
-//        List<SanPham> list = new SanPhamRepository().getAll();
-//        for (SanPham x : list) {
-//            System.out.println(x.toString());
-//        }
-        SanPhamModel sp = new SanPhamModel("SP03", "Trân Châu Đen", 5000, "Ngọt", "4ca4e804-4817-46c4-afdb-11181cfa8d82", "Ngừng bán");
-        boolean add = new SanPhamRepository().update(sp, "SP03");
-        System.out.println(add);
+        List<SanPham> list = new SanPhamRepository().getAll();
+        for (SanPham x : list) {
+            System.out.println(x.toString());
+        }
+//        SanPhamModel sp = new SanPhamModel("SP03", "Trân Châu Đen", 5000, "Ngọt", "4ca4e804-4817-46c4-afdb-11181cfa8d82", "Ngừng bán");
+//        boolean add = new SanPhamRepository().update(sp, "SP03");
+//        System.out.println(add);
 
 //        List<SanPham> list = new SanPhamRepository().search("Bạc Xỉu");
 //        for (SanPham x : list) {
