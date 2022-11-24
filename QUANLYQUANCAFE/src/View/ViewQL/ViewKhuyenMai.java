@@ -6,8 +6,11 @@ package View.ViewQL;
 
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import DomainModels.KhuyenMaiModel;
+import DomainModels.SanPhamModel;
 import Service.impl.KhuyenMaiServiceIblm;
+import Service.impl.SanPhamServiceImpl;
 import ViewModels.KhuyenMai;
+import ViewModels.SanPham;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,12 +25,14 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewKhuyenMai extends javax.swing.JInternalFrame {
-
+    
     private List<KhuyenMai> listKM = new ArrayList<>();
+    private List<SanPham> listSP = new ArrayList<>();
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultComboBoxModel box1 = new DefaultComboBoxModel();
     private DefaultComboBoxModel box2 = new DefaultComboBoxModel();
     private Service.impl.KhuyenMaiServiceIblm impl = new KhuyenMaiServiceIblm();
+    private SanPhamServiceImpl impl1 = new SanPhamServiceImpl();
 
     /**
      * Creates new form ViewKhuyenMai
@@ -49,12 +54,17 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         box2.addElement("Giảm theo số tiền");
         listKM = impl.getAll();
         showData(listKM);
-        DefaultTableModel modelSP = (DefaultTableModel) bangSP.getModel();
+        DefaultTableModel dtm1 = (DefaultTableModel) bangSP.getModel();
         String headerSP[] = {"Select", "Mã Sản Phẩm", "Tên Sản Phẩm"};
-        modelSP.setColumnIdentifiers(headerSP);
-        modelSP.addRow(new Object[]{false, "SP01", "PhoneZ"});
+        bangSP.setModel(dtm1);
+        dtm1.setColumnIdentifiers(headerSP);
+        listSP = impl1.getAllKM();
+        dtm1.setRowCount(0);
+        for (SanPham x : listSP) {
+            dtm1.addRow(x.toRowData());
+        }
     }
-
+    
     private void showData(List<KhuyenMai> km) {
         dtm.setRowCount(0);
         for (KhuyenMai x : km) {
@@ -91,6 +101,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         bangSP = new javax.swing.JTable();
         cbSelectAll = new javax.swing.JCheckBox();
+        bltAddSP = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         bangKM = new javax.swing.JTable();
@@ -199,12 +210,22 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
                 .addComponent(cbSelectAll))
         );
 
+        bltAddSP.setBackground(new java.awt.Color(255, 0, 0));
+        bltAddSP.setText("Lưu");
+        bltAddSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bltAddSPActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(bltAddSP, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btClear))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -266,7 +287,9 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btClear, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bltAddSP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -460,7 +483,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(135, Short.MAX_VALUE)
+                .addContainerGap(134, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(132, 132, 132))
         );
@@ -468,10 +491,10 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 185, Short.MAX_VALUE))
+                .addGap(0, 61, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 1054, 831);
+        setBounds(0, 0, 1093, 743);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bltAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltAddActionPerformed
@@ -479,10 +502,10 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         String ten = txtTenKM.getText();
         String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
         String mucG = txtMucGiam.getText();
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
-
+        
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
         String mota = txtMoTa.getText();
@@ -505,10 +528,10 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         String ten = txtTenKM.getText();
         String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
         String mucG = txtMucGiam.getText();
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
-
+        
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
         String mota = txtMoTa.getText();
@@ -536,13 +559,13 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             Date date = (Date) new SimpleDateFormat("yyyy-MM-dd").parse((String) bangKM.getValueAt(row, 5));
             txtNgaybatDau.setDate(date);
         } catch (ParseException ex) {
-
+            
         }
         try {
             Date date1 = (Date) new SimpleDateFormat("yyyy-MM-dd").parse((String) bangKM.getValueAt(row, 6));
             txtNgayKetThuc.setDate(date1);
         } catch (ParseException ex) {
-
+            
         }
         String check = bangKM.getValueAt(row, 7).toString();
         if (check.contains("Đang kích hoạt")) {
@@ -585,11 +608,24 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbbSearchHinhThucGGActionPerformed
 
+    private void bltAddSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltAddSPActionPerformed
+        for (int i = 0; i < bangSP.getRowCount(); i++) {
+            boolean check = Boolean.valueOf(bangSP.getValueAt(i, 0).toString());
+            String col = bangSP.getValueAt(i, 1).toString();
+            if (check) {
+                KhuyenMai id = impl.getOne(txtTenKM.getText());
+                SanPhamModel sp = new SanPhamModel(id.getID());
+                JOptionPane.showMessageDialog(this, impl1.addID(sp, col));
+            }
+        }
+    }//GEN-LAST:event_bltAddSPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable bangKM;
     private javax.swing.JTable bangSP;
     private javax.swing.JButton bltAdd;
+    private javax.swing.JButton bltAddSP;
     private javax.swing.JButton bltUpdate;
     private javax.swing.JButton btClear;
     private javax.swing.ButtonGroup buttonGroup1;

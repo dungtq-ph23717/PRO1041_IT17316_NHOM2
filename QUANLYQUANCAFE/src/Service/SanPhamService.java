@@ -16,7 +16,11 @@ public interface SanPhamService {
 
     List<ViewModels.SanPham> getAll();
 
+    List<ViewModels.SanPham> getAllKM();
+
     String add(SanPhamModel sp);
+    
+    String addID(SanPhamModel sp, String ma);
 
     String delete(String ma);
 
