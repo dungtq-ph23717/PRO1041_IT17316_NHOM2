@@ -93,6 +93,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         txtMota.setText(sp.getMoTa());
         cbbDanhMuc.setSelectedItem(sp.getDanhMuc().getTenDanhMuc());
         cbbTrangThai.setSelectedItem(String.valueOf(sp.getTrangThai()));
+        cbbSize.setSelectedItem(sp.getSize().getSize());
     }
 
     /**
