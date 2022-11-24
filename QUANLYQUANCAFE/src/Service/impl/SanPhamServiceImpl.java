@@ -67,4 +67,19 @@ public class SanPhamServiceImpl implements SanPhamService {
         return rps.searchTenDanhMuc(tenDanhMuc);
     }
 
+    @Override
+    public List<SanPham> getAllKM() {
+        return rps.getAllKM();
+    }
+
+    @Override
+    public String addID(SanPhamModel sp, String ma) {
+        boolean add = rps.addID(sp, ma);
+        if (add) {
+            return "Add thành công";
+        } else {
+            return "Add thất bại";
+        }
+    }
+
 }

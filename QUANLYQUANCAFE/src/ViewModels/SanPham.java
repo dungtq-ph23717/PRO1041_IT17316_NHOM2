@@ -51,6 +51,11 @@ public class SanPham {
         this.size = size;
     }
 
+    public SanPham(String maSP, String tenSP) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+    }
+
     public Size getSize() {
         return size;
     }
@@ -58,7 +63,6 @@ public class SanPham {
     public void setSize(Size size) {
         this.size = size;
     }
-    
 
     public String getMaSP() {
         return maSP;
@@ -121,6 +125,7 @@ public class SanPham {
         return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", giaBan=" + giaBan + ", moTa=" + moTa + ", anh=" + anh + ", danhMuc=" + danhMuc + ", trangThai=" + trangThai + ", size=" + size + '}';
     }
 
-    
-
+    public Object[] toRowData() {
+        return new Object[]{false, maSP, tenSP};
+    }
 }
