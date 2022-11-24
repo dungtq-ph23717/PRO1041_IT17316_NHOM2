@@ -56,6 +56,10 @@ public class SanPhamModel {
         this.trangThai = trangThai;
     }
 
+    public SanPhamModel(String maSP) {
+        this.maSP = maSP;
+    }
+
     public String getId() {
         return id;
     }
@@ -134,6 +138,11 @@ public class SanPhamModel {
 
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return "SanPhamModel{" + "id=" + id + ", maSP=" + maSP + ", tenSP=" + tenSP + ", giaBan=" + giaBan + ", moTa=" + moTa + ", anh=" + anh + ", idSize=" + idSize + ", idCB=" + idCB + ", idDM=" + idDM + ", trangThai=" + trangThai + '}';
     }
 
 }

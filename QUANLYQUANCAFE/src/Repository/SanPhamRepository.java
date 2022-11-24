@@ -29,7 +29,7 @@ public class SanPhamRepository {
             ResultSet rs = ps.executeQuery();
             List<SanPham> list = new ArrayList<>();
             while (rs.next()) {
-                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6),new Size(rs.getString(7)));
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6), new Size(rs.getString(7)));
                 list.add(sp);
             }
             return list;
@@ -144,13 +144,28 @@ public class SanPhamRepository {
         return check > 0;
     }
 
-    public static void main(String[] args) {
-        List<SanPham> list = new SanPhamRepository().getAll();
-        for (SanPham x : list) {
-            System.out.println(x.toString());
+    public SanPhamModel checkTrung(String maSp) {
+        String query = "SELECT MASP FROM SANPHAM WHERE MASP = ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maSp);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SanPhamModel sp = new SanPhamModel(rs.getString(1));
+                return sp;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
+        return null;
+    }
+
+    public static void main(String[] args) {
+//        List<SanPham> list = new SanPhamRepository().getAll();
+//        for (SanPham x : list) {
+//            System.out.println(x.toString());
+//        }
 //        SanPhamModel sp = new SanPhamModel("SP03", "Trân Châu Đen", 5000, "Ngọt", "4ca4e804-4817-46c4-afdb-11181cfa8d82", "Ngừng bán");
-//        boolean add = new SanPhamRepository().update(sp, "SP03");
+//        boolean add = new SanPhamRepository().delete("SP01")
 //        System.out.println(add);
 
 //        List<SanPham> list = new SanPhamRepository().search("Bạc Xỉu");
@@ -161,5 +176,6 @@ public class SanPhamRepository {
 //        for (SanPham x : list) {
 //            System.out.println(x);
 //        }
+//        System.out.println(new SanPhamRepository().checkTrung("SP01"));
     }
 }
