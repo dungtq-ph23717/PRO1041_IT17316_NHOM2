@@ -19,11 +19,12 @@ public class KhuyenMai {
     private String tgKetThuc;
     private String trangThai;
     private String moTa;
+    private SanPham sp;
 
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String ID, String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa) {
+    public KhuyenMai(String ID, String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa, SanPham sp) {
         this.ID = ID;
         this.maKM = maKM;
         this.tenKM = tenKM;
@@ -33,9 +34,10 @@ public class KhuyenMai {
         this.tgKetThuc = tgKetThuc;
         this.trangThai = trangThai;
         this.moTa = moTa;
+        this.sp = sp;
     }
 
-    public KhuyenMai(String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa) {
+    public KhuyenMai(String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa, SanPham sp) {
         this.maKM = maKM;
         this.tenKM = tenKM;
         this.hinhThucGG = hinhThucGG;
@@ -44,6 +46,7 @@ public class KhuyenMai {
         this.tgKetThuc = tgKetThuc;
         this.trangThai = trangThai;
         this.moTa = moTa;
+        this.sp = sp;
     }
 
     public String getID() {
@@ -120,10 +123,14 @@ public class KhuyenMai {
 
     @Override
     public String toString() {
-        return "KhuyenMai{" + "ID=" + ID + ", maKM=" + maKM + ", tenKM=" + tenKM + ", hinhThucGG=" + hinhThucGG + ", mucGiam=" + mucGiam + ", tgBatDau=" + tgBatDau + ", tgKetThuc=" + tgKetThuc + ", trangThai=" + trangThai + ", moTa=" + moTa + '}';
+        return "KhuyenMai{" + "ID=" + ID + ", maKM=" + maKM + ", tenKM=" + tenKM + ", hinhThucGG=" + hinhThucGG + ", mucGiam=" + mucGiam + ", tgBatDau=" + tgBatDau + ", tgKetThuc=" + tgKetThuc + ", trangThai=" + trangThai + ", moTa=" + moTa + ", sp=" + sp + '}';
     }
 
     public Object[] toRowData() {
-        return new Object[]{ID, maKM, tenKM, hinhThucGG, mucGiam, tgBatDau, tgKetThuc, trangThai, moTa};
+        return new Object[]{ID, maKM, tenKM, sp.getTenSP(), hinhThucGG, mucGiam, tgBatDau, tgKetThuc, trangThai, moTa};
+    }
+
+    public Object[] toRowDataSP() {
+        return new Object[]{sp.getMaSP(), sp.getTenSP()};
     }
 }
