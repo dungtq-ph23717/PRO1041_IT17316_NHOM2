@@ -189,18 +189,18 @@ public class ViewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btDangNhapMouseClicked
 
     private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        String user = txtUser.getText();
+        String pass = txtPass.getText();
+        TaiKhoanModel tk = impl.dangNhap(user, pass);
         try {
-            String user = txtUser.getText();
-            String pass = txtPass.getText();
-            TaiKhoanModel tk = impl.dangNhap(user, pass);
             if (user.equalsIgnoreCase(tk.getUsername()) && pass.equalsIgnoreCase(tk.getPassword()) && tk.getRole().equalsIgnoreCase("nv")) {
                 this.dispose();
                 View.ViewNV.ViewNhanVien v = new View.ViewNV.ViewNhanVien();
                 v.setVisible(true);
             } else if (user.equalsIgnoreCase(tk.getUsername()) && pass.equalsIgnoreCase(tk.getPassword()) && tk.getRole().equalsIgnoreCase("ql")) {
                 this.dispose();
-                View.ViewQL.ViewQuanLySanPham v = new View.ViewQL.ViewQuanLySanPham();
-                v.setVisible(true);
+                View.ViewQL.ViewQuanLy q = new View.ViewQL.ViewQuanLy();
+                q.setVisible(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu");

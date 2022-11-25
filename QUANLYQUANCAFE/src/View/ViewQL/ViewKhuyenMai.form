@@ -362,9 +362,11 @@
                 </Container>
                 <Component class="javax.swing.JCheckBox" name="cbSelectAll">
                   <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Select All"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSelectAllActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

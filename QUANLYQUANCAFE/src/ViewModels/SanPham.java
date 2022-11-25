@@ -10,6 +10,7 @@ package ViewModels;
  */
 public class SanPham {
 
+    private String id;
     private String maSP;
     private String tenSP;
     private double giaBan;
@@ -20,6 +21,29 @@ public class SanPham {
     private Size size;
 
     public SanPham() {
+    }
+
+    public SanPham(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public SanPham(String id, String maSP, String tenSP, double giaBan, String moTa, DanhMuc danhMuc, String trangThai, Size size) {
+        this.id = id;
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.giaBan = giaBan;
+        this.moTa = moTa;
+        this.danhMuc = danhMuc;
+        this.trangThai = trangThai;
+        this.size = size;
     }
 
     public SanPham(String maSP, String tenSP, double giaBan, String moTa, String anh, DanhMuc danhMuc, String trangThai) {
@@ -122,7 +146,7 @@ public class SanPham {
 
     @Override
     public String toString() {
-        return "SanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", giaBan=" + giaBan + ", moTa=" + moTa + ", anh=" + anh + ", danhMuc=" + danhMuc + ", trangThai=" + trangThai + ", size=" + size + '}';
+        return "SanPham{" + "id=" + id + ", maSP=" + maSP + ", tenSP=" + tenSP + ", giaBan=" + giaBan + ", moTa=" + moTa + ", anh=" + anh + ", danhMuc=" + danhMuc + ", trangThai=" + trangThai + ", size=" + size + '}';
     }
 
     public Object[] toRowData() {

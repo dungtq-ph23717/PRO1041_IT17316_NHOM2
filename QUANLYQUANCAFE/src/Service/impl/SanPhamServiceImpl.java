@@ -82,4 +82,9 @@ public class SanPhamServiceImpl implements SanPhamService {
         }
     }
 
+    @Override
+    public SanPham getOne(String ma) {
+        return rps.getOne(ma);
+    }
+
 }

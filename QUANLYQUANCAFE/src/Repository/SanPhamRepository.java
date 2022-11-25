@@ -55,6 +55,23 @@ public class SanPhamRepository {
         return null;
     }
 
+    public SanPham getOne(String ten) {
+        String query = "SELECT SanPham.ID, MaSP, TenSP, Giaban, MoTa, DanhMuc.TenDM, TrangThai, Size FROM SanPham\n"
+                + "INNER JOIN DanhMuc ON SanPham.IDDM = DanhMuc.ID\n"
+                + "inner join Size on SanPham.IDSize = Size.ID\n"
+                + "WHERE MaSP like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ten);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new SanPham(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), new DanhMuc(rs.getString(6)), rs.getString(7), new Size(rs.getString(8)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<SanPham> search(String ten) {
         String query = "SELECT MaSP, TenSP, Giaban, MoTa, DanhMuc.TenDM, TrangThai FROM SanPham\n"
                 + "INNER JOIN DanhMuc ON SanPham.IDDM = DanhMuc.ID\n"
@@ -180,10 +197,12 @@ public class SanPhamRepository {
 //        for (SanPham x : list) {
 //            System.out.println(x.toString());
 //        }
-        SanPhamModel sp = new SanPhamModel("ae539fd9-0cd8-4818-addd-87cce30342d9");
-        boolean add = new SanPhamRepository().addID(sp, "SP1");
+//        SanPhamModel sp = new SanPhamModel("ae539fd9-0cd8-4818-addd-87cce30342d9");
+//        boolean add = new SanPhamRepository().addID(sp, "SP1");
+//        System.out.println(add);
+//        SanPhamModel sp = new SanPhamModel("ae539fd9-0cd8-4818-addd-87cce30342d9");
+        SanPham add = new SanPhamRepository().getOne("SP1");
         System.out.println(add);
-
 //        List<SanPham> list = new SanPhamRepository().search("Bạc Xỉu");
 //        for (SanPham x : list) {
 //            System.out.println(x);
