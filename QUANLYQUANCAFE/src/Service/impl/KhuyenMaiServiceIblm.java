@@ -28,11 +28,18 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     }
 
     @Override
-    public String add(KhuyenMaiModel km) {
+    public String addTST(KhuyenMaiModel km) {
         if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || km.getMucGiam().isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
             return "Không được để trống !";
         }
-        boolean add = resKM.add(km);
+        if (km.getMucGiam().matches("[a-z A-Z]+") == false) {
+            return "Mức giảm phải là số và lớn hơn 0";
+        }
+        KhuyenMaiModel ma = resKM.checkTrung(km.getMaKM());
+        if (ma != null) {
+            return "Mã khuyến mãi đã tồn tại!";
+        }
+        boolean add = resKM.addTST(km);
         if (add) {
             return "Thêm thành công!";
         } else {
@@ -41,8 +48,8 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     }
 
     @Override
-    public String update(KhuyenMaiModel km, String IDKM) {
-        boolean update = resKM.update(km, IDKM);
+    public String updateTST(KhuyenMaiModel km, String IDKM) {
+        boolean update = resKM.updateTST(km, IDKM);
         if (update) {
             return "Sửa thành công!";
         } else {
@@ -68,5 +75,35 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     @Override
     public KhuyenMai getOne(String ten) {
         return resKM.getOne(ten);
+    }
+
+    @Override
+    public String addTPT(KhuyenMaiModel km) {
+        if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || km.getMucGiam().isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
+            return "Không được để trống !";
+        }
+        if (km.getMucGiam().matches("[a-z A-Z]+") == false) {
+            return "Mức giảm phải là số và lớn hơn 0";
+        }
+        KhuyenMaiModel ma = resKM.checkTrung(km.getMaKM());
+        if (ma != null) {
+            return "Mã khuyến mãi đã tồn tại!";
+        }
+        boolean add = resKM.addTPT(km);
+        if (add) {
+            return "Thêm thành công!";
+        } else {
+            return "Thêm thất bại!";
+        }
+    }
+
+    @Override
+    public String updateTPT(KhuyenMaiModel km, String IDKM) {
+        boolean update = resKM.updateTPT(km, IDKM);
+        if (update) {
+            return "Sửa thành công!";
+        } else {
+            return "Sửa thất bại!";
+        }
     }
 }

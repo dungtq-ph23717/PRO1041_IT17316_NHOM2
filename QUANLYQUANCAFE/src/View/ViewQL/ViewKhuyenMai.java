@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewKhuyenMai extends javax.swing.JInternalFrame {
-
+    
     private List<KhuyenMai> listKM = new ArrayList<>();
     private List<SanPham> listSP = new ArrayList<>();
     private DefaultTableModel dtm = new DefaultTableModel();
@@ -67,7 +67,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             dtm1.addRow(x.toRowData());
         }
     }
-
+    
     private void showData(List<KhuyenMai> km) {
         dtm.setRowCount(0);
         for (KhuyenMai x : km) {
@@ -509,10 +509,10 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         String ten = txtTenKM.getText();
         String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
         String mucG = txtMucGiam.getText();
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
-
+        
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
         String mota = txtMoTa.getText();
@@ -524,7 +524,11 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             tt = "Hết hiệu lực sử dụng";
         }
         KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, mucG, ngaybatdau, ngayketthuc, tt, mota);
-        JOptionPane.showMessageDialog(this, impl.add(km));
+        if (cbbHinhThucGG.getSelectedItem().toString().equalsIgnoreCase("Giảm theo số tiền")) {
+            JOptionPane.showMessageDialog(this, impl.addTST(km));
+        } else {
+            JOptionPane.showMessageDialog(this, impl.addTPT(km));
+        }
         listKM = impl.getAll();
         showData(listKM);
     }//GEN-LAST:event_bltAddActionPerformed
@@ -535,10 +539,10 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         String ten = txtTenKM.getText();
         String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
         String mucG = txtMucGiam.getText();
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
-
+        
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
         String mota = txtMoTa.getText();
@@ -550,7 +554,11 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             tt = "Hết hiệu lực sử dụng";
         }
         KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, mucG, ngaybatdau, ngayketthuc, tt, mota);
-        JOptionPane.showMessageDialog(this, impl.update(km, id));
+        if (cbbHinhThucGG.getSelectedItem().toString().equalsIgnoreCase("Giảm theo số tiền")) {
+            JOptionPane.showMessageDialog(this, impl.updateTST(km, id));
+        } else {
+            JOptionPane.showMessageDialog(this, impl.updateTPT(km, id));
+        }
         listKM = impl.getAll();
         showData(listKM);
     }//GEN-LAST:event_bltUpdateActionPerformed
@@ -566,13 +574,13 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             Date date = (Date) new SimpleDateFormat("yyyy-MM-dd").parse((String) bangKM.getValueAt(row, 5));
             txtNgaybatDau.setDate(date);
         } catch (ParseException ex) {
-
+            
         }
         try {
             Date date1 = (Date) new SimpleDateFormat("yyyy-MM-dd").parse((String) bangKM.getValueAt(row, 6));
             txtNgayKetThuc.setDate(date1);
         } catch (ParseException ex) {
-
+            
         }
         String check = bangKM.getValueAt(row, 7).toString();
         if (check.contains("Đang kích hoạt")) {
@@ -633,7 +641,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             for (int i = 0; i < bangSP.getRowCount(); i++) {
                 bangSP.setValueAt(true, i, 0);
             }
-        }else{
+        } else {
             for (int i = 0; i < bangSP.getRowCount(); i++) {
                 bangSP.setValueAt(false, i, 0);
             }

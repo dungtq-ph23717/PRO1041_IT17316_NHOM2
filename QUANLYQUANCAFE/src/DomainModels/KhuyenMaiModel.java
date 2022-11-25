@@ -46,6 +46,10 @@ public class KhuyenMaiModel {
         this.moTa = moTa;
     }
 
+    public KhuyenMaiModel(String maKM) {
+        this.maKM = maKM;
+    }
+
     public String getID() {
         return ID;
     }

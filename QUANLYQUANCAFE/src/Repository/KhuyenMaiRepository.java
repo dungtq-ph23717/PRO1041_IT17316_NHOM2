@@ -123,7 +123,7 @@ public class KhuyenMaiRepository {
         return null;
     }
 
-    public boolean add(KhuyenMaiModel km) {
+    public boolean addTST(KhuyenMaiModel km) {
         int check = 0;
         String query = "INSERT INTO [dbo].[KhuyenMai]\n"
                 + "           ([MaKM]\n"
@@ -140,7 +140,7 @@ public class KhuyenMaiRepository {
             ps.setObject(1, km.getMaKM());
             ps.setObject(2, km.getTenKM());
             ps.setObject(3, km.getHinhThucGG());
-            ps.setObject(4, km.getMucGiam());
+            ps.setObject(4, km.getMucGiam() + " " + "VND");
             ps.setObject(5, km.getTgBatDau());
             ps.setObject(6, km.getTgKetThuc());
             ps.setObject(7, km.getTrangThai());
@@ -152,7 +152,36 @@ public class KhuyenMaiRepository {
         return check > 0;
     }
 
-    public boolean update(KhuyenMaiModel km, String IDKM) {
+    public boolean addTPT(KhuyenMaiModel km) {
+        int check = 0;
+        String query = "INSERT INTO [dbo].[KhuyenMai]\n"
+                + "           ([MaKM]\n"
+                + "           ,[TenKM]\n"
+                + "           ,[HinhThucGG]\n"
+                + "           ,[MucGiam]\n"
+                + "           ,[TGBatDau]\n"
+                + "           ,[TGKetThuc]\n"
+                + "           ,[TrangThai]\n"
+                + "           ,[Mota])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?,?,?)";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, km.getMaKM());
+            ps.setObject(2, km.getTenKM());
+            ps.setObject(3, km.getHinhThucGG());
+            ps.setObject(4, km.getMucGiam() + " " + "%");
+            ps.setObject(5, km.getTgBatDau());
+            ps.setObject(6, km.getTgKetThuc());
+            ps.setObject(7, km.getTrangThai());
+            ps.setObject(8, km.getMoTa());
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check > 0;
+    }
+
+    public boolean updateTST(KhuyenMaiModel km, String IDKM) {
         int check = 0;
         String query = "UPDATE [dbo].[KhuyenMai]\n"
                 + "   SET [MaKM] = ?\n"
@@ -168,7 +197,7 @@ public class KhuyenMaiRepository {
             ps.setObject(1, km.getMaKM());
             ps.setObject(2, km.getTenKM());
             ps.setObject(3, km.getHinhThucGG());
-            ps.setObject(4, km.getMucGiam());
+            ps.setObject(4, km.getMucGiam() + " " + "VND");
             ps.setObject(5, km.getTgBatDau());
             ps.setObject(6, km.getTgKetThuc());
             ps.setObject(7, km.getTrangThai());
@@ -179,6 +208,50 @@ public class KhuyenMaiRepository {
             e.printStackTrace();
         }
         return check > 0;
+    }
+
+    public boolean updateTPT(KhuyenMaiModel km, String IDKM) {
+        int check = 0;
+        String query = "UPDATE [dbo].[KhuyenMai]\n"
+                + "   SET [MaKM] = ?\n"
+                + "      ,[TenKM] = ?\n"
+                + "      ,[HinhThucGG] = ?\n"
+                + "      ,[MucGiam] = ?\n"
+                + "      ,[TGBatDau] = ?\n"
+                + "      ,[TGKetThuc] = ?\n"
+                + "      ,[TrangThai] = ?\n"
+                + "      ,[Mota] = ?\n"
+                + " WHERE ID = ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, km.getMaKM());
+            ps.setObject(2, km.getTenKM());
+            ps.setObject(3, km.getHinhThucGG());
+            ps.setObject(4, km.getMucGiam() + " " + "%");
+            ps.setObject(5, km.getTgBatDau());
+            ps.setObject(6, km.getTgKetThuc());
+            ps.setObject(7, km.getTrangThai());
+            ps.setObject(8, km.getMoTa());
+            ps.setObject(9, IDKM);
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check > 0;
+    }
+
+    public KhuyenMaiModel checkTrung(String maKM) {
+        String query = "SELECT MaKM FROM KhuyenMai WHERE MaKM = ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, maKM);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                KhuyenMaiModel km = new KhuyenMaiModel(rs.getString(1));
+                return km;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
     }
 
     public boolean xoa(String IDKM) {
