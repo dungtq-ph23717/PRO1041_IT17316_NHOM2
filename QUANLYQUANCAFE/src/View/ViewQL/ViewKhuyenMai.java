@@ -6,7 +6,9 @@ package View.ViewQL;
 
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import DomainModels.KhuyenMaiModel;
+import DomainModels.SP_KM;
 import DomainModels.SanPhamModel;
+import Service.impl.KMSPServiceImpl;
 import Service.impl.KhuyenMaiServiceIblm;
 import Service.impl.SanPhamServiceImpl;
 import ViewModels.KhuyenMai;
@@ -25,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewKhuyenMai extends javax.swing.JInternalFrame {
-    
+
     private List<KhuyenMai> listKM = new ArrayList<>();
     private List<SanPham> listSP = new ArrayList<>();
     private DefaultTableModel dtm = new DefaultTableModel();
@@ -33,6 +35,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
     private DefaultComboBoxModel box2 = new DefaultComboBoxModel();
     private Service.impl.KhuyenMaiServiceIblm impl = new KhuyenMaiServiceIblm();
     private SanPhamServiceImpl impl1 = new SanPhamServiceImpl();
+    private KMSPServiceImpl impl2 = new KMSPServiceImpl();
 
     /**
      * Creates new form ViewKhuyenMai
@@ -64,7 +67,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             dtm1.addRow(x.toRowData());
         }
     }
-    
+
     private void showData(List<KhuyenMai> km) {
         dtm.setRowCount(0);
         for (KhuyenMai x : km) {
@@ -502,10 +505,10 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         String ten = txtTenKM.getText();
         String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
         String mucG = txtMucGiam.getText();
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
-        
+
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
         String mota = txtMoTa.getText();
@@ -528,10 +531,10 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         String ten = txtTenKM.getText();
         String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
         String mucG = txtMucGiam.getText();
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
-        
+
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
         String mota = txtMoTa.getText();
@@ -559,13 +562,13 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             Date date = (Date) new SimpleDateFormat("yyyy-MM-dd").parse((String) bangKM.getValueAt(row, 5));
             txtNgaybatDau.setDate(date);
         } catch (ParseException ex) {
-            
+
         }
         try {
             Date date1 = (Date) new SimpleDateFormat("yyyy-MM-dd").parse((String) bangKM.getValueAt(row, 6));
             txtNgayKetThuc.setDate(date1);
         } catch (ParseException ex) {
-            
+
         }
         String check = bangKM.getValueAt(row, 7).toString();
         if (check.contains("Đang kích hoạt")) {
@@ -613,9 +616,10 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             boolean check = Boolean.valueOf(bangSP.getValueAt(i, 0).toString());
             String col = bangSP.getValueAt(i, 1).toString();
             if (check) {
-                KhuyenMai id = impl.getOne(txtTenKM.getText());
-                SanPhamModel sp = new SanPhamModel(id.getID());
-                JOptionPane.showMessageDialog(this, impl1.addID(sp, col));
+                KhuyenMai idKM = impl.getOne(txtTenKM.getText());
+                SanPham idSP = impl1.getOne(col);
+                SP_KM s = new SP_KM(idSP.getId(), idKM.getID());
+                JOptionPane.showMessageDialog(this, impl2.add(s));
             }
         }
     }//GEN-LAST:event_bltAddSPActionPerformed
