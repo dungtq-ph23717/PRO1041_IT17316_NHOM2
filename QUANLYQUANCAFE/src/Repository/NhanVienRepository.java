@@ -4,8 +4,6 @@
  */
 package Repository;
 
-
-
 import DomainModels.NhanVienModel;
 import Utilities.DBContext;
 import ViewModels.NhanVienViewModel;
@@ -22,14 +20,14 @@ import java.util.List;
 public class NhanVienRepository {
 
     public List<NhanVienViewModel> getAll() {
-        String query = "SELECT dbo.NhanVien.ID, dbo.NhanVien.MaNV, dbo.NhanVien.TenNV, dbo.NhanVien.NgaySinh, dbo.NhanVien.SDT, dbo.ChucVu.TenCV\n"
+        String query = "SELECT dbo.NhanVien.ID, dbo.NhanVien.MaNV, dbo.NhanVien.TenNV, dbo.NhanVien.NgaySinh, dbo.NhanVien.SDT, dbo.ChucVu.TenCV, dbo.NhanVien.TrangThai, dbo.NhanVien.GioiTinh, dbo.NhanVien.Diachi\n"
                 + "FROM   dbo.NhanVien INNER JOIN\n"
                 + "             dbo.ChucVu ON dbo.NhanVien.IDCV = dbo.ChucVu.ID";
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<NhanVienViewModel> list = new ArrayList<>();
             while (rs.next()) {
-                NhanVienViewModel nhanVienViewModel = new NhanVienViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                NhanVienViewModel nhanVienViewModel = new NhanVienViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8), rs.getString(9));
 
                 list.add(nhanVienViewModel);
             }
@@ -42,14 +40,15 @@ public class NhanVienRepository {
 
     public boolean add(NhanVienModel nhanVien) {
         String query = "INSERT INTO [dbo].[NhanVien]\n"
-                + "           (\n"
-                + "           [MaNV]\n"
+                + "           ([MaNV]\n"
                 + "           ,[TenNV]\n"
                 + "           ,[NgaySinh]\n"
                 + "           ,[SDT]\n"
-                + "           ,[IDCV])\n"
-                + "     VALUES\n"
-                + "           (?,?,?,?,?)";
+                + "           ,[IDCV]\n"
+                + "           ,[TrangThai]\n"
+                + "           ,[GioiTinh]\n"
+                + "           ,[Diachi])\n"
+                + "     VALUES (?,?,?,?,?,?,?,?)";
         int check = 0;
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, nhanVien.getMaNV());
@@ -57,6 +56,9 @@ public class NhanVienRepository {
             ps.setObject(3, nhanVien.getNgaySinh());
             ps.setObject(4, nhanVien.getSDT());
             ps.setObject(5, nhanVien.getIdCV());
+            ps.setObject(6, nhanVien.isTrangThai());
+            ps.setObject(7, nhanVien.isGioiTinh());
+            ps.setObject(8, nhanVien.getDiaChi());
 
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -80,12 +82,14 @@ public class NhanVienRepository {
 
     public boolean update(NhanVienModel nhanVien, String id) {
         String query = "UPDATE [dbo].[NhanVien]\n"
-                + "   SET \n"
-                + "      [MaNV] =? \n"
-                + "      ,[TenNV] =? \n"
-                + "      ,[NgaySinh] =? \n"
-                + "      ,[SDT] = ?\n"
-                + "      ,[IDCV] = ?\n"
+                + "   SET [MaNV] = \n"
+                + "      ,[TenNV] = \n"
+                + "      ,[NgaySinh] = \n"
+                + "      ,[SDT] = \n"
+                + "      ,[IDCV] =\n"
+                + "      ,[TrangThai] = \n"
+                + "      ,[GioiTinh] = \n"
+                + "      ,[Diachi] = \n"
                 + " WHERE ID=?";
         int check = 0;
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
@@ -94,7 +98,10 @@ public class NhanVienRepository {
             ps.setObject(3, nhanVien.getNgaySinh());
             ps.setObject(4, nhanVien.getSDT());
             ps.setObject(5, nhanVien.getIdCV());
-            ps.setObject(6, id);
+            ps.setObject(6, nhanVien.isTrangThai());
+            ps.setObject(7, nhanVien.isGioiTinh());
+            ps.setObject(8, nhanVien.getDiaChi());
+            ps.setObject(9, id);
 
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -103,24 +110,23 @@ public class NhanVienRepository {
         return check > 0;
     }
 
- 
-     public List<NhanVienViewModel> timkiem(String ma) {
-        String sql = "SELECT dbo.NhanVien.ID, dbo.NhanVien.MaNV, dbo.NhanVien.TenNV, dbo.NhanVien.NgaySinh, dbo.NhanVien.SDT, dbo.ChucVu.TenCV\n"
+    public List<NhanVienViewModel> timkiem(String ma) {
+        String sql = "SELECT dbo.NhanVien.ID, dbo.NhanVien.MaNV, dbo.NhanVien.TenNV, dbo.NhanVien.NgaySinh, dbo.NhanVien.SDT, dbo.ChucVu.TenCV, dbo.NhanVien.TrangThai, dbo.NhanVien.GioiTinh, dbo.NhanVien.Diachi\n"
                 + "FROM   dbo.NhanVien INNER JOIN\n"
                 + "             dbo.ChucVu ON dbo.NhanVien.IDCV = dbo.ChucVu.ID\n"
-                + "			 where MaNV = ?";
+                + "			 where MaNV=?";
         try (Connection con = DBContext.getConnection();
                 PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
 
-            List<NhanVienViewModel> LIST = new ArrayList<>();
+            List<NhanVienViewModel> LISTs = new ArrayList<>();
             while (rs.next()) {
-                NhanVienViewModel nvm= new NhanVienViewModel(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
-                LIST.add(nvm);
+                NhanVienViewModel nhanVienViewModel = new NhanVienViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8), rs.getString(9));
 
+                LISTs.add(nhanVienViewModel);
             }
-            return LIST;
+            return LISTs;
 
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -128,11 +134,34 @@ public class NhanVienRepository {
         return null;
 
     }
-     public static void main(String[] args) {
-         System.out.println(new NhanVienRepository().timkiem("Manv3"));
+
+    public List<NhanVienViewModel> locchucvu(String ten) {
+        String sql = "SELECT dbo.NhanVien.ID, dbo.NhanVien.MaNV, dbo.NhanVien.TenNV, dbo.NhanVien.NgaySinh, dbo.NhanVien.SDT, dbo.ChucVu.TenCV, dbo.NhanVien.TrangThai, dbo.NhanVien.GioiTinh, dbo.NhanVien.Diachi\n"
+                + "FROM   dbo.NhanVien INNER JOIN\n"
+                + "             dbo.ChucVu ON dbo.NhanVien.IDCV = dbo.ChucVu.ID\n"
+                + "			 where ChucVu.TenCV=?";
+        try (Connection con = DBContext.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, ten);
+            ResultSet rs = ps.executeQuery();
+
+            List<NhanVienViewModel> LISTloc = new ArrayList<>();
+            while (rs.next()) {
+                NhanVienViewModel nhanVienViewModel = new NhanVienViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8), rs.getString(9));
+
+                LISTloc.add(nhanVienViewModel);
+            }
+            return LISTloc;
+
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+
     }
 
-   
-     
-   
+    public static void main(String[] args) {
+        System.out.println(new NhanVienRepository().timkiem("Manv3"));
+    }
+
 }

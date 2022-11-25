@@ -22,6 +22,19 @@ public class NhanVienViewModel {
     public NhanVienViewModel() {
     }
 
+    public NhanVienViewModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String tenCV, boolean trangThai, boolean GioiTinh, String diaChi) {
+        this.id = id;
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.ngaySinh = ngaySinh;
+        this.SDT = SDT;
+        this.tenCV = tenCV;
+        this.trangThai = trangThai;
+        this.GioiTinh = GioiTinh;
+        this.diaChi = diaChi;
+    }
+    
+
     public String getTenCV() {
         return tenCV;
     }

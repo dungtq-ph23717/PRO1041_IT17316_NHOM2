@@ -25,12 +25,18 @@ public class NhanVienServiceImpl implements NhanVienService {
 
     @Override
     public String add(NhanVienModel nhanVien) {
+        if(nhanVien.getMaNV().isEmpty()||nhanVien.getSDT().isEmpty()||nhanVien.getDiaChi().isEmpty()||nhanVien.getTenNV().isEmpty()){
+            return "Dữ liệu còn trống!";
+        }else{
+            
+        
         boolean add = nhanVienRepository.add(nhanVien);
         if (add) {
             return "ADD THÀNH CÔNG";
         } else {
             return "ADD THẤT BẠI";
         }
+    }
     }
 
     @Override
@@ -58,5 +64,11 @@ public class NhanVienServiceImpl implements NhanVienService {
     public List<NhanVienViewModel> getTimkiem(String ma) {
         List<NhanVienViewModel> listtk = nhanVienRepository.timkiem(ma);
         return listtk;
+    }
+
+    @Override
+    public List<NhanVienViewModel> locchucvu(String ten) {
+        List<NhanVienViewModel> loccv=nhanVienRepository.locchucvu(ten);
+        return loccv;
     }
 }
