@@ -538,8 +538,10 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         } else {
             status = "Ngừng bán";
         }
+        String size = (String) cbbSize.getSelectedItem();
+        Size sizeImpl = impl.getOne(cbbSize.getSelectedItem().toString());
         DanhMuc dm = danhMucService.getOne(cbbDanhMuc.getSelectedItem().toString());
-        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(gia), moTa, dm.getId(), status);
+        SanPhamModel sp = new SanPhamModel(ma, ten, Double.valueOf(gia), moTa, sizeImpl.getId(), dm.getId(), status);
         JOptionPane.showMessageDialog(this, spService.update(sp, ma));
         listDanhMuc = danhMucService.getAll();
         listSanPham = spService.getAll();
@@ -572,8 +574,10 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         } else {
             status = "Ngừng bán";
         }
+        String size = (String) cbbSize.getSelectedItem();
+        Size sizeImpl = impl.getOne(cbbSize.getSelectedItem().toString());
         DanhMuc dm = danhMucService.getOne(cbbDanhMuc.getSelectedItem().toString());
-        SanPhamModel sp = new SanPhamModel(ma, ten, Integer.valueOf(gia), moTa, dm.getId(), status);
+        SanPhamModel sp = new SanPhamModel(ma, ten, Double.valueOf(gia), moTa, sizeImpl.getId(), dm.getId(), status);
         JOptionPane.showMessageDialog(this, spService.add(sp));
         listDanhMuc = danhMucService.getAll();
         listSanPham = spService.getAll();

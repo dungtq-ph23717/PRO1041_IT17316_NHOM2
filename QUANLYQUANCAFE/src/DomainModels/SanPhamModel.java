@@ -59,12 +59,12 @@ public class SanPhamModel {
         this.trangThai = trangThai;
     }
 
-    public SanPhamModel(String maSP, String tenSP, double giaBan, String moTa, String anh, String idDM, String trangThai) {
+    public SanPhamModel(String maSP, String tenSP, double giaBan, String moTa, String idSize, String idDM, String trangThai) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.giaBan = giaBan;
         this.moTa = moTa;
-        this.anh = anh;
+        this.idSize = idSize;
         this.idDM = idDM;
         this.trangThai = trangThai;
     }
