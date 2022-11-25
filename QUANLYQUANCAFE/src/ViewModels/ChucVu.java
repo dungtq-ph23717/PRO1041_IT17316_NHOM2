@@ -39,4 +39,8 @@ public class ChucVu {
         this.ten = ten;
     }
 
+    public Object[] toRowData() {
+        return new Object[]{id, maCV, ten};
+    }
+
 }

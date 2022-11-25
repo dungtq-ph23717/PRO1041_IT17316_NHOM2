@@ -14,23 +14,32 @@ public class NhanVienViewModel {
     private String tenNV;
     private String ngaySinh;
     private String SDT;
-    private String tencv;
-    private String TrangThai;
-    private String anh;
-
+    private String tenCV;
+    private boolean trangThai;
+      private boolean GioiTinh;
+      private String diaChi;
+      
+    
     public NhanVienViewModel() {
     }
 
-    public NhanVienViewModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String tencv, String TrangThai, String anh) {
+    public NhanVienViewModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String tenCV, boolean trangThai, boolean GioiTinh, String diaChi) {
         this.id = id;
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.ngaySinh = ngaySinh;
         this.SDT = SDT;
-        this.tencv = tencv;
-        this.TrangThai = TrangThai;
-        this.anh = anh;
+        this.tenCV = tenCV;
+        this.trangThai = trangThai;
+        this.GioiTinh = GioiTinh;
+        this.diaChi = diaChi;
     }
+
+   
+
+   
+
+  
 
   
 
@@ -74,39 +83,47 @@ public class NhanVienViewModel {
         this.SDT = SDT;
     }
 
-    public String getTencv() {
-        return tencv;
+    public String getTenCV() {
+        return tenCV;
     }
 
-    public void setTencv(String tencv) {
-        this.tencv = tencv;
+    public void setTenCV(String tenCV) {
+        this.tenCV = tenCV;
     }
 
-    public String getTrangThai() {
-        return TrangThai;
+    public boolean isGioiTinh() {
+        return GioiTinh;
     }
 
-    public void setTrangThai(String TrangThai) {
-        this.TrangThai = TrangThai;
+    public void setGioiTinh(boolean GioiTinh) {
+        this.GioiTinh = GioiTinh;
     }
 
-    public String getAnh() {
-        return anh;
+    public boolean isTrangThai() {
+        return trangThai;
     }
 
-    public void setAnh(String anh) {
-        this.anh = anh;
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
 
     @Override
     public String toString() {
-        return "NhanVienViewModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", tencv=" + tencv + ", TrangThai=" + TrangThai + ", anh=" + anh + '}';
+        return "NhanVienViewModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", tenCV=" + tenCV + ", trangThai=" + trangThai + ", GioiTinh=" + GioiTinh + ", diaChi=" + diaChi + '}';
     }
     
-
    
     
     public Object[] toRowData(){
-        return new Object[]{id,maNV,tenNV,ngaySinh,SDT,tencv,TrangThai,anh};
+        return new Object[]{id,maNV,tenNV,ngaySinh,SDT,tenCV,trangThai==true?"ĐANG LÀM VIỆC":"ĐÃ NGHỈ",GioiTinh==true?"NAM":"NỮ",diaChi};
     }
-}
+    
+}   

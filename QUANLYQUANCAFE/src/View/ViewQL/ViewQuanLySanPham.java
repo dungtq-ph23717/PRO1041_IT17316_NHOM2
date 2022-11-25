@@ -33,11 +33,11 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         uI.setNorthPane(null);
 
 
-        tbSanPham.setModel(dtm);
-        String[] header = {"Mã SP", "Tên SP", "Số Lượng", "Giá Bán"};
-        dtm.setColumnIdentifiers(header);
-        listSanPham = spService.getAll();
-        showData(listSanPham);
+//        tbSanPham.setModel(dtm);
+//        String[] header = {"Mã SP", "Tên SP", "Giá Bán"};
+//        dtm.setColumnIdentifiers(header);
+//        listSanPham = spService.getAll();
+//        showData(listSanPham);
     }
 
     private void showData(List<SanPham> list) {

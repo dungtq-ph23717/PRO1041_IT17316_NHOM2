@@ -131,6 +131,11 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         cbbKhuVuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btKhuVuc.setText("...");
+        btKhuVuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btKhuVucActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -245,7 +250,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
@@ -297,7 +302,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                 .addGap(34, 34, 34))
         );
 
@@ -345,6 +350,10 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         listKV = impl1.getAll();
         showData(listBan);
     }//GEN-LAST:event_btThemActionPerformed
+
+    private void btKhuVucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btKhuVucActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btKhuVucActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -15,8 +15,9 @@ import java.util.List;
 public interface NhanVienService {
       List<NhanVienViewModel> getAll();
     String add(NhanVienModel nhanVien);
-    String delete(String id);
+    String deleteTT(String id);
     String update(NhanVienModel nhanVien,String id);
     List<NhanVienViewModel> getTimkiem(String ma);
+  
     
 }

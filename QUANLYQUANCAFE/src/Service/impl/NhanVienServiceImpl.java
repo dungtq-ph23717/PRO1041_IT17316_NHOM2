@@ -25,23 +25,20 @@ public class NhanVienServiceImpl implements NhanVienService {
 
     @Override
     public String add(NhanVienModel nhanVien) {
-        boolean add = nhanVienRepository.add(nhanVien);
+        if(nhanVien.getMaNV().isEmpty()||nhanVien.getDiaChi().isEmpty()||nhanVien.getNgaySinh().isEmpty()||nhanVien.getSDT().isEmpty()||nhanVien.getTenNV().isEmpty()){
+            return "dữ liệu còn trống !";
+        }else{
+             boolean add = nhanVienRepository.add(nhanVien);
         if (add) {
             return "ADD THÀNH CÔNG";
         } else {
             return "ADD THẤT BẠI";
         }
+        }
+       
     }
 
-    @Override
-    public String delete(String id) {
-        boolean DELETE = nhanVienRepository.delete(id);
-        if (DELETE) {
-            return "DELETE THÀNH CÔNG";
-        } else {
-            return "DELETE THẤT BẠI";
-        }
-    }
+  
 
     @Override
     public String update(NhanVienModel nhanVien, String id) {
@@ -58,5 +55,18 @@ public class NhanVienServiceImpl implements NhanVienService {
     public List<NhanVienViewModel> getTimkiem(String ma) {
         List<NhanVienViewModel> listtk = nhanVienRepository.timkiem(ma);
     return listtk;
+    }
+
+   
+
+
+    @Override
+    public String deleteTT(String id) {
+        boolean delete=nhanVienRepository.DELETETt(id);
+       if(delete){
+           return "DELETE THÀNH CÔNG";
+       }else{
+           return "DELETE THẤT BẠI";
+       }
     }
 }
