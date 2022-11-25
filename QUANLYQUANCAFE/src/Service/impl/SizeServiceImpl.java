@@ -4,6 +4,7 @@
  */
 package Service.impl;
 
+import DomainModels.SizeModel;
 import ViewModels.Size;
 import Repository.SizeRepostory;
 import Service.SizeService;
@@ -20,6 +21,44 @@ public class SizeServiceImpl implements SizeService {
     @Override
     public List<Size> getAll() {
         return rp.getAll();
+    }
+
+    @Override
+    public String add(SizeModel s) {
+        if (s.getSize().isEmpty()) {
+            return "Không được để trống!";
+        }
+        boolean add = rp.add(s);
+        if (add) {
+            return "Thêm thành công!";
+        } else {
+            return "Thêm thất bại!";
+        }
+    }
+
+    @Override
+    public String update(SizeModel s, String ID) {
+        boolean update = rp.update(s, ID);
+        if (update) {
+            return "Sửa thành công!";
+        } else {
+            return "Sửa thất bại!";
+        }
+    }
+
+    @Override
+    public Size getOne(String size) {
+        return rp.getOne(size);
+    }
+
+    @Override
+    public String delete(String ID) {
+        boolean xoa = rp.delete(ID);
+        if (xoa) {
+            return "Sửa thành công!";
+        } else {
+            return "Sửa thất bại!";
+        }
     }
 
 }

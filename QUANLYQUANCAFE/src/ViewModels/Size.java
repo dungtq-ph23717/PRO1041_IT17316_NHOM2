@@ -38,4 +38,7 @@ public class Size {
         return "SizeModel{" + "id=" + id + ", size=" + size + '}';
     }
 
+    public Object[] toRowDataSize() {
+        return new Object[]{id, size};
+    }
 }

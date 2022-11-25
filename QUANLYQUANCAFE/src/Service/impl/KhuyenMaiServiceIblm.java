@@ -30,13 +30,13 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     @Override
     public String add(KhuyenMaiModel km) {
         if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || km.getMucGiam().isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
-            return "Khong dc de trong !";
+            return "Không được để trống !";
         }
         boolean add = resKM.add(km);
         if (add) {
-            return "Succesfully!";
+            return "Thêm thành công!";
         } else {
-            return "Failed!";
+            return "Thêm thất bại!";
         }
     }
 
@@ -44,9 +44,9 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     public String update(KhuyenMaiModel km, String IDKM) {
         boolean update = resKM.update(km, IDKM);
         if (update) {
-            return "Succesfully!";
+            return "Sửa thành công!";
         } else {
-            return "Failed!";
+            return "Sửa thất bại!";
         }
     }
 

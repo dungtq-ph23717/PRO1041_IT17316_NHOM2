@@ -4,6 +4,7 @@
  */
 package Service;
 
+import DomainModels.DanhMucModel;
 import ViewModels.DanhMuc;
 import java.util.List;
 
@@ -17,4 +18,9 @@ public interface DanhMucService {
 
     DanhMuc getOne(String ma);
 
+    String add(DanhMucModel dm);
+
+    String update(DanhMucModel dm, String ID);
+    
+    String delete(String ID);
 }
