@@ -43,7 +43,6 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-
         String[] headers = {"Mã", "Tên", "Mô tả", "Loại bàn", "Khu vực"};
         jTable1.setModel(dtm);
         dtm.setColumnIdentifiers(headers);

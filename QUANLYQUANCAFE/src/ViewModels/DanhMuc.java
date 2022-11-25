@@ -46,4 +46,7 @@ public class DanhMuc {
         return "DanhMuc{" + "id=" + id + ", tenDanhMuc=" + tenDanhMuc + '}';
     }
 
+    public Object[] toRowDataDM() {
+        return new Object[]{id, tenDanhMuc};
+    }
 }

@@ -11,15 +11,13 @@ package DomainModels;
 public class DanhMucModel {
 
     private String id;
-    private String maDM;
     private String tenDM;
 
     public DanhMucModel() {
     }
 
-    public DanhMucModel(String id, String maDM, String tenDM) {
+    public DanhMucModel(String id, String tenDM) {
         this.id = id;
-        this.maDM = maDM;
         this.tenDM = tenDM;
     }
 
@@ -33,14 +31,6 @@ public class DanhMucModel {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getMaDM() {
-        return maDM;
-    }
-
-    public void setMaDM(String maDM) {
-        this.maDM = maDM;
     }
 
     public String getTenDM() {

@@ -4,6 +4,7 @@
  */
 package Service;
 
+import DomainModels.SizeModel;
 import ViewModels.Size;
 import java.util.List;
 
@@ -14,4 +15,12 @@ import java.util.List;
 public interface SizeService {
 
     List<Size> getAll();
+
+    Size getOne(String size);
+
+    String add(SizeModel s);
+
+    String update(SizeModel s, String ID);
+
+    String delete(String ID);
 }

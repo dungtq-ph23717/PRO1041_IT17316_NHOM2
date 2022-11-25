@@ -1,5 +1,6 @@
 package Repository;
 
+import DomainModels.SizeModel;
 import Utilities.DBContext;
 import ViewModels.Size;
 import java.sql.Connection;
@@ -28,7 +29,7 @@ public class SizeRepostory {
         return null;
     }
 
-    public boolean add(Size s) {
+    public boolean add(SizeModel s) {
         String query = "INSERT INTO [dbo].[Size]\n"
                 + "          ([Size])\n"
                 + "     VALUES\n"
@@ -46,8 +47,8 @@ public class SizeRepostory {
     public Size getOne(String size) {
         String query = "SELECT [ID]\n"
                 + "      ,[Size]\n"
-                + "  FROM [dbo].[Size]"
-                + "WHERE LIKE ?";
+                + "  FROM [dbo].[Size]\n"
+                + "  WHERE Size = ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, size);
             ResultSet rs = ps.executeQuery();
@@ -60,7 +61,7 @@ public class SizeRepostory {
         return null;
     }
 
-    public boolean update(Size s, String ID) {
+    public boolean update(SizeModel s, String ID) {
         String query = "UPDATE [dbo].[Size]\n"
                 + "   SET [Size] = ?\n"
                 + " WHERE ID = ?";
@@ -75,11 +76,25 @@ public class SizeRepostory {
         return check > 0;
     }
 
+    public boolean delete(String ID) {
+        String query = "DELETE FROM [dbo].[Size]\n"
+                + "      WHERE ID = ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ID);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public static void main(String[] args) {
-        Size s = new SizeRepostory().getOne("L");
-//        for (Size x : list) {
+//        List<Size> show = new Repository.SizeRepostory().getAll();
+//        for (Size x : show) {
 //            System.out.println(x);
 //        }
+        Size s = new SizeRepostory().getOne("L");
         System.out.println(s);
     }
 }

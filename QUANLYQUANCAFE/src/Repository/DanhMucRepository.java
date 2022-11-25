@@ -4,6 +4,7 @@
  */
 package Repository;
 
+import DomainModels.DanhMucModel;
 import Utilities.DBContext;
 import ViewModels.DanhMuc;
 import java.util.List;
@@ -36,14 +37,14 @@ public class DanhMucRepository {
         return null;
     }
 
-    public boolean add(DanhMuc dm) {
+    public boolean add(DanhMucModel dm) {
         String query = "INSERT INTO [dbo].[DanhMuc]\n"
                 + "           ([TenDM])\n"
                 + "     VALUES\n"
                 + "           (?)";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, dm.getTenDanhMuc());
+            ps.setObject(1, dm.getTenDM());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -51,13 +52,13 @@ public class DanhMucRepository {
         return check > 0;
     }
 
-    public boolean update(DanhMuc dm, String id) {
+    public boolean update(DanhMucModel dm, String id) {
         String query = "UPDATE [dbo].[DanhMuc]\n"
                 + "   SET [TenDM] = ?\n"
                 + " WHERE ID = ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, dm.getTenDanhMuc());
+            ps.setObject(1, dm.getTenDM());
             ps.setString(2, id);
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -81,6 +82,19 @@ public class DanhMucRepository {
             e.printStackTrace(System.out);
         }
         return null;
+    }
+
+    public boolean delete(String ID) {
+        String query = "DELETE FROM [dbo].[DanhMuc]\n"
+                + "      WHERE ID =?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ID);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
     }
 
     public static void main(String[] args) {
