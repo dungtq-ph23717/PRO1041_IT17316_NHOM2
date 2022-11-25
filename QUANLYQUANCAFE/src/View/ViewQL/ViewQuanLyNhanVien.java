@@ -58,7 +58,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         list = nhanVienService.getAll();
         showDATAnv(list);
         showCombOBOX(litscv);
-        LocCHUCVU(list);
+//        LocCHUCVU(litscv);
     }
 
 
@@ -71,11 +71,11 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         }
    
     }
-    private void LocCHUCVU(List<NhanVienViewModel> lits){
-        list=nhanVienService.getAll();
+    private void LocCHUCVU(List<ChucVu> lits){
+        
         modelGT= (DefaultComboBoxModel) cbblocCV.getModel();
-        for (NhanVienViewModel nv : lits) {
-            modelGT.addElement(nv.getTenCV());
+        for (ChucVu chucVu: lits) {
+            modelGT.addElement(chucVu.getTenCV());
             
         }
     }
