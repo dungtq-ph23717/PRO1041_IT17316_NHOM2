@@ -69,4 +69,12 @@ public class NhanVienServiceImpl implements NhanVienService {
            return "DELETE THẤT BẠI";
        }
     }
+
+    @Override
+    public List<NhanVienViewModel> locChucVu(String ten) {
+       List<NhanVienViewModel> listchucvu=nhanVienRepository.locCHucvu(ten);
+       return listchucvu;
+    }
+
+    
 }

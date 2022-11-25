@@ -37,7 +37,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
     private DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
     private DefaultTableModel dtm = new DefaultTableModel();
     private NhanVienService nhanVienService = new NhanVienServiceImpl();
-    private DefaultTableModel dtmNVNGHI = new DefaultTableModel();
+    private DefaultComboBoxModel modelGT=new DefaultComboBoxModel();
     private ChucVuService chucVuService = new ChucVuServiceImpl();
 
 //
@@ -58,6 +58,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         list = nhanVienService.getAll();
         showDATAnv(list);
         showCombOBOX(litscv);
+        LocCHUCVU(list);
     }
 
 
@@ -68,9 +69,15 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
             dtm.addRow(nv.toRowData());
 
         }
-    
-
    
+    }
+    private void LocCHUCVU(List<NhanVienViewModel> lits){
+        list=nhanVienService.getAll();
+        modelGT= (DefaultComboBoxModel) cbblocCV.getModel();
+        for (NhanVienViewModel nv : lits) {
+            modelGT.addElement(nv.getTenCV());
+            
+        }
     }
 
     private NhanVienModel getdata() {
@@ -111,6 +118,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
 
         }
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -188,10 +196,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        cbbGioiTinh = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        cbbTrangThai = new javax.swing.JComboBox<>();
-        jLabel11 = new javax.swing.JLabel();
+        cbblocCV = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         txtTimKIEM = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
@@ -461,30 +467,26 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("LỌC"));
 
-        jLabel10.setText("TRẠNG THÁI");
+        jLabel10.setText("LỌC THEO CHỨC VỤ");
 
-        jLabel11.setText("GIỚI TÍNH");
+        cbblocCV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbblocCVActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel9)
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)))
-                .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel10)
-                .addGap(36, 36, 36)
-                .addComponent(cbbTrangThai, 0, 179, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(23, 23, 23)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(cbblocCV, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -492,10 +494,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                    .addComponent(cbblocCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -513,7 +513,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(txtTimKIEM, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(txtTimKIEM, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -557,7 +557,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         setJMenuBar(jMenuBar1);
@@ -567,20 +567,18 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(34, 34, 34)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55))))
+                        .addGap(55, 55, 55))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(34, 34, 34))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -679,6 +677,12 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_tableNhanVienMouseClicked
 
+    private void cbblocCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbblocCVActionPerformed
+        List<NhanVienViewModel> listloc=nhanVienService.locChucVu((String) cbblocCV.getSelectedItem());
+        showDATAnv(listloc);
+                
+    }//GEN-LAST:event_cbblocCVActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btADD;
@@ -691,11 +695,9 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbbChucVu;
-    private javax.swing.JComboBox<String> cbbGioiTinh;
-    private javax.swing.JComboBox<String> cbbTrangThai;
+    private javax.swing.JComboBox<String> cbblocCV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -18,6 +18,8 @@ public interface NhanVienService {
     String deleteTT(String id);
     String update(NhanVienModel nhanVien,String id);
     List<NhanVienViewModel> getTimkiem(String ma);
+    List<NhanVienViewModel> locChucVu(String ten);
+    
   
     
 }

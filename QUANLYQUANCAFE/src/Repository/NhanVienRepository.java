@@ -140,4 +140,28 @@ public class NhanVienRepository {
 
     }
 
+    public List<NhanVienViewModel> locCHucvu(String ten) {
+        String sql = "SELECT dbo.NhanVien.ID, dbo.NhanVien.MaNV, dbo.NhanVien.TenNV, dbo.NhanVien.NgaySinh, dbo.NhanVien.SDT, dbo.ChucVu.TenCV, dbo.NhanVien.TrangThai, dbo.NhanVien.GioiTinh, dbo.NhanVien.Diachi\n"
+                + "FROM   dbo.NhanVien INNER JOIN\n"
+                + "             dbo.ChucVu ON dbo.NhanVien.IDCV = dbo.ChucVu.ID\n"
+                + "			 where ChucVu.TenCV='?'";
+        try (Connection con = DBContext.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setObject(1, ten);
+            ResultSet rs = ps.executeQuery();
+
+            List<NhanVienViewModel> LIST = new ArrayList<>();
+            while (rs.next()) {
+                NhanVienViewModel nvvm = new NhanVienViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getBoolean(8), rs.getString(9));
+                LIST.add(nvvm);
+
+            }
+            return LIST;
+
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
 }
