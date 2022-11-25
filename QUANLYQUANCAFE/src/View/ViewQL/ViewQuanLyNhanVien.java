@@ -37,6 +37,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
     private NhanVienService nhanVienService = new NhanVienServiceImpl();
     private List<ChucVu> listcv = new ArrayList<>();
     private ChucVuService chucVuService = new ChucVuServiceImpl();
+    private DefaultComboBoxModel modelGT= new DefaultComboBoxModel();
 
     /**
      * Creates new form ViewNhanVien
@@ -49,65 +50,77 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         uI.setNorthPane(null);
 
         txtID.disable();
-        txtIDCV.disable();
         tableNhanVien.setModel(dtm);
-        String[] header = {"ID", "MÃ NV", "TÊN NV", "NGÀY SINH", "SĐT", "TÊN CV"};
+        String[] header = {"ID", "MÃ NV", "TÊN NV", "NGÀY SINH", "SĐT", "CHỨC VỤ", "Trạng thái", "GIỚI TÍNH", "ĐỊA CHỈ"};
         dtm.setColumnIdentifiers(header);
-        tableChucVu.setModel(dtmcv);
-        String[] headercv = {"ID", "MÃ CV", "TÊN CV"};
-        dtmcv.setColumnIdentifiers(headercv);
+       listcv=chucVuService.getAll();
         list = nhanVienService.getAll();
-        listcv = chucVuService.getAll();
         showDATAnv(list);
         showCombOBOX(listcv);
-        showdatacv(listcv);
+        
     }
-
-    private void showDATAnv(List<NhanVienViewModel> lits) {
+     private void showDATAnv(List<NhanVienViewModel> lits) {
+            
         dtm.setRowCount(0);
         for (NhanVienViewModel nv : lits) {
             dtm.addRow(nv.toRowData());
 
         }
+   
     }
-
-    private void showCombOBOX(List<ChucVu> listcv) {
-        comboBoxModel = (DefaultComboBoxModel) cbbChucVu.getModel();
-        for (ChucVu chucVu : listcv) {
-            comboBoxModel.addElement(chucVu.getTenCV());
-
+    private void LocCHUCVU(List<ChucVu> lits){
+        
+        modelGT= (DefaultComboBoxModel) cbbLocCHUCvu.getModel();
+        for (ChucVu chucVu: lits) {
+            modelGT.addElement(chucVu.getTenCV());
+            
         }
     }
 
     private NhanVienModel getdata() {
         NhanVienModel nhanVien = new NhanVienModel();
-        nhanVien.setMaNV(txtManv.getText());
-        nhanVien.setTenNV(txtTenNv.getText());
+        nhanVien.setMaNV(txtMaNV.getText());
+        nhanVien.setTenNV(txtTENNV.getText());
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(txtNgaySinh.getDate());
         nhanVien.setNgaySinh(date);
-        int indextencv = cbbChucVu.getSelectedIndex();
-        nhanVien.setSDT(txtSDT.getText());
+        nhanVien.setSDT(txtSĐT.getText());
+        int indextencv = CBBchucVu.getSelectedIndex();
         ChucVu chucVu = listcv.get(indextencv);
         nhanVien.setIdCV(chucVu.getID());
+        if (rdoDANGLAM.isSelected()) {
+            nhanVien.setTrangThai(true);
+        } else {
+            nhanVien.setTrangThai(false);
+        }
+
+        if (RDONam.isSelected()) {
+            nhanVien.setGioiTinh(true);
+        } else {
+            nhanVien.setGioiTinh(false);
+        }
+
+        nhanVien.setDiaChi(txtDiachi.getText());
+
         return nhanVien;
 
     }
 
-    private void showdatacv(List<ChucVu> lits) {
-        dtmcv.setRowCount(0);
-        for (ChucVu cv : lits) {
-            dtmcv.addRow(cv.toRowData());
+    private void showCombOBOX(List<ChucVu> listcv) {
+        listcv=chucVuService.getAll();
+        comboBoxModel = (DefaultComboBoxModel) CBBchucVu.getModel();
+        for (ChucVu chucVu : listcv) {
+            comboBoxModel.addElement(chucVu.getTenCV());
 
         }
     }
+   
+    
+   
 
-    private DomainModels.ChucVu getdatacv() {
-        DomainModels.ChucVu chucVu = new DomainModels.ChucVu();
-        chucVu.setMacv(txtMacv.getText());
-        chucVu.setTenCV(txtTenCV.getText());
-        return chucVu;
-    }
+  
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -175,7 +188,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         rdoDANGLAM = new javax.swing.JRadioButton();
         RDODaNghiViec = new javax.swing.JRadioButton();
         jLabel16 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtNgaySinh = new com.toedter.calendar.JDateChooser();
         BTADD = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -185,12 +198,12 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbbLocCHUCvu = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jTextField6 = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableNhanVien = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -357,7 +370,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                                     .addComponent(RDONam, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtSĐT, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rdoDANGLAM)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(26, 26, 26))
                             .addGroup(txtNgAYSINHLayout.createSequentialGroup()
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -394,12 +407,13 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                     .addComponent(rdoDANGLAM)
                     .addComponent(RDODaNghiViec))
                 .addGap(22, 22, 22)
-                .addGroup(txtNgAYSINHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(CBBchucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(jButton5)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(txtNgAYSINHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(txtNgAYSINHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(CBBchucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel16)
+                        .addComponent(jButton5)))
                 .addGap(23, 23, 23)
                 .addGroup(txtNgAYSINHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -426,7 +440,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbbLocCHUCvu, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -435,7 +449,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbLocCHUCvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -479,7 +493,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("THÔNG TIN NHÂN VIÊN"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -490,7 +504,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableNhanVien);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -556,17 +570,12 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton RDODaNghiViec;
     private javax.swing.JRadioButton RDONam;
     private javax.swing.JRadioButton RDONu;
-    private javax.swing.JButton btADD;
-    private javax.swing.JLabel btSua;
-    private javax.swing.JComboBox<String> cbbChucVu;
+    private javax.swing.JComboBox<String> cbbLocCHUCvu;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -575,13 +584,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
@@ -619,7 +622,6 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JMenuBar jMenuBar9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -627,23 +629,15 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JRadioButton rdoDANGLAM;
-    private javax.swing.JRadioButton rdoDaNghiviec;
-    private javax.swing.JRadioButton rdoDangLamViec;
-    private javax.swing.JRadioButton rdoNam;
-    private javax.swing.JRadioButton rdoNu;
-    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTable tableNhanVien;
     private javax.swing.JTextField txtDiachi;
     private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtMANV;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JPanel txtNgAYSINH;
     private com.toedter.calendar.JDateChooser txtNgaySinh;
-    private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtSĐT;
     private javax.swing.JTextField txtTENNV;
-    private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
 }
