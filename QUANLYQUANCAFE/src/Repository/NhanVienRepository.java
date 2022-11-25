@@ -144,7 +144,7 @@ public class NhanVienRepository {
         String sql = "SELECT dbo.NhanVien.ID, dbo.NhanVien.MaNV, dbo.NhanVien.TenNV, dbo.NhanVien.NgaySinh, dbo.NhanVien.SDT, dbo.ChucVu.TenCV, dbo.NhanVien.TrangThai, dbo.NhanVien.GioiTinh, dbo.NhanVien.Diachi\n"
                 + "FROM   dbo.NhanVien INNER JOIN\n"
                 + "             dbo.ChucVu ON dbo.NhanVien.IDCV = dbo.ChucVu.ID\n"
-                + "			 where ChucVu.TenCV='?'";
+                + "			 where ChucVu.TenCV = ?";
         try (Connection con = DBContext.getConnection();
                 PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setObject(1, ten);

@@ -58,7 +58,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         list = nhanVienService.getAll();
         showDATAnv(list);
         showCombOBOX(litscv);
-//        LocCHUCVU(litscv);
+        LocCHUCVU(litscv);
     }
 
 
