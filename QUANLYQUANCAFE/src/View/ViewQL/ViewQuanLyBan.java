@@ -435,6 +435,15 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbbKhuVuc1ActionPerformed
 
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
+        cbbKhuVuc.setModel(boxModel1);
+        for (KhuVuc x : listKV) {
+            boxModel1.removeAllElements();
+        }
+        for (KhuVuc x : listKV) {
+            boxModel1.addElement(x.getTenKV());
+        }
+        listBan = impl.getAll();
+        showData(listBan);
         listKV = impl1.getAll();
     }//GEN-LAST:event_btResetActionPerformed
 

@@ -189,8 +189,12 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             bangSP.getColumnModel().getColumn(0).setMaxWidth(50);
         }
 
-        cbSelectAll.setSelected(true);
         cbSelectAll.setText("Select All");
+        cbSelectAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSelectAllActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -623,6 +627,18 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_bltAddSPActionPerformed
+
+    private void cbSelectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelectAllActionPerformed
+        if (cbSelectAll.isSelected() == true) {
+            for (int i = 0; i < bangSP.getRowCount(); i++) {
+                bangSP.setValueAt(true, i, 0);
+            }
+        }else{
+            for (int i = 0; i < bangSP.getRowCount(); i++) {
+                bangSP.setValueAt(false, i, 0);
+            }
+        }
+    }//GEN-LAST:event_cbSelectAllActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
