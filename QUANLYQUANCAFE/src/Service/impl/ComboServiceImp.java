@@ -10,17 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import DomainModels.ComboModel;
 import Repository.ComboRepository;
-/**
- *
- * @author Lee Tuan
- */
-public class ComboServiceImp implements ComboService{
-    
-        private ComboRepository _ComboRepository=new ComboRepository();
-        
-        
-           @Override
-    public List<ComboModel> get_all() {
+
+
+
+public class ComboServiceImp implements ComboService {
+
+    private ComboRepository _ComboRepository = new ComboRepository();
+
+    @Override
+    public List<ComboReponse> get_all() {
+
         return _ComboRepository.get_all();
     }
 
@@ -28,30 +27,25 @@ public class ComboServiceImp implements ComboService{
     public String add(ComboModel a) {
         if (_ComboRepository.add_cb(a)) {
             return "Thêm thành công";
-        }return "Thêm thất bại";
+        }
+        return "Thêm thất bại";
     }
 
     @Override
-    public String update(ComboModel a,String id) {
-        if(a.getMaCB().isEmpty()||a.getTenCB().isEmpty()){
-            return "DỮ LIỆU CÒN TRỐNG";
-            
-        }else{
-            boolean UPDATE=_ComboRepository.update_cb(a, id);
-            if(UPDATE){
-                return "update thành công";
-            }else{
-                return "update thất bại";
-            }
+
+    public String update(ComboModel a) {
+        if (_ComboRepository.update_cb(a)) {
+            return "Sửa thành công";
         }
-    
-     
+        return "Sửa thất bại";
+
     }
     @Override
     public String delete(ComboModel a) {
-         if (_ComboRepository.delete_cb(a)) {
+        if (_ComboRepository.delete_cb(a)) {
             return "Xóa thành công";
-        }return "Xóa thất bại";
+        }
+        return "Xóa thất bại";
     }
 
 //    @Override

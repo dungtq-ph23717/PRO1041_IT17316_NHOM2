@@ -18,6 +18,7 @@ public class HoaDon {
     private String MAKM;
     private String MANV;
     private String MABan;
+    private NhanVienViewModel tenNV;
 
     public HoaDon() {
     }
@@ -31,6 +32,12 @@ public class HoaDon {
         this.MAKM = MAKM;
         this.MANV = MANV;
         this.MABan = MABan;
+    }
+
+    public HoaDon(String maHD, String ngayLapHD, NhanVienViewModel tenNV) {
+        this.maHD = maHD;
+        this.ngayLapHD = ngayLapHD;
+        this.tenNV = tenNV;
     }
 
     public String getID() {
@@ -97,7 +104,10 @@ public class HoaDon {
         this.MABan = MABan;
     }
 
-  
+    @Override
+    public String toString() {
+        return "HoaDon{" + "maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", tenNV=" + tenNV + '}';
+    }
 
     public Object[] toRowData() {
         return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, MAKM, MANV, MABan};

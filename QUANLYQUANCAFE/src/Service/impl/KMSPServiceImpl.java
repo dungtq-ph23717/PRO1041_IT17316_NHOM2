@@ -20,9 +20,9 @@ public class KMSPServiceImpl implements SPKMService {
     public String add(SP_KM sp) {
         boolean add = rp.add(sp);
         if (add) {
-            return "Add thành công";
+            return "Áp dụng mã giảm giá cho sản phẩm thành công!";
         } else {
-            return "Add thất bại";
+            return "Áp dụng mã giảm giá cho sản phẩm thất bại!";
         }
     }
 

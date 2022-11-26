@@ -20,6 +20,12 @@ public class SanPham {
     private String trangThai;
     private Size size;
 
+    public SanPham(String maSP, String tenSP, double giaBan) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.giaBan = giaBan;
+    }
+
     public SanPham() {
     }
 

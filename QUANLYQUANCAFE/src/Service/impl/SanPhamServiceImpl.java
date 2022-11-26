@@ -29,6 +29,13 @@ public class SanPhamServiceImpl implements SanPhamService {
         if (sp.getMaSP().isEmpty() || sp.getTenSP().isEmpty() || sp.getMoTa().isEmpty() || String.valueOf(sp.getGiaBan()).isEmpty()) {
             return "Không được để trống";
         }
+        if (sp.getTenSP().matches("[a-z A-Z]+") == false) {
+            return "Tên phải là chữ";
+        }
+        SanPhamModel ma = rps.checkTrung(sp.getMaSP());
+        if (ma != null) {
+            return "Mã SP đã tồn tại!";
+        }
         boolean add = rps.add(sp);
         if (add) {
             return "Đã thêm thành công";
@@ -49,6 +56,12 @@ public class SanPhamServiceImpl implements SanPhamService {
 
     @Override
     public String update(SanPhamModel sp, String ma) {
+        if (sp.getMaSP().isEmpty() || sp.getTenSP().isEmpty() || sp.getMoTa().isEmpty() || String.valueOf(sp.getGiaBan()).isEmpty()) {
+            return "Không được để trống";
+        }
+        if (sp.getTenSP().matches("[a-z A-Z]+") == false) {
+            return "Tên phải là chữ";
+        }
         boolean add = rps.update(sp, ma);
         if (add) {
             return "Đã sửa thành công";
@@ -85,6 +98,11 @@ public class SanPhamServiceImpl implements SanPhamService {
     @Override
     public SanPham getOne(String ma) {
         return rps.getOne(ma);
+    }
+
+    @Override
+    public List<SanPham> getAllTT() {
+        return rps.getAllTT();
     }
 
 }

@@ -613,7 +613,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 818, 727);
+        setBounds(0, 0, 1133, 772);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableNhanVienMouseClicked
