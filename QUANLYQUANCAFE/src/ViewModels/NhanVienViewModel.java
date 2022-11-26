@@ -9,17 +9,22 @@ package ViewModels;
  * @author hdo48
  */
 public class NhanVienViewModel {
-      private String id;
+
+    private String id;
     private String maNV;
     private String tenNV;
     private String ngaySinh;
     private String SDT;
     private String tenCV;
-     private boolean trangThai;
+    private boolean trangThai;
     private boolean GioiTinh;
     private String diaChi;
 
     public NhanVienViewModel() {
+    }
+
+    public NhanVienViewModel(String tenNV) {
+        this.tenNV = tenNV;
     }
 
     public NhanVienViewModel(String id, String maNV, String tenNV, String ngaySinh, String SDT, String tenCV, boolean trangThai, boolean GioiTinh, String diaChi) {
@@ -33,7 +38,6 @@ public class NhanVienViewModel {
         this.GioiTinh = GioiTinh;
         this.diaChi = diaChi;
     }
-    
 
     public String getTenCV() {
         return tenCV;
@@ -66,8 +70,6 @@ public class NhanVienViewModel {
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
     }
-
-   
 
     public String getId() {
         return id;
@@ -114,10 +116,7 @@ public class NhanVienViewModel {
         return "NhanVienViewModel{" + "id=" + id + ", maNV=" + maNV + ", tenNV=" + tenNV + ", ngaySinh=" + ngaySinh + ", SDT=" + SDT + ", tenCV=" + tenCV + ", trangThai=" + trangThai + ", GioiTinh=" + GioiTinh + ", diaChi=" + diaChi + '}';
     }
 
-   
-
-    
-    public Object[] toRowData(){
-        return new Object[]{id,maNV,tenNV,ngaySinh,SDT,tenCV,trangThai==true?"ĐANG LÀM VIỆC":"ĐÃ NGHỈ",GioiTinh==true?"NAM":"NỮ",diaChi};
+    public Object[] toRowData() {
+        return new Object[]{id, maNV, tenNV, ngaySinh, SDT, tenCV, trangThai == true ? "ĐANG LÀM VIỆC" : "ĐÃ NGHỈ", GioiTinh == true ? "NAM" : "NỮ", diaChi};
     }
 }
