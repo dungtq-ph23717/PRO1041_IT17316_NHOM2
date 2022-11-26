@@ -18,10 +18,11 @@ public interface ServiceHoaDon {
     
     List<ViewModels.HoaDon> getAllTT();
 
-    String add(HoaDonModel hd, HoaDonChiTietModel hdct);
-
-    String update(HoaDonModel hd, HoaDonChiTietModel hdct, String maHD);
+//    String add(HoaDonModel hd, HoaDonChiTietModel hdct);
+//
+//    String update(HoaDonModel hd, HoaDonChiTietModel hdct, String maHD);
 
     String delete(String maHD);
+   
 
 }

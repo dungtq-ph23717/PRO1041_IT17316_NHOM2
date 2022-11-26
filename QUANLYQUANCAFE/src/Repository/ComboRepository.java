@@ -6,6 +6,7 @@ package Repository;
 
 //import repositores.DBContext;
 import DomainModels.ComboModel;
+import DomainModels.SanPhamModel;
 import Utilities.DBContext;
 import ViewModels.ComboReponse;
 import java.sql.*;
@@ -43,7 +44,7 @@ public class ComboRepository {
                 + " WHERE ID=?";
         int check = 0;
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            
+
             ps.setObject(1, cb.getMaCB());
             ps.setObject(2, cb.getTenCB());
             ps.setObject(3, cb.getGiaBan());
@@ -88,7 +89,22 @@ public class ComboRepository {
         return lst_cb;
     }
 
+    public ComboModel checkTrung(String macb) {
+        String query = "select MaCB  from Combo where MaCB=?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, macb);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ComboModel cb = new ComboModel(rs.getString(1));
+                return cb;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
-        System.out.println(new ComboRepository().update_cb(new ComboModel("EAE68394-711E-4CB0-A515-79E79DF4A019", "cb1", "cà phê+khô gà", 10000),"EAE68394-711E-4CB0-A515-79E79DF4A019" ));
+        System.out.println(new ComboRepository().update_cb(new ComboModel("EAE68394-711E-4CB0-A515-79E79DF4A019", "cb1", "cà phê+khô gà", 10000), "EAE68394-711E-4CB0-A515-79E79DF4A019"));
     }
 }
