@@ -688,8 +688,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         txtTENNV.setText("");
         txtDiachi.setText("");
         txtSĐT.setText("");
-        buttonGroup1.clearSelection();
-        buttonGroup2.clearSelection();
+        RDONam.setSelected(true);
+        rdoDANGLAM.setSelected(true);
         CBBchucVu.setSelectedIndex(0);
     }//GEN-LAST:event_BTCLEARActionPerformed
 

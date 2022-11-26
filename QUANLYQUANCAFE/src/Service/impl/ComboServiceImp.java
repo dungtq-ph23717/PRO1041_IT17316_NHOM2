@@ -20,7 +20,7 @@ public class ComboServiceImp implements ComboService{
         
         
            @Override
-    public List<ComboReponse> get_all() {
+    public List<ComboModel> get_all() {
         return _ComboRepository.get_all();
     }
 
@@ -45,13 +45,13 @@ public class ComboServiceImp implements ComboService{
         }return "Xóa thất bại";
     }
 
-    @Override
-    public ComboReponse getById(String id) {
-        for (ComboReponse o : _ComboRepository.get_all()) {
-            if (o.getId().equals(id)) {
-                return o;
-            }
-        }
-        return null;
-    }
+//    @Override
+//    public ComboReponse getById(String id) {
+//        for (ComboReponse o : _ComboRepository.get_all()) {
+//            if (o.getId().equals(id)) {
+//                return o;
+//            }
+//        }
+//        return null;
+//    }
 }

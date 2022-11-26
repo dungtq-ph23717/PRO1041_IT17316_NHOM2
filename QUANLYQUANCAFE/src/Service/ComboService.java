@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ComboService {
 
-    List<ComboReponse> get_all();
+    List<ComboModel> get_all();
 
     String add(ComboModel a);
 
@@ -22,5 +22,5 @@ public interface ComboService {
 
     String delete(ComboModel a);
 
-    ComboReponse getById(String id);
+//    ComboReponse getById(String id);
 }

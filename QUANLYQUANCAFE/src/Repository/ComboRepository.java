@@ -60,14 +60,14 @@ public class ComboRepository {
         }
     }
 
-    public List<ComboReponse> get_all() {
+    public List<ComboModel> get_all() {
         String sql = "SELECT * FROM Combo";
-        ArrayList<ComboReponse> lst_cb = new ArrayList<>();
+        ArrayList<ComboModel> lst_cb = new ArrayList<>();
         try ( Connection conn = DBContext.getConnection()) {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                lst_cb.add(new ComboReponse(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
+                lst_cb.add(new ComboModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
             }
             conn.close();
             st.close();
@@ -80,12 +80,6 @@ public class ComboRepository {
     }
 
     public static void main(String[] args) {
-        ComboRepository cbr = new ComboRepository();
-////        SanPham sp1=new SanPham("sp01", "laptop");
-//        spr.add_sp(sp1);
-//            System.out.println(sp1.toString());
-        for (var o : cbr.get_all()) {
-            System.out.println(o.toString());
-        }
+        System.out.println(new ComboRepository().get_all());
     }
 }
