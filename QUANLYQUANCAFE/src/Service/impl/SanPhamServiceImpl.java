@@ -100,4 +100,9 @@ public class SanPhamServiceImpl implements SanPhamService {
         return rps.getOne(ma);
     }
 
+    @Override
+    public List<SanPham> getAllTT() {
+        return rps.getAllTT();
+    }
+
 }

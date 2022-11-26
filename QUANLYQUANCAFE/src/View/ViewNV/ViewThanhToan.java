@@ -5,11 +5,9 @@
 package View.ViewNV;
 
 import Service.impl.BanServiceImpl;
-import Service.impl.GioHangServiceImpl;
 import Service.impl.HoaDonServiceIblm;
 import Service.impl.SanPhamServiceImpl;
 import ViewModels.Ban;
-import ViewModels.GioHang;
 import ViewModels.HoaDon;
 import ViewModels.SanPham;
 import java.util.ArrayList;
@@ -28,13 +26,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
     private DefaultTableModel dtmHoaDon = new DefaultTableModel();
     private List<Ban> listBan = new ArrayList<>();
-    private List<GioHang> listGioHang = new ArrayList<>();
     private List<HoaDon> listHoaDon = new ArrayList<>();
     private List<SanPham> listSanPham = new ArrayList<>();
     private BanServiceImpl implBan = new BanServiceImpl();
     private SanPhamServiceImpl implSP = new SanPhamServiceImpl();
     private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
-    private GioHangServiceImpl implGH = new GioHangServiceImpl();
 
     /**
      * Creates new form Menu1

@@ -15,6 +15,8 @@ import java.util.List;
 public interface ServiceHoaDon {
 
     List<ViewModels.HoaDon> getAll();
+    
+    List<ViewModels.HoaDon> getAllTT();
 
     String add(HoaDonModel hd, HoaDonChiTietModel hdct);
 
