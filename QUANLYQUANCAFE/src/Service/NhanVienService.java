@@ -23,5 +23,7 @@ public interface NhanVienService {
     String update(NhanVienModel nhanVien, String id);
 
     List<NhanVienViewModel> getTimkiem(String ma);
+    
+    List<NhanVienViewModel> locchucvu(String ten);
 
 }
