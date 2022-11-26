@@ -82,14 +82,14 @@ public class NhanVienRepository {
 
     public boolean update(NhanVienModel nhanVien, String id) {
         String query = "UPDATE [dbo].[NhanVien]\n"
-                + "   SET [MaNV] = \n"
-                + "      ,[TenNV] = \n"
-                + "      ,[NgaySinh] = \n"
-                + "      ,[SDT] = \n"
-                + "      ,[IDCV] =\n"
-                + "      ,[TrangThai] = \n"
-                + "      ,[GioiTinh] = \n"
-                + "      ,[Diachi] = \n"
+                + "   SET [MaNV] = ?\n"
+                + "      ,[TenNV] =?\n"
+                + "      ,[NgaySinh] =?\n"
+                + "      ,[SDT] = ?\n"
+                + "      ,[IDCV] = ?\n"
+                + "      ,[TrangThai] =? \n"
+                + "      ,[GioiTinh] =?\n"
+                + "      ,[Diachi] = ?\n"
                 + " WHERE ID=?";
         int check = 0;
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
@@ -161,7 +161,7 @@ public class NhanVienRepository {
     }
 
     public static void main(String[] args) {
-        System.out.println(new NhanVienRepository().timkiem("Manv3"));
+        System.out.println(new NhanVienRepository().update(new NhanVienModel("E79BE21E-2BCE-4D20-9C70-1882E94A3EE5", "manv6", "hu", "01-11-2003", "0345571727", "F7724F02-E050-487B-901C-678E11B29A64", true, true, "ha noi"), "E79BE21E-2BCE-4D20-9C70-1882E94A3EE5"));
     }
 
 }
