@@ -18,7 +18,7 @@ public interface ComboService {
 
     String add(ComboModel a);
 
-    String update(ComboModel a);
+    String update(ComboModel a,String id);
 
     String delete(ComboModel a);
 

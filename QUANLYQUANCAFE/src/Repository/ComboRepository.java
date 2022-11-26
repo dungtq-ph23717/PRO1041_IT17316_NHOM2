@@ -19,7 +19,7 @@ import java.util.List;
 public class ComboRepository {
 
     public boolean add_cb(ComboModel cb) {
-        try ( Connection conn = DBContext.getConnection()) {
+        try (Connection conn = DBContext.getConnection()) {
             String sql = "insert into Combo(MaCB,TenCB,GiaBan)values(?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, cb.getMaCB());
@@ -34,21 +34,30 @@ public class ComboRepository {
         }
     }
 
-    public boolean update_cb(ComboModel cb) {
-        try ( Connection conn = DBContext.getConnection()) {
-            Statement st = conn.createStatement();
-            String sql = "UPDATE Combo SET MACB = '" + cb.getMaCB() + "',TenCB = '" + cb.getTenCB() + "',GiaBan = '" + cb.getGiaBan() + "' WHERE ID = '" + cb.getId() + "'";
-            st.execute(sql);
-            return true;
+    public boolean update_cb(ComboModel cb, String id) {
+
+        String sql = "UPDATE [dbo].[Combo]\n"
+                + "   SET [MaCB] = ?\n"
+                + "      ,[TenCB] = ?\n"
+                + "      ,[GiaBan] = ?\n"
+                + " WHERE ID=?";
+        int check = 0;
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setObject(1, cb.getMaCB());
+            ps.setObject(2, cb.getTenCB());
+            ps.setObject(3, cb.getGiaBan());
+            ps.setObject(4, id);
+            check = ps.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Error update");
-            e.printStackTrace();
-            return false;
+            e.printStackTrace(System.out);
         }
+        return check > 0;
+
     }
 
     public boolean delete_cb(ComboModel obj) {
-        try ( Connection conn = DBContext.getConnection()) {
+        try (Connection conn = DBContext.getConnection()) {
             Statement st = conn.createStatement();
             String DELETE_COMBO = "DELETE FROM COMBO WHERE ID = '" + obj.getId() + "'";
             System.out.println(DELETE_COMBO);
@@ -63,7 +72,7 @@ public class ComboRepository {
     public List<ComboModel> get_all() {
         String sql = "SELECT * FROM Combo";
         ArrayList<ComboModel> lst_cb = new ArrayList<>();
-        try ( Connection conn = DBContext.getConnection()) {
+        try (Connection conn = DBContext.getConnection()) {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
@@ -80,6 +89,6 @@ public class ComboRepository {
     }
 
     public static void main(String[] args) {
-        System.out.println(new ComboRepository().get_all());
+        System.out.println(new ComboRepository().update_cb(new ComboModel("EAE68394-711E-4CB0-A515-79E79DF4A019", "cb1", "cà phê+khô gà", 10000),"EAE68394-711E-4CB0-A515-79E79DF4A019" ));
     }
 }

@@ -32,12 +32,21 @@ public class ComboServiceImp implements ComboService{
     }
 
     @Override
-    public String update(ComboModel a) {
-       if (_ComboRepository.update_cb(a)) {
-            return "Sửa thành công";
-        }return "Sửa thất bại";
+    public String update(ComboModel a,String id) {
+        if(a.getMaCB().isEmpty()||a.getTenCB().isEmpty()){
+            return "DỮ LIỆU CÒN TRỐNG";
+            
+        }else{
+            boolean UPDATE=_ComboRepository.update_cb(a, id);
+            if(UPDATE){
+                return "update thành công";
+            }else{
+                return "update thất bại";
+            }
+        }
+    
+     
     }
-
     @Override
     public String delete(ComboModel a) {
          if (_ComboRepository.delete_cb(a)) {

@@ -6,9 +6,13 @@ package View.ViewQL;
 
 import DomainModels.ComboModel;
 import Service.ComboService;
+import Service.SanPhamService;
 import Service.impl.ComboServiceImp;
+import Service.impl.SanPhamServiceImpl;
+import ViewModels.SanPham;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,10 +20,13 @@ import javax.swing.table.DefaultTableModel;
  * @author hdo48
  */
 public class ViewComBoBox extends javax.swing.JDialog {
-private List<ComboModel> lists= new ArrayList<>();
-private DefaultTableModel dtm= new DefaultTableModel();
-private DefaultTableModel dtmsp= new DefaultTableModel();
-private ComboService comboService= new ComboServiceImp();
+    private List<SanPham> listSp=new ArrayList<>();
+    private SanPhamService sanPhamService= new SanPhamServiceImpl();
+    private List<ComboModel> lists = new ArrayList<>();
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private DefaultTableModel dtmsp = new DefaultTableModel();
+    private ComboService comboService = new ComboServiceImp();
+
     /**
      * Creates new form ViewComBoBox
      */
@@ -30,20 +37,31 @@ private ComboService comboService= new ComboServiceImp();
         txtID.disable();
         tableSP.setModel(dtmsp);
         tableCOMBO.setModel(dtm);
-        String[] headerSP={"ID","MÃ SP","TÊN SẢN PHẨM"};
+        String[] headerSP = {"Select", "MÃ SP", "TÊN SẢN PHẨM"};
         dtmsp.setColumnIdentifiers(headerSP);
-        String []header ={"ID","MÃ COMBO","TÊN COMBO","GIÁ BÁN"};
+        String[] header = {"ID", "MÃ COMBO", "TÊN COMBO", "GIÁ BÁN"};
         dtm.setColumnIdentifiers(header);
-        lists=comboService.get_all();
+        lists = comboService.get_all();
         showdatacombo(lists);
+        
     }
-    private void showdatacombo(List<ComboModel> lists){
+
+    private void showdatacombo(List<ComboModel> lists) {
         dtm.setRowCount(0);
         for (ComboModel cb : lists) {
             dtm.addRow(cb.toRowData());
             
         }
     }
+
+    private ComboModel getData() {
+        ComboModel comboModel = new ComboModel();
+        comboModel.setMaCB(txtMAcombo.getText());
+        comboModel.setTenCB(txtTenSP.getText());
+        comboModel.setGiaBan(Double.valueOf(txtGIAban.getText()));
+        return comboModel;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,17 +105,32 @@ private ComboService comboService= new ComboServiceImp();
 
         jLabel2.setText("MÃ COMBO");
 
-        jLabel3.setText("TÊN SẢN PHẨM");
+        jLabel3.setText("TÊN COMBO");
 
         jLabel4.setText("GIÁ BÁN");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("CHỨC NĂNG"));
 
         btADD.setText("ADD");
+        btADD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btADDActionPerformed(evt);
+            }
+        });
 
         btupdate.setText("UPDATE");
+        btupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btupdateActionPerformed(evt);
+            }
+        });
 
         btClear.setText("CLEAR");
+        btClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btClearActionPerformed(evt);
+            }
+        });
 
         btClose.setText("CLOSE");
 
@@ -180,15 +213,23 @@ private ComboService comboService= new ComboServiceImp();
 
         tableSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "", "Title 2", "Title 3", "Title 4"
+                "", "Title 2", "Title 3"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tableSP);
 
         btLuaSP.setText("LƯA");
@@ -228,6 +269,11 @@ private ComboService comboService= new ComboServiceImp();
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableCOMBO.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableCOMBOMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableCOMBO);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -290,6 +336,34 @@ private ComboService comboService= new ComboServiceImp();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btADDActionPerformed
+        JOptionPane.showMessageDialog(this, comboService.add(getData()));
+        lists = comboService.get_all();
+        showdatacombo(lists);
+    }//GEN-LAST:event_btADDActionPerformed
+
+    private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
+        JOptionPane.showMessageDialog(this, comboService.update(getData(), txtID.getText()));
+        lists = comboService.get_all();
+        showdatacombo(lists);
+    }//GEN-LAST:event_btupdateActionPerformed
+
+    private void tableCOMBOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCOMBOMouseClicked
+        int row = tableCOMBO.getSelectedRow();
+        txtID.setText(tableCOMBO.getValueAt(row, 0).toString());
+        txtMAcombo.setText(tableCOMBO.getValueAt(row, 1).toString());
+        txtTenSP.setText(tableCOMBO.getValueAt(row, 2).toString());
+        txtGIAban.setText(tableCOMBO.getValueAt(row, 3).toString());
+        
+    }//GEN-LAST:event_tableCOMBOMouseClicked
+
+    private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
+        txtID.setText("");
+        txtMAcombo.setText("");
+        txtGIAban.setText("");
+        txtTenSP.setText("");
+    }//GEN-LAST:event_btClearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -331,7 +405,7 @@ private ComboService comboService= new ComboServiceImp();
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btADD;
