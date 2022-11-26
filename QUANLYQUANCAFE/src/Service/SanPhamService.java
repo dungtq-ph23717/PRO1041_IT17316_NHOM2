@@ -16,6 +16,8 @@ public interface SanPhamService {
 
     List<ViewModels.SanPham> getAll();
 
+    List<ViewModels.SanPham> getAllTT();
+
     List<ViewModels.SanPham> getAllKM();
 
     ViewModels.SanPham getOne(String ma);

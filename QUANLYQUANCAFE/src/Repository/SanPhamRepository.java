@@ -39,6 +39,25 @@ public class SanPhamRepository {
         return null;
     }
 
+    public List<SanPham> getAllTT() {
+        String query = "SELECT MaSP, TenSP, Giaban, MoTa, DanhMuc.TenDM, TrangThai, Size FROM SanPham\n"
+                + "INNER JOIN DanhMuc ON SanPham.IDDM = DanhMuc.ID\n"
+                + "inner join Size on SanPham.IDSize = Size.ID\n"
+                + "Where TrangThai like 'Đang bán'";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<SanPham> list = new ArrayList<>();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4), new DanhMuc(rs.getString(5)), rs.getString(6), new Size(rs.getString(7)));
+                list.add(sp);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<SanPham> getAllKM() {
         String query = "SELECT MaSP, TenSP FROM SanPham";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
@@ -214,10 +233,10 @@ public class SanPhamRepository {
     }
 
     public static void main(String[] args) {
-//        List<SanPham> list = new SanPhamRepository().getAll();
-//        for (SanPham x : list) {
-//            System.out.println(x.toString());
-////        }
+        List<SanPham> list = new SanPhamRepository().getAllTT();
+        for (SanPham x : list) {
+            System.out.println(x.toString());
+        }
 //        SanPhamModel sp = new SanPhamModel("SP05", "TranChau", 1110, "Ngon", "653342b5-baab-4e2f-84b5-774c27b80d63", "41cc728e-36a8-4362-8839-61d1c3c39395", "Đang bán");
 //        boolean add = new SanPhamRepository().add(sp);
 //        System.out.println(add);
