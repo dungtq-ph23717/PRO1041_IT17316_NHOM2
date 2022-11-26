@@ -8,10 +8,12 @@ import View.ViewNV.*;
 import Service.impl.BanServiceImpl;
 import Service.impl.GioHangServiceImpl;
 import Service.impl.HoaDonServiceIblm;
+import Service.impl.NhanVienServiceImpl;
 import Service.impl.SanPhamServiceImpl;
 import ViewModels.Ban;
 import ViewModels.GioHang;
 import ViewModels.HoaDon;
+import ViewModels.NhanVienViewModel;
 import ViewModels.SanPham;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
     private DefaultTableModel dtmHoaDon = new DefaultTableModel();
     private List<Ban> listBan = new ArrayList<>();
+    private List<NhanVienViewModel> listNV = new ArrayList<>();
     private List<GioHang> listGioHang = new ArrayList<>();
     private List<HoaDon> listHoaDon = new ArrayList<>();
     private List<SanPham> listSanPham = new ArrayList<>();
@@ -36,6 +39,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private SanPhamServiceImpl implSP = new SanPhamServiceImpl();
     private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
     private GioHangServiceImpl implGH = new GioHangServiceImpl();
+    private NhanVienServiceImpl implNV = new NhanVienServiceImpl();
 
     /**
      * Creates new form Menu1
@@ -45,20 +49,48 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        
-        String[] headersBan = {"Tên bàn","Loại bàn"};
-        jTable3.setModel(dtmBan);
+
+        String[] headersBan = {"Tên bàn", "Loại bàn"};
+        tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
         listBan = implBan.getAllTT();
-        showData(listBan);
+        showDataBan(listBan);
+
+        String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên"};
+        tbHD.setModel(dtmHoaDon);
+        dtmHoaDon.setColumnIdentifiers(headersHD);
+        listHoaDon = implHD.getAllTT();
+        listNV = implNV.getAll();
+        showDataHD(listHoaDon);
+
+        tbSP.setModel(dtmSanPham);
+        String[] headersSP = {"Mã SP", "Tên SP", "Giá Bán", "Danh Mục", "Trạng Thái", "Mô tả", "Size"};
+        dtmSanPham.setColumnIdentifiers(headersSP);
+        listSanPham = implSP.getAll();
+        showDataSP(listSanPham);
     }
 
-    private void showData(List<Ban> listBan){
+    private void showDataBan(List<Ban> list) {
         dtmBan.setRowCount(0);
-        for (Ban x : listBan) {
+        for (Ban x : list) {
             dtmBan.addRow(x.toRowDataTT());
         }
     }
+
+    private void showDataSP(List<SanPham> list) {
+        dtmSanPham.setRowCount(0);
+        for (SanPham sp : list) {
+            dtmSanPham.addRow(new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getDanhMuc().getTenDanhMuc(), sp.getTrangThai(), sp.getMoTa(), sp.getSize().getSize()});
+        }
+    }
+
+    private void showDataHD(List<HoaDon> list) {
+        dtmHoaDon.setRowCount(0);
+        for (HoaDon x : list) {
+            dtmHoaDon.addRow(x.toRowData());
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,11 +102,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbSP = new javax.swing.JTable();
         txtTongtien1 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbGH = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtMa = new javax.swing.JLabel();
@@ -104,16 +136,16 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jComboBox4 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbBan = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tbHD = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Sản phẩm"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -124,7 +156,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbSP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -151,7 +183,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Giỏ hàng"));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbGH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -162,7 +194,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(tbGH);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -209,7 +241,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel6.setText("Tiền thối");
+        jLabel6.setText("Tiền thừa");
 
         txtTienThoi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -358,7 +390,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Bàn"));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbBan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -369,7 +401,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable3);
+        jScrollPane4.setViewportView(tbBan);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -390,7 +422,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Hoá đơn"));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tbHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -401,7 +433,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTable4);
+        jScrollPane5.setViewportView(tbHD);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -503,10 +535,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JTable tbBan;
+    private javax.swing.JTable tbGH;
+    private javax.swing.JTable tbHD;
+    private javax.swing.JTable tbSP;
     private javax.swing.JLabel txtBan;
     private javax.swing.JLabel txtMa;
     private javax.swing.JLabel txtNgay;
