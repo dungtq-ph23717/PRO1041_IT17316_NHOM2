@@ -160,6 +160,21 @@ public class NhanVienRepository {
 
     }
 
+    public NhanVienModel checkTrung(String manv) {
+        String query = "select MaNV from NhanVien where MaNV=?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, manv);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                NhanVienModel sp = new NhanVienModel(rs.getString(1));
+                return sp;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         System.out.println(new NhanVienRepository().update(new NhanVienModel("E79BE21E-2BCE-4D20-9C70-1882E94A3EE5", "manv6", "hu", "01-11-2003", "0345571727", "F7724F02-E050-487B-901C-678E11B29A64", true, true, "ha noi"), "E79BE21E-2BCE-4D20-9C70-1882E94A3EE5"));
     }

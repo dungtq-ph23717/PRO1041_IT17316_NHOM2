@@ -158,4 +158,7 @@ public class SanPham {
     public Object[] toRowData() {
         return new Object[]{false, maSP, tenSP};
     }
+    public Object[] torowdata1(){
+        return new Object[] {false,maSP,tenSP};
+    }
 }

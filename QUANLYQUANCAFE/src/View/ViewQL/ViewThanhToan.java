@@ -4,6 +4,7 @@
  */
 package View.ViewQL;
 
+
 import DomainModels.HoaDonChiTietModel;
 import DomainModels.KhuyenMaiModel;
 import View.ViewNV.*;
