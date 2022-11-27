@@ -38,11 +38,9 @@ public class ViewComBoBox extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         txtID.disable();
-       
-       
+
         tableCOMBO.setModel(dtm);
 
-        
         String[] header = {"ID", "MÃ COMBO", "TÊN COMBO", "GIÁ BÁN"};
         dtm.setColumnIdentifiers(header);
         lists = comboService.get_all();
@@ -53,7 +51,7 @@ public class ViewComBoBox extends javax.swing.JDialog {
     }
 
     private void showdatacombo(List<ComboModel> lists) {
-        
+
         dtm.setRowCount(0);
         for (ComboModel cb : lists) {
             dtm.addRow(cb.toRowData());
@@ -62,9 +60,9 @@ public class ViewComBoBox extends javax.swing.JDialog {
     }
 
     private void showdatasanpham(List<SanPham> lits) {
-         DefaultTableModel dtmsp = (DefaultTableModel) tableSP.getModel();
-          String headerSP[] = {"Select", "MÃ SẢN PHẨM", "TÊN SẢN PHẨM"};
-          dtmsp.setColumnIdentifiers(headerSP);
+        DefaultTableModel dtmsp = (DefaultTableModel) tableSP.getModel();
+        String headerSP[] = {"Select", "MÃ SẢN PHẨM", "TÊN SẢN PHẨM"};
+        dtmsp.setColumnIdentifiers(headerSP);
         tableSP.setModel(dtmsp);
         dtmsp.setRowCount(0);
         for (SanPham sp : lits) {
@@ -74,11 +72,24 @@ public class ViewComBoBox extends javax.swing.JDialog {
     }
 
     private ComboModel getData() {
-        ComboModel comboModel = new ComboModel();
-        comboModel.setMaCB(txtMAcombo.getText());
-        comboModel.setTenCB(txtTenSP.getText());
-        comboModel.setGiaBan(Double.valueOf(txtGIAban.getText()));
-        return comboModel;
+        int index = 0;
+        for (int i = index; i < tableSP.getRowCount(); i++) {
+            boolean check = Boolean.valueOf(tableSP.getValueAt(i, 0).toString());
+            String col1 = tableSP.getValueAt(i, 2).toString();
+            if (check) {
+                for (int j = index + 1; j < tableSP.getRowCount()+1; j++) {
+                    String col2 = tableSP.getValueAt(j + i, 2).toString();
+                    String ten = col1 + " + " + col2;
+                    ComboModel comboModel = new ComboModel();
+                    comboModel.setMaCB(txtMAcombo.getText());
+                    comboModel.setTenCB(ten);
+                    comboModel.setGiaBan(Double.valueOf(txtGIAban.getText()));
+                    return comboModel;
+                }
+            }
+        }
+        return null;
+
     }
 
     /**
