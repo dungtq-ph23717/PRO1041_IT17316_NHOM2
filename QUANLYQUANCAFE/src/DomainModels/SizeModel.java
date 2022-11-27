@@ -13,6 +13,8 @@ public class SizeModel {
         this.size = size;
     }
 
+    
+
     public SizeModel(String size) {
         this.size = size;
     }

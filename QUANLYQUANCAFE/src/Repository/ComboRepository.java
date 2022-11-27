@@ -6,9 +6,12 @@ package Repository;
 
 //import repositores.DBContext;
 import DomainModels.ComboModel;
+import DomainModels.DanhMucModel;
 import DomainModels.SanPhamModel;
+import DomainModels.SizeModel;
 import Utilities.DBContext;
 import ViewModels.ComboReponse;
+import ViewModels.SanPham;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +103,31 @@ public class ComboRepository {
             }
         } catch (Exception e) {
             e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public SanPhamModel getOne(String ten) {
+        String query = "SELECT [ID]\n"
+                + "      ,[MaSP]\n"
+                + "      ,[TenSP]\n"
+                + "      ,[Giaban]\n"
+                + "      ,[MoTa]\n"
+                + "      ,[Anh]\n"
+                + "      ,[IDSize]\n"
+                + "      ,[IDCB]\n"
+                + "      ,[IDDM]\n"
+                + "      ,[TrangThai]\n"
+                + "  FROM sanpham\n"
+                + "  where TenSP like ?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, ten);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new SanPhamModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6),rs.getString(7), rs.getString(8), rs.getString(9),rs.getString(10));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }

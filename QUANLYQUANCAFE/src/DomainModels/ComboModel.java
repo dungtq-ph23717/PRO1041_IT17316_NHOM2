@@ -28,6 +28,12 @@ public class ComboModel {
     public ComboModel(String maCB) {
         this.maCB = maCB;
     }
+
+   
+
+  
+    
+    
     
 
     public String getId() {

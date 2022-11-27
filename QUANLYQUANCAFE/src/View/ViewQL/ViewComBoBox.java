@@ -5,6 +5,8 @@
 package View.ViewQL;
 
 import DomainModels.ComboModel;
+import DomainModels.Combo_SanPham;
+import DomainModels.SanPhamModel;
 import Service.ComboService;
 import Service.SanPhamService;
 import Service.impl.ComboServiceImp;
@@ -20,8 +22,9 @@ import javax.swing.table.DefaultTableModel;
  * @author hdo48
  */
 public class ViewComBoBox extends javax.swing.JDialog {
-    private List<SanPham> listSp=new ArrayList<>();
-    private SanPhamService sanPhamService= new SanPhamServiceImpl();
+
+    private List<SanPham> listSp = new ArrayList<>();
+    private SanPhamService sanPhamService = new SanPhamServiceImpl();
     private List<ComboModel> lists = new ArrayList<>();
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultTableModel dtmsp = new DefaultTableModel();
@@ -35,22 +38,38 @@ public class ViewComBoBox extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         txtID.disable();
-        tableSP.setModel(dtmsp);
+       
+       
         tableCOMBO.setModel(dtm);
-        String[] headerSP = {"Select", "MÃ SP", "TÊN SẢN PHẨM"};
-        dtmsp.setColumnIdentifiers(headerSP);
+
+        
         String[] header = {"ID", "MÃ COMBO", "TÊN COMBO", "GIÁ BÁN"};
         dtm.setColumnIdentifiers(header);
         lists = comboService.get_all();
+        listSp = sanPhamService.getAll();
         showdatacombo(lists);
-        
+        showdatasanpham(listSp);
+
     }
 
     private void showdatacombo(List<ComboModel> lists) {
+        
         dtm.setRowCount(0);
         for (ComboModel cb : lists) {
             dtm.addRow(cb.toRowData());
-            
+
+        }
+    }
+
+    private void showdatasanpham(List<SanPham> lits) {
+         DefaultTableModel dtmsp = (DefaultTableModel) tableSP.getModel();
+          String headerSP[] = {"Select", "MÃ SẢN PHẨM", "TÊN SẢN PHẨM"};
+          dtmsp.setColumnIdentifiers(headerSP);
+        tableSP.setModel(dtmsp);
+        dtmsp.setRowCount(0);
+        for (SanPham sp : lits) {
+            dtmsp.addRow(sp.torowdata1());
+
         }
     }
 
@@ -61,7 +80,6 @@ public class ViewComBoBox extends javax.swing.JDialog {
         comboModel.setGiaBan(Double.valueOf(txtGIAban.getText()));
         return comboModel;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -233,6 +251,11 @@ public class ViewComBoBox extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tableSP);
 
         btLuaSP.setText("LƯA");
+        btLuaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLuaSPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -354,7 +377,7 @@ public class ViewComBoBox extends javax.swing.JDialog {
         txtMAcombo.setText(tableCOMBO.getValueAt(row, 1).toString());
         txtTenSP.setText(tableCOMBO.getValueAt(row, 2).toString());
         txtGIAban.setText(tableCOMBO.getValueAt(row, 3).toString());
-        
+
     }//GEN-LAST:event_tableCOMBOMouseClicked
 
     private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
@@ -363,6 +386,20 @@ public class ViewComBoBox extends javax.swing.JDialog {
         txtGIAban.setText("");
         txtTenSP.setText("");
     }//GEN-LAST:event_btClearActionPerformed
+
+    private void btLuaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLuaSPActionPerformed
+        for (int i = 0; i < tableSP.getRowCount(); i++) {
+            boolean check = Boolean.valueOf(tableSP.getValueAt(i, 0).toString());
+            String col = tableSP.getValueAt(i, 1).toString();
+            if (check) {
+                SanPhamModel sp=new SanPhamModel();
+                 comboService.getOne(sp.getTenSP()+sp.getTenSP());
+                ComboModel idcb = comboService.getOne(col);
+                Combo_SanPham s = new Combo_SanPham(idSP.getId(), idKM.getID());
+                JOptionPane.showMessageDialog(this, impl2.add(s));
+            }
+        }
+    }//GEN-LAST:event_btLuaSPActionPerformed
 
     /**
      * @param args the command line arguments

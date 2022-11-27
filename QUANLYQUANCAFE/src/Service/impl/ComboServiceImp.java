@@ -55,4 +55,11 @@ public class ComboServiceImp implements ComboService {
             return "UPDATE THẤT BẠI";
         }
     }
+
+    @Override
+    public SanPhamModel getOne(String ten) {
+       return _ComboRepository.getOne(ten);
+    }
+
+   
 }
