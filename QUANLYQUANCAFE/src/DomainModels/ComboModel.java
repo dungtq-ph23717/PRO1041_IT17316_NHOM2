@@ -29,13 +29,6 @@ public class ComboModel {
         this.maCB = maCB;
     }
 
-   
-
-  
-    
-    
-    
-
     public String getId() {
         return id;
     }
@@ -72,9 +65,10 @@ public class ComboModel {
     public String toString() {
         return "Combo{" + "id=" + id + ", maCB=" + maCB + ", tenCB=" + tenCB + ", giaBan=" + giaBan + '}';
     }
-    public Object[] toRowData(){
-        return new Object[]{id,maCB,tenCB,giaBan};
-        
-}
+
+    public Object[] toRowData() {
+        return new Object[]{id, maCB, tenCB, giaBan};
+
+    }
 
 }
