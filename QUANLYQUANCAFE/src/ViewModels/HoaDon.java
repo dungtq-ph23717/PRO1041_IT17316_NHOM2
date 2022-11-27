@@ -18,7 +18,6 @@ public class HoaDon {
     private String MAKM;
     private String MANV;
     private String MABan;
-    private String trangThai;
     private NhanVienViewModel tenNV;
     private String tinhTrang;
 
@@ -38,7 +37,6 @@ public class HoaDon {
         this.MAKM = MAKM;
         this.MANV = MANV;
         this.MABan = MABan;
-        this.trangThai = trangThai;
         this.tenNV = tenNV;
     }
 
@@ -131,16 +129,17 @@ public class HoaDon {
     }
 
     public Object[] toRowData() {
-        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, trangThai, MAKM, MANV, MABan};
+        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, tinhTrang, MAKM, MANV, MABan};
     }
 
-    public String getTrangThai() {
-        return trangThai;
+    public String getTinhTrang() {
+        return tinhTrang;
     }
 
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
+    public void setTinhTrang(String tinhTrang) {
+        this.tinhTrang = tinhTrang;
     }
+
 
     public NhanVienViewModel getTenNV() {
         return tenNV;

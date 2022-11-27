@@ -99,7 +99,7 @@ public class HoaDonRepository {
             ps.setObject(5, hd.getIDKM());
             ps.setObject(6, hd.getIDNV());
             ps.setObject(7, hd.getIDBan());
-            ps.setObject(8, hd.getTrangThai());
+            ps.setObject(8, hd.getTinhhTrang());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -128,7 +128,7 @@ public class HoaDonRepository {
             ps.setObject(5, hd.getIDKM());
             ps.setObject(6, hd.getIDNV());
             ps.setObject(7, hd.getIDBan());
-            ps.setObject(8, hd.getTrangThai());
+            ps.setObject(8, hd.getTinhhTrang());
             ps.setObject(9, ID);
             check = ps.executeUpdate();
         } catch (Exception e) {
