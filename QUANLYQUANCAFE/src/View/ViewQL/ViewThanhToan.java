@@ -4,11 +4,13 @@
  */
 package View.ViewQL;
 
-
+import DomainModels.ComboModel;
 import DomainModels.HoaDonChiTietModel;
 import DomainModels.KhuyenMaiModel;
 import View.ViewNV.*;
 import Service.impl.BanServiceImpl;
+import Service.impl.ComBoSPServiceImpl;
+import Service.impl.ComboServiceImp;
 import Service.impl.HoaDonChiTietServiceIblm;
 import Service.impl.HoaDonServiceIblm;
 import Service.impl.KhuyenMaiServiceIblm;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SingleSelectionModel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,8 +41,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private DefaultTableModel dtmGioHang = new DefaultTableModel();
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
     private DefaultTableModel dtmHoaDon = new DefaultTableModel();
+    private DefaultTableModel dtmCB = new DefaultTableModel();
     private DefaultComboBoxModel boxModelGG = new DefaultComboBoxModel();
     private List<Ban> listBan = new ArrayList<>();
+    private List<ComboModel> listCB = new ArrayList<>();
     private List<NhanVienViewModel> listNV = new ArrayList<>();
     private List<KhuyenMai> listKhuyenMai = new ArrayList<>();
     private List<HoaDon> listHoaDon = new ArrayList<>();
@@ -51,6 +56,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
     private NhanVienServiceImpl implNV = new NhanVienServiceImpl();
     private HoaDonChiTietServiceIblm implHDCT = new HoaDonChiTietServiceIblm();
+    private ComboServiceImp implCB = new ComboServiceImp();
 
     /**
      * Creates new form Menu1
@@ -80,6 +86,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         listSanPham = implSP.getAllTT();
         showDataSP(listSanPham);
 
+        String[] headersCB = {"Mã CB", "Tên CB", "Giá bán"};
+        tbHD1.setModel(dtmCB);
+        dtmCB.setColumnIdentifiers(headersCB);
+        listCB = implCB.get_all();
+        showDataCB(listCB);
+
         String[] headersGH = {"Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Tổng tiền"};
         tbGH.setModel(dtmGioHang);
         dtmGioHang.setColumnIdentifiers(headersGH);
@@ -97,6 +109,13 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         dtmGioHang.setRowCount(0);
         for (HoaDonChiTiet x : list) {
             dtmGioHang.addRow(x.toRowdata());
+        }
+    }
+
+    private void showDataCB(List<ComboModel> list) {
+        dtmCB.setRowCount(0);
+        for (ComboModel x : list) {
+            dtmCB.addRow(x.toRowData());
         }
     }
 
@@ -628,7 +647,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         int rowSP = tbGH.getSelectedRow();
         String maSP = tbGH.getValueAt(rowSP, 0).toString();
         SanPham sp = implSP.getOne(maSP);
-        implHDCT.delete(idHD.getID(),sp.getId());
+        implHDCT.delete(idHD.getID(), sp.getId());
         listHDCT = implHDCT.getAll();
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -643,10 +662,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         fillDataGH(row);
     }//GEN-LAST:event_tbGHMouseClicked
 
-    private void fillDataGH(int index){
+    private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
     }
+
     private void fillDataHD(int index) {
         HoaDon hd = listHoaDon.get(index);
         txtMa.setText(hd.getMaHD());
