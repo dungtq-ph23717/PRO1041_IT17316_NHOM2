@@ -18,6 +18,7 @@ public class HoaDon {
     private String MAKM;
     private String MANV;
     private String MABan;
+    private String trangThai;
     private NhanVienViewModel tenNV;
     private String tinhTrang;
 
@@ -37,7 +38,10 @@ public class HoaDon {
         this.MAKM = MAKM;
         this.MANV = MANV;
         this.MABan = MABan;
+        this.trangThai = trangThai;
+        this.tenNV = tenNV;
     }
+
 
     public HoaDon(String ID, String maHD, String ngayLapHD, NhanVienViewModel tenNV, String tinhTrang) {
         this.ID = ID;
@@ -52,6 +56,7 @@ public class HoaDon {
         this.ngayLapHD = ngayLapHD;
         this.tenNV = tenNV;
         this.tinhTrang = tinhTrang;
+
     }
 
     public String getID() {
@@ -120,11 +125,29 @@ public class HoaDon {
 
     @Override
     public String toString() {
+
         return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", MAKM=" + MAKM + ", MANV=" + MANV + ", MABan=" + MABan + ", tenNV=" + tenNV + ", tinhTrang=" + tinhTrang + '}';
+
     }
 
     public Object[] toRowData() {
-        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, MAKM, MANV, MABan};
+        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, trangThai, MAKM, MANV, MABan};
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public NhanVienViewModel getTenNV() {
+        return tenNV;
+    }
+
+    public void setTenNV(NhanVienViewModel tenNV) {
+        this.tenNV = tenNV;
     }
 
 }

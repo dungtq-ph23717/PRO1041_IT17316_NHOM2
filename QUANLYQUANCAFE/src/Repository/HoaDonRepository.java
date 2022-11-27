@@ -7,7 +7,6 @@ package Repository;
 import DomainModels.HoaDonModel;
 import Utilities.DBContext;
 import ViewModels.HoaDon;
-import ViewModels.HoaDonChiTiet;
 import ViewModels.NhanVienViewModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,7 +66,9 @@ public class HoaDonRepository {
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
                 NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
+
                 HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv,rs.getString(4));
+
                 list.add(hd);
             }
             return list;
@@ -83,11 +84,12 @@ public class HoaDonRepository {
                 + "           ,[NgayLapHD]\n"
                 + "           ,[ThanhTien]\n"
                 + "           ,[PhuongThucThanhToan]\n"
-                + "           ,[IDKM]\n"
                 + "           ,[IDNV]\n"
-                + "           ,[IDBan])\n"
+                + "           ,[IDKM]\n"
+                + "           ,[IDBan]\n"
+                + "           ,[TinhTrang])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?)";
+                + "           (?,?,?,?,?,?,?,?)";
         int check = 0;
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getMaHD());
@@ -97,6 +99,7 @@ public class HoaDonRepository {
             ps.setObject(5, hd.getIDKM());
             ps.setObject(6, hd.getIDNV());
             ps.setObject(7, hd.getIDBan());
+            ps.setObject(8, hd.getTrangThai());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -106,15 +109,16 @@ public class HoaDonRepository {
 
     public boolean update(HoaDonModel hd, String ID) {
         String query = "UPDATE [dbo].[HoaDon]\n"
-                + "   SET \n"
-                + "      [MaHD] =?\n"
-                + "      ,[NgayLapHD] =? \n"
+                + "   SET [ID] = ?\n"
+                + "      ,[MaHD] = ?\n"
+                + "      ,[NgayLapHD] = ?\n"
                 + "      ,[ThanhTien] = ?\n"
-                + "      ,[PhuongThucThanhToan] =? \n"
-                + "      ,[IDKM] = ?\n"
+                + "      ,[PhuongThucThanhToan] = ?\n"
                 + "      ,[IDNV] = ?\n"
-                + "      ,[IDBan] =?\n"
-                + " WHERE ID=?";
+                + "      ,[IDKM] = ?\n"
+                + "      ,[IDBan] = ?\n"
+                + "      ,[TinhTrang] = ?\n"
+                + " WHERE ID = ?";
         int check = 0;
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getMaHD());
@@ -124,7 +128,8 @@ public class HoaDonRepository {
             ps.setObject(5, hd.getIDKM());
             ps.setObject(6, hd.getIDNV());
             ps.setObject(7, hd.getIDBan());
-            ps.setObject(8, ID);
+            ps.setObject(8, hd.getTrangThai());
+            ps.setObject(9, ID);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);

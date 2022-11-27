@@ -18,9 +18,7 @@ public class HoaDonModel {
     private String IDKM;
     private String IDNV;
     private String IDBan;
-    
     private String tinhhTrang;
-
     public HoaDonModel() {
     }
 
