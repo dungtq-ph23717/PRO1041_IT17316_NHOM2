@@ -1,12 +1,10 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View.ViewQL;
 
 import DomainModels.ComboModel;
-import DomainModels.Combo_SanPham;
-import DomainModels.SanPhamModel;
 import Service.ComboService;
 import Service.SanPhamService;
 import Service.impl.ComboServiceImp;
@@ -19,9 +17,9 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author hdo48
+ * @author vietv
  */
-public class ViewComBoBox extends javax.swing.JDialog {
+public class ViewComBoSP extends javax.swing.JFrame {
 
     private List<SanPham> listSp = new ArrayList<>();
     private SanPhamService sanPhamService = new SanPhamServiceImpl();
@@ -31,12 +29,10 @@ public class ViewComBoBox extends javax.swing.JDialog {
     private ComboService comboService = new ComboServiceImp();
 
     /**
-     * Creates new form ViewComBoBox
+     * Creates new form ViewComBoSP1
      */
-    public ViewComBoBox(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public ViewComBoSP() {
         initComponents();
-        setLocationRelativeTo(null);
         txtID.disable();
         txtTenSP.disable();
 
@@ -48,7 +44,6 @@ public class ViewComBoBox extends javax.swing.JDialog {
         listSp = sanPhamService.getAll();
         showdatacombo(lists);
         showdatasanpham(listSp);
-
     }
 
     private void showdatacombo(List<ComboModel> lists) {
@@ -78,7 +73,7 @@ public class ViewComBoBox extends javax.swing.JDialog {
             boolean check = Boolean.valueOf(tableSP.getValueAt(i, 0).toString());
             String col1 = tableSP.getValueAt(i, 2).toString();
             if (check) {
-                for (int j = index + 1; j < tableSP.getRowCount()+1; j++) {
+                for (int j = index + 1; j < tableSP.getRowCount() + 1; j++) {
                     String col2 = tableSP.getValueAt(j + i, 2).toString();
                     String ten = col1 + " + " + col2;
                     ComboModel comboModel = new ComboModel();
@@ -92,8 +87,9 @@ public class ViewComBoBox extends javax.swing.JDialog {
         return null;
 
     }
-    private ComboModel getdata1(){
-        ComboModel comboModel= new ComboModel();
+
+    private ComboModel getdata1() {
+        ComboModel comboModel = new ComboModel();
         comboModel.setMaCB(txtMAcombo.getText());
         comboModel.setTenCB(txtTenSP.getText());
         comboModel.setGiaBan(Double.valueOf(txtGIAban.getText()));
@@ -132,7 +128,7 @@ public class ViewComBoBox extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCOMBO = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setToolTipText("Quản l");
 
@@ -170,6 +166,11 @@ public class ViewComBoBox extends javax.swing.JDialog {
         });
 
         btClose.setText("CLOSE");
+        btClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -366,16 +367,18 @@ public class ViewComBoBox extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btADDActionPerformed
@@ -390,15 +393,6 @@ public class ViewComBoBox extends javax.swing.JDialog {
         showdatacombo(lists);
     }//GEN-LAST:event_btupdateActionPerformed
 
-    private void tableCOMBOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCOMBOMouseClicked
-        int row = tableCOMBO.getSelectedRow();
-        txtID.setText(tableCOMBO.getValueAt(row, 0).toString());
-        txtMAcombo.setText(tableCOMBO.getValueAt(row, 1).toString());
-        txtTenSP.setText(tableCOMBO.getValueAt(row, 2).toString());
-        txtGIAban.setText(tableCOMBO.getValueAt(row, 3).toString());
-
-    }//GEN-LAST:event_tableCOMBOMouseClicked
-
     private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
         txtID.setText("");
         txtMAcombo.setText("");
@@ -409,6 +403,18 @@ public class ViewComBoBox extends javax.swing.JDialog {
     private void btLuaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLuaSPActionPerformed
 
     }//GEN-LAST:event_btLuaSPActionPerformed
+
+    private void tableCOMBOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCOMBOMouseClicked
+        int row = tableCOMBO.getSelectedRow();
+        txtID.setText(tableCOMBO.getValueAt(row, 0).toString());
+        txtMAcombo.setText(tableCOMBO.getValueAt(row, 1).toString());
+        txtTenSP.setText(tableCOMBO.getValueAt(row, 2).toString());
+        txtGIAban.setText(tableCOMBO.getValueAt(row, 3).toString());
+    }//GEN-LAST:event_tableCOMBOMouseClicked
+
+    private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,31 +433,24 @@ public class ViewComBoBox extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewComBoBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewComBoSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewComBoBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewComBoSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewComBoBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewComBoSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewComBoBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewComBoSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ViewComBoBox dialog = new ViewComBoBox(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new ViewComBoSP().setVisible(true);
             }
         });
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btADD;
@@ -477,4 +476,5 @@ public class ViewComBoBox extends javax.swing.JDialog {
     private javax.swing.JTextField txtMAcombo;
     private javax.swing.JTextField txtTenSP;
     // End of variables declaration//GEN-END:variables
+
 }

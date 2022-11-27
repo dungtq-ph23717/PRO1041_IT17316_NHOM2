@@ -233,7 +233,7 @@ public class SanPhamRepository {
     }
 
     public static void main(String[] args) {
-        List<SanPham> list = new SanPhamRepository().getAllTT();
+        List<SanPham> list = new SanPhamRepository().getAll();
         for (SanPham x : list) {
             System.out.println(x.toString());
         }
