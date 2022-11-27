@@ -20,11 +20,16 @@ public class HoaDon {
     private String MABan;
     private String trangThai;
     private NhanVienViewModel tenNV;
+    private String tinhTrang;
 
     public HoaDon() {
     }
 
-    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String MAKM, String MANV, String MABan, String trangThai, NhanVienViewModel tenNV) {
+    public HoaDon(String maHD) {
+        this.maHD = maHD;
+    }
+
+    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String MAKM, String MANV, String MABan) {
         this.ID = ID;
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
@@ -37,11 +42,21 @@ public class HoaDon {
         this.tenNV = tenNV;
     }
 
-    public HoaDon(String maHD, String ngayLapHD, NhanVienViewModel tenNV, String trangThai) {
+
+    public HoaDon(String ID, String maHD, String ngayLapHD, NhanVienViewModel tenNV, String tinhTrang) {
+        this.ID = ID;
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
         this.tenNV = tenNV;
-        this.trangThai = trangThai;
+        this.tinhTrang = tinhTrang;
+    }
+
+    public HoaDon(String maHD, String ngayLapHD, NhanVienViewModel tenNV, String tinhTrang) {
+        this.maHD = maHD;
+        this.ngayLapHD = ngayLapHD;
+        this.tenNV = tenNV;
+        this.tinhTrang = tinhTrang;
+
     }
 
     public String getID() {
@@ -110,7 +125,9 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", MAKM=" + MAKM + ", MANV=" + MANV + ", MABan=" + MABan + ", trangThai=" + trangThai + ", tenNV=" + tenNV + '}';
+
+        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", MAKM=" + MAKM + ", MANV=" + MANV + ", MABan=" + MABan + ", tenNV=" + tenNV + ", tinhTrang=" + tinhTrang + '}';
+
     }
 
     public Object[] toRowData() {

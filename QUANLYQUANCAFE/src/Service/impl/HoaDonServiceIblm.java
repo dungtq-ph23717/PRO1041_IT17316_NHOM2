@@ -34,6 +34,17 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         }
     }
 
+  
+    @Override
+    public List<HoaDon> getAllTT() {
+        return rps.getAllTT();
+    }
+
+    @Override
+    public HoaDon getOne(String ma) {
+        return rps.getOne(ma);
+    }
+
     @Override
     public String add(HoaDonModel hd, HoaDonChiTietModel hdct) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -42,11 +53,6 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     @Override
     public String update(HoaDonModel hd, HoaDonChiTietModel hdct, String maHD) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<HoaDon> getAllTT() {
-        return rps.getAllTT();
     }
 
 }

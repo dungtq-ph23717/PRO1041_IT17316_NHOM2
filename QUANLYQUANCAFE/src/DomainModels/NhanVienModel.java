@@ -31,6 +31,11 @@ public class NhanVienModel {
         this.diaChi = diaChi;
     }
 
+    public NhanVienModel(String maNV) {
+        this.maNV = maNV;
+    }
+    
+
   
 
     public NhanVienModel() {
