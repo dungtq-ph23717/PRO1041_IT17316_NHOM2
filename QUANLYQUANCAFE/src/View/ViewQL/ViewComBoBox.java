@@ -388,17 +388,17 @@ public class ViewComBoBox extends javax.swing.JDialog {
     }//GEN-LAST:event_btClearActionPerformed
 
     private void btLuaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLuaSPActionPerformed
-        for (int i = 0; i < tableSP.getRowCount(); i++) {
-            boolean check = Boolean.valueOf(tableSP.getValueAt(i, 0).toString());
-            String col = tableSP.getValueAt(i, 1).toString();
-            if (check) {
-                SanPhamModel sp=new SanPhamModel();
-                 comboService.getOne(sp.getTenSP()+sp.getTenSP());
-                ComboModel idcb = comboService.getOne(col);
-                Combo_SanPham s = new Combo_SanPham(idSP.getId(), idKM.getID());
-                JOptionPane.showMessageDialog(this, impl2.add(s));
-            }
-        }
+//        for (int i = 0; i < tableSP.getRowCount(); i++) {
+//            boolean check = Boolean.valueOf(tableSP.getValueAt(i, 0).toString());
+//            String col = tableSP.getValueAt(i, 1).toString();
+//            if (check) {
+//                
+//                 SanPhamModel sp=comboService.getOne(col);
+//                ComboModel idcb=comboService.getOne();
+//                Combo_SanPham s = new Combo_SanPham(idcb.getId(), idKM.getID());
+//                JOptionPane.showMessageDialog(this, impl2.add(s));
+//            }
+//        }
     }//GEN-LAST:event_btLuaSPActionPerformed
 
     /**
