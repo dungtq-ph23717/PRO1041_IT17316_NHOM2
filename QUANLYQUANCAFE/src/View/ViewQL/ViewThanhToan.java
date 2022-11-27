@@ -114,7 +114,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
-            dtmHoaDon.addRow(x.toRowData());
+            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), x.getTrangThai()});
         }
     }
 

@@ -19,10 +19,10 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
 
     private HoaDonRepository rps = new HoaDonRepository();
 
-    @Override
-    public List<HoaDon> getAll() {
-        return rps.getAll();
-    }
+//    @Override
+//    public List<HoaDon> getAll() {
+//        return rps.getAll();
+//    }
 
     @Override
     public String delete(String maHD) {

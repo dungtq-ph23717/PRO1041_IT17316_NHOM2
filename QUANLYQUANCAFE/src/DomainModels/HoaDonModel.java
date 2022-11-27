@@ -18,11 +18,12 @@ public class HoaDonModel {
     private String IDKM;
     private String IDNV;
     private String IDBan;
+    private String trangThai;
 
     public HoaDonModel() {
     }
 
-    public HoaDonModel(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDKM, String IDNV, String IDBan) {
+    public HoaDonModel(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDKM, String IDNV, String IDBan, String trangThai) {
         this.ID = ID;
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
@@ -31,6 +32,15 @@ public class HoaDonModel {
         this.IDKM = IDKM;
         this.IDNV = IDNV;
         this.IDBan = IDBan;
+        this.trangThai = trangThai;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
     }
 
     public String getID() {

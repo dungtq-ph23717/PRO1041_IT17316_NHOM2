@@ -18,12 +18,13 @@ public class HoaDon {
     private String MAKM;
     private String MANV;
     private String MABan;
+    private String trangThai;
     private NhanVienViewModel tenNV;
 
     public HoaDon() {
     }
 
-    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String MAKM, String MANV, String MABan) {
+    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String MAKM, String MANV, String MABan, String trangThai, NhanVienViewModel tenNV) {
         this.ID = ID;
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
@@ -32,12 +33,15 @@ public class HoaDon {
         this.MAKM = MAKM;
         this.MANV = MANV;
         this.MABan = MABan;
+        this.trangThai = trangThai;
+        this.tenNV = tenNV;
     }
 
-    public HoaDon(String maHD, String ngayLapHD, NhanVienViewModel tenNV) {
+    public HoaDon(String maHD, String ngayLapHD, NhanVienViewModel tenNV, String trangThai) {
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
         this.tenNV = tenNV;
+        this.trangThai = trangThai;
     }
 
     public String getID() {
@@ -106,11 +110,27 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "HoaDon{" + "maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", tenNV=" + tenNV + '}';
+        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", MAKM=" + MAKM + ", MANV=" + MANV + ", MABan=" + MABan + ", trangThai=" + trangThai + ", tenNV=" + tenNV + '}';
     }
 
     public Object[] toRowData() {
-        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, MAKM, MANV, MABan};
+        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, trangThai, MAKM, MANV, MABan};
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public NhanVienViewModel getTenNV() {
+        return tenNV;
+    }
+
+    public void setTenNV(NhanVienViewModel tenNV) {
+        this.tenNV = tenNV;
     }
 
 }
