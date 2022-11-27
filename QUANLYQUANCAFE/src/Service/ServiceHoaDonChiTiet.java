@@ -15,10 +15,10 @@ public interface ServiceHoaDonChiTiet {
 
     List<ViewModels.HoaDonChiTiet> getAll();
 
-    boolean add(HoaDonChiTietModel hd);
+    String add(HoaDonChiTietModel hd);
 
-    boolean update(HoaDonChiTietModel hd, String maHD);
+    String update(HoaDonChiTietModel hd, String maHD);
 
-    boolean delete(String maHD);
+    String delete(String idHD, String idSP);
 
 }

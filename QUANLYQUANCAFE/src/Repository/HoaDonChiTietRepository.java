@@ -45,18 +45,13 @@ public class HoaDonChiTietRepository {
         String query = "INSERT INTO [dbo].[HoaDonChiTiet]\n"
                 + "           ([IDSP]\n"
                 + "           ,[IDHD]\n"
-                + "           ,[Soluong]\n"
-                + "           ,[Giatien]\n"
-                + "           ,[Ghichu])\n"
-                + "     VALUES\n"
-                + "           (?,?,?,?,?)";
+                + "           ,[Soluong])\n"
+                + "     VALUES(?,?,?)";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getIDSP());
             ps.setObject(2, hd.getIDHD());
             ps.setObject(3, hd.getSoLuong());
-            ps.setObject(4, hd.getGiaTien());
-            ps.setObject(5, hd.getGiaTien());
 
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -81,12 +76,13 @@ public class HoaDonChiTietRepository {
         return check > 0;
     }
 
-    public boolean delete(String ma) {
-        String query = "DELETE FROM [dbo].[HoaDon]\n"
-                + "      WHERE MaHD = ?";
+    public boolean delete(String idHD, String idSP) {
+        String query = "DELETE FROM [dbo].[HoaDonChiTiet]\n"
+                + "      WHERE IDHD like ? and IDSP like ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, ma);
+            ps.setObject(1, idHD);
+            ps.setObject(2, idSP);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -95,9 +91,12 @@ public class HoaDonChiTietRepository {
     }
 
     public static void main(String[] args) {
-        List<HoaDonChiTiet> list = new HoaDonChiTietRepository().getAll();
-        for (HoaDonChiTiet x : list) {
-            System.out.println(x.toString());
-        }
+//        List<HoaDonChiTiet> list = new HoaDonChiTietRepository().getAll();
+//        for (HoaDonChiTiet x : list) {
+//            System.out.println(x.toString());
+//        }
+        HoaDonChiTietModel hd = new HoaDonChiTietModel("6a0c96e8-fe13-4e56-80b8-1a294978cc7b", "44a3f36c-64bb-4c28-9290-4b1e63ff7dd5", 1);
+        boolean add = new HoaDonChiTietRepository().delete("44a3f36c-64bb-4c28-9290-4b1e63ff7dd5","64e38e57-1447-483d-a82f-08c6dd36ae74");
+        System.out.println(add);
     }
 }
