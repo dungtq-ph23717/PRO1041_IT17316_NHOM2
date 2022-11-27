@@ -12,6 +12,7 @@ import ViewModels.HoaDon;
 import ViewModels.SanPham;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -86,7 +87,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         txtTienThoi = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btHuyDon = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -214,7 +215,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         jButton3.setText("Thanh toán");
 
-        jButton1.setText("Huỷ đơn");
+        btHuyDon.setText("Huỷ đơn");
+        btHuyDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btHuyDonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Tạo hoá đơn");
 
@@ -285,7 +291,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                                 .addComponent(txtTienThoi, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btHuyDon, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2))
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -342,7 +348,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     .addComponent(txtTienThoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btHuyDon)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -468,9 +474,13 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtTienKhachTraKeyReleased
 
+    private void btHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyDonActionPerformed
+        JOptionPane.showMessageDialog(this, closable);
+    }//GEN-LAST:event_btHuyDonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btHuyDon;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
