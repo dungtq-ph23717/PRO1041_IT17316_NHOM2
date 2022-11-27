@@ -43,7 +43,7 @@ public class SanPhamRepository {
         String query = "SELECT MaSP, TenSP, Giaban, MoTa, DanhMuc.TenDM, TrangThai, Size FROM SanPham\n"
                 + "INNER JOIN DanhMuc ON SanPham.IDDM = DanhMuc.ID\n"
                 + "inner join Size on SanPham.IDSize = Size.ID\n"
-                + "Where TrangThai like 'Đang bán'";
+                + "Where TrangThai like N'Đang bán'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<SanPham> list = new ArrayList<>();
