@@ -6,6 +6,7 @@ package Service;
 
 import ViewModels.ComboReponse;
 import DomainModels.ComboModel;
+import DomainModels.SanPhamModel;
 import java.util.List;
 
 /**
@@ -14,13 +15,14 @@ import java.util.List;
  */
 public interface ComboService {
 
-    List<ComboReponse> get_all();
+    List<ComboModel> get_all();
 
     String add(ComboModel a);
 
-    String update(ComboModel a);
+    String update(ComboModel a,String id);
 
     String delete(ComboModel a);
+    SanPhamModel getOne(String ten);
 
-    ComboReponse getById(String id);
+//    ComboReponse getById(String id);
 }

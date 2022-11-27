@@ -27,7 +27,7 @@ public class HoaDonRepository {
                 + "             dbo.KhuyenMai ON dbo.HoaDon.IDKM = dbo.KhuyenMai.ID INNER JOIN\n"
                 + "             dbo.NhanVien ON dbo.HoaDon.IDNV = dbo.NhanVien.ID INNER JOIN\n"
                 + "             dbo.Ban ON dbo.HoaDon.ID = dbo.Ban.ID";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
@@ -45,7 +45,7 @@ public class HoaDonRepository {
         String query = "Select MaHD,NgayLapHD,TenNV\n"
                 + "from HoaDon \n"
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
@@ -72,7 +72,7 @@ public class HoaDonRepository {
                 + "     VALUES\n"
                 + "           (?,?,?,?,?,?,?)";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getMaHD());
             ps.setObject(2, hd.getNgayLapHD());
             ps.setObject(3, hd.getThanhTien());
@@ -99,7 +99,7 @@ public class HoaDonRepository {
                 + "      ,[IDBan] =?\n"
                 + " WHERE ID=?";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getMaHD());
             ps.setObject(2, hd.getNgayLapHD());
             ps.setObject(3, hd.getThanhTien());
@@ -117,9 +117,9 @@ public class HoaDonRepository {
 
     public boolean delete(String ID) {
         String query = "DELETE FROM [dbo].[HoaDon]\n"
-                + "      WHERE ID=?";
+                + "      WHERE  MaHD=?";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ID);
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -134,5 +134,32 @@ public class HoaDonRepository {
         for (HoaDon hoaDon : rp) {
             System.out.println(hoaDon.toString());
         }
+    }
+
+    public List<HoaDonModel> getListChuaThanhToan() {
+        String query = "SELECT [ID]\n"
+                + "      ,[MaHD]\n"
+                + "      ,[NgayLapHD]\n"
+                + "      ,[ThanhTien]\n"
+                + "      ,[PhuongThucThanhToan]\n"
+                + "      ,[IDNV]\n"
+                + "      ,[IDKM]\n"
+                + "      ,[IDBan]\n"
+                + "      ,[TinhTrang]\n"
+                + "  FROM [dbo].[HoaDon]\n"
+                + "  where TinhTrang='Chưa thanh toán'";
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+            List<HoaDonModel> glistHD = new ArrayList<>();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+               HoaDonModel hdm= new HoaDonModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
+            }
+            return glistHD;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 }

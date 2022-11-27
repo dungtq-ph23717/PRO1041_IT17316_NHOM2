@@ -27,7 +27,11 @@ public class NhanVienServiceImpl implements NhanVienService {
     public String add(NhanVienModel nhanVien) {
         if(nhanVien.getMaNV().isEmpty()||nhanVien.getSDT().isEmpty()||nhanVien.getDiaChi().isEmpty()||nhanVien.getTenNV().isEmpty()){
             return "Dữ liệu còn trống!";
-        }else{
+        }
+         NhanVienModel ma = nhanVienRepository.checkTrung(nhanVien.getMaNV());
+        if (ma != null) {
+            return "Mã SP đã tồn tại!";
+        }
             
         
         boolean add = nhanVienRepository.add(nhanVien);
@@ -37,7 +41,7 @@ public class NhanVienServiceImpl implements NhanVienService {
             return "ADD THẤT BẠI";
         }
     }
-    }
+    
 
     @Override
     public String delete(String id) {

@@ -12,6 +12,7 @@ public class DanhMucModel {
 
     private String id;
     private String tenDM;
+   
 
     public DanhMucModel() {
     }
@@ -20,6 +21,8 @@ public class DanhMucModel {
         this.id = id;
         this.tenDM = tenDM;
     }
+
+       
 
     public DanhMucModel(String tenDM) {
         this.tenDM = tenDM;
