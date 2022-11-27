@@ -6,6 +6,7 @@ package Service;
 
 import DomainModels.HoaDonChiTietModel;
 import DomainModels.HoaDonModel;
+import ViewModels.HoaDon;
 import java.util.List;
 
 /**
@@ -15,8 +16,10 @@ import java.util.List;
 public interface ServiceHoaDon {
 
     List<ViewModels.HoaDon> getAll();
-    
+
     List<ViewModels.HoaDon> getAllTT();
+
+    HoaDon getOne(String ma);
 
     String add(HoaDonModel hd, HoaDonChiTietModel hdct);
 

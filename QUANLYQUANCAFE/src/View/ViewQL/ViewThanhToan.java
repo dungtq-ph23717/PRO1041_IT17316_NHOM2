@@ -4,6 +4,7 @@
  */
 package View.ViewQL;
 
+import DomainModels.HoaDonChiTietModel;
 import DomainModels.KhuyenMaiModel;
 import View.ViewNV.*;
 import Service.impl.BanServiceImpl;
@@ -22,6 +23,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -204,6 +206,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(tbGH);
 
         jButton4.setText("Xoá sản phẩm");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -437,6 +444,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbHDMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tbHD);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -482,6 +494,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSPMouseClicked(evt);
+            }
+        });
         jScrollPane7.setViewportView(tbSP);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -536,9 +553,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tbCB, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tbCB))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
@@ -584,6 +600,42 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtTienKhachTraKeyReleased
 
+    private void tbSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSPMouseClicked
+        int rowSP = tbSP.getSelectedRow();
+        String maSP = tbSP.getValueAt(rowSP, 0).toString();
+        SanPham sp = implSP.getOne(maSP);
+        HoaDon idHD = implHD.getOne(txtMa.getText());
+        String id = sp.getId();
+        int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+        if (slt <= 0) {
+            JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+            return;
+        }
+        HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt);
+        implHDCT.add(hdct);
+        listHDCT = implHDCT.getAll();
+        showDataHDCT(listHDCT);
+    }//GEN-LAST:event_tbSPMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        HoaDon idHD = implHD.getOne(txtMa.getText());
+        int rowSP = tbGH.getSelectedRow();
+        String maSP = tbGH.getValueAt(rowSP, 0).toString();
+        SanPham sp = implSP.getOne(maSP);
+        implHDCT.delete(idHD.getID(),sp.getId());
+        listHDCT = implHDCT.getAll();
+        showDataHDCT(listHDCT);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void tbHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHDMouseClicked
+        int row = tbHD.getSelectedRow();
+        fillDataHD(row);
+    }//GEN-LAST:event_tbHDMouseClicked
+
+    private void fillDataHD(int index) {
+        HoaDon hd = listHoaDon.get(index);
+        txtMa.setText(hd.getMaHD());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbbGG;
