@@ -203,6 +203,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbGH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbGHMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tbGH);
 
         jButton4.setText("Xoá sản phẩm");
@@ -590,12 +595,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void txtTienKhachTraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachTraKeyReleased
         try {
-            Integer tongTien = Integer.valueOf(txtTongTien.getText());
-            Integer tienKhach = Integer.valueOf(txtTienKhachTra.getText());
-            int tienThua = tienKhach - tongTien;
+            double tongTien = Double.valueOf(txtTongTien.getText());
+            double tienKhach = Double.valueOf(txtTienKhachTra.getText());
+            double tienThua = tienKhach - tongTien;
             txtTienThua.setText(String.valueOf(tienThua));
         } catch (Exception e) {
-            txtTienThua.setText("");
+            txtTienThua.setText("0");
             txtTienKhachTra.setText("");
         }
     }//GEN-LAST:event_txtTienKhachTraKeyReleased
@@ -632,6 +637,15 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         fillDataHD(row);
     }//GEN-LAST:event_tbHDMouseClicked
 
+    private void tbGHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGHMouseClicked
+        int row = tbGH.getSelectedRow();
+        fillDataGH(row);
+    }//GEN-LAST:event_tbGHMouseClicked
+
+    private void fillDataGH(int index){
+        HoaDonChiTiet hdct = listHDCT.get(index);
+        txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
+    }
     private void fillDataHD(int index) {
         HoaDon hd = listHoaDon.get(index);
         txtMa.setText(hd.getMaHD());
