@@ -86,7 +86,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         listSanPham = implSP.getAllTT();
         showDataSP(listSanPham);
 
-        String[] headersCB = {"Mã CB", "Tên CB", "Giá bán"};
+        String[] headersCB = {"ID", "Mã CB", "Tên CB", "Giá bán"};
         tbHD1.setModel(dtmCB);
         dtmCB.setColumnIdentifiers(headersCB);
         listCB = implCB.get_all();
@@ -136,7 +136,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
-            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), x.getTrangThai()});
+            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), x.getTinhTrang()});
         }
     }
 
