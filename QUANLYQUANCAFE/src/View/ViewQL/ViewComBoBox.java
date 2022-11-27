@@ -38,6 +38,7 @@ public class ViewComBoBox extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         txtID.disable();
+        txtTenSP.disable();
 
         tableCOMBO.setModel(dtm);
 
@@ -90,6 +91,13 @@ public class ViewComBoBox extends javax.swing.JDialog {
         }
         return null;
 
+    }
+    private ComboModel getdata1(){
+        ComboModel comboModel= new ComboModel();
+        comboModel.setMaCB(txtMAcombo.getText());
+        comboModel.setTenCB(txtTenSP.getText());
+        comboModel.setGiaBan(Double.valueOf(txtGIAban.getText()));
+        return comboModel;
     }
 
     /**
@@ -377,7 +385,7 @@ public class ViewComBoBox extends javax.swing.JDialog {
     }//GEN-LAST:event_btADDActionPerformed
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
-        JOptionPane.showMessageDialog(this, comboService.update(getData(), txtID.getText()));
+        JOptionPane.showMessageDialog(this, comboService.update(getdata1(), txtID.getText()));
         lists = comboService.get_all();
         showdatacombo(lists);
     }//GEN-LAST:event_btupdateActionPerformed
@@ -399,17 +407,7 @@ public class ViewComBoBox extends javax.swing.JDialog {
     }//GEN-LAST:event_btClearActionPerformed
 
     private void btLuaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLuaSPActionPerformed
-//        for (int i = 0; i < tableSP.getRowCount(); i++) {
-//            boolean check = Boolean.valueOf(tableSP.getValueAt(i, 0).toString());
-//            String col = tableSP.getValueAt(i, 1).toString();
-//            if (check) {
-//                
-//                 SanPhamModel sp=comboService.getOne(col);
-//                ComboModel idcb=comboService.getOne();
-//                Combo_SanPham s = new Combo_SanPham(idcb.getId(), idKM.getID());
-//                JOptionPane.showMessageDialog(this, impl2.add(s));
-//            }
-//        }
+
     }//GEN-LAST:event_btLuaSPActionPerformed
 
     /**
