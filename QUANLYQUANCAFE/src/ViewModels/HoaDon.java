@@ -24,6 +24,12 @@ public class HoaDon {
     public HoaDon() {
     }
 
+    public HoaDon(String maHD, String ngayLapHD, double thanhTien) {
+        this.maHD = maHD;
+        this.ngayLapHD = ngayLapHD;
+        this.thanhTien = thanhTien;
+    }
+
     public HoaDon(String maHD) {
         this.maHD = maHD;
     }

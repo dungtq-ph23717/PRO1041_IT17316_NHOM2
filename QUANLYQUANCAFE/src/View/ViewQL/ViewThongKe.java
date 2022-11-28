@@ -4,7 +4,12 @@
  */
 package View.ViewQL;
 
+import javax.swing.table.DefaultTableModel;
+import DomainModels.HoaDonModel;
+import Repository.HoaDonRepository;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import Service.impl.HoaDonServiceIblm;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -12,14 +17,42 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 public class ViewThongKe extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel _DefaultTableModel1;
+    private HoaDonServiceIblm _HoaDonService;
+    private String _idWhenClick;
+
     /**
      * Creates new form ViewThongKe
      */
     public ViewThongKe() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        BasicInternalFrameUI uI = (BasicInternalFrameUI)this.getUI();
+        BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
+        _HoaDonService = new HoaDonServiceIblm();
+        LoadTable();
+        TinhTong();
+
+    }
+
+    public void LoadTable() {
+        _DefaultTableModel1 = (DefaultTableModel) tbl_thongke.getModel();
+        _DefaultTableModel1.setRowCount(0);
+        int stt = 1;
+        for (var o : _HoaDonService.getListHD()) {
+            _DefaultTableModel1.addRow(new Object[]{
+                stt++, o.getMaHD(), o.getNgayLapHD(), o.getThanhTien()
+            });
+        }
+    }
+
+    public void TinhTong() {
+        DecimalFormat x = new DecimalFormat("###,###,###");
+        int Tong = 0;
+        for (int i = 0; i < tbl_thongke.getRowCount(); i++) {
+            Tong += Integer.parseInt(tbl_thongke.getValueAt(i,3).toString());
+        }
+        lbl_Tong.setText("Tong Doanh Thu: "+x.format(Tong) + " " + "VNĐ");
     }
 
     /**
@@ -31,23 +64,140 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
+        btn_timkiem = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_thongke = new javax.swing.JTable();
+        lbl_Tong = new javax.swing.JLabel();
+
         setPreferredSize(new java.awt.Dimension(814, 678));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel2.setText("Thống Kê Doanh Thu");
+
+        jLabel3.setText("Tim Kiem Theo Ngay");
+
+        txtDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDateMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtDateMouseExited(evt);
+            }
+        });
+
+        btn_timkiem.setText("Tim Kiem");
+        btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timkiemActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Clear");
+
+        tbl_thongke.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "STT", "Ma HD", "Ngày Đat", "Thành Tiên"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_thongke);
+
+        lbl_Tong.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_Tong.setText("Tong Doanh Thu:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1077, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(270, 270, 270))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(506, 506, 506)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(btn_timkiem)
+                                .addGap(42, 42, 42)
+                                .addComponent(jButton2))
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(lbl_Tong, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(419, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_timkiem)
+                    .addComponent(jButton2)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(lbl_Tong)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 1093, 735);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
+
+    }//GEN-LAST:event_btn_timkiemActionPerformed
+
+    private void txtDateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDateMouseExited
+        txtDate.setText("Tìm Kiếm ....");
+        LoadTable();
+    }//GEN-LAST:event_txtDateMouseExited
+
+    private void txtDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDateMouseClicked
+        txtDate.setText("");
+    }//GEN-LAST:event_txtDateMouseClicked
+    /**
+     * @param args the command line arguments
+     */
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_timkiem;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_Tong;
+    private javax.swing.JTable tbl_thongke;
+    private javax.swing.JTextField txtDate;
     // End of variables declaration//GEN-END:variables
+
 }

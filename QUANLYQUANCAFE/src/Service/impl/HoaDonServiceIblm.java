@@ -39,6 +39,11 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     public List<HoaDon> getAllTT() {
         return rps.getAllTT();
     }
+    
+     @Override
+    public List<HoaDon> getListHD() {
+        return rps.getListHD();
+    }
 
     @Override
     public HoaDon getOne(String ma) {

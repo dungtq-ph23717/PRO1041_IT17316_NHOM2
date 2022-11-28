@@ -18,6 +18,8 @@ public interface ServiceHoaDon {
     List<ViewModels.HoaDon> getAll();
 
     List<ViewModels.HoaDon> getAllTT();
+    
+    List<ViewModels.HoaDon> getListHD();
 
     HoaDon getOne(String ma);
 
