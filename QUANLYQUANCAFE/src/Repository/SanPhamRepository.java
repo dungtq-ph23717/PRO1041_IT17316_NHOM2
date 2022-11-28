@@ -90,6 +90,7 @@ public class SanPhamRepository {
         }
         return null;
     }
+    
 
     public List<SanPham> search(String ten) {
         String query = "SELECT MaSP, TenSP, Giaban, MoTa, DanhMuc.TenDM, TrangThai, Size FROM SanPham\n"

@@ -150,7 +150,7 @@ public class HoaDonChiTietRepository {
         HoaDonChiTiet hd = new HoaDonChiTietRepository().getOne("SP1");
         System.out.println(hd);
 //        HoaDonChiTietModel hd = new HoaDonChiTietModel("6a0c96e8-fe13-4e56-80b8-1a294978cc7b", "44a3f36c-64bb-4c28-9290-4b1e63ff7dd5", 1);
-//        boolean add = new HoaDonChiTietRepository().delete("44a3f36c-64bb-4c28-9290-4b1e63ff7dd5", "64e38e57-1447-483d-a82f-08c6dd36ae74");
-//        System.out.println(add);
+        boolean add = new HoaDonChiTietRepository().delete("218FB055-1C8F-4CDE-97C4-7743EAA406C2", "6A0C96E8-FE13-4E56-80B8-1A294978CC7B");
+        System.out.println(add);
     }
 }

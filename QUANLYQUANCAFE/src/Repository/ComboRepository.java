@@ -108,12 +108,11 @@ public class ComboRepository {
     }
 
     public ComboModel getOne(String ma) {
-        String query = "SELECT dbo.Combo.ID, dbo.Combo.MaCB, dbo.Combo.TenCB, dbo.Combo.GiaBan, dbo.Combo_HD.IDCB, dbo.Combo_HD.IDHD, dbo.HoaDon.ID AS Expr1, dbo.HoaDonChiTiet.IDHD AS Expr2\n"
-                + "FROM   dbo.HoaDon INNER JOIN\n"
-                + "             dbo.Combo_HD ON dbo.HoaDon.ID = dbo.Combo_HD.IDHD INNER JOIN\n"
-                + "             dbo.HoaDonChiTiet ON dbo.HoaDon.ID = dbo.HoaDonChiTiet.IDHD INNER JOIN\n"
-                + "             dbo.Combo ON dbo.Combo_HD.IDCB = dbo.Combo.ID\n"
-                + "			 where MaCB like ?";
+        String query = "SELECT [ID]\n"
+                + "      ,[MaCB]\n"
+                + "      ,[TenCB]\n"
+                + "      ,[GiaBan]\n"
+                + "  FROM [dbo].[Combo]";
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();

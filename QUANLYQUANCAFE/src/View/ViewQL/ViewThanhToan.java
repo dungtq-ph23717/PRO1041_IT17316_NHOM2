@@ -179,7 +179,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
+        btXoaSP = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtMa = new javax.swing.JLabel();
@@ -193,10 +193,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         txtTienKhachTra = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btThanhToan = new javax.swing.JButton();
         btHuyHoaDon = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        btTaoHoadon = new javax.swing.JButton();
+        ckbIn = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
@@ -276,10 +276,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tbGH);
 
-        jButton4.setText("Xoá sản phẩm");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btXoaSP.setText("Xoá sản phẩm");
+        btXoaSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btXoaSPActionPerformed(evt);
             }
         });
 
@@ -293,14 +293,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(btXoaSP)
                 .addGap(72, 72, 72))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(btXoaSP)
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -336,7 +336,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Tiền thừa");
 
-        jButton3.setText("Thanh toán");
+        btThanhToan.setText("Thanh toán");
 
         btHuyHoaDon.setText("Huỷ đơn");
         btHuyHoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -345,15 +345,15 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Tạo hoá đơn");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btTaoHoadon.setText("Tạo hoá đơn");
+        btTaoHoadon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btTaoHoadonActionPerformed(evt);
             }
         });
 
-        jCheckBox1.setText("In");
-        jCheckBox1.setToolTipText("");
+        ckbIn.setText("In");
+        ckbIn.setToolTipText("");
 
         jLabel1.setText("Phương thức thanh toán");
         jLabel1.setToolTipText("");
@@ -402,11 +402,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(btHuyHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
+                                .addComponent(btTaoHoadon))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jButton3)
+                                .addComponent(btThanhToan)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBox1))
+                                .addComponent(ckbIn))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
@@ -472,11 +472,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btHuyHoaDon)
-                    .addComponent(jButton2))
+                    .addComponent(btTaoHoadon))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jCheckBox1))
+                    .addComponent(btThanhToan)
+                    .addComponent(ckbIn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -740,7 +740,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tbSPMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaSPActionPerformed
         HoaDon idHD = implHD.getOne(txtMa.getText());
         int rowSP = tbGH.getSelectedRow();
         String maSP = tbGH.getValueAt(rowSP, 0).toString();
@@ -748,7 +748,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         implHDCT.delete(idHD.getID(), sp.getId());
         listHDCT = implHDCT.getAllviewGH(sp.getId());
         showDataHDCT(listHDCT);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btXoaSPActionPerformed
 
     private void tbHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHDMouseClicked
         int row = tbHD.getSelectedRow();
@@ -772,7 +772,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         showDataHD(listHoaDon);
     }//GEN-LAST:event_tbBanMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btTaoHoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaoHoadonActionPerformed
         if (txtBan.getText() == "__") {
             JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
         } else {
@@ -790,7 +790,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             listHoaDon = implHD.getAllTTViewHD(b.getId());
             showDataHD(listHoaDon);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btTaoHoadonActionPerformed
     private void tachBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachBanActionPerformed
         JOptionPane.showMessageDialog(this, "Tách bàn");
     }//GEN-LAST:event_tachBanActionPerformed
@@ -816,34 +816,37 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtSearchTenSPKeyReleased
 
-    private void deletehdct(){
-        JOptionPane.showMessageDialog(this, implHDCT.deletehdct(txtMa.getText()));
+    private void deletehdct() {
+
     }
-    private void deletehd(){
-        JOptionPane.showMessageDialog(this, implHD.delete(txtMa.getText()));
-    }
+//    private void deletehd(){
+//        JOptionPane.showMessageDialog(this, implHD.delete(txtMa.getText()));
+//    }
     private void btHuyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyHoaDonActionPerformed
-        deletehdct();
-        showDataHDCT(listHDCT);
-        deletehd();
-        showDataHD(listHoaDon);
+        if(tbGH.getRowCount()>0){
+            JOptionPane.showMessageDialog(this, "hóa đơn còn ở sản phẩm");
+        }else{
+            JOptionPane.showMessageDialog(this, implHD.delete(txtMa.getText()));
+            showDataHD(listHoaDon);
+        }
+
     }//GEN-LAST:event_btHuyHoaDonActionPerformed
 
     private void tbHD1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHD1MouseClicked
-         int rowcb = tbHD1.getSelectedRow();
-        String macb = tbHD1.getValueAt(rowcb, 0).toString();
-        ComboModel cm1 = implCB.getOne(macb);
-        HoaDon idHD = implHD.getOne(txtMa.getText());
-       String id = cm1.getMaCB();
-        int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-        if (slt <= 0) {
-            JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-            return;
-        }
-        HoaDonChiTietModel hdct = new HoaDonChiTietModel(id,idHD.getID(), slt);
-        implHDCT.add(hdct);
-        listHDCT = implHDCT.getAll();
-        showDataHDCT(listHDCT);
+//         int rowcb = tbHD1.getSelectedRow();
+//        String macb = tbHD1.getValueAt(rowcb, 0).toString();
+//        ComboModel cm1 = implCB.getOne(macb);
+//        HoaDon idHD = implHD.getOne(txtMa.getText());
+//       String id = cm1.getMaCB();
+//        int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+//        if (slt <= 0) {
+//            JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+//            return;
+//        }
+//        HoaDonChiTietModel hdct = new HoaDonChiTietModel(id,idHD.getID(), slt);
+//        implHDCT.add(hdct);
+//        listHDCT = implHDCT.getAll();
+//        showDataHDCT(listHDCT);
     }//GEN-LAST:event_tbHD1MouseClicked
 
     private void fillDataGH(int index) {
@@ -865,16 +868,13 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btHuyHoaDon;
+    private javax.swing.JButton btTaoHoadon;
+    private javax.swing.JButton btThanhToan;
+    private javax.swing.JButton btXoaSP;
     private javax.swing.JComboBox<String> cbbGG;
-
+    private javax.swing.JCheckBox ckbIn;
     private javax.swing.JMenuItem gopHD;
     private javax.swing.JMenuItem gopban;
-    private javax.swing.JButton jButton1;
-
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

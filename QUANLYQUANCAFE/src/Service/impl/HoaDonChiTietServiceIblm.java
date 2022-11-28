@@ -59,4 +59,9 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
         return rp.getOne(ma);
     }
 
+    @Override
+    public String deletehdct(String idhd) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
