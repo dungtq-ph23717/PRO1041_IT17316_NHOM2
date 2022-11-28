@@ -6,6 +6,7 @@ package View.ViewQL;
 
 import DomainModels.ComboModel;
 import DomainModels.HoaDonChiTietModel;
+import DomainModels.HoaDonModel;
 import DomainModels.KhuyenMaiModel;
 import View.ViewNV.*;
 import Service.impl.BanServiceImpl;
@@ -25,6 +26,7 @@ import ViewModels.SanPham;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.SingleSelectionModel;
@@ -76,8 +78,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
-        listHoaDon = implHD.getAllTT();
-        listNV = implNV.getAll();
         showDataHD(listHoaDon);
 
         tbSP.setModel(dtmSanPham);
@@ -136,7 +136,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
-            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), x.getTinhTrang()});
+            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), "Chờ"});
         }
     }
 
@@ -295,6 +295,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jButton1.setText("Huỷ đơn");
 
         jButton2.setText("Tạo hoá đơn");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("In");
         jCheckBox1.setToolTipText("");
@@ -437,6 +442,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbBan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbBanMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tbBan);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -626,20 +636,24 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTienKhachTraKeyReleased
 
     private void tbSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSPMouseClicked
-        int rowSP = tbSP.getSelectedRow();
-        String maSP = tbSP.getValueAt(rowSP, 0).toString();
-        SanPham sp = implSP.getOne(maSP);
-        HoaDon idHD = implHD.getOne(txtMa.getText());
-        String id = sp.getId();
-        int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-        if (slt <= 0) {
-            JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-            return;
+        if (txtMa.getText() == "__") {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+        } else {
+            int rowSP = tbSP.getSelectedRow();
+            String maSP = tbSP.getValueAt(rowSP, 0).toString();
+            SanPham sp = implSP.getOne(maSP);
+            HoaDon idHD = implHD.getOne(txtMa.getText());
+            String id = sp.getId();
+            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+            if (slt <= 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+                return;
+            }
+            HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt);
+            implHDCT.add(hdct);
+            listHDCT = implHDCT.getAll();
+            showDataHDCT(listHDCT);
         }
-        HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt);
-        implHDCT.add(hdct);
-        listHDCT = implHDCT.getAll();
-        showDataHDCT(listHDCT);
     }//GEN-LAST:event_tbSPMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -655,6 +669,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private void tbHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHDMouseClicked
         int row = tbHD.getSelectedRow();
         fillDataHD(row);
+        String ma = tbHD.getValueAt(row, 0).toString();
+        HoaDon hd = implHD.getOne(ma);
+        listHDCT = implHDCT.getAllviewGH(hd.getID());
+        showDataHDCT(listHDCT);
     }//GEN-LAST:event_tbHDMouseClicked
 
     private void tbGHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGHMouseClicked
@@ -662,14 +680,46 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         fillDataGH(row);
     }//GEN-LAST:event_tbGHMouseClicked
 
+    private void tbBanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBanMouseClicked
+        int row = tbBan.getSelectedRow();
+        fillDataBan(row);
+        String ten = tbBan.getValueAt(row, 0).toString();
+        Ban b = implBan.getOne(ten);
+        listHoaDon = implHD.getAllTTViewHD(b.getId());
+        showDataHD(listHoaDon);
+    }//GEN-LAST:event_tbBanMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (txtBan.getText() == "__") {
+            JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
+        } else {
+            Ban b = implBan.getOne(txtBan.getText());
+            Random r = new Random();
+            int x = r.nextInt(100);
+            long millis = System.currentTimeMillis();
+            String name;
+            HoaDonModel hd = new HoaDonModel(b.getId());
+            implHD.add(hd, x + "");
+            listHoaDon = implHD.getAllTTViewHD(b.getId());
+            showDataHD(listHoaDon);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
     }
 
+    private void fillDataBan(int index) {
+        Ban b = listBan.get(index);
+        txtBan.setText(b.getTenBan());
+    }
+
     private void fillDataHD(int index) {
         HoaDon hd = listHoaDon.get(index);
         txtMa.setText(hd.getMaHD());
+        txtNgay.setText(hd.getNgayLapHD());
+        txtNhanVien.setText(hd.getTenNV().getTenNV());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

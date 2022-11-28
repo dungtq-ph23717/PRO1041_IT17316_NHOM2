@@ -18,7 +18,7 @@ public interface BanService {
 
     List<Ban> getAllTT();
 
-    Ban getOne(String ma);
+    Ban getOne(String id);
 
     List<Ban> Search(String ma);
 

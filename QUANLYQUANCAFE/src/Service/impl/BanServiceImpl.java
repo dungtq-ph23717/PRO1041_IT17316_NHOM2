@@ -24,8 +24,8 @@ public class BanServiceImpl implements BanService {
     }
 
     @Override
-    public Ban getOne(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Ban getOne(String id) {
+        return rp.getOne(id);
     }
 
     @Override

@@ -15,6 +15,8 @@ public interface ServiceHoaDonChiTiet {
 
     List<ViewModels.HoaDonChiTiet> getAll();
 
+    List<ViewModels.HoaDonChiTiet> getAllviewGH(String id);
+
     String add(HoaDonChiTietModel hd);
 
     String update(HoaDonChiTietModel hd, String maHD);

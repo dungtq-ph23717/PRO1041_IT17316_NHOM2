@@ -48,4 +48,9 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
         }
     }
 
+    @Override
+    public List<HoaDonChiTiet> getAllviewGH(String id) {
+        return rp.getAllviewGH(id);
+    }
+
 }

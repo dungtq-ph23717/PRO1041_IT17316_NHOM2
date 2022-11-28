@@ -41,6 +41,27 @@ public class HoaDonChiTietRepository {
         return null;
     }
 
+    public List<HoaDonChiTiet> getAllviewGH(String id) {
+        String query = "select	MaSP,TenSP,Giaban,Soluong, Soluong * Giaban as Tongtien\n"
+                + "from HoaDonChiTiet\n"
+                + "inner join SanPham on SanPham.ID = HoaDonChiTiet.IDSP\n"
+                + "where IDHD like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            List<HoaDonChiTiet> list = new ArrayList<>();
+            while (rs.next()) {
+                SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3));
+                HoaDonChiTiet hdct = new HoaDonChiTiet(sp, rs.getInt(4), rs.getDouble(5));
+                list.add(hdct);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public boolean add(HoaDonChiTietModel hd) {
         String query = "INSERT INTO [dbo].[HoaDonChiTiet]\n"
                 + "           ([IDSP]\n"
@@ -91,12 +112,12 @@ public class HoaDonChiTietRepository {
     }
 
     public static void main(String[] args) {
-//        List<HoaDonChiTiet> list = new HoaDonChiTietRepository().getAll();
-//        for (HoaDonChiTiet x : list) {
-//            System.out.println(x.toString());
-//        }
-        HoaDonChiTietModel hd = new HoaDonChiTietModel("6a0c96e8-fe13-4e56-80b8-1a294978cc7b", "44a3f36c-64bb-4c28-9290-4b1e63ff7dd5", 1);
-        boolean add = new HoaDonChiTietRepository().delete("44a3f36c-64bb-4c28-9290-4b1e63ff7dd5","64e38e57-1447-483d-a82f-08c6dd36ae74");
-        System.out.println(add);
+        List<HoaDonChiTiet> list = new HoaDonChiTietRepository().getAllviewGH("44a3f36c-64bb-4c28-9290-4b1e63ff7dd5");
+        for (HoaDonChiTiet x : list) {
+            System.out.println(x.toString());
+        }
+//        HoaDonChiTietModel hd = new HoaDonChiTietModel("6a0c96e8-fe13-4e56-80b8-1a294978cc7b", "44a3f36c-64bb-4c28-9290-4b1e63ff7dd5", 1);
+//        boolean add = new HoaDonChiTietRepository().delete("44a3f36c-64bb-4c28-9290-4b1e63ff7dd5", "64e38e57-1447-483d-a82f-08c6dd36ae74");
+//        System.out.println(add);
     }
 }
