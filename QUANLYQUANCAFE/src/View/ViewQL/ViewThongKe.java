@@ -31,7 +31,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         uI.setNorthPane(null);
         _HoaDonService = new HoaDonServiceIblm();
         LoadTable();
-        TinhTong();
+//        TinhTong();
 
     }
 
