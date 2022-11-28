@@ -609,7 +609,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtSearchTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -793,6 +793,15 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
         JOptionPane.showMessageDialog(this, "Gộp hoá đơn");
     }//GEN-LAST:event_gopHDActionPerformed
+
+    private void txtSearchTenSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTenSPKeyReleased
+        if (txtSearchTenSP.getText().equalsIgnoreCase("")) {
+            showDataSP(listSanPham);
+        } else {
+            List<SanPham> searchTenSP = implSP.search(txtSearchTenSP.getText());
+            showDataSP(searchTenSP);
+        }
+    }//GEN-LAST:event_txtSearchTenSPKeyReleased
 
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
