@@ -110,6 +110,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         tachBan.setText("Tách bàn");
         gopban.setText("Gộp bàn");
+        tachHD.setText("Tách hoá đơn");
+        gopHD.setText("Gộp hoá đơn");
     }
 
     public String Fomat(double gia) {
@@ -171,6 +173,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         puBan = new javax.swing.JPopupMenu();
         tachBan = new javax.swing.JMenuItem();
         gopban = new javax.swing.JMenuItem();
+        puHD = new javax.swing.JPopupMenu();
+        tachHD = new javax.swing.JMenuItem();
+        gopHD = new javax.swing.JMenuItem();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
@@ -216,10 +221,36 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         tbHD1 = new javax.swing.JTable();
 
         tachBan.setText("jMenuItem1");
+        tachBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tachBanActionPerformed(evt);
+            }
+        });
         puBan.add(tachBan);
 
         gopban.setText("jMenuItem1");
+        gopban.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gopbanActionPerformed(evt);
+            }
+        });
         puBan.add(gopban);
+
+        tachHD.setText("jMenuItem1");
+        tachHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tachHDActionPerformed(evt);
+            }
+        });
+        puHD.add(tachHD);
+
+        gopHD.setText("jMenuItem2");
+        gopHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gopHDActionPerformed(evt);
+            }
+        });
+        puHD.add(gopHD);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -493,6 +524,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbHD.setComponentPopupMenu(puHD);
         tbHD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbHDMouseClicked(evt);
@@ -726,6 +758,22 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void tachBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachBanActionPerformed
+        JOptionPane.showMessageDialog(this, "Tách bàn");
+    }//GEN-LAST:event_tachBanActionPerformed
+
+    private void gopbanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopbanActionPerformed
+        JOptionPane.showMessageDialog(this, "Gộp bàn");
+    }//GEN-LAST:event_gopbanActionPerformed
+
+    private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
+        JOptionPane.showMessageDialog(this, "Tách hoá đơn");
+    }//GEN-LAST:event_tachHDActionPerformed
+
+    private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
+        JOptionPane.showMessageDialog(this, "Gộp hoá đơn");
+    }//GEN-LAST:event_gopHDActionPerformed
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
@@ -745,6 +793,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbbGG;
+    private javax.swing.JMenuItem gopHD;
     private javax.swing.JMenuItem gopban;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -776,7 +825,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu puBan;
+    private javax.swing.JPopupMenu puHD;
     private javax.swing.JMenuItem tachBan;
+    private javax.swing.JMenuItem tachHD;
     private javax.swing.JTable tbBan;
     private javax.swing.JTabbedPane tbCB;
     private javax.swing.JTable tbGH;
