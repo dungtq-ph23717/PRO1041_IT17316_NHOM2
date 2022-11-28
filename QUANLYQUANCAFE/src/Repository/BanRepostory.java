@@ -16,7 +16,7 @@ import java.util.List;
 public class BanRepostory {
 
     public List<Ban> getAll() {
-        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV\n"
+        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV,TinhTrang\n"
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
@@ -24,7 +24,7 @@ public class BanRepostory {
             List<Ban> list = new ArrayList<>();
             while (rs.next()) {
                 KhuVuc kv = new KhuVuc(rs.getString(5));
-                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv);
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv, rs.getString(6));
                 list.add(ban);
             }
             return list;
@@ -34,15 +34,31 @@ public class BanRepostory {
         return null;
     }
 
+    public Ban getOne(String ten) {
+        String query = "SELECT [ID]\n"
+                + "  FROM [dbo].[Ban]\n"
+                + "  Where [TenBan] like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ten);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Ban(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<Ban> getAllTT() {
-        String query = "Select TenBan,Loaiban\n"
+        String query = "Select TenBan,Loaiban,TinhTrang\n"
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<Ban> list = new ArrayList<>();
             while (rs.next()) {
-                Ban ban = new Ban(rs.getString(1), rs.getString(2));
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3));
                 list.add(ban);
             }
             return list;
@@ -53,7 +69,7 @@ public class BanRepostory {
     }
 
     public List<Ban> Search(String ma) {
-        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV\n"
+        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV,TinhTrang\n"
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
                 + "where TenBan like ?";
@@ -63,7 +79,7 @@ public class BanRepostory {
             List<Ban> list = new ArrayList<>();
             while (rs.next()) {
                 KhuVuc kv = new KhuVuc(rs.getString(5));
-                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv);
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv, rs.getString(6));
                 list.add(ban);
             }
             return list;
@@ -74,7 +90,7 @@ public class BanRepostory {
     }
 
     public List<Ban> SearchKV(String TenKV) {
-        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV\n"
+        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV,TinhTrang\n"
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
                 + "where TenKV like ?";
@@ -84,7 +100,7 @@ public class BanRepostory {
             List<Ban> list = new ArrayList<>();
             while (rs.next()) {
                 KhuVuc kv = new KhuVuc(rs.getString(5));
-                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv);
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv, rs.getString(6));
                 list.add(ban);
             }
             return list;
@@ -95,7 +111,7 @@ public class BanRepostory {
     }
 
     public List<Ban> SearchTen(String ten) {
-        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV\n"
+        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV,TinhTrang\n"
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
                 + "where TenBan like ?";
@@ -105,7 +121,7 @@ public class BanRepostory {
             List<Ban> list = new ArrayList<>();
             while (rs.next()) {
                 KhuVuc kv = new KhuVuc(rs.getString(5));
-                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv);
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv, rs.getString(6));
                 list.add(ban);
             }
             return list;
@@ -116,7 +132,7 @@ public class BanRepostory {
     }
 
     public List<Ban> SearchLoaiBan(String loai) {
-        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV\n"
+        String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV,TinhTrang\n"
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
                 + "where Loaiban like ?";
@@ -126,7 +142,7 @@ public class BanRepostory {
             List<Ban> list = new ArrayList<>();
             while (rs.next()) {
                 KhuVuc kv = new KhuVuc(rs.getString(5));
-                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv);
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), kv, rs.getString(6));
                 list.add(ban);
             }
             return list;
@@ -199,12 +215,30 @@ public class BanRepostory {
         return check > 0;
     }
 
-    public static void main(String[] args) {
-        List<Ban> list = new BanRepostory().SearchKV("Tầng 1");
-        for (Ban x : list) {
-            System.out.println(x.toString());
+    public boolean updateTT(BanModel ban, String id) {
+        String query = "UPDATE [dbo].[Ban]\n"
+                + "   SET [TinhTrang] = ?\n"
+                + " WHERE ID = ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ban.getTinhTrang());
+            ps.setObject(2, id);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
-//        boolean add = new BanRepostory().delete("74021EA2-43FE-4472-B795-1EA8B5714FF2");
-//        System.out.println(add);
+        return check > 0;
+    }
+
+    public static void main(String[] args) {
+//        List<Ban> list = new BanRepostory().getAllTT();
+//        for (Ban x : list) {
+//            System.out.println(x.toString());
+//        }
+//        Ban b = new BanRepostory().getOne("Bàn 1");
+//        System.out.println(b);
+        BanModel b = new BanModel("Đang sử dụng");
+        boolean add = new BanRepostory().updateTT(b, "9f23f735-2783-4dfd-ac62-bb9b9397466c");
+        System.out.println(add);
     }
 }

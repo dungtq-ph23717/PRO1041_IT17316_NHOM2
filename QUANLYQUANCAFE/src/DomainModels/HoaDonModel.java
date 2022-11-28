@@ -19,7 +19,12 @@ public class HoaDonModel {
     private String IDNV;
     private String IDBan;
     private String tinhhTrang;
+
     public HoaDonModel() {
+    }
+
+    public HoaDonModel(String IDBan) {
+        this.IDBan = IDBan;
     }
 
     public HoaDonModel(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDKM, String IDNV, String IDBan, String tinhhTrang) {
@@ -33,8 +38,6 @@ public class HoaDonModel {
         this.IDBan = IDBan;
         this.tinhhTrang = tinhhTrang;
     }
-
-   
 
     public String getID() {
         return ID;
@@ -113,10 +116,8 @@ public class HoaDonModel {
         return "HoaDonModel{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", IDKM=" + IDKM + ", IDNV=" + IDNV + ", IDBan=" + IDBan + ", tinhhTrang=" + tinhhTrang + '}';
     }
 
-  
-
     public Object[] toRowData() {
-        return new Object[]{ID, maHD, ngayLapHD, thanhTien, phuongThucThanhToan, IDKM, IDNV, IDBan,tinhhTrang};
+        return new Object[]{ID, maHD, ngayLapHD, thanhTien, phuongThucThanhToan, IDKM, IDNV, IDBan, tinhhTrang};
 
     }
 }

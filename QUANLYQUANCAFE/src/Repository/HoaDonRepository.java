@@ -26,7 +26,7 @@ public class HoaDonRepository {
                 + "             dbo.KhuyenMai ON dbo.HoaDon.IDKM = dbo.KhuyenMai.ID INNER JOIN\n"
                 + "             dbo.NhanVien ON dbo.HoaDon.IDNV = dbo.NhanVien.ID INNER JOIN\n"
                 + "             dbo.Ban ON dbo.HoaDon.ID = dbo.Ban.ID";
-        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
@@ -49,7 +49,7 @@ public class HoaDonRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 NhanVienViewModel nv = new NhanVienViewModel(rs.getString(4));
-                return new HoaDon(rs.getString(1), rs.getString(2),rs.getString(3), nv,rs.getString(5));
+                return new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), nv, rs.getString(5));
             }
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -61,13 +61,13 @@ public class HoaDonRepository {
         String query = "Select MaHD,NgayLapHD,TenNV, TinhTrang\n"
                 + "from HoaDon \n"
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV";
-        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
                 NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
 
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv,rs.getString(4));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv, rs.getString(4));
 
                 list.add(hd);
             }
@@ -78,28 +78,35 @@ public class HoaDonRepository {
         return null;
     }
 
-    public boolean add(HoaDonModel hd) {
-        String query = "INSERT INTO [dbo].[HoaDon]\n"
-                + "           ([MaHD]\n"
-                + "           ,[NgayLapHD]\n"
-                + "           ,[ThanhTien]\n"
-                + "           ,[PhuongThucThanhToan]\n"
-                + "           ,[IDNV]\n"
-                + "           ,[IDKM]\n"
-                + "           ,[IDBan]\n"
-                + "           ,[TinhTrang])\n"
-                + "     VALUES\n"
-                + "           (?,?,?,?,?,?,?,?)";
+    public List<HoaDon> getAllTTViewHD(String id) {
+        String query = "Select MaHD,NgayLapHD,TenNV, hoadon.TinhTrang\n"
+                + "from HoaDon \n"
+                + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
+                + "inner join Ban on HoaDon.IDBan = Ban.ID\n"
+                + "Where IDBan like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, id);
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv, rs.getString(4));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public boolean add(HoaDonModel hd, String ma) {
+        String query = "INSERT INTO [dbo].[HoaDon]([MaHD],[NgayLapHD],[IDNV],[IDBan],[TinhTrang])\n"
+                + "VALUES('HD'+?,GETDATE(),'5dc424c8-d86a-4aa9-9b6a-399678fd5ae5',?,'Chờ')";
         int check = 0;
-        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, hd.getMaHD());
-            ps.setObject(2, hd.getNgayLapHD());
-            ps.setObject(3, hd.getThanhTien());
-            ps.setObject(4, hd.getPhuongThucThanhToan());
-            ps.setObject(5, hd.getIDKM());
-            ps.setObject(6, hd.getIDNV());
-            ps.setObject(7, hd.getIDBan());
-            ps.setObject(8, hd.getTinhhTrang());
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ma);
+            ps.setObject(2, hd.getIDBan());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -120,7 +127,7 @@ public class HoaDonRepository {
                 + "      ,[TinhTrang] = ?\n"
                 + " WHERE ID = ?";
         int check = 0;
-        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getMaHD());
             ps.setObject(2, hd.getNgayLapHD());
             ps.setObject(3, hd.getThanhTien());
@@ -141,7 +148,7 @@ public class HoaDonRepository {
         String query = "DELETE FROM [dbo].[HoaDon]\n"
                 + "      WHERE  MaHD=?";
         int check = 0;
-        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ID);
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -152,12 +159,12 @@ public class HoaDonRepository {
 
     public static void main(String[] args) {
 
-//        List<HoaDon> rp = new HoaDonRepository().getAllTT();
-//        for (HoaDon hoaDon : rp) {
-//            System.out.println(hoaDon.toString());
-//        }
-        HoaDon hd = new HoaDonRepository().getOne("HD2");
-        System.out.println(hd);
+        List<HoaDon> rp = new HoaDonRepository().getAllTTViewHD("771c62b0-ea76-4dc5-b5af-4e626985c5b3");
+        for (HoaDon hoaDon : rp) {
+            System.out.println(hoaDon.toString());
+        }
+//        HoaDon hd = new HoaDonRepository().getOne("HD2");
+//        System.out.println(hd);
     }
 
     public List<HoaDonModel> getListChuaThanhToan() {
@@ -172,12 +179,12 @@ public class HoaDonRepository {
                 + "      ,[TinhTrang]\n"
                 + "  FROM [dbo].[HoaDon]\n"
                 + "  where TinhTrang='Chưa thanh toán'";
-        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
             List<HoaDonModel> glistHD = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-               HoaDonModel hdm= new HoaDonModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
+                HoaDonModel hdm = new HoaDonModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
             }
             return glistHD;
         } catch (Exception e) {

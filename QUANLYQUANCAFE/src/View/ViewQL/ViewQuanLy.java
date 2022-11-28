@@ -307,7 +307,7 @@ public class ViewQuanLy extends javax.swing.JFrame {
 
         txtLichSuOrder1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtLichSuOrder1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtLichSuOrder1.setText("      Lịch sử order");
+        txtLichSuOrder1.setText("      Hoá đơn");
         txtLichSuOrder1.setToolTipText("");
         txtLichSuOrder1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {

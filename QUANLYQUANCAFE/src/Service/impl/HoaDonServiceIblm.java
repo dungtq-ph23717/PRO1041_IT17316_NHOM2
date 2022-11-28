@@ -23,7 +23,6 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
 //    public List<HoaDon> getAll() {
 //        return rps.getAll();
 //    }
-
     @Override
     public String delete(String maHD) {
         boolean delete = rps.delete(maHD);
@@ -34,7 +33,6 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         }
     }
 
-  
     @Override
     public List<HoaDon> getAllTT() {
         return rps.getAllTT();
@@ -46,8 +44,13 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     }
 
     @Override
-    public String add(HoaDonModel hd, HoaDonChiTietModel hdct) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String add(HoaDonModel hd, String id) {
+        boolean add = rps.add(hd, id);
+        if (add) {
+            return "Add thành công";
+        } else {
+            return "Add thất bại";
+        }
     }
 
     @Override
@@ -58,6 +61,11 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     @Override
     public List<HoaDon> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<HoaDon> getAllTTViewHD(String id) {
+        return rps.getAllTTViewHD(id);
     }
 
 }
