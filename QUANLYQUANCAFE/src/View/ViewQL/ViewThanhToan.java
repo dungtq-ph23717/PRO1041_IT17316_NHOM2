@@ -98,7 +98,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         String[] headersGH = {"Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Tổng tiền"};
         tbGH.setModel(dtmGioHang);
         dtmGioHang.setColumnIdentifiers(headersGH);
-        listHDCT = implHDCT.getAll();
+//        listHDCT = implHDCT.getAll();
         showDataHDCT(listHDCT);
 
         listKhuyenMai = implKM.getAll();
@@ -165,8 +165,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
@@ -210,19 +208,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jPanel8 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbHD1 = new javax.swing.JTable();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -666,7 +651,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             }
             HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt);
             implHDCT.add(hdct);
-            listHDCT = implHDCT.getAll();
+            listHDCT = implHDCT.getAllviewGH(idHD.getID());
             showDataHDCT(listHDCT);
         }
     }//GEN-LAST:event_tbSPMouseClicked
@@ -677,7 +662,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         String maSP = tbGH.getValueAt(rowSP, 0).toString();
         SanPham sp = implSP.getOne(maSP);
         implHDCT.delete(idHD.getID(), sp.getId());
-        listHDCT = implHDCT.getAll();
+        listHDCT = implHDCT.getAllviewGH(sp.getId());
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -763,13 +748,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable tbBan;
     private javax.swing.JTabbedPane tbCB;
     private javax.swing.JTable tbGH;
