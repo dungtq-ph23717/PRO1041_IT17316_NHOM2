@@ -398,7 +398,7 @@
                   <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="      L&#x1ecb;ch s&#x1eed; order"/>
+                <Property name="text" type="java.lang.String" value="      Ho&#xe1; &#x111;&#x1a1;n"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
