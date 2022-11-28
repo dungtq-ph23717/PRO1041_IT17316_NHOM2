@@ -17,8 +17,21 @@ public class BanModel {
     private String loaiBan;
     private String IDKV;
     private KhuVucModel tenKV;
+    private String tinhTrang;
+
+    public String getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(String tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }
 
     public BanModel() {
+    }
+
+    public BanModel(String tinhTrang) {
+        this.tinhTrang = tinhTrang;
     }
 
     public BanModel(String id, String maBan, String tenBan, String moTa, String loaiBan, String IDKV, KhuVucModel tenKV) {

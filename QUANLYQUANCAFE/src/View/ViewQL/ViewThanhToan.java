@@ -4,6 +4,7 @@
  */
 package View.ViewQL;
 
+import DomainModels.BanModel;
 import DomainModels.ComboModel;
 import DomainModels.HoaDonChiTietModel;
 import DomainModels.HoaDonModel;
@@ -107,6 +108,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             boxModelGG.addElement(x.getMucGiam());
         }
 
+        tachBan.setText("Tách bàn");
+        gopban.setText("Gộp bàn");
     }
 
     public String Fomat(double gia) {
@@ -165,6 +168,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        puBan = new javax.swing.JPopupMenu();
+        tachBan = new javax.swing.JMenuItem();
+        gopban = new javax.swing.JMenuItem();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
@@ -208,6 +214,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jPanel8 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbHD1 = new javax.swing.JTable();
+
+        tachBan.setText("jMenuItem1");
+        puBan.add(tachBan);
+
+        gopban.setText("jMenuItem1");
+        puBan.add(gopban);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -443,6 +455,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbBan.setComponentPopupMenu(puBan);
         tbBan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbBanMouseClicked(evt);
@@ -704,6 +717,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             String name;
             HoaDonModel hd = new HoaDonModel(b.getId());
             implHD.add(hd, x + "");
+            BanModel b2 = new BanModel("Đang sử dụng");
+            implBan.updateTT(b2, b.getId());
+            listBan = implBan.getAllTT();
+            showDataBan(listBan);
             listHoaDon = implHD.getAllTTViewHD(b.getId());
             showDataHD(listHoaDon);
         }
@@ -728,6 +745,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbbGG;
+    private javax.swing.JMenuItem gopban;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -757,6 +775,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JPopupMenu puBan;
+    private javax.swing.JMenuItem tachBan;
     private javax.swing.JTable tbBan;
     private javax.swing.JTabbedPane tbCB;
     private javax.swing.JTable tbGH;

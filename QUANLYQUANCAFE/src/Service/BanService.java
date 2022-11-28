@@ -32,5 +32,7 @@ public interface BanService {
 
     String update(BanModel ban, String ma);
 
+    String updateTT(BanModel ban, String ma);
+
     String delete(String ma);
 }

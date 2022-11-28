@@ -83,4 +83,14 @@ public class BanServiceImpl implements BanService {
         return rp.getAllTT();
     }
 
+    @Override
+    public String updateTT(BanModel ban, String ma) {
+        boolean update = rp.updateTT(ban, ma);
+        if (update) {
+            return "update thành công";
+        } else {
+            return "update thất bại";
+        }
+    }
+
 }

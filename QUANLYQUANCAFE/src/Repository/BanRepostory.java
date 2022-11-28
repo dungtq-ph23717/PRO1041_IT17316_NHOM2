@@ -215,14 +215,30 @@ public class BanRepostory {
         return check > 0;
     }
 
+    public boolean updateTT(BanModel ban, String id) {
+        String query = "UPDATE [dbo].[Ban]\n"
+                + "   SET [TinhTrang] = ?\n"
+                + " WHERE ID = ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ban.getTinhTrang());
+            ps.setObject(2, id);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public static void main(String[] args) {
 //        List<Ban> list = new BanRepostory().getAllTT();
 //        for (Ban x : list) {
 //            System.out.println(x.toString());
 //        }
-        Ban b = new BanRepostory().getOne("Bàn 1");
-        System.out.println(b);
-//        boolean add = new BanRepostory().delete("74021EA2-43FE-4472-B795-1EA8B5714FF2");
-//        System.out.println(add);
+//        Ban b = new BanRepostory().getOne("Bàn 1");
+//        System.out.println(b);
+        BanModel b = new BanModel("Đang sử dụng");
+        boolean add = new BanRepostory().updateTT(b, "9f23f735-2783-4dfd-ac62-bb9b9397466c");
+        System.out.println(add);
     }
 }
