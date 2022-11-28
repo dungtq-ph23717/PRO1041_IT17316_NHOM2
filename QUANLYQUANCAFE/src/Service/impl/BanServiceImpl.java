@@ -24,8 +24,8 @@ public class BanServiceImpl implements BanService {
     }
 
     @Override
-    public Ban getOne(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Ban getOne(String id) {
+        return rp.getOne(id);
     }
 
     @Override
@@ -81,6 +81,16 @@ public class BanServiceImpl implements BanService {
     @Override
     public List<Ban> getAllTT() {
         return rp.getAllTT();
+    }
+
+    @Override
+    public String updateTT(BanModel ban, String ma) {
+        boolean update = rp.updateTT(ban, ma);
+        if (update) {
+            return "update thành công";
+        } else {
+            return "update thất bại";
+        }
     }
 
 }

@@ -19,14 +19,14 @@ public interface ServiceHoaDon {
 
     List<ViewModels.HoaDon> getAllTT();
 
+    List<ViewModels.HoaDon> getAllTTViewHD(String id);
+
     HoaDon getOne(String ma);
 
-    String add(HoaDonModel hd, HoaDonChiTietModel hdct);
+    String add(HoaDonModel hd, String ma);
 
     String update(HoaDonModel hd, HoaDonChiTietModel hdct, String maHD);
 
-
     String delete(String maHD);
-   
 
 }

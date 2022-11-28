@@ -49,13 +49,14 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
     }
 
     @Override
-    public String deletehdct(String idhd) {
-        boolean delete=rp.deletehdct(idhd);
-        if(delete){
-            return "HỦY HÓA ĐƠN THÀNH CÔNG";
-        }else{
-            return "HỦY HÓA ĐƠN THẤT BẠI";
-        }
+
+    public List<HoaDonChiTiet> getAllviewGH(String id) {
+        return rp.getAllviewGH(id);
+    }
+
+    @Override
+    public HoaDonChiTiet getOne(String ma) {
+        return rp.getOne(ma);
     }
 
 }
