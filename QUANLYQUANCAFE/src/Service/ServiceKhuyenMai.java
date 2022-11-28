@@ -32,4 +32,8 @@ public interface ServiceKhuyenMai {
 
     List<ViewModels.KhuyenMai> searchTheoHinhThucGG(String htgg);
 
+    List<ViewModels.KhuyenMai> searchTheoTrangThai(String tt);
+
+    List<ViewModels.SanPham> searchSPTheoTen(String tenSP);
+
 }

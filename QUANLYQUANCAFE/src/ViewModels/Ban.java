@@ -16,13 +16,19 @@ public class Ban {
     private String moTa;
     private String loaiBan;
     private KhuVuc IDKV;
+    private String trangThai;
 
     public Ban() {
     }
 
-    public Ban(String tenBan, String loaiBan) {
+    public Ban(String id) {
+        this.id = id;
+    }
+
+    public Ban(String tenBan, String loaiBan, String trangThai) {
         this.tenBan = tenBan;
         this.loaiBan = loaiBan;
+        this.trangThai = trangThai;
     }
 
     public Ban(String id, String maBan, String tenBan, String moTa, String loaiBan, KhuVuc IDKV) {
@@ -32,14 +38,24 @@ public class Ban {
         this.moTa = moTa;
         this.loaiBan = loaiBan;
         this.IDKV = IDKV;
+
     }
 
-    public Ban(String maBan, String tenBan, String moTa, String loaiBan, KhuVuc IDKV) {
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public Ban(String maBan, String tenBan, String moTa, String loaiBan, KhuVuc IDKV, String trangThai) {
         this.maBan = maBan;
         this.tenBan = tenBan;
         this.moTa = moTa;
         this.loaiBan = loaiBan;
         this.IDKV = IDKV;
+        this.trangThai = trangThai;
     }
 
     public String getId() {
@@ -92,7 +108,7 @@ public class Ban {
 
     @Override
     public String toString() {
-        return "Ban{" + "id=" + id + ", maBan=" + maBan + ", tenBan=" + tenBan + ", moTa=" + moTa + ", loaiBan=" + loaiBan + ", IDKV=" + IDKV + '}';
+        return "Ban{" + "id=" + id + ", maBan=" + maBan + ", tenBan=" + tenBan + ", moTa=" + moTa + ", loaiBan=" + loaiBan + ", IDKV=" + IDKV + ", trangThai=" + trangThai + '}';
     }
 
     public Object[] toRowData() {
@@ -100,6 +116,6 @@ public class Ban {
     }
 
     public Object[] toRowDataTT() {
-        return new Object[]{tenBan, loaiBan};
+        return new Object[]{tenBan, loaiBan, trangThai};
     }
 }

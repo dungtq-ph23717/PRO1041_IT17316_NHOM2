@@ -7,6 +7,7 @@ package Service.impl;
 import DomainModels.KhuyenMaiModel;
 import Service.ServiceKhuyenMai;
 import ViewModels.KhuyenMai;
+import ViewModels.SanPham;
 import java.util.List;
 
 /**
@@ -32,9 +33,6 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
         if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || km.getMucGiam().isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
             return "Không được để trống !";
         }
-        if (km.getMucGiam().matches("[a-z A-Z]+") == false) {
-            return "Mức giảm phải là số và lớn hơn 0";
-        }
         KhuyenMaiModel ma = resKM.checkTrung(km.getMaKM());
         if (ma != null) {
             return "Mã khuyến mãi đã tồn tại!";
@@ -49,6 +47,13 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
 
     @Override
     public String updateTST(KhuyenMaiModel km, String IDKM) {
+        if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || km.getMucGiam().isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
+            return "Không được để trống !";
+        }
+        KhuyenMaiModel ma = resKM.checkTrung(km.getMaKM());
+        if (ma != null) {
+            return "Mã khuyến mãi đã tồn tại!";
+        }
         boolean update = resKM.updateTST(km, IDKM);
         if (update) {
             return "Sửa thành công!";
@@ -82,9 +87,6 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
         if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || km.getMucGiam().isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
             return "Không được để trống !";
         }
-        if (km.getMucGiam().matches("[a-z A-Z]+") == false) {
-            return "Mức giảm phải là số và lớn hơn 0";
-        }
         KhuyenMaiModel ma = resKM.checkTrung(km.getMaKM());
         if (ma != null) {
             return "Mã khuyến mãi đã tồn tại!";
@@ -99,11 +101,28 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
 
     @Override
     public String updateTPT(KhuyenMaiModel km, String IDKM) {
+        if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || km.getMucGiam().isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
+            return "Không được để trống !";
+        }
+        KhuyenMaiModel ma = resKM.checkTrung(km.getMaKM());
+        if (ma != null) {
+            return "Mã khuyến mãi đã tồn tại!";
+        }
         boolean update = resKM.updateTPT(km, IDKM);
         if (update) {
             return "Sửa thành công!";
         } else {
             return "Sửa thất bại!";
         }
+    }
+
+    @Override
+    public List<KhuyenMai> searchTheoTrangThai(String tt) {
+        return resKM.searchTheoTrangThai(tt);
+    }
+
+    @Override
+    public List<SanPham> searchSPTheoTen(String tenSP) {
+        return resKM.searchSP_KMTheoTen(tenSP);
     }
 }
