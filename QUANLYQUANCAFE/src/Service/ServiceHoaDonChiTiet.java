@@ -5,6 +5,7 @@
 package Service;
 
 import DomainModels.HoaDonChiTietModel;
+import ViewModels.HoaDonChiTiet;
 import java.util.List;
 
 /**
@@ -16,6 +17,8 @@ public interface ServiceHoaDonChiTiet {
     List<ViewModels.HoaDonChiTiet> getAll();
 
     List<ViewModels.HoaDonChiTiet> getAllviewGH(String id);
+
+    HoaDonChiTiet getOne(String ma);
 
     String add(HoaDonChiTietModel hd);
 

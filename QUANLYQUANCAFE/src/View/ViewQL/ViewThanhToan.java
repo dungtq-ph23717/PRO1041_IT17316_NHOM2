@@ -693,9 +693,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void txtTienKhachTraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachTraKeyReleased
         try {
-            double tongTien = Double.valueOf(txtTongTien.getText());
-            double tienKhach = Double.valueOf(txtTienKhachTra.getText());
-            double tienThua = tienKhach - tongTien;
+            int row = tbGH.getSelectedRow();
+            String ma = tbGH.getValueAt(row, 0).toString();
+            HoaDonChiTiet hd = implHDCT.getOne(ma);
+            Double tien = hd.getGiaTien();
+            Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
+            Double tienThua = tienKhach - tien;
             txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
         } catch (Exception e) {
             txtTienThua.setText("0");
@@ -805,7 +808,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
-        txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
+        txtTongTien.setText(String.valueOf(Fomat(hdct.getGiaTien())));
     }
 
     private void fillDataBan(int index) {
