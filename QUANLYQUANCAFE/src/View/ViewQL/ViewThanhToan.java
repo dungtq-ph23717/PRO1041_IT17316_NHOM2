@@ -24,8 +24,11 @@ import ViewModels.KhuyenMai;
 import ViewModels.NhanVienViewModel;
 import ViewModels.SanPham;
 import java.awt.Color;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -103,12 +106,25 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         for (KhuyenMai x : listKhuyenMai) {
             boxModelGG.addElement(x.getMucGiam());
         }
+
+    }
+
+    public String Fomat(double gia) {
+        Locale locale = new Locale("vi", "VN");
+//        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+//        format.setRoundingMode(RoundingMode.HALF_UP);
+        DecimalFormat format = (DecimalFormat) DecimalFormat.getCurrencyInstance(locale);
+        DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
+        decimalFormatSymbols.setGroupingSeparator(',');
+        decimalFormatSymbols.setCurrencySymbol("");
+        format.setDecimalFormatSymbols(decimalFormatSymbols);
+        return format.format(gia);
     }
 
     private void showDataHDCT(List<HoaDonChiTiet> list) {
         dtmGioHang.setRowCount(0);
         for (HoaDonChiTiet x : list) {
-            dtmGioHang.addRow(x.toRowdata());
+            dtmGioHang.addRow(new Object[]{x.getIdSP().getMaSP(), x.getIdSP().getTenSP(), x.getSoLuong(), Fomat(x.getIdSP().getGiaBan()), Fomat(x.getGiaTien())});
         }
     }
 
@@ -129,7 +145,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private void showDataSP(List<SanPham> list) {
         dtmSanPham.setRowCount(0);
         for (SanPham sp : list) {
-            dtmSanPham.addRow(new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getDanhMuc().getTenDanhMuc(), sp.getTrangThai(), sp.getMoTa(), sp.getSize().getSize()});
+            dtmSanPham.addRow(new Object[]{sp.getMaSP(), sp.getTenSP(), Fomat(sp.getGiaBan()), sp.getDanhMuc().getTenDanhMuc(), sp.getTrangThai(), sp.getMoTa(), sp.getSize().getSize()});
         }
     }
 
@@ -628,10 +644,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             double tongTien = Double.valueOf(txtTongTien.getText());
             double tienKhach = Double.valueOf(txtTienKhachTra.getText());
             double tienThua = tienKhach - tongTien;
-            txtTienThua.setText(String.valueOf(tienThua));
+            txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
         } catch (Exception e) {
             txtTienThua.setText("0");
-            txtTienKhachTra.setText("");
         }
     }//GEN-LAST:event_txtTienKhachTraKeyReleased
 
