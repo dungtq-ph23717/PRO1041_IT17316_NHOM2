@@ -107,24 +107,18 @@ public class ComboRepository {
         return null;
     }
 
-    public SanPhamModel getOne(String ten) {
-        String query = "SELECT [ID]\n"
-                + "      ,[MaSP]\n"
-                + "      ,[TenSP]\n"
-                + "      ,[Giaban]\n"
-                + "      ,[MoTa]\n"
-                + "      ,[Anh]\n"
-                + "      ,[IDSize]\n"
-                + "      ,[IDCB]\n"
-                + "      ,[IDDM]\n"
-                + "      ,[TrangThai]\n"
-                + "  FROM sanpham\n"
-                + "  where TenSP like ?";
+    public ComboModel getOne(String ma) {
+        String query = "SELECT dbo.Combo.ID, dbo.Combo.MaCB, dbo.Combo.TenCB, dbo.Combo.GiaBan, dbo.Combo_HD.IDCB, dbo.Combo_HD.IDHD, dbo.HoaDon.ID AS Expr1, dbo.HoaDonChiTiet.IDHD AS Expr2\n"
+                + "FROM   dbo.HoaDon INNER JOIN\n"
+                + "             dbo.Combo_HD ON dbo.HoaDon.ID = dbo.Combo_HD.IDHD INNER JOIN\n"
+                + "             dbo.HoaDonChiTiet ON dbo.HoaDon.ID = dbo.HoaDonChiTiet.IDHD INNER JOIN\n"
+                + "             dbo.Combo ON dbo.Combo_HD.IDCB = dbo.Combo.ID\n"
+                + "			 where MaCB like ?";
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setObject(1, ten);
+            ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return new SanPhamModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6),rs.getString(7), rs.getString(8), rs.getString(9),rs.getString(10));
+                return new ComboModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,6 +127,6 @@ public class ComboRepository {
     }
 
     public static void main(String[] args) {
-        System.out.println(new ComboRepository().update_cb(new ComboModel("EAE68394-711E-4CB0-A515-79E79DF4A019", "cb1", "cà phê+khô gà", 10000), "EAE68394-711E-4CB0-A515-79E79DF4A019"));
+        System.out.println(new ComboRepository().getOne("CB2"));
     }
 }

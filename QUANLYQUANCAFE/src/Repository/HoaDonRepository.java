@@ -137,12 +137,12 @@ public class HoaDonRepository {
         return check > 0;
     }
 
-    public boolean delete(String ID) {
+    public boolean delete(String ma) {
         String query = "DELETE FROM [dbo].[HoaDon]\n"
                 + "      WHERE  MaHD=?";
         int check = 0;
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, ID);
+            ps.setObject(1, ma);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);

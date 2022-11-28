@@ -48,4 +48,14 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
         }
     }
 
+    @Override
+    public String deletehdct(String idhd) {
+        boolean delete=rp.deletehdct(idhd);
+        if(delete){
+            return "HỦY HÓA ĐƠN THÀNH CÔNG";
+        }else{
+            return "HỦY HÓA ĐƠN THẤT BẠI";
+        }
+    }
+
 }

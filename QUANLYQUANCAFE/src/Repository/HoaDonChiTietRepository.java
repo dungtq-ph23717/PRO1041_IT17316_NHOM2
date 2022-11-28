@@ -89,6 +89,19 @@ public class HoaDonChiTietRepository {
         }
         return check > 0;
     }
+    
+      public boolean deletehdct(String idHD) {
+        String query = "DELETE FROM [dbo].[HoaDonChiTiet]\n"
+                + "      WHERE IDHD like ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, idHD);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
 
     public static void main(String[] args) {
 //        List<HoaDonChiTiet> list = new HoaDonChiTietRepository().getAll();

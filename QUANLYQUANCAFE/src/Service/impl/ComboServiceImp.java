@@ -57,8 +57,8 @@ public class ComboServiceImp implements ComboService {
     }
 
     @Override
-    public SanPhamModel getOne(String ten) {
-       return _ComboRepository.getOne(ten);
+    public ComboModel getOne(String ma) {
+       return _ComboRepository.getOne(ma);
     }
 
    

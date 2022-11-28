@@ -22,7 +22,7 @@ public interface ComboService {
     String update(ComboModel a,String id);
 
     String delete(ComboModel a);
-    SanPhamModel getOne(String ten);
+    ComboModel getOne(String ma);
 
 //    ComboReponse getById(String id);
 }

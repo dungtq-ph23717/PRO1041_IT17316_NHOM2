@@ -20,5 +20,6 @@ public interface ServiceHoaDonChiTiet {
     String update(HoaDonChiTietModel hd, String maHD);
 
     String delete(String idHD, String idSP);
+    String deletehdct(String idhd);
 
 }

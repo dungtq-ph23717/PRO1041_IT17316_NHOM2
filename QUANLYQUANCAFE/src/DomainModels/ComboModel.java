@@ -25,6 +25,8 @@ public class ComboModel {
         this.giaBan = giaBan;
     }
 
+ 
+
     public ComboModel(String maCB) {
         this.maCB = maCB;
     }

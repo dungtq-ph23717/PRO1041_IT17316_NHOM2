@@ -169,7 +169,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         txtTienKhachTra = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btHuyHoaDon = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -292,7 +292,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         jButton3.setText("Thanh toán");
 
-        jButton1.setText("Huỷ đơn");
+        btHuyHoaDon.setText("Huỷ đơn");
+        btHuyHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btHuyHoaDonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Tạo hoá đơn");
 
@@ -344,7 +349,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                                     .addComponent(txtBan)
                                     .addComponent(txtMa)))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btHuyHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2))
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -415,7 +420,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btHuyHoaDon)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -552,6 +557,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbHD1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbHD1MouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tbHD1);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -662,6 +672,36 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         fillDataGH(row);
     }//GEN-LAST:event_tbGHMouseClicked
 
+    private void deletehdct(){
+        JOptionPane.showMessageDialog(this, implHDCT.deletehdct(txtMa.getText()));
+    }
+    private void deletehd(){
+        JOptionPane.showMessageDialog(this, implHD.delete(txtMa.getText()));
+    }
+    private void btHuyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyHoaDonActionPerformed
+        deletehdct();
+        showDataHDCT(listHDCT);
+        deletehd();
+        showDataHD(listHoaDon);
+    }//GEN-LAST:event_btHuyHoaDonActionPerformed
+
+    private void tbHD1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHD1MouseClicked
+         int rowcb = tbHD1.getSelectedRow();
+        String macb = tbHD1.getValueAt(rowcb, 0).toString();
+        ComboModel cm1 = implCB.getOne(macb);
+        HoaDon idHD = implHD.getOne(txtMa.getText());
+       String id = cm1.getMaCB();
+        int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+        if (slt <= 0) {
+            JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+            return;
+        }
+        HoaDonChiTietModel hdct = new HoaDonChiTietModel(id,idHD.getID(), slt);
+        implHDCT.add(hdct);
+        listHDCT = implHDCT.getAll();
+        showDataHDCT(listHDCT);
+    }//GEN-LAST:event_tbHD1MouseClicked
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
@@ -673,8 +713,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btHuyHoaDon;
     private javax.swing.JComboBox<String> cbbGG;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
