@@ -191,6 +191,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbSP = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        txtSearchTenSP = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbHD1 = new javax.swing.JTable();
@@ -526,6 +528,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         });
         jScrollPane7.setViewportView(tbSP);
 
+        jLabel12.setText("TÌM KIẾM SẢN PHẨM:");
+
+        txtSearchTenSP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchTenSPKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -533,10 +543,22 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearchTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtSearchTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tbCB.addTab("Sản phẩm", jPanel7);
@@ -662,6 +684,15 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         fillDataGH(row);
     }//GEN-LAST:event_tbGHMouseClicked
 
+    private void txtSearchTenSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTenSPKeyReleased
+        if (txtSearchTenSP.getText().equalsIgnoreCase("")) {
+            showDataSP(listSanPham);
+        } else {
+            List<SanPham> searchTenSP = implSP.search(txtSearchTenSP.getText());
+            showDataSP(searchTenSP);
+        }
+    }//GEN-LAST:event_txtSearchTenSPKeyReleased
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
@@ -683,6 +714,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -715,6 +747,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtMa;
     private javax.swing.JLabel txtNgay;
     private javax.swing.JLabel txtNhanVien;
+    private javax.swing.JTextField txtSearchTenSP;
     private javax.swing.JTextField txtTienKhachTra;
     private javax.swing.JLabel txtTienThua;
     private javax.swing.JLabel txtTongTien;
