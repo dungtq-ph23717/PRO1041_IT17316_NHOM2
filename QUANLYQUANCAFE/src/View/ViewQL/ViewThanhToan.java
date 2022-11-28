@@ -636,23 +636,27 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTienKhachTraKeyReleased
 
     private void tbSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSPMouseClicked
-        if (txtMa.getText() == "__") {
-            JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
-        } else {
-            int rowSP = tbSP.getSelectedRow();
-            String maSP = tbSP.getValueAt(rowSP, 0).toString();
-            SanPham sp = implSP.getOne(maSP);
-            HoaDon idHD = implHD.getOne(txtMa.getText());
-            String id = sp.getId();
-            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-            if (slt <= 0) {
-                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-                return;
+        try {
+            if (txtMa.getText() == "__") {
+                JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+            } else {
+                int rowSP = tbSP.getSelectedRow();
+                String maSP = tbSP.getValueAt(rowSP, 0).toString();
+                SanPham sp = implSP.getOne(maSP);
+                HoaDon idHD = implHD.getOne(txtMa.getText());
+                String id = sp.getId();
+                int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+                if (slt <= 0) {
+                    JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+                    return;
+                }
+                HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt);
+                implHDCT.add(hdct);
+                listHDCT = implHDCT.getAllviewGH(idHD.getID());
+                showDataHDCT(listHDCT);
             }
-            HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt);
-            implHDCT.add(hdct);
-            listHDCT = implHDCT.getAllviewGH(idHD.getID());
-            showDataHDCT(listHDCT);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Bỏ chọn sản phẩm");
         }
     }//GEN-LAST:event_tbSPMouseClicked
 
