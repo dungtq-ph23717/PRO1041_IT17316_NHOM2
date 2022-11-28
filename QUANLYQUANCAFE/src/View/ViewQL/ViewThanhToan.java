@@ -337,6 +337,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jLabel6.setText("Tiền thừa");
 
         btThanhToan.setText("Thanh toán");
+        btThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThanhToanActionPerformed(evt);
+            }
+        });
 
         btHuyHoaDon.setText("Huỷ đơn");
         btHuyHoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -772,6 +777,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         showDataHD(listHoaDon);
     }//GEN-LAST:event_tbBanMouseClicked
 
+
     private void btTaoHoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaoHoadonActionPerformed
         if (txtBan.getText() == "__") {
             JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
@@ -816,38 +822,82 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtSearchTenSPKeyReleased
 
-    private void deletehdct() {
-
-    }
-//    private void deletehd(){
 //        JOptionPane.showMessageDialog(this, implHD.delete(txtMa.getText()));
 //    }
     private void btHuyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyHoaDonActionPerformed
-        if(tbGH.getRowCount()>0){
-            JOptionPane.showMessageDialog(this, "hóa đơn còn ở sản phẩm");
-        }else{
-            JOptionPane.showMessageDialog(this, implHD.delete(txtMa.getText()));
-            showDataHD(listHoaDon);
-        }
+//        if (tbGH.getRowCount() > 0) {
+//            JOptionPane.showMessageDialog(this, "hóa đơn còn ở sản phẩm");
+//        } else {
+//            JOptionPane.showMessageDialog(this, implHD.delete(txtMa.getText()));
+//            showDataHD(listHoaDon);
+//        }
 
     }//GEN-LAST:event_btHuyHoaDonActionPerformed
 
     private void tbHD1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHD1MouseClicked
-//         int rowcb = tbHD1.getSelectedRow();
-//        String macb = tbHD1.getValueAt(rowcb, 0).toString();
-//        ComboModel cm1 = implCB.getOne(macb);
-//        HoaDon idHD = implHD.getOne(txtMa.getText());
-//       String id = cm1.getMaCB();
-//        int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-//        if (slt <= 0) {
-//            JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-//            return;
+
+//        try{
+//
+//            if (txtMa.getText() == "__") {
+//                JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+//            } else {
+//                int rowcb = tbHD1.getSelectedRow();
+//                String macb = tbHD1.getValueAt(rowcb, 1).toString();
+//                ComboModel cm1 = implCB.getOne(macb);
+//                HoaDon idHD = implHD.getOne(txtMa.getText());
+//                String id = cm1.getMaCB();
+//                int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+//                if (slt <= 0) {
+//                    JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+//                    return;
+//                }
+//                HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt);
+//                implHDCT.add(hdct);
+//                listHDCT = implHDCT.getAll();
+//                showDataHDCT(listHDCT);
+//            }
+//            }catch (Exception e) {
+//            txtTienThua.setText("0");
 //        }
-//        HoaDonChiTietModel hdct = new HoaDonChiTietModel(id,idHD.getID(), slt);
-//        implHDCT.add(hdct);
-//        listHDCT = implHDCT.getAll();
-//        showDataHDCT(listHDCT);
+
     }//GEN-LAST:event_tbHD1MouseClicked
+
+    private void btThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThanhToanActionPerformed
+        int index = tbGH.getSelectedRow();
+        int index1 = tbHD.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm muốn thanh toán");
+        } else if (index1 < 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn thanh toán");
+        } else {
+            String mahd = (String) tbHD.getValueAt(index1, 0);
+            String masp = (String) tbGH.getValueAt(index, 0);
+            String tensp = (String) tbGH.getValueAt(index, 1);
+            int soluong = (int) tbGH.getValueAt(index, 2);
+            Double dongia = (double) tbGH.getValueAt(index, 3);
+            Double tongtien = (double) tbGH.getValueAt(index, 4);
+            String ngaylap = (String) tbHD.getValueAt(index1, 1);
+            String nhanvien = (String) tbHD.getValueAt(index1, 2);
+            String tinhtrang = (String) tbHD.getValueAt(index1, 3);
+            boolean trung = false;
+            for (HoaDonChiTiet hdct : listHDCT) {
+                if (hdct.getIdHD().contains(mahd)) {
+                    trung = true;
+
+                }
+
+            }
+            if (trung) {
+                JOptionPane.showMessageDialog(this, "sản phẩm đã có trong hóa đơn ,vui lòng chọn sản phẩm khác");
+            } else {
+                HoaDonChiTiet hdct = new HoaDonChiTiet(masp, mahd, soluong, tongtien, null);
+                JOptionPane.showMessageDialog(this, implHDCT.thanhtoan(hdct));
+                implHD.updatetinhtrang(tinhtrang);
+                showDataHD(listHoaDon);
+            }
+
+        }
+    }//GEN-LAST:event_btThanhToanActionPerformed
 
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);

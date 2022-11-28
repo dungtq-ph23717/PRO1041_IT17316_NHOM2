@@ -28,5 +28,6 @@ public interface ServiceHoaDon {
     String update(HoaDonModel hd, HoaDonChiTietModel hdct, String maHD);
 
     String delete(String maHD);
+    String updatetinhtrang(String tinhtrang);
 
 }

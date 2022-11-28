@@ -56,10 +56,10 @@ public class ComboServiceImp implements ComboService {
         }
     }
 
-    @Override
-    public ComboModel getOne(String ma) {
-       return _ComboRepository.getOne(ma);
-    }
+//    @Override
+//    public ComboModel getOne(String ma) {
+//       return _ComboRepository.getOne(ma);
+//    }
 
    
 }

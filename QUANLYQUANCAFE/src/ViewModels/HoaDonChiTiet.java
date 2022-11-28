@@ -39,6 +39,10 @@ public class HoaDonChiTiet {
         this.ghiChu = ghiChu;
     }
 
+    public HoaDonChiTiet(String masp, String mahd, int soluong, Double tongtien, Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public SanPham getIdSP() {
         return idSP;
     }

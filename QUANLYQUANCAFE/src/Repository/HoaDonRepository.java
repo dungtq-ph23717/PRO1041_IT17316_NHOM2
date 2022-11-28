@@ -26,7 +26,7 @@ public class HoaDonRepository {
                 + "             dbo.KhuyenMai ON dbo.HoaDon.IDKM = dbo.KhuyenMai.ID INNER JOIN\n"
                 + "             dbo.NhanVien ON dbo.HoaDon.IDNV = dbo.NhanVien.ID INNER JOIN\n"
                 + "             dbo.Ban ON dbo.HoaDon.ID = dbo.Ban.ID";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
@@ -40,11 +40,27 @@ public class HoaDonRepository {
         return null;
     }
 
+    public String updateTinhTrang(String ma) {
+        String query = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET [TinhTrang] = N'đã thanh toán'\n"
+                + " WHERE MaHD=?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setObject(1, ma);
+
+            if (ps.executeUpdate() > 0) {
+                return "sửa thành công";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Sửa thất bại";
+    }
+
     public HoaDon getOne(String ma) {
         String query = "Select HoaDon.ID, MaHD,NgayLapHD,TenNV, TinhTrang\n"
                 + "from HoaDon \n"
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV where MaHD like ?";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -61,7 +77,7 @@ public class HoaDonRepository {
         String query = "Select MaHD,NgayLapHD,TenNV, TinhTrang\n"
                 + "from HoaDon \n"
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
@@ -84,7 +100,7 @@ public class HoaDonRepository {
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
                 + "inner join Ban on HoaDon.IDBan = Ban.ID\n"
                 + "Where IDBan like ?";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, id);
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
@@ -104,7 +120,7 @@ public class HoaDonRepository {
         String query = "INSERT INTO [dbo].[HoaDon]([MaHD],[NgayLapHD],[IDNV],[IDBan],[TinhTrang])\n"
                 + "VALUES('HD'+?,GETDATE(),'5dc424c8-d86a-4aa9-9b6a-399678fd5ae5',?,'Chờ')";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ma);
             ps.setObject(2, hd.getIDBan());
             check = ps.executeUpdate();
@@ -127,7 +143,7 @@ public class HoaDonRepository {
                 + "      ,[TinhTrang] = ?\n"
                 + " WHERE ID = ?";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getMaHD());
             ps.setObject(2, hd.getNgayLapHD());
             ps.setObject(3, hd.getThanhTien());
@@ -181,7 +197,7 @@ public class HoaDonRepository {
                 + "      ,[TinhTrang]\n"
                 + "  FROM [dbo].[HoaDon]\n"
                 + "  where TinhTrang='Chưa thanh toán'";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             List<HoaDonModel> glistHD = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

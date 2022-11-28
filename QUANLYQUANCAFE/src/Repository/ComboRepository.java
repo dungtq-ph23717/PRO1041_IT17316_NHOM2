@@ -112,7 +112,8 @@ public class ComboRepository {
                 + "      ,[MaCB]\n"
                 + "      ,[TenCB]\n"
                 + "      ,[GiaBan]\n"
-                + "  FROM [dbo].[Combo]";
+                + "  FROM [dbo].[Combo]\n"
+                + "  where MaCB=?";
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
@@ -124,6 +125,7 @@ public class ComboRepository {
         }
         return null;
     }
+    
 
     public static void main(String[] args) {
         System.out.println(new ComboRepository().getOne("CB2"));

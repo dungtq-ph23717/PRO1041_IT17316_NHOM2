@@ -64,4 +64,9 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public String thanhtoan(HoaDonChiTiet hdct) {
+       return rp.thanhToan(hdct);
+    }
+
 }

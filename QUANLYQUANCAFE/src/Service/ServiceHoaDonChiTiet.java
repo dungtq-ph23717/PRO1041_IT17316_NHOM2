@@ -26,5 +26,5 @@ public interface ServiceHoaDonChiTiet {
 
     String delete(String idHD, String idSP);
     String deletehdct(String idhd);
-
+    String thanhtoan(HoaDonChiTiet hdct);
 }

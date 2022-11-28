@@ -68,4 +68,10 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         return rps.getAllTTViewHD(id);
     }
 
+    @Override
+    public String updatetinhtrang(String tinhtrang) {
+        return rps.updateTinhTrang(tinhtrang);
+    }
+    
+
 }
