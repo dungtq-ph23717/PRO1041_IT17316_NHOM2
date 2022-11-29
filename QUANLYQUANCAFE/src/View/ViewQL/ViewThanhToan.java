@@ -937,7 +937,13 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbbGGActionPerformed
 
     private void cbbLocDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLocDanhMucActionPerformed
-        
+        if (cbbLocDanhMuc.getSelectedItem().toString().equalsIgnoreCase("All")) {
+            listSanPham = implSP.getAllTT();
+            showDataSP(listSanPham);
+        } else {
+            List<SanPham> listSearchTenDanhMuc = implSP.searchTenDanhMuc((String) cbbLocDanhMuc.getSelectedItem());
+            showDataSP(listSearchTenDanhMuc);
+        }
     }//GEN-LAST:event_cbbLocDanhMucActionPerformed
 
     private void fillDataGH(int index) {
