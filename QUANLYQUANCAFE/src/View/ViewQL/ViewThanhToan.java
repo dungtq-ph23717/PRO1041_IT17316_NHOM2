@@ -13,12 +13,14 @@ import View.ViewNV.*;
 import Service.impl.BanServiceImpl;
 import Service.impl.ComBoSPServiceImpl;
 import Service.impl.ComboServiceImp;
+import Service.impl.DanhMucServiceImpl;
 import Service.impl.HoaDonChiTietServiceIblm;
 import Service.impl.HoaDonServiceIblm;
 import Service.impl.KhuyenMaiServiceIblm;
 import Service.impl.NhanVienServiceImpl;
 import Service.impl.SanPhamServiceImpl;
 import ViewModels.Ban;
+import ViewModels.DanhMuc;
 import ViewModels.HoaDon;
 import ViewModels.HoaDonChiTiet;
 import ViewModels.KhuyenMai;
@@ -51,7 +53,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private DefaultTableModel dtmHoaDon = new DefaultTableModel();
     private DefaultTableModel dtmCB = new DefaultTableModel();
     private DefaultComboBoxModel boxModelGG = new DefaultComboBoxModel();
+    private DefaultComboBoxModel boxModelDM = new DefaultComboBoxModel();
     private List<Ban> listBan = new ArrayList<>();
+    private List<DanhMuc> listDM = new ArrayList<>();
     private List<ComboModel> listCB = new ArrayList<>();
     private List<NhanVienViewModel> listNV = new ArrayList<>();
     private List<KhuyenMai> listKhuyenMai = new ArrayList<>();
@@ -66,6 +70,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private HoaDonChiTietServiceIblm implHDCT = new HoaDonChiTietServiceIblm();
     private ComboServiceImp implCB = new ComboServiceImp();
     private DefaultComboBoxModel boxKM = new DefaultComboBoxModel();
+    private DanhMucServiceImpl implDM = new DanhMucServiceImpl();
 
     /**
      * Creates new form Menu1
@@ -106,10 +111,16 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         showDataHDCT(listHDCT);
 
         listKhuyenMai = implKM.getAll();
-        cbbGG.setModel(boxModelGG);
         boxModelGG.addElement("Chọn");
+        cbbGG.setModel(boxModelGG);
         for (KhuyenMai x : listKhuyenMai) {
             boxModelGG.addElement(x.getMaKM());
+        }
+        listDM = implDM.getAll();
+        boxModelDM.addElement("All");
+        cbbLocDanhMuc.setModel(boxModelDM);
+        for (DanhMuc danhMuc : listDM) {
+            boxModelDM.addElement(danhMuc.getTenDanhMuc());
         }
         cbbPhuongThucThanhToan.setModel(boxKM);
         boxKM.addElement("Tiền mặt");
@@ -230,7 +241,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         tbSP = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         txtSearchTenSP = new javax.swing.JTextField();
-        cbbDanhMuc = new javax.swing.JComboBox<>();
+        cbbLocDanhMuc = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbHD1 = new javax.swing.JTable();
@@ -638,7 +649,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             }
         });
 
-        cbbDanhMuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbLocDanhMuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbLocDanhMuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbLocDanhMucActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -653,7 +669,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtSearchTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(115, 115, 115)
-                .addComponent(cbbDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbbLocDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -663,7 +679,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtSearchTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbbDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbLocDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -920,6 +936,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbbGGActionPerformed
 
+    private void cbbLocDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLocDanhMucActionPerformed
+        
+    }//GEN-LAST:event_cbbLocDanhMucActionPerformed
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         txtTongTien.setText(String.valueOf(Fomat(hdct.getGiaTien())));
@@ -941,8 +961,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PHoaDon;
     private javax.swing.JButton bltThanhToan;
     private javax.swing.JCheckBox cbInHD;
-    private javax.swing.JComboBox<String> cbbDanhMuc;
     private javax.swing.JComboBox<String> cbbGG;
+    private javax.swing.JComboBox<String> cbbLocDanhMuc;
     private javax.swing.JComboBox<String> cbbPhuongThucThanhToan;
     private javax.swing.JMenuItem gopHD;
     private javax.swing.JMenuItem gopban;
