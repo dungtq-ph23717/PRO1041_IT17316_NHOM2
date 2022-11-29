@@ -93,4 +93,14 @@ public class BanServiceImpl implements BanService {
         }
     }
 
+    @Override
+    public String updatehdtt(BanModel bm, String ma) {
+       boolean update =rp.updatehdtt(bm, ma);
+       if(update){
+           return null;
+       }else{
+           return null;
+       }
+    }
+
 }

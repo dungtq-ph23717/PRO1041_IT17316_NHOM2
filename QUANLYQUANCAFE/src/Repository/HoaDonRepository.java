@@ -40,7 +40,7 @@ public class HoaDonRepository {
         return null;
     }
 
-    public String updateTinhTrang(String ma) {
+    public String updateTinhTrang(HoaDon hd, String ma) {
         String query = "UPDATE [dbo].[HoaDon]\n"
                 + "   SET [TinhTrang] = N'đã thanh toán'\n"
                 + " WHERE MaHD=?";
@@ -48,12 +48,12 @@ public class HoaDonRepository {
             ps.setObject(1, ma);
 
             if (ps.executeUpdate() > 0) {
-                return "sửa thành công";
+                return "thanh toán thành công";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Sửa thất bại";
+        return "thanh toán thất bại";
     }
 
     public HoaDon getOne(String ma) {
@@ -79,6 +79,29 @@ public class HoaDonRepository {
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV";
         try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
+
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv, rs.getString(4));
+
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<HoaDon> getAllTTcho() {
+        String query = "Select MaHD,NgayLapHD,TenNV, TinhTrang\n"
+                + "               from HoaDon\n"
+                + "             inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
+                + "			 where TinhTrang like N'Chờ'";
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
                 NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
@@ -176,13 +199,8 @@ public class HoaDonRepository {
     }
 
     public static void main(String[] args) {
+        System.out.println(new HoaDonRepository().getAllTTcho());
 
-        List<HoaDon> rp = new HoaDonRepository().getAllTTViewHD("771c62b0-ea76-4dc5-b5af-4e626985c5b3");
-        for (HoaDon hoaDon : rp) {
-            System.out.println(hoaDon.toString());
-        }
-//        HoaDon hd = new HoaDonRepository().getOne("HD2");
-//        System.out.println(hd);
     }
 
     public List<HoaDonModel> getListChuaThanhToan() {
@@ -211,4 +229,5 @@ public class HoaDonRepository {
         return null;
 
     }
+   
 }

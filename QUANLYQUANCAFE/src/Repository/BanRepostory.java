@@ -19,7 +19,7 @@ public class BanRepostory {
         String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV,TinhTrang\n"
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<Ban> list = new ArrayList<>();
             while (rs.next()) {
@@ -38,7 +38,7 @@ public class BanRepostory {
         String query = "SELECT [ID]\n"
                 + "  FROM [dbo].[Ban]\n"
                 + "  Where [TenBan] like ?";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ten);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -54,7 +54,7 @@ public class BanRepostory {
         String query = "Select TenBan,Loaiban,TinhTrang\n"
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<Ban> list = new ArrayList<>();
             while (rs.next()) {
@@ -73,7 +73,7 @@ public class BanRepostory {
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
                 + "where TenBan like ?";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, "%" + ma + "%");
             ResultSet rs = ps.executeQuery();
             List<Ban> list = new ArrayList<>();
@@ -94,7 +94,7 @@ public class BanRepostory {
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
                 + "where TenKV like ?";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, "%" + TenKV + "%");
             ResultSet rs = ps.executeQuery();
             List<Ban> list = new ArrayList<>();
@@ -115,7 +115,7 @@ public class BanRepostory {
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
                 + "where TenBan like ?";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, "%" + ten + "%");
             ResultSet rs = ps.executeQuery();
             List<Ban> list = new ArrayList<>();
@@ -136,7 +136,7 @@ public class BanRepostory {
                 + "From Ban \n"
                 + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID\n"
                 + "where Loaiban like ?";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, "%" + loai + "%");
             ResultSet rs = ps.executeQuery();
             List<Ban> list = new ArrayList<>();
@@ -166,7 +166,7 @@ public class BanRepostory {
                 + "           ,?\n"
                 + "           ,?)";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ban.getMaBan());
             ps.setObject(2, ban.getTenBan());
             ps.setObject(3, ban.getMoTa());
@@ -183,7 +183,7 @@ public class BanRepostory {
         String query = "DELETE FROM [dbo].[Ban]\n"
                 + "      WHERE MaBan = ?";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ma);
             check = ps.executeUpdate();
         } catch (Exception e) {
@@ -201,7 +201,7 @@ public class BanRepostory {
                 + "      ,[IDKV] = ?\n"
                 + " WHERE MaBan like ?";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ban.getMaBan());
             ps.setObject(2, ban.getTenBan());
             ps.setObject(3, ban.getMoTa());
@@ -215,12 +215,37 @@ public class BanRepostory {
         return check > 0;
     }
 
+    public boolean updatehdtt(BanModel ban, String ma) {
+        String query = "UPDATE [dbo].[Ban]\n"
+                + "   SET [MaBan] = ?\n"
+                + "      ,[TenBan] =?\n"
+                + "      ,[Mota] = ?\n"
+                + "      ,[Loaiban] = ?\n"
+                + "      ,[IDKV] = ?\n"
+                + "      ,[TinhTrang] = ?\n"
+                + " WHERE MaBan=?";
+        int check = 0;
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ban.getMaBan());
+            ps.setObject(2, ban.getTenBan());
+            ps.setObject(3, ban.getMoTa());
+            ps.setObject(4, ban.getLoaiBan());
+            ps.setObject(5, ban.getIDKV());
+            ps.setObject(6, ban.getTinhTrang());
+            ps.setObject(7, ma);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public boolean updateTT(BanModel ban, String id) {
         String query = "UPDATE [dbo].[Ban]\n"
-                + "   SET [TinhTrang] = ?\n"
-                + " WHERE ID = ?";
+                + "   SET [TinhTrang] = 'N'Trống"
+                + " WHERE  TenBan= ?";
         int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ban.getTinhTrang());
             ps.setObject(2, id);
             check = ps.executeUpdate();

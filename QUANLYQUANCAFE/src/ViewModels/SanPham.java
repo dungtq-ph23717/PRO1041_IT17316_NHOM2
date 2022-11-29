@@ -25,6 +25,7 @@ public class SanPham {
         this.tenSP = tenSP;
         this.giaBan = giaBan;
     }
+    
 
     public SanPham() {
     }

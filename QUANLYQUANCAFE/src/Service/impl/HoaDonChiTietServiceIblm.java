@@ -61,12 +61,29 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
 
     @Override
     public String deletehdct(String idhd) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      boolean dele=rp.delete(idhd);
+      if(dele){
+          return "hủy thành công";
+      }else{
+          return "hủy thất bại";
+      }
     }
 
     @Override
     public String thanhtoan(HoaDonChiTiet hdct) {
        return rp.thanhToan(hdct);
+    }
+
+    @Override
+    public String deletehd(String ma) {
+        boolean delete=rp.delete(ma);
+    if (delete){
+        
+        return "Hủy thành công";
+    }else{
+        return "hủy thất bại";
+    }
+       
     }
 
 }

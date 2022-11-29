@@ -157,7 +157,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
-            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), "Chờ"});
+            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), x.getTinhTrang()});
         }
     }
 
@@ -825,12 +825,31 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 //        JOptionPane.showMessageDialog(this, implHD.delete(txtMa.getText()));
 //    }
     private void btHuyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyHoaDonActionPerformed
-//        if (tbGH.getRowCount() > 0) {
-//            JOptionPane.showMessageDialog(this, "hóa đơn còn ở sản phẩm");
-//        } else {
-//            JOptionPane.showMessageDialog(this, implHD.delete(txtMa.getText()));
-//            showDataHD(listHoaDon);
-//        }
+        int index = tbHD.getSelectedRow();
+
+        int sl = listHDCT.size();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "VUI LÒNG CHỌN HÓA ĐƠN MUỐN HỦY");
+        } else {
+            var temp = JOptionPane.showConfirmDialog(this, "BẠN CÓ CHẮC CHẮN MUỐN HỦY THANH TOÁN KHÔNG?");
+            if (temp == 0) {
+                HoaDonChiTiet hdct = listHDCT.get(index);
+                HoaDon hd = listHoaDon.get(index);
+                String idhd = hdct.getIdHD();
+                implHDCT.deletehdct(idhd);
+                implHDCT.deletehd(idhd);
+                listSanPham = implSP.getAll();
+                listHoaDon = implHD.getAll();
+                listHDCT = (List<HoaDonChiTiet>) implHDCT.getOne(idhd);
+                showDataHD(listHoaDon);
+                showDataHDCT(listHDCT);
+                showDataSP(listSanPham);
+//               
+//                }
+
+            }
+        }
+
 
     }//GEN-LAST:event_btHuyHoaDonActionPerformed
 
@@ -863,40 +882,26 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbHD1MouseClicked
 
     private void btThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThanhToanActionPerformed
-        int index = tbGH.getSelectedRow();
-        int index1 = tbHD.getSelectedRow();
-        if (index < 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm muốn thanh toán");
-        } else if (index1 < 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn muốn thanh toán");
+        if (txtTienKhachTra.getText().equals("") || txtTienKhachTra.getText().matches("\\s+")) {
+            JOptionPane.showMessageDialog(this, "vui lòng nhập đầy đủ thông tin");
+            txtTienKhachTra.setText("");
+            
         } else {
-            String mahd = (String) tbHD.getValueAt(index1, 0);
-            String masp = (String) tbGH.getValueAt(index, 0);
-            String tensp = (String) tbGH.getValueAt(index, 1);
-            int soluong = (int) tbGH.getValueAt(index, 2);
-            Double dongia = (double) tbGH.getValueAt(index, 3);
-            Double tongtien = (double) tbGH.getValueAt(index, 4);
-            String ngaylap = (String) tbHD.getValueAt(index1, 1);
-            String nhanvien = (String) tbHD.getValueAt(index1, 2);
-            String tinhtrang = (String) tbHD.getValueAt(index1, 3);
-            boolean trung = false;
-            for (HoaDonChiTiet hdct : listHDCT) {
-                if (hdct.getIdHD().contains(mahd)) {
-                    trung = true;
+                
+            String mahd = txtMa.getText();
+            HoaDon hd = new HoaDon("Đã thanh toán");
+            implHD.updatetinhtrang(hd, mahd);
+            listHoaDon = implHD.getALLCho();
+            showDataHD(listHoaDon);
+            
 
-                }
-
-            }
-            if (trung) {
-                JOptionPane.showMessageDialog(this, "sản phẩm đã có trong hóa đơn ,vui lòng chọn sản phẩm khác");
-            } else {
-                HoaDonChiTiet hdct = new HoaDonChiTiet(masp, mahd, soluong, tongtien, null);
-                JOptionPane.showMessageDialog(this, implHDCT.thanhtoan(hdct));
-                implHD.updatetinhtrang(tinhtrang);
-                showDataHD(listHoaDon);
-            }
-
+            String tenban = txtBan.getText();
+            BanModel ban = new BanModel();
+            implBan.updateTT(ban, mahd);
+            listBan = implBan.getAllTT();
+            showDataBan(listBan);
         }
+
     }//GEN-LAST:event_btThanhToanActionPerformed
 
     private void fillDataGH(int index) {

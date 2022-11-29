@@ -69,9 +69,20 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     }
 
     @Override
-    public String updatetinhtrang(String tinhtrang) {
-        return rps.updateTinhTrang(tinhtrang);
+    public String updatetinhtrang(HoaDon hd,String tinhtrang) {
+        return rps.updateTinhTrang(hd, tinhtrang);
     }
+
+    @Override
+    public List<HoaDon> getALLCho() {
+       return rps.getAllTTcho();
+    }
+
+   
+    
+
+  
+
     
 
 }

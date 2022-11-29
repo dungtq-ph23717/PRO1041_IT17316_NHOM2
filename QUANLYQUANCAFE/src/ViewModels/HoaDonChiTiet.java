@@ -43,6 +43,10 @@ public class HoaDonChiTiet {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public HoaDonChiTiet(String masp, String mahd, Double dongia, Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public SanPham getIdSP() {
         return idSP;
     }

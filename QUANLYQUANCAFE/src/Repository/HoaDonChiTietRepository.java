@@ -167,6 +167,21 @@ public class HoaDonChiTietRepository {
         return "Thanh toán thất bại";
     }
 
+    public boolean delete(String ma) {
+        String query = "DELETE FROM [dbo].[HoaDon]\n"
+                + "      WHERE ID=?";
+        int check = 0;
+
+        try (Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ma);
+
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public static void main(String[] args) {
 //        List<HoaDonChiTiet> list = new HoaDonChiTietRepository().getAllviewGH("44a3f36c-64bb-4c28-9290-4b1e63ff7dd5");
 //        for (HoaDonChiTiet x : list) {
