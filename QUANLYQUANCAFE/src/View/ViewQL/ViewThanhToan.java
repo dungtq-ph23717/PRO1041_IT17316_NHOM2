@@ -100,7 +100,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 //        dtmCB.setColumnIdentifiers(headersCB);
 //        listCB = implCB.get_all();
 //        showDataCB(listCB);
-        String[] headersGH = {"Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Tổng tiền"};
+        String[] headersGH = {"Mã", "Tên", "Số lượng", "Đơn giá", "Tổng tiền"};
         tbGH.setModel(dtmGioHang);
         dtmGioHang.setColumnIdentifiers(headersGH);
 //        listHDCT = implHDCT.getAll();
@@ -728,6 +728,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             HoaDonChiTiet hd = implHDCT.getOne(ma);
             Double tienGiam = Double.valueOf(txtTienGiam.getText());
             Double tien = hd.getGiaTien() - tienGiam;
+            txtTongTien.setText(String.valueOf(Fomat(tien)));
             Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
             Double tienThua = tienKhach - tien;
             txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
@@ -849,14 +850,27 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbbLocDanhMucActionPerformed
 
     private void cbbGGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbGGActionPerformed
-        if (cbbGG.getSelectedItem().toString().equalsIgnoreCase("Chọn")) {
-           txtTienGiam.setText("0");
-        } else {
-            for (KhuyenMai x : listKhuyenMai) {
-                if (cbbGG.getSelectedItem() == x.getMaKM()) {
-                    txtTienGiam.setText(x.getMucGiam());
+        try {
+            if (cbbGG.getSelectedItem().toString().equalsIgnoreCase("Chọn")) {
+                txtTienGiam.setText("0");
+                int row = tbGH.getSelectedRow();
+                fillDataGH(row);
+            } else {
+                for (KhuyenMai x : listKhuyenMai) {
+                    if (cbbGG.getSelectedItem() == x.getMaKM()) {
+                        txtTienGiam.setText(Fomat(Double.valueOf(x.getMucGiam())));
+                        int row = tbGH.getSelectedRow();
+                        String ma = tbGH.getValueAt(row, 0).toString();
+                        HoaDonChiTiet hd = implHDCT.getOne(ma);
+                        Double tienGiam = Double.valueOf(x.getMucGiam());
+                        Double tien = hd.getGiaTien() - tienGiam;
+                        txtTongTien.setText(String.valueOf(Fomat(tien)));
+                    }
                 }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm");
+            txtTienGiam.setText("0");
         }
     }//GEN-LAST:event_cbbGGActionPerformed
 
