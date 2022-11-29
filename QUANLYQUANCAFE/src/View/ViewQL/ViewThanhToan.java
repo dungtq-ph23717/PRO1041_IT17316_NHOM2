@@ -723,15 +723,27 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void txtTienKhachTraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachTraKeyReleased
         try {
-            int row = tbGH.getSelectedRow();
-            String ma = tbGH.getValueAt(row, 0).toString();
-            HoaDonChiTiet hd = implHDCT.getOne(ma);
-            Double tienGiam = Double.valueOf(txtTienGiam.getText());
-            Double tien = hd.getGiaTien() - tienGiam;
-            txtTongTien.setText(String.valueOf(Fomat(tien)));
-            Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
-            Double tienThua = tienKhach - tien;
-            txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
+            for (KhuyenMai x : listKhuyenMai) {
+                if (cbbGG.getSelectedItem() == x.getMaKM()) {
+                    txtTienGiam.setText(Fomat(Double.valueOf(x.getMucGiam())));
+                    int row = tbGH.getSelectedRow();
+                    String ma = tbGH.getValueAt(row, 0).toString();
+                    HoaDonChiTiet hd = implHDCT.getOne(ma);
+                    Double tienGiam = Double.valueOf(x.getMucGiam());
+                    Double tien = hd.getGiaTien() - tienGiam;
+                    Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
+                    Double tienThua = tienKhach - tien;
+                    txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
+                } else if (cbbGG.getSelectedItem() == "Chọn") {
+                    int row = tbGH.getSelectedRow();
+                    String ma = tbGH.getValueAt(row, 0).toString();
+                    HoaDonChiTiet hd = implHDCT.getOne(ma);
+                    Double tien = hd.getGiaTien();
+                    Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
+                    Double tienThua = tienKhach - tien;
+                    txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
+                }
+            }
         } catch (Exception e) {
             txtTienThua.setText("0");
         }
