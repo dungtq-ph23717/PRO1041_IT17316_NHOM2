@@ -836,7 +836,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             try {
                 txtPrint.print();
             } catch (PrinterException ex) {
-                Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, "In thất bại!", ex);
             }
             JOptionPane.showMessageDialog(this, "Print done!");
         } else {
