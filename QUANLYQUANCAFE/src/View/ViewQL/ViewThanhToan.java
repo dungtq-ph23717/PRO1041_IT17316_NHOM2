@@ -408,7 +408,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         txtPrint.setRows(5);
         jScrollPane1.setViewportView(txtPrint);
 
-        jLabel13.setText("Tổng tiền");
+        jLabel13.setText("Mức giảm:");
 
         txtTienGiam.setText("0");
 
