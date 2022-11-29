@@ -398,6 +398,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jLabel10.setText("VND");
 
         cbInHD.setText("In hóa đơn");
+        cbInHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbInHDActionPerformed(evt);
+            }
+        });
 
         txtPrint.setColumns(20);
         txtPrint.setRows(5);
@@ -416,13 +421,17 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             .addGroup(PHoaDonLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PHoaDonLayout.createSequentialGroup()
-                        .addComponent(bltThanhToan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(cbInHD)
-                        .addGap(47, 47, 47))
                     .addGroup(PHoaDonLayout.createSequentialGroup()
                         .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(PHoaDonLayout.createSequentialGroup()
+                        .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PHoaDonLayout.createSequentialGroup()
+                                .addComponent(bltThanhToan)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbInHD))
                             .addGroup(PHoaDonLayout.createSequentialGroup()
                                 .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
@@ -466,12 +475,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbbPhuongThucThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PHoaDonLayout.createSequentialGroup()
-                        .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
         PHoaDonLayout.setVerticalGroup(
             PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -945,6 +949,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             showDataSP(listSearchTenDanhMuc);
         }
     }//GEN-LAST:event_cbbLocDanhMucActionPerformed
+
+    private void cbInHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbInHDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbInHDActionPerformed
 
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
