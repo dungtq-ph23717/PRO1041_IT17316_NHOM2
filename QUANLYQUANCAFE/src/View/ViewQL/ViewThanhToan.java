@@ -107,6 +107,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         listKhuyenMai = implKM.getAll();
         cbbGG.setModel(boxModelGG);
+        boxModelGG.addElement("Chọn");
         for (KhuyenMai x : listKhuyenMai) {
             boxModelGG.addElement(x.getMaKM());
         }
@@ -895,7 +896,28 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bltThanhToanActionPerformed
 
     private void cbbGGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbGGActionPerformed
-        // TODO add your handling code here:
+        try {
+            if (cbbGG.getSelectedItem().toString().equalsIgnoreCase("Chọn")) {
+                txtTienGiam.setText("0");
+                int row = tbGH.getSelectedRow();
+                fillDataGH(row);
+            } else {
+                for (KhuyenMai x : listKhuyenMai) {
+                    if (cbbGG.getSelectedItem() == x.getMaKM()) {
+                        txtTienGiam.setText(Fomat(Double.valueOf(x.getMucGiam())));
+                        int row = tbGH.getSelectedRow();
+                        String ma = tbGH.getValueAt(row, 0).toString();
+                        HoaDonChiTiet hd = implHDCT.getOne(ma);
+                        Double tienGiam = Double.valueOf(x.getMucGiam());
+                        Double tien = hd.getGiaTien() - tienGiam;
+                        txtTongTien.setText(String.valueOf(Fomat(tien)));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm");
+            txtTienGiam.setText("0");
+        }
     }//GEN-LAST:event_cbbGGActionPerformed
 
     private void fillDataGH(int index) {
