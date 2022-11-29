@@ -108,7 +108,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         listKhuyenMai = implKM.getAll();
         cbbGG.setModel(boxModelGG);
         for (KhuyenMai x : listKhuyenMai) {
-            boxModelGG.addElement(x.getMucGiam());
+            boxModelGG.addElement(x.getMaKM());
         }
         cbbPhuongThucThanhToan.setModel(boxKM);
         boxKM.addElement("Tiền mặt");
@@ -214,7 +214,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPrint = new javax.swing.JTextArea();
         jLabel13 = new javax.swing.JLabel();
-        txtTongTien1 = new javax.swing.JLabel();
+        txtTienGiam = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -371,6 +371,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jLabel11.setToolTipText("");
 
         cbbGG.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbGG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbGGActionPerformed(evt);
+            }
+        });
 
         txtTongTien.setText("0");
 
@@ -388,7 +393,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Tổng tiền");
 
-        txtTongTien1.setText("0");
+        txtTienGiam.setText("0");
 
         jLabel14.setText("VND");
 
@@ -426,7 +431,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel9))
                                         .addComponent(txtTienKhachTra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PHoaDonLayout.createSequentialGroup()
-                                        .addComponent(txtTongTien1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtTienGiam, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel14))))
                             .addGroup(PHoaDonLayout.createSequentialGroup()
@@ -491,7 +496,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtTongTien1)
+                    .addComponent(txtTienGiam)
                     .addComponent(jLabel14))
                 .addGap(22, 22, 22)
                 .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -735,13 +740,27 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void txtTienKhachTraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachTraKeyReleased
         try {
-            int row = tbGH.getSelectedRow();
-            String ma = tbGH.getValueAt(row, 0).toString();
-            HoaDonChiTiet hd = implHDCT.getOne(ma);
-            Double tien = hd.getGiaTien();
-            Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
-            Double tienThua = tienKhach - tien;
-            txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
+            for (KhuyenMai x : listKhuyenMai) {
+                if (cbbGG.getSelectedItem() == x.getMaKM()) {
+                    txtTienGiam.setText(Fomat(Double.valueOf(x.getMucGiam())));
+                    int row = tbGH.getSelectedRow();
+                    String ma = tbGH.getValueAt(row, 0).toString();
+                    HoaDonChiTiet hd = implHDCT.getOne(ma);
+                    Double tienGiam = Double.valueOf(x.getMucGiam());
+                    Double tien = hd.getGiaTien() - tienGiam;
+                    Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
+                    Double tienThua = tienKhach - tien;
+                    txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
+                } else if (cbbGG.getSelectedItem() == "Chọn") {
+                    int row = tbGH.getSelectedRow();
+                    String ma = tbGH.getValueAt(row, 0).toString();
+                    HoaDonChiTiet hd = implHDCT.getOne(ma);
+                    Double tien = hd.getGiaTien();
+                    Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
+                    Double tienThua = tienKhach - tien;
+                    txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
+                }
+            }
         } catch (Exception e) {
             txtTienThua.setText("0");
         }
@@ -875,6 +894,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_bltThanhToanActionPerformed
 
+    private void cbbGGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbGGActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbbGGActionPerformed
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         txtTongTien.setText(String.valueOf(Fomat(hdct.getGiaTien())));
@@ -946,9 +969,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtNhanVien;
     private javax.swing.JTextArea txtPrint;
     private javax.swing.JTextField txtSearchTenSP;
+    private javax.swing.JLabel txtTienGiam;
     private javax.swing.JTextField txtTienKhachTra;
     private javax.swing.JLabel txtTienThua;
     private javax.swing.JLabel txtTongTien;
-    private javax.swing.JLabel txtTongTien1;
     // End of variables declaration//GEN-END:variables
 }
