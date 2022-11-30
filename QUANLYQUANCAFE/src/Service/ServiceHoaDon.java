@@ -25,7 +25,7 @@ public interface ServiceHoaDon {
 
     String add(HoaDonModel hd, String ma);
 
-    String update(HoaDonModel hd, HoaDonChiTietModel hdct, String maHD);
+    String update(HoaDonModel hd, String maHD, String tinhTrang);
 
     String delete(String maHD);
 

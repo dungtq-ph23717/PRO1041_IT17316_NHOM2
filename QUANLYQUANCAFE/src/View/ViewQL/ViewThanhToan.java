@@ -126,10 +126,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         boxKM.addElement("Tiền mặt");
         boxKM.addElement("ATM");
         //
-        tachBan.setText("Tách bàn");
-        gopban.setText("Gộp bàn");
-        tachHD.setText("Tách hoá đơn");
-        gopHD.setText("Gộp hoá đơn");
     }
 
     public String Fomat(double gia) {
@@ -175,7 +171,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
-            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), "Chờ"});
+            dtmHoaDon.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), x.getTinhTrang()});
         }
     }
 
@@ -190,10 +186,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         puBan = new javax.swing.JPopupMenu();
         tachBan = new javax.swing.JMenuItem();
-        gopban = new javax.swing.JMenuItem();
-        puHD = new javax.swing.JPopupMenu();
-        tachHD = new javax.swing.JMenuItem();
-        gopHD = new javax.swing.JMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
@@ -212,7 +206,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         txtTienKhachTra = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         bltThanhToan = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btHuyDon = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         cbbPhuongThucThanhToan = new javax.swing.JComboBox<>();
@@ -246,7 +240,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         tbHD1 = new javax.swing.JTable();
 
-        tachBan.setText("jMenuItem1");
+        tachBan.setText("Properties");
         tachBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tachBanActionPerformed(evt);
@@ -254,29 +248,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         });
         puBan.add(tachBan);
 
-        gopban.setText("jMenuItem1");
-        gopban.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gopbanActionPerformed(evt);
-            }
-        });
-        puBan.add(gopban);
-
-        tachHD.setText("jMenuItem1");
-        tachHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tachHDActionPerformed(evt);
-            }
-        });
-        puHD.add(tachHD);
-
-        gopHD.setText("jMenuItem2");
-        gopHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gopHDActionPerformed(evt);
-            }
-        });
-        puHD.add(gopHD);
+        jMenuItem1.setText("Update số lượng");
+        jPopupMenu1.add(jMenuItem1);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -293,6 +266,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbGH.setComponentPopupMenu(jPopupMenu1);
         tbGH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbGHMouseClicked(evt);
@@ -367,7 +341,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Huỷ đơn");
+        btHuyDon.setText("Huỷ đơn");
+        btHuyDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btHuyDonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Tạo hoá đơn");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -456,7 +435,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel14))))
                             .addGroup(PHoaDonLayout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btHuyDon, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2))
                             .addGroup(PHoaDonLayout.createSequentialGroup()
@@ -525,7 +504,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btHuyDon)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -587,7 +566,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbHD.setComponentPopupMenu(puHD);
         tbHD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbHDMouseClicked(evt);
@@ -867,18 +845,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Tách bàn");
     }//GEN-LAST:event_tachBanActionPerformed
 
-    private void gopbanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopbanActionPerformed
-        JOptionPane.showMessageDialog(this, "Gộp bàn");
-    }//GEN-LAST:event_gopbanActionPerformed
-
-    private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
-        JOptionPane.showMessageDialog(this, "Tách hoá đơn");
-    }//GEN-LAST:event_tachHDActionPerformed
-
-    private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
-        JOptionPane.showMessageDialog(this, "Gộp hoá đơn");
-    }//GEN-LAST:event_gopHDActionPerformed
-
     private void txtSearchTenSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTenSPKeyReleased
         if (txtSearchTenSP.getText().equalsIgnoreCase("")) {
             showDataSP(listSanPham);
@@ -890,28 +856,100 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void bltThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltThanhToanActionPerformed
         if (cbInHD.isSelected() == true) {
-            txtPrint.append("\t\t HÓA ĐƠN THANH TOÁN \n\n\n\n"
-                    + "\tMã Hóa Đơn:\t\t\t" + txtMa.getText()
-                    + "\t\n=============================================================\n"
-                    + "\tBàn:\t\t\t" + txtBan.getText() + "\n\n"
-                    + "\tNhân viên:\t\t\t" + txtNhanVien.getText() + "\n\n"
-                    + "\tNgày:\t\t\t" + txtNgay.getText() + "\n\n"
-                    + "\tPhương thức thanh toán:\t\t" + cbbPhuongThucThanhToan.getSelectedItem().toString() + "\n\n"
-                    + "\tMã giảm giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n\n"
-                    + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n"
-                    + "\t\n=============================================================\n"
-                    + "\tTiền khách trả:\t\t\t" + txtTienKhachTra.getText() + " " + "VND" + "\n\n"
-                    + "\tTiền thừa:\t\t\t" + txtTienThua.getText() + " " + "VND" + "\n\n\n\n"
-                    + "\t=====Chúc quý khách một ngày vui vẻ!=====\n\n\n\n\n"
-            );
-            try {
-                txtPrint.print();
-            } catch (PrinterException ex) {
-                Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, "In thất bại!", ex);
+            int row1 = tbGH.getSelectedRow();
+            String maGH = tbGH.getValueAt(row1, 0).toString();
+            HoaDonChiTiet hd1 = implHDCT.getOne(maGH);
+            Double tien = hd1.getGiaTien();
+            Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
+            Double tienThua = tienKhach - tien;
+            if (tienThua >= 0) {
+                if (tbHD.getRowCount() <= 1) {
+                    txtPrint.append("\t\t HÓA ĐƠN THANH TOÁN \n\n\n\n"
+                            + "\tMã Hóa Đơn:\t\t\t" + txtMa.getText()
+                            + "\t\n=============================================================\n"
+                            + "\tBàn:\t\t\t" + txtBan.getText() + "\n\n"
+                            + "\tNhân viên:\t\t\t" + txtNhanVien.getText() + "\n\n"
+                            + "\tNgày:\t\t\t" + txtNgay.getText() + "\n\n"
+                            + "\tPhương thức thanh toán:\t\t" + cbbPhuongThucThanhToan.getSelectedItem().toString() + "\n\n"
+                            + "\tMã giảm giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n\n"
+                            + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n"
+                            + "\t\n=============================================================\n"
+                            + "\tTiền khách trả:\t\t\t" + txtTienKhachTra.getText() + " " + "VND" + "\n\n"
+                            + "\tTiền thừa:\t\t\t" + txtTienThua.getText() + " " + "VND" + "\n\n\n\n"
+                            + "\t=====Chúc quý khách một ngày vui vẻ!=====\n\n\n\n\n"
+                    );
+                    try {
+                        txtPrint.print();
+                    } catch (PrinterException ex) {
+                        Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, "In thất bại!", ex);
+                    }
+                    JOptionPane.showMessageDialog(this, "Print done!");
+                    
+                    String ma = txtMa.getText();
+                    HoaDonModel hd = new HoaDonModel(ma, ma);
+                    JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
+                    int row = tbBan.getSelectedRow();
+                    String ten = tbBan.getValueAt(row, 0).toString();
+                    Ban b = implBan.getOne(ten);
+                    BanModel b2 = new BanModel("Trống");
+                    implBan.updateTT(b2, b.getId());
+                    listHoaDon = implHD.getAllTTViewHD(b.getId());
+                    showDataHD(listHoaDon);
+                    listBan = implBan.getAllTT();
+                    showDataBan(listBan);
+                    listHDCT = implHDCT.getAllviewGH("");
+                    showDataHDCT(listHDCT);
+                } else {
+                    String ma = txtMa.getText();
+                    HoaDonModel hd = new HoaDonModel(ma, ma);
+                    JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
+                    int row = tbBan.getSelectedRow();
+                    String ten = tbBan.getValueAt(row, 0).toString();
+                    Ban b = implBan.getOne(ten);
+                    listHoaDon = implHD.getAllTTViewHD(b.getId());
+                    showDataHD(listHoaDon);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-            JOptionPane.showMessageDialog(this, "Print done!");
+
         } else {
-            JOptionPane.showMessageDialog(this, "Da thanh toan thanh cong!");
+            int row1 = tbGH.getSelectedRow();
+            String maGH = tbGH.getValueAt(row1, 0).toString();
+            HoaDonChiTiet hd1 = implHDCT.getOne(maGH);
+            Double tien = hd1.getGiaTien();
+            Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
+            Double tienThua = tienKhach - tien;
+            if (tienThua >= 0) {
+                if (tbHD.getRowCount() <= 1) {
+                    String ma = txtMa.getText();
+                    HoaDonModel hd = new HoaDonModel(ma, ma);
+                    JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
+                    int row = tbBan.getSelectedRow();
+                    String ten = tbBan.getValueAt(row, 0).toString();
+                    Ban b = implBan.getOne(ten);
+                    BanModel b2 = new BanModel("Trống");
+                    implBan.updateTT(b2, b.getId());
+                    listHoaDon = implHD.getAllTTViewHD(b.getId());
+                    showDataHD(listHoaDon);
+                    listBan = implBan.getAllTT();
+                    showDataBan(listBan);
+                    listHDCT = implHDCT.getAllviewGH("");
+                    showDataHDCT(listHDCT);
+                } else {
+                    String ma = txtMa.getText();
+                    HoaDonModel hd = new HoaDonModel(ma, ma);
+                    JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
+                    int row = tbBan.getSelectedRow();
+                    String ten = tbBan.getValueAt(row, 0).toString();
+                    Ban b = implBan.getOne(ten);
+                    listHoaDon = implHD.getAllTTViewHD(b.getId());
+                    showDataHD(listHoaDon);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Không đủ tiền");
+            }
+
         }
     }//GEN-LAST:event_bltThanhToanActionPerformed
 
@@ -954,6 +992,39 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbInHDActionPerformed
 
+    private void btHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyDonActionPerformed
+
+        if (tbHD.getRowCount() <= 1) {
+            String ma = txtMa.getText();
+            HoaDonModel hd = new HoaDonModel(ma, ma);
+            implHD.update(hd, ma, "Huỷ");
+            JOptionPane.showMessageDialog(this, "Huỷ thành công");
+            int row = tbBan.getSelectedRow();
+            String ten = tbBan.getValueAt(row, 0).toString();
+            Ban b = implBan.getOne(ten);
+            BanModel b2 = new BanModel("Trống");
+            implBan.updateTT(b2, b.getId());
+            listHoaDon = implHD.getAllTTViewHD(b.getId());
+            showDataHD(listHoaDon);
+            listBan = implBan.getAllTT();
+            showDataBan(listBan);
+            listHDCT.clear();
+            showDataHDCT(listHDCT);
+        } else {
+            String ma = txtMa.getText();
+            HoaDonModel hd = new HoaDonModel(ma, ma);
+            implHD.update(hd, ma, "Huỷ");
+            JOptionPane.showMessageDialog(this, "Huỷ thành công");
+            int row = tbBan.getSelectedRow();
+            String ten = tbBan.getValueAt(row, 0).toString();
+            Ban b = implBan.getOne(ten);
+            listHoaDon = implHD.getAllTTViewHD(b.getId());
+            showDataHD(listHoaDon);
+            listHDCT.clear();
+            showDataHDCT(listHDCT);
+        }
+    }//GEN-LAST:event_btHuyDonActionPerformed
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         txtTongTien.setText(String.valueOf(Fomat(hdct.getGiaTien())));
@@ -974,13 +1045,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PHoaDon;
     private javax.swing.JButton bltThanhToan;
+    private javax.swing.JButton btHuyDon;
     private javax.swing.JCheckBox cbInHD;
     private javax.swing.JComboBox<String> cbbGG;
     private javax.swing.JComboBox<String> cbbLocDanhMuc;
     private javax.swing.JComboBox<String> cbbPhuongThucThanhToan;
-    private javax.swing.JMenuItem gopHD;
-    private javax.swing.JMenuItem gopban;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -997,12 +1066,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1010,9 +1081,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu puBan;
-    private javax.swing.JPopupMenu puHD;
     private javax.swing.JMenuItem tachBan;
-    private javax.swing.JMenuItem tachHD;
     private javax.swing.JTable tbBan;
     private javax.swing.JTabbedPane tbCB;
     private javax.swing.JTable tbGH;
