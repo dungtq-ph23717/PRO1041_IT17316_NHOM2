@@ -1013,10 +1013,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void tachBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachBanActionPerformed
         int row = tbBan.getSelectedRow();
-        String ten = tbBan.getValueAt(row, 0).toString();
+        String ten = txtBan.getText();
         Ban idKV = implBan.getOne(ten);
         KhuVuc id = idKV.getIDKV();
-        BanModel ban = new BanModel(ten + "-tách", "Nhỏ", "Trống");
+        BanModel ban = new BanModel(ten + "-tách", "Nhỏ", idKV.getIDKV(), "Trống");
         JOptionPane.showMessageDialog(this, "Tách bàn thành công");
         implBan.add(ban);
         listBan = implBan.getAllTT();

@@ -89,12 +89,18 @@ public class ViewTachBan extends javax.swing.JFrame {
         btClose = new javax.swing.JButton();
         btBack = new javax.swing.JButton();
         btNext = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Bàn");
 
         cbbBan1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbBan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbBan1ActionPerformed(evt);
+            }
+        });
 
         tbHD1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,6 +143,8 @@ public class ViewTachBan extends javax.swing.JFrame {
 
         btNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/fast-forward-double-right-arrows-symbol (1).png"))); // NOI18N
 
+        jButton1.setText("Tách");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,6 +173,8 @@ public class ViewTachBan extends javax.swing.JFrame {
                                 .addComponent(cbbBan2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(btClose)))
                 .addContainerGap())
         );
@@ -193,7 +203,9 @@ public class ViewTachBan extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(btClose)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btClose)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -204,6 +216,13 @@ public class ViewTachBan extends javax.swing.JFrame {
     private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
         this.dispose();
     }//GEN-LAST:event_btCloseActionPerformed
+
+    private void cbbBan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbBan1ActionPerformed
+        String ten = cbbBan1.getSelectedItem().toString();
+        Ban b = implBan.getOne(ten);
+        listHD = implHD.getAllTTViewHD(b.getId());
+        showDataHD1(listHD);
+    }//GEN-LAST:event_cbbBan1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,6 +265,7 @@ public class ViewTachBan extends javax.swing.JFrame {
     private javax.swing.JButton btNext;
     private javax.swing.JComboBox<String> cbbBan1;
     private javax.swing.JComboBox<String> cbbBan2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

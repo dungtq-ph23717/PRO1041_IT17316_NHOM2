@@ -23,9 +23,10 @@ public class BanModel {
         return trangThai;
     }
 
-    public BanModel(String tenBan, String loaiBan, String trangThai) {
+    public BanModel(String tenBan, String loaiBan, String IDKV, String trangThai) {
         this.tenBan = tenBan;
         this.loaiBan = loaiBan;
+        this.IDKV = IDKV;
         this.trangThai = trangThai;
     }
 
