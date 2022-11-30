@@ -130,6 +130,23 @@ public class HoaDonRepository {
         return check > 0;
     }
 
+    public boolean updateSL(HoaDonModel hd, String ma, String tinhTrang) {
+        String query = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET [MaHD] = ?\n"
+                + "      ,[TinhTrang] = ?\n"
+                + " WHERE MaHD = ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hd.getMaHD());
+            ps.setObject(2, tinhTrang);
+            ps.setObject(3, ma);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public boolean delete(String ID) {
         String query = "DELETE FROM [dbo].[HoaDon]\n"
                 + "      WHERE  MaHD=?";

@@ -47,7 +47,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewThanhToan extends javax.swing.JInternalFrame {
-    
+
     private DefaultTableModel dtmBan = new DefaultTableModel();
     private DefaultTableModel dtmGioHang = new DefaultTableModel();
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
@@ -81,18 +81,18 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        
+
         String[] headersBan = {"Tên bàn", "Loại bàn", "Trạng thái"};
         tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
         listBan = implBan.getAllTT();
         showDataBan(listBan);
-        
+
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
         showDataHD(listHoaDon);
-        
+
         tbSP.setModel(dtmSanPham);
         String[] headersSP = {"Mã SP", "Tên SP", "Giá Bán", "Danh Mục", "Trạng Thái", "Mô tả", "Size"};
         dtmSanPham.setColumnIdentifiers(headersSP);
@@ -109,7 +109,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         dtmGioHang.setColumnIdentifiers(headersGH);
 //        listHDCT = implHDCT.getAll();
         showDataHDCT(listHDCT);
-        
+
         listKhuyenMai = implKM.getAll();
         boxModelGG.addElement("Chọn");
         cbbGG.setModel(boxModelGG);
@@ -127,47 +127,46 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         boxKM.addElement("ATM");
         //
     }
-    
-    public String Fomat(double gia) {
-        Locale locale = new Locale("vi", "VN");
-//        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
-//        format.setRoundingMode(RoundingMode.HALF_UP);
-        DecimalFormat format = (DecimalFormat) DecimalFormat.getCurrencyInstance(locale);
-        DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
-        decimalFormatSymbols.setGroupingSeparator(',');
-        decimalFormatSymbols.setCurrencySymbol("");
-        format.setDecimalFormatSymbols(decimalFormatSymbols);
-        return format.format(gia);
-    }
-    
+
+//    public String Fomat(double gia) {
+//        Locale locale = new Locale("vi", "VN");
+////        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+////        format.setRoundingMode(RoundingMode.HALF_UP);
+//        DecimalFormat format = (DecimalFormat) DecimalFormat.getCurrencyInstance(locale);
+//        DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
+//        decimalFormatSymbols.setGroupingSeparator(',');
+//        decimalFormatSymbols.setCurrencySymbol("");
+//        format.setDecimalFormatSymbols(decimalFormatSymbols);
+//        return format.format(gia);
+//    }
     private void showDataHDCT(List<HoaDonChiTiet> list) {
         dtmGioHang.setRowCount(0);
         for (HoaDonChiTiet x : list) {
-            dtmGioHang.addRow(new Object[]{x.getIdSP().getMaSP(), x.getIdSP().getTenSP(), x.getSoLuong(), Fomat(x.getIdSP().getGiaBan()), Fomat(x.getGiaTien())});
+            dtmGioHang.addRow(new Object[]{x.getIdSP().getMaSP(), x.getIdSP().getTenSP(), x.getSoLuong(), x.getIdSP().getGiaBan(), x.getGiaTien()});
         }
     }
-    
+
     private void showDataCB(List<ComboModel> list) {
         dtmCB.setRowCount(0);
         for (ComboModel x : list) {
             dtmCB.addRow(x.toRowData());
         }
     }
-    
+
     private void showDataBan(List<Ban> list) {
         dtmBan.setRowCount(0);
         for (Ban x : list) {
             dtmBan.addRow(x.toRowDataTT());
         }
     }
-    
+
     private void showDataSP(List<SanPham> list) {
         dtmSanPham.setRowCount(0);
         for (SanPham sp : list) {
-            dtmSanPham.addRow(new Object[]{sp.getMaSP(), sp.getTenSP(), Fomat(sp.getGiaBan()), sp.getDanhMuc().getTenDanhMuc(), sp.getTrangThai(), sp.getMoTa(), sp.getSize().getSize()});
+            dtmSanPham.addRow(new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getDanhMuc().getTenDanhMuc(), sp.getTrangThai(), sp.getMoTa(), sp.getSize().getSize()});
         }
     }
-    
+
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
@@ -189,10 +188,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         tachBan = new javax.swing.JMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         updateSL = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbSP = new javax.swing.JTable();
@@ -263,6 +262,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         });
         jPopupMenu1.add(updateSL);
 
+        jMenuItem1.setText("Xoá sản phẩm");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
+
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Giỏ hàng"));
@@ -286,13 +293,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tbGH);
 
-        jButton4.setText("Xoá sản phẩm");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -301,18 +301,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(72, 72, 72))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -726,23 +720,23 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         try {
             for (KhuyenMai x : listKhuyenMai) {
                 if (cbbGG.getSelectedItem() == x.getMaKM()) {
-                    txtTienGiam.setText(Fomat(Double.valueOf(x.getMucGiam())));
+                    txtTienGiam.setText(String.valueOf(x.getMucGiam()));
                     int row = tbGH.getSelectedRow();
                     String ma = tbGH.getValueAt(row, 0).toString();
                     HoaDonChiTiet hd = implHDCT.getOne(ma);
                     Double tienGiam = Double.valueOf(x.getMucGiam());
-                    Double tien = hd.getGiaTien() - tienGiam;
+                    Double tien = (Double) tbGH.getValueAt(row, 4) - tienGiam;
                     Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
                     Double tienThua = tienKhach - tien;
-                    txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
+                    txtTienThua.setText(String.valueOf(tienThua));
                 } else if (cbbGG.getSelectedItem() == "Chọn") {
                     int row = tbGH.getSelectedRow();
                     String ma = tbGH.getValueAt(row, 0).toString();
                     HoaDonChiTiet hd = implHDCT.getOne(ma);
-                    Double tien = hd.getGiaTien();
+                    Double tien = (Double) tbGH.getValueAt(row, 4);
                     Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
                     Double tienThua = tienKhach - tien;
-                    txtTienThua.setText(String.valueOf(Fomat(Double.valueOf(tienThua))));
+                    txtTienThua.setText(String.valueOf(tienThua));
                 }
             }
         } catch (Exception e) {
@@ -774,16 +768,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Bỏ chọn sản phẩm");
         }
     }//GEN-LAST:event_tbSPMouseClicked
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        HoaDon idHD = implHD.getOne(txtMa.getText());
-        int rowSP = tbGH.getSelectedRow();
-        String maSP = tbGH.getValueAt(rowSP, 0).toString();
-        SanPham sp = implSP.getOne(maSP);
-        implHDCT.delete(idHD.getID(), sp.getId());
-        listHDCT = implHDCT.getAllviewGH(sp.getId());
-        showDataHDCT(listHDCT);
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void tbHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHDMouseClicked
         int row = tbHD.getSelectedRow();
@@ -827,8 +811,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     private void gopBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopBanActionPerformed
-        ViewPropertieBan v = new ViewPropertieBan();
-        v.setVisible(true);
+
     }//GEN-LAST:event_gopBanActionPerformed
 
     private void txtSearchTenSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTenSPKeyReleased
@@ -870,7 +853,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                         Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, "In thất bại!", ex);
                     }
                     JOptionPane.showMessageDialog(this, "Print done!");
-                    
+
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
@@ -898,7 +881,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-            
+
         } else {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
@@ -935,7 +918,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-            
+
         }
     }//GEN-LAST:event_bltThanhToanActionPerformed
 
@@ -948,13 +931,13 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 for (KhuyenMai x : listKhuyenMai) {
                     if (cbbGG.getSelectedItem() == x.getMaKM()) {
-                        txtTienGiam.setText(Fomat(Double.valueOf(x.getMucGiam())));
+                        txtTienGiam.setText(String.valueOf(x.getMucGiam()));
                         int row = tbGH.getSelectedRow();
                         String ma = tbGH.getValueAt(row, 0).toString();
                         HoaDonChiTiet hd = implHDCT.getOne(ma);
                         Double tienGiam = Double.valueOf(x.getMucGiam());
                         Double tien = hd.getGiaTien() - tienGiam;
-                        txtTongTien.setText(String.valueOf(Fomat(tien)));
+                        txtTongTien.setText(String.valueOf(tien));
                     }
                 }
             }
@@ -979,7 +962,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbInHDActionPerformed
 
     private void btHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyDonActionPerformed
-        
+
         if (tbHD.getRowCount() <= 1) {
             String ma = txtMa.getText();
             HoaDonModel hd = new HoaDonModel(ma, ma);
@@ -1013,7 +996,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void updateSLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSLActionPerformed
         int rowSP = tbGH.getSelectedRow();
-        String maSP = tbSP.getValueAt(rowSP, 0).toString();
+        String maSP = tbGH.getValueAt(rowSP, 0).toString();
         SanPham sp = implSP.getOne(maSP);
         HoaDon idHD = implHD.getOne(txtMa.getText());
         String id = sp.getId();
@@ -1026,7 +1009,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         implHDCT.update(hdct, idHD.getID(), id);
         listHDCT = implHDCT.getAllviewGH(idHD.getID());
         showDataHDCT(listHDCT);
-
     }//GEN-LAST:event_updateSLActionPerformed
 
     private void tachBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachBanActionPerformed
@@ -1040,17 +1022,27 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         listBan = implBan.getAllTT();
         showDataBan(listBan);
     }//GEN-LAST:event_tachBanActionPerformed
-    
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        HoaDon idHD = implHD.getOne(txtMa.getText());
+        int rowSP = tbGH.getSelectedRow();
+        String maSP = tbGH.getValueAt(rowSP, 0).toString();
+        SanPham sp = implSP.getOne(maSP);
+        implHDCT.delete(idHD.getID(), sp.getId());
+        listHDCT = implHDCT.getAllviewGH(sp.getId());
+        showDataHDCT(listHDCT);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
-        txtTongTien.setText(String.valueOf(Fomat(hdct.getGiaTien())));
+        txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
     }
-    
+
     private void fillDataBan(int index) {
         Ban b = listBan.get(index);
         txtBan.setText(b.getTenBan());
     }
-    
+
     private void fillDataHD(int index) {
         HoaDon hd = listHoaDon.get(index);
         txtMa.setText(hd.getMaHD());
@@ -1068,7 +1060,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbbPhuongThucThanhToan;
     private javax.swing.JMenuItem gopBan;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1083,6 +1074,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
