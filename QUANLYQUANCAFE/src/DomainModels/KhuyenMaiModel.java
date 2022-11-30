@@ -14,7 +14,7 @@ public class KhuyenMaiModel {
     private String maKM;
     private String tenKM;
     private String hinhThucGG;
-    private String mucGiam;
+    private double mucGiam;
     private String tgBatDau;
     private String tgKetThuc;
     private String trangThai;
@@ -23,7 +23,7 @@ public class KhuyenMaiModel {
     public KhuyenMaiModel() {
     }
 
-    public KhuyenMaiModel(String ID, String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa) {
+    public KhuyenMaiModel(String ID, String maKM, String tenKM, String hinhThucGG, double mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa) {
         this.ID = ID;
         this.maKM = maKM;
         this.tenKM = tenKM;
@@ -35,7 +35,7 @@ public class KhuyenMaiModel {
         this.moTa = moTa;
     }
 
-    public KhuyenMaiModel(String maKM, String tenKM, String hinhThucGG, String mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa) {
+    public KhuyenMaiModel(String maKM, String tenKM, String hinhThucGG, double mucGiam, String tgBatDau, String tgKetThuc, String trangThai, String moTa) {
         this.maKM = maKM;
         this.tenKM = tenKM;
         this.hinhThucGG = hinhThucGG;
@@ -82,11 +82,11 @@ public class KhuyenMaiModel {
         this.hinhThucGG = hinhThucGG;
     }
 
-    public String getMucGiam() {
+    public double getMucGiam() {
         return mucGiam;
     }
 
-    public void setMucGiam(String mucGiam) {
+    public void setMucGiam(double mucGiam) {
         this.mucGiam = mucGiam;
     }
 
