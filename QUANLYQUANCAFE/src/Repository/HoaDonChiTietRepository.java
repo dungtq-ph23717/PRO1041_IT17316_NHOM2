@@ -99,15 +99,15 @@ public class HoaDonChiTietRepository {
         return check > 0;
     }
 
-    public boolean update(HoaDonModel hd, String ma) {
-        String query = "";
+    public boolean update(HoaDonChiTietModel hd, String idHD, String idSP) {
+        String query = "UPDATE [dbo].[HoaDonChiTiet]\n"
+                + "   SET [Soluong] = ?\n"
+                + " WHERE IDHD like ? and IDSP like ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, hd.getMaHD());
-            ps.setObject(2, hd.getNgayLapHD());
-            ps.setObject(3, hd.getThanhTien());
-            ps.setObject(4, hd.getPhuongThucThanhToan());
-            ps.setObject(5, ma);
+            ps.setObject(1, hd.getSoLuong());
+            ps.setObject(2, idHD);
+            ps.setObject(3, idSP);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);

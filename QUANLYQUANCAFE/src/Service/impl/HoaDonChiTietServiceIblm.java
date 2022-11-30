@@ -15,14 +15,14 @@ import java.util.List;
  * @author vietv
  */
 public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
-
+    
     private HoaDonChiTietRepository rp = new HoaDonChiTietRepository();
-
+    
     @Override
     public List<HoaDonChiTiet> getAll() {
         return rp.getAll();
     }
-
+    
     @Override
     public String add(HoaDonChiTietModel hd) {
         boolean add = rp.add(hd);
@@ -32,12 +32,17 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
             return "Add thất bại";
         }
     }
-
+    
     @Override
-    public String update(HoaDonChiTietModel hd, String maHD) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String update(HoaDonChiTietModel hd, String idHD, String idSP) {
+        boolean update = rp.update(hd, idHD, idSP);
+        if (update) {
+            return "update thành công";
+        } else {
+            return "update thất bại";
+        }
     }
-
+    
     @Override
     public String delete(String idHD, String idSP) {
         boolean delete = rp.delete(idHD, idSP);
@@ -47,15 +52,15 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
             return "Delete thất bại";
         }
     }
-
+    
     @Override
     public List<HoaDonChiTiet> getAllviewGH(String id) {
         return rp.getAllviewGH(id);
     }
-
+    
     @Override
     public HoaDonChiTiet getOne(String ma) {
         return rp.getOne(ma);
     }
-
+    
 }
