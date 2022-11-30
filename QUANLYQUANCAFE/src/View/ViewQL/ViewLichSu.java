@@ -30,8 +30,18 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
+        String[] headers = {"Mã HĐ", "Ngày","bàn", "Phương Thức TT","Tên Sản Phẩm","Giá bán","số lượng", "Tên NV","Tình Trạng"};
+        jTable1.setModel(dtm);
+        dtm.setColumnIdentifiers(headers);
+        list = impl.getAll();
+        showData(list);
         
     }
+     private void fillData(int index) {
+       
+        
+    }   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,7 +110,7 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(790, 790, 790)
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 287, Short.MAX_VALUE))
+                .addGap(0, 291, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -115,9 +125,9 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(378, 378, 378)
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -127,9 +137,9 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
     private void showData(List<HoaDon> list){
         dtm.setRowCount(0);
         for (HoaDon x : list) {
-            dtm.addRow(x.toRowData());
+            dtm.addRow(x.toRowData1());
         }
-    }
+}
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
