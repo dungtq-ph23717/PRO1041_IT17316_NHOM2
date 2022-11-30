@@ -126,7 +126,7 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
     private void showData(List<HoaDon> list){
         dtm.setRowCount(0);
         for (HoaDon x : list) {
-            dtm.addRow(x.toRowData());
+            dtm.addRow(x.toRowData1());
         }
     }
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

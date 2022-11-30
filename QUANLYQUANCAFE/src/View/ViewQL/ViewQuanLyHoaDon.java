@@ -5,12 +5,23 @@
 package View.ViewQL;
 
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import View.ViewNV.*;
+import Service.impl.HoaDonServiceIblm;
+import ViewModels.HoaDon;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Admin
  */
 public class ViewQuanLyHoaDon extends javax.swing.JInternalFrame {
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private HoaDonServiceIblm impl = new HoaDonServiceIblm();
+    private List<HoaDon> list = new ArrayList<>();
+
 
     /**
      * Creates new form ViewQuanLyHoaDon
@@ -20,8 +31,20 @@ public class ViewQuanLyHoaDon extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI)this.getUI();
         uI.setNorthPane(null);
+        String[] headers = {"ID","Mã HĐ", "Ngày", "Phương Thức TT", "ThanhToán", "Tên NV","Tình Trạng"};
+        jTable1.setModel(dtm);
+        dtm.setColumnIdentifiers(headers);
+        list = impl.getAll();
+        showData(list);
+    }
+    private void showData(List<HoaDon> list){
+        dtm.setRowCount(0);
+        for (HoaDon x : list) {
+            dtm.addRow(x.toRowData1());
+        }
     }
 
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -21,16 +21,15 @@ import java.util.List;
 public class HoaDonRepository {
 
     public List<HoaDon> getAll() {
-        String query = "SELECT dbo.HoaDon.ID, dbo.HoaDon.MaHD, dbo.HoaDon.NgayLapHD, dbo.HoaDon.ThanhTien, dbo.HoaDon.PhuongThucThanhToan, dbo.KhuyenMai.MaKM, dbo.NhanVien.MaNV, dbo.Ban.MaBan\n"
-                + "FROM   dbo.HoaDon INNER JOIN\n"
-                + "             dbo.KhuyenMai ON dbo.HoaDon.IDKM = dbo.KhuyenMai.ID INNER JOIN\n"
-                + "             dbo.NhanVien ON dbo.HoaDon.IDNV = dbo.NhanVien.ID INNER JOIN\n"
-                + "             dbo.Ban ON dbo.HoaDon.ID = dbo.Ban.ID";
+        String query = "SELECT        dbo.HoaDon.ID, dbo.HoaDon.MaHD, dbo.HoaDon.NgayLapHD, dbo.HoaDon.PhuongThucThanhToan, dbo.HoaDon.ThanhTien, dbo.NhanVien.TenNV, dbo.HoaDon.TinhTrang\n" +
+"FROM            dbo.HoaDon INNER JOIN\n" +
+"                         dbo.NhanVien ON dbo.HoaDon.IDNV = dbo.NhanVien.ID\n" +
+"						 WHERE TinhTrang LIKE N'đã thanh toán'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(5), rs.getString(4), new NhanVienViewModel(rs.getString(6)), rs.getString(7));
                 list.add(hd);
             }
             return list;
@@ -159,7 +158,7 @@ public class HoaDonRepository {
 
     public static void main(String[] args) {
 
-        List<HoaDon> rp = new HoaDonRepository().getAllTTViewHD("771c62b0-ea76-4dc5-b5af-4e626985c5b3");
+        List<HoaDon> rp = new HoaDonRepository().getAll();
         for (HoaDon hoaDon : rp) {
             System.out.println(hoaDon.toString());
         }

@@ -57,6 +57,17 @@ public class HoaDon {
 
     }
 
+    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, NhanVienViewModel tenNV, String tinhTrang) {
+        this.ID = ID;
+        this.maHD = maHD;
+        this.ngayLapHD = ngayLapHD;
+        this.thanhTien = thanhTien;
+        this.phuongThucThanhToan = phuongThucThanhToan;
+        this.tenNV = tenNV;
+        this.tinhTrang = tinhTrang;
+    }
+    
+
     public String getID() {
         return ID;
     }
@@ -148,5 +159,7 @@ public class HoaDon {
     public void setTenNV(NhanVienViewModel tenNV) {
         this.tenNV = tenNV;
     }
-
+ public Object[] toRowData1() {
+        return new Object[]{ID, maHD, ngayLapHD, phuongThucThanhToan, thanhTien,tenNV.getTenNV(),tinhTrang};
 }
+    }         

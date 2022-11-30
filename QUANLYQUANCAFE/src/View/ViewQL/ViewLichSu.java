@@ -30,6 +30,23 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
+        String[] headers = {"ID","Mã HĐ", "Ngày", "Phương Thức TT", "ThanhToán", "Tên NV","Tình Trạng"};
+        jTable1.setModel(dtm);
+        dtm.setColumnIdentifiers(headers);
+        list = impl.getAll();
+        showData(list);
+        
+    }
+     private void fillData(int index) {
+        HoaDon hd = list.get(index);
+        jlbid.setText(hd.getID());
+        jlbma.setText(hd.getMaHD());
+        jlbngay.setText(hd.getNgayLapHD());
+        jlbthanhtoan.setText(hd.getPhuongThucThanhToan());
+        jlbtt.setText(String.valueOf(hd.getThanhTien()));
+//        jlbnv.setText((hd.getTenNV()));
+        jlbtinhtrang.setText(hd.getTinhTrang());
+        
         
     }
 
@@ -48,6 +65,24 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        bttimkiem = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jlbid = new javax.swing.JLabel();
+        jlbma = new javax.swing.JLabel();
+        jlbngay = new javax.swing.JLabel();
+        jlbpttt = new javax.swing.JLabel();
+        jlbtt = new javax.swing.JLabel();
+        jlbnv = new javax.swing.JLabel();
+        jlbtinhtrang = new javax.swing.JLabel();
+        jlbthanhtoan = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(871, 699));
 
@@ -93,54 +128,183 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setText("Lịch sử thanh toán");
 
+        bttimkiem.setText("Tìm Kiếm");
+
+        jLabel4.setText("ID :");
+
+        jLabel5.setText("Mã HD :");
+
+        jLabel6.setText("Ngày :");
+
+        jLabel7.setText("Phương Thức TT :");
+
+        jLabel8.setText("Thành Tiền :");
+
+        jLabel9.setText("Tên NV :");
+
+        jLabel10.setText("Tình Trạng :");
+
+        jlbid.setText("X");
+
+        jlbma.setText("X");
+
+        jlbngay.setText("X");
+
+        jlbtt.setText("X");
+
+        jlbnv.setText("X");
+
+        jlbtinhtrang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlbtinhtrang.setText("X");
+
+        jlbthanhtoan.setText("X");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(790, 790, 790)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 287, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bttimkiem)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(790, 790, 790)
+                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(341, 341, 341)
+                        .addComponent(jLabel3)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jlbpttt))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jlbid))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlbma, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlbngay, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(132, 132, 132)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbtt)
+                            .addComponent(jlbtinhtrang)
+                            .addComponent(jlbnv)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jlbthanhtoan)))
+                .addContainerGap(733, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bttimkiem))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jlbid)
+                    .addComponent(jLabel8)
+                    .addComponent(jlbtt))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jlbma)
+                    .addComponent(jLabel9)
+                    .addComponent(jlbnv))
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jlbngay)
+                    .addComponent(jLabel10)
+                    .addComponent(jlbtinhtrang))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jlbthanhtoan))
+                .addGap(75, 75, 75)
+                .addComponent(jlbpttt)
+                .addGap(112, 112, 112)
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setBounds(0, 0, 1093, 735);
+        setBounds(0, 0, 1093, 690);
     }// </editor-fold>//GEN-END:initComponents
 
     private void showData(List<HoaDon> list){
         dtm.setRowCount(0);
         for (HoaDon x : list) {
-            dtm.addRow(x.toRowData());
+            dtm.addRow(x.toRowData1());
         }
     }
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        fillData(row);
     }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bttimkiem;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jlbid;
+    private javax.swing.JLabel jlbma;
+    private javax.swing.JLabel jlbngay;
+    private javax.swing.JLabel jlbnv;
+    private javax.swing.JLabel jlbpttt;
+    private javax.swing.JLabel jlbthanhtoan;
+    private javax.swing.JLabel jlbtinhtrang;
+    private javax.swing.JLabel jlbtt;
     // End of variables declaration//GEN-END:variables
 }
