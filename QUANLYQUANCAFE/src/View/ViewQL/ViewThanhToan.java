@@ -929,7 +929,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
             HoaDonChiTiet hd1 = implHDCT.getOne(maGH);
-            Double tien = hd1.getGiaTien();
+            Double tien = hd1.getSoLuong() * hd1.getGiaTien();
             Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
             Double tienThua = tienKhach - tien;
             if (tienThua >= 0) {
@@ -977,9 +977,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                         txtTienGiam.setText(String.valueOf(x.getMucGiam()));
                         int row = tbGH.getSelectedRow();
                         String ma = tbGH.getValueAt(row, 0).toString();
+                        Double tongTien = (Double) tbGH.getValueAt(row, 4);
                         HoaDonChiTiet hd = implHDCT.getOne(ma);
                         Double tienGiam = Double.valueOf(x.getMucGiam());
-                        Double tien = hd.getGiaTien() - tienGiam;
+                        Double tien = tongTien - tienGiam;
                         txtTongTien.setText(String.valueOf(tien));
                     }
                 }
@@ -1060,7 +1061,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         listBan = implBan.getAllTT();
         showDataBan(listBan);
         Ban b = listBan.get(row);
-        ViewTachBan v = new ViewTachBan();
+        ViewTachBan v = new ViewTachBan(b);
         v.setVisible(true);
     }//GEN-LAST:event_tachBanActionPerformed
 
