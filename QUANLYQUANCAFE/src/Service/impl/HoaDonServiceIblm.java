@@ -73,4 +73,14 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         return rps.getAllTTViewHD(id);
     }
 
+    @Override
+    public String updateID(String id, String maHD) {
+        boolean update = rps.updateID(id, maHD);
+        if (update) {
+            return "Update thành công";
+        } else {
+            return "Update thất bại";
+        }
+    }
+
 }

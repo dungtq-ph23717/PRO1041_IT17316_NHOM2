@@ -27,6 +27,8 @@ public interface ServiceHoaDon {
 
     String update(HoaDonModel hd, String maHD, String tinhTrang);
 
+    String updateID(String id, String maHD);
+
     String delete(String maHD);
 
 }

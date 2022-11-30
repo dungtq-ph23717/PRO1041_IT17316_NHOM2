@@ -237,7 +237,7 @@ public class BanRepostory {
 //        }
 //        Ban b = new BanRepostory().getOne("Bàn 1");
 //        System.out.println(b);
-        BanModel b = new BanModel("Bàn 1", "Nhỏ","2a0369ea-f5b8-4e9f-87a8-065ab1ed2eb4", "Trống");
+        BanModel b = new BanModel("Bàn 1", "Nhỏ", "Trống");
         boolean add = new BanRepostory().add(b);
         System.out.println(add);
     }

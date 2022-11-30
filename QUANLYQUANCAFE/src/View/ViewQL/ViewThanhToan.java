@@ -8,6 +8,7 @@ import DomainModels.BanModel;
 import DomainModels.ComboModel;
 import DomainModels.HoaDonChiTietModel;
 import DomainModels.HoaDonModel;
+import DomainModels.KhuVucModel;
 import DomainModels.KhuyenMaiModel;
 import View.ViewNV.*;
 import Service.impl.BanServiceImpl;
@@ -1015,12 +1016,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         int row = tbBan.getSelectedRow();
         String ten = txtBan.getText();
         Ban idKV = implBan.getOne(ten);
-        KhuVuc id = idKV.getIDKV();
-        BanModel ban = new BanModel(ten + "-tách", "Nhỏ", idKV.getIDKV(), "Trống");
+        BanModel ban = new BanModel(ten + "-tách", "Nhỏ", "Trống");
         JOptionPane.showMessageDialog(this, "Tách bàn thành công");
         implBan.add(ban);
         listBan = implBan.getAllTT();
         showDataBan(listBan);
+        Ban b = listBan.get(row);
+        ViewTachBan v = new ViewTachBan();
+        v.setVisible(true);
     }//GEN-LAST:event_tachBanActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

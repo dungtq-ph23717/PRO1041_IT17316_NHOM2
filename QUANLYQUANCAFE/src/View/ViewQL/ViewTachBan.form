@@ -108,7 +108,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="B&#xe0;n"/>
+        <Property name="text" type="java.lang.String" value="B&#xe0;n t&#xe1;ch"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbbBan1">
@@ -161,6 +161,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbbBan2ActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -205,6 +208,9 @@
           <Image iconType="3" name="/Image/double-arrow (1).png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btBackActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btNext">
       <Properties>
@@ -212,6 +218,9 @@
           <Image iconType="3" name="/Image/fast-forward-double-right-arrows-symbol (1).png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btNextActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>

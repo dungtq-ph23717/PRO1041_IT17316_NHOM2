@@ -11,6 +11,7 @@ import ViewModels.HoaDon;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,7 +45,7 @@ public class ViewTachBan extends javax.swing.JFrame {
         listHD = implHD.getAllTT();
         showDataHD2(listHD);
 
-        listBan = implBan.getAll();
+        listBan = implBan.getAllTT();
         cbbBan1.setModel(boxModel1);
         for (Ban b : listBan) {
             boxModel1.addElement(b.getTenBan());
@@ -93,7 +94,7 @@ public class ViewTachBan extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Bàn");
+        jLabel1.setText("Bàn tách");
 
         cbbBan1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbbBan1.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +117,11 @@ public class ViewTachBan extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbHD1);
 
         cbbBan2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbBan2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbBan2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Bàn");
 
@@ -140,8 +146,18 @@ public class ViewTachBan extends javax.swing.JFrame {
         });
 
         btBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/double-arrow (1).png"))); // NOI18N
+        btBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBackActionPerformed(evt);
+            }
+        });
 
         btNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/fast-forward-double-right-arrows-symbol (1).png"))); // NOI18N
+        btNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNextActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Tách");
 
@@ -223,6 +239,57 @@ public class ViewTachBan extends javax.swing.JFrame {
         listHD = implHD.getAllTTViewHD(b.getId());
         showDataHD1(listHD);
     }//GEN-LAST:event_cbbBan1ActionPerformed
+
+    private void cbbBan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbBan2ActionPerformed
+        String ten = cbbBan2.getSelectedItem().toString();
+        Ban b = implBan.getOne(ten);
+        listHD = implHD.getAllTTViewHD(b.getId());
+        showDataHD2(listHD);
+    }//GEN-LAST:event_cbbBan2ActionPerformed
+
+    private void btBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackActionPerformed
+        try {
+            int row = tbHD2.getSelectedRow();
+            String ten = cbbBan1.getSelectedItem().toString();
+            String maHD = (String) tbHD2.getValueAt(row, 0);
+            Ban b = implBan.getOne(ten);
+            implHD.updateID(b.getId(), maHD);
+
+            String ten1 = cbbBan1.getSelectedItem().toString();
+            Ban b1 = implBan.getOne(ten1);
+            listHD = implHD.getAllTTViewHD(b1.getId());
+            showDataHD1(listHD);
+
+            String ten2 = cbbBan2.getSelectedItem().toString();
+            Ban b2 = implBan.getOne(ten2);
+            listHD = implHD.getAllTTViewHD(b2.getId());
+            showDataHD2(listHD);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+        }
+    }//GEN-LAST:event_btBackActionPerformed
+
+    private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
+        try {
+            int row = tbHD1.getSelectedRow();
+            String ten = cbbBan2.getSelectedItem().toString();
+            String maHD = (String) tbHD1.getValueAt(row, 0);
+            Ban b = implBan.getOne(ten);
+            implHD.updateID(b.getId(), maHD);
+
+            String ten1 = cbbBan1.getSelectedItem().toString();
+            Ban b1 = implBan.getOne(ten1);
+            listHD = implHD.getAllTTViewHD(b1.getId());
+            showDataHD1(listHD);
+
+            String ten2 = cbbBan2.getSelectedItem().toString();
+            Ban b2 = implBan.getOne(ten2);
+            listHD = implHD.getAllTTViewHD(b2.getId());
+            showDataHD2(listHD);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+        }
+    }//GEN-LAST:event_btNextActionPerformed
 
     /**
      * @param args the command line arguments
