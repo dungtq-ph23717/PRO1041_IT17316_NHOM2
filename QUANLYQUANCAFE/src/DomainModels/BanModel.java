@@ -17,21 +17,27 @@ public class BanModel {
     private String loaiBan;
     private String IDKV;
     private KhuVucModel tenKV;
-    private String tinhTrang;
+    private String trangThai;
 
     public String getTinhTrang() {
-        return tinhTrang;
+        return trangThai;
     }
 
-    public void setTinhTrang(String tinhTrang) {
-        this.tinhTrang = tinhTrang;
+    public BanModel(String tenBan, String loaiBan, String trangThai) {
+        this.tenBan = tenBan;
+        this.loaiBan = loaiBan;
+        this.trangThai = trangThai;
+    }
+
+    public void setTinhTrang(String trangThai) {
+        this.trangThai = trangThai;
     }
 
     public BanModel() {
     }
 
     public BanModel(String tinhTrang) {
-        this.tinhTrang = tinhTrang;
+        this.trangThai = tinhTrang;
     }
 
     public BanModel(String id, String maBan, String tenBan, String moTa, String loaiBan, String IDKV, KhuVucModel tenKV) {

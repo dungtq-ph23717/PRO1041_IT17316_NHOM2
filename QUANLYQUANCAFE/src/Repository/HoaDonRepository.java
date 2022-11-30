@@ -58,18 +58,16 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> getAllTT() {
-        String query = "Select MaHD,NgayLapHD,TenNV, TinhTrang\n"
+        String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
                 + "from HoaDon \n"
-                + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV"
+                + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
                 + "Where TinhTrang like N'Chờ'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
                 NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
-
                 HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv, rs.getString(4));
-
                 list.add(hd);
             }
             return list;
@@ -147,13 +145,13 @@ public class HoaDonRepository {
 
     public static void main(String[] args) {
 
-        List<HoaDon> rp = new HoaDonRepository().getAllTTViewHD("771c62b0-ea76-4dc5-b5af-4e626985c5b3");
+        List<HoaDon> rp = new HoaDonRepository().getAllTT();
         for (HoaDon hoaDon : rp) {
             System.out.println(hoaDon.toString());
         }
-        HoaDonModel hd = new HoaDonModel("HD1", "1");
-        boolean add = new HoaDonRepository().update(hd, "HD1", "Huỷ");
-        System.out.println(add);
+//        HoaDonModel hd = new HoaDonModel("HD1", "1");
+//        boolean add = new HoaDonRepository().update(hd, "HD1", "Huỷ");
+//        System.out.println(add);
 //        HoaDon hd = new HoaDonRepository().getOne("HD2");
 //        System.out.println(hd);
     }

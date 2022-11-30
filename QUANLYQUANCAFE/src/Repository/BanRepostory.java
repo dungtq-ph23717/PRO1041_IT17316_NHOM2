@@ -52,8 +52,7 @@ public class BanRepostory {
 
     public List<Ban> getAllTT() {
         String query = "Select TenBan,Loaiban,TinhTrang\n"
-                + "From Ban \n"
-                + "inner join KhuVuc on Ban.IDKV = KhuVuc.ID";
+                + "From Ban \n";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<Ban> list = new ArrayList<>();
@@ -158,13 +157,13 @@ public class BanRepostory {
                 + "           ,[TenBan]\n"
                 + "           ,[Mota]\n"
                 + "           ,[Loaiban]\n"
-                + "           ,[IDKV])\n"
+                + "           ,[IDKV],[TinhTrang])\n"
                 + "     VALUES\n"
                 + "           (?\n"
                 + "           ,?\n"
                 + "           ,?\n"
                 + "           ,?\n"
-                + "           ,?)";
+                + "           ,?,?)";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ban.getMaBan());
@@ -172,6 +171,7 @@ public class BanRepostory {
             ps.setObject(3, ban.getMoTa());
             ps.setObject(4, ban.getLoaiBan());
             ps.setObject(5, ban.getIDKV());
+            ps.setObject(6, ban.getTinhTrang());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -231,14 +231,14 @@ public class BanRepostory {
     }
 
     public static void main(String[] args) {
-//        List<Ban> list = new BanRepostory().getAllTT();
-//        for (Ban x : list) {
-//            System.out.println(x.toString());
-//        }
+        List<Ban> list = new BanRepostory().getAllTT();
+        for (Ban x : list) {
+            System.out.println(x.toString());
+        }
 //        Ban b = new BanRepostory().getOne("Bàn 1");
 //        System.out.println(b);
-        BanModel b = new BanModel("Đang sử dụng");
-        boolean add = new BanRepostory().updateTT(b, "9f23f735-2783-4dfd-ac62-bb9b9397466c");
+        BanModel b = new BanModel("Bàn 1", "Nhỏ", "Trống");
+        boolean add = new BanRepostory().add(b);
         System.out.println(add);
     }
 }
