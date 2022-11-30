@@ -229,6 +229,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         txtTienGiam = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        txtTenSP = new javax.swing.JLabel();
+        txtSoL = new javax.swing.JLabel();
+        txtDonGia = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbBan = new javax.swing.JTable();
@@ -372,7 +376,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     .addComponent(txtSearchTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbLocDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -449,11 +453,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jLabel10.setText("VND");
 
         cbInHD.setText("In hóa đơn");
-        cbInHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbInHDActionPerformed(evt);
-            }
-        });
 
         txtPrint.setColumns(20);
         txtPrint.setRows(5);
@@ -464,6 +463,40 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         txtTienGiam.setText("0");
 
         jLabel14.setText("VND");
+
+        txtTenSP.setText("jLabel15");
+
+        txtSoL.setText("jLabel15");
+
+        txtDonGia.setText("jLabel15");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtSoL))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTenSP)
+                            .addComponent(txtDonGia))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTenSP)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSoL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtDonGia))
+        );
 
         javax.swing.GroupLayout PHoaDonLayout = new javax.swing.GroupLayout(PHoaDon);
         PHoaDon.setLayout(PHoaDonLayout);
@@ -527,6 +560,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbbPhuongThucThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(24, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PHoaDonLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         PHoaDonLayout.setVerticalGroup(
             PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -543,7 +580,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtNhanVien))
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
                 .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtNgay))
@@ -668,11 +707,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 265, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 162, Short.MAX_VALUE)
+            .addGap(0, 212, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -692,7 +731,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -835,18 +874,21 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             if (tienThua >= 0) {
                 if (tbHD.getRowCount() <= 1) {
                     txtPrint.append("\t\t HÓA ĐƠN THANH TOÁN \n\n\n\n"
-                            + "\tMã Hóa Đơn:\t\t\t" + txtMa.getText()
-                            + "\t\n=============================================================\n"
+                            + "\t\t   Mã Hóa Đơn:  " + txtMa.getText() + "\n"
+                            + "\t\n+++--------------------------------------------------------------------------------------------------------+++\n\n"
                             + "\tBàn:\t\t\t" + txtBan.getText() + "\n\n"
-                            + "\tNhân viên:\t\t\t" + txtNhanVien.getText() + "\n\n"
+                            + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n\n"
                             + "\tNgày:\t\t\t" + txtNgay.getText() + "\n\n"
-                            + "\tPhương thức thanh toán:\t\t" + cbbPhuongThucThanhToan.getSelectedItem().toString() + "\n\n"
-                            + "\tMã giảm giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n\n"
-                            + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n"
-                            + "\t\n=============================================================\n"
-                            + "\tTiền khách trả:\t\t\t" + txtTienKhachTra.getText() + " " + "VND" + "\n\n"
-                            + "\tTiền thừa:\t\t\t" + txtTienThua.getText() + " " + "VND" + "\n\n\n\n"
-                            + "\t=====Chúc quý khách một ngày vui vẻ!=====\n\n\n\n\n"
+                            + "\tPhương Thức Thanh Toán:\t\t" + cbbPhuongThucThanhToan.getSelectedItem().toString() + "\n\n"
+                            + "\tMã Giảm Giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n\n"
+                            + "\tMức Giảm:\t\t\t" + txtTienGiam.getText() + " " + "VND" + "\n\n"
+                            + "\tTên Sản Phẩm:\t\t" + txtTenSP.getText() + "\n\n"
+                            + "\tSố Lượng:\t\t\t" + txtSoL.getText() + "\n\n"
+                            + "              X\n\n"
+                            + "\tĐơn Giá:\t\t\t" + txtDonGia.getText() + " " + "VND" + "\n"
+                            + "\t\n================================================================================\n\n"
+                            + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n\n\n\n"
+                            + "       +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++\n\n\n"
                     );
                     try {
                         txtPrint.print();
@@ -958,10 +1000,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbbLocDanhMucActionPerformed
 
-    private void cbInHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbInHDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbInHDActionPerformed
-
     private void btHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyDonActionPerformed
 
         if (tbHD.getRowCount() <= 1) {
@@ -1038,7 +1076,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
+        SanPham sp = listSanPham.get(index);
         txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
+        txtTenSP.setText(sp.getTenSP());
+        txtDonGia.setText(String.valueOf(sp.getGiaBan()));
+        txtSoL.setText(String.valueOf(hdct.getSoLuong()));
     }
 
     private void fillDataBan(int index) {
@@ -1078,6 +1120,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1096,11 +1139,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JTable tbHD;
     private javax.swing.JTable tbSP;
     private javax.swing.JLabel txtBan;
+    private javax.swing.JLabel txtDonGia;
     private javax.swing.JLabel txtMa;
     private javax.swing.JLabel txtNgay;
     private javax.swing.JLabel txtNhanVien;
     private javax.swing.JTextArea txtPrint;
     private javax.swing.JTextField txtSearchTenSP;
+    private javax.swing.JLabel txtSoL;
+    private javax.swing.JLabel txtTenSP;
     private javax.swing.JLabel txtTienGiam;
     private javax.swing.JTextField txtTienKhachTra;
     private javax.swing.JLabel txtTienThua;
