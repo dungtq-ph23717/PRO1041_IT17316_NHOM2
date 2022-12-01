@@ -27,6 +27,11 @@ public class HoaDonModel {
         this.IDBan = IDBan;
     }
 
+    public HoaDonModel(String maHD, String tinhhTrang) {
+        this.maHD = maHD;
+        this.tinhhTrang = tinhhTrang;
+    }
+
     public HoaDonModel(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String IDKM, String IDNV, String IDBan, String tinhhTrang) {
         this.ID = ID;
         this.maHD = maHD;

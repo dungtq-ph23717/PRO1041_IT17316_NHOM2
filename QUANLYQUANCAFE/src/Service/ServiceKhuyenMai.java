@@ -18,13 +18,9 @@ public interface ServiceKhuyenMai {
 
     KhuyenMai getOne(String ten);
 
-    String addTST(KhuyenMaiModel km);
+    String add(KhuyenMaiModel km);
 
-    String addTPT(KhuyenMaiModel km);
-
-    String updateTST(KhuyenMaiModel km, String IDKM);
-
-    String updateTPT(KhuyenMaiModel km, String IDKM);
+    String update(KhuyenMaiModel km, String IDKM);
 
     String delete(String IDKM);
 

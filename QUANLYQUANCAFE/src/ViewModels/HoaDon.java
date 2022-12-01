@@ -34,6 +34,11 @@ public class HoaDon {
         this.maHD = maHD;
     }
 
+    public HoaDon(String maHD, String tinhTrang) {
+        this.maHD = maHD;
+        this.tinhTrang = tinhTrang;
+    }
+
     public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String MAKM, String MANV, String MABan) {
         this.ID = ID;
         this.maHD = maHD;
@@ -45,7 +50,6 @@ public class HoaDon {
         this.MABan = MABan;
         this.tenNV = tenNV;
     }
-
 
     public HoaDon(String ID, String maHD, String ngayLapHD, NhanVienViewModel tenNV, String tinhTrang) {
         this.ID = ID;
@@ -145,7 +149,6 @@ public class HoaDon {
     public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
-
 
     public NhanVienViewModel getTenNV() {
         return tenNV;

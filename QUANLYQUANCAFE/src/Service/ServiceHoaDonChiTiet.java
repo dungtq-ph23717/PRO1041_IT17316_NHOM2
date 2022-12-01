@@ -22,7 +22,7 @@ public interface ServiceHoaDonChiTiet {
 
     String add(HoaDonChiTietModel hd);
 
-    String update(HoaDonChiTietModel hd, String maHD);
+    String update(HoaDonChiTietModel hd, String idHD, String idSP);
 
     String delete(String idHD, String idSP);
 

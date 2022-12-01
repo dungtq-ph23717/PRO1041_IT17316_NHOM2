@@ -27,8 +27,12 @@
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/ViewModels/HoaDonChiTiet.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Repository/ComboRepository.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Repository/KhuVucRepostory.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewChucVu.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewQuanLyBan.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewTachBan.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/DomainModels/ComboModel.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/DomainModels/HoaDonModel.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewChucNang.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/Ban_HoaDonService.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/impl/SanPhamServiceImpl.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewDanhMuc.java</file>
@@ -36,6 +40,7 @@
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewQuanLyHoaDon.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewLoad.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Repository/HoaDonRepository.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/DomainModels/BanModel.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewLichSu.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/ViewModels/Ban.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewQuanLyNhanVien.java</file>
@@ -43,6 +48,7 @@
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/impl/HoaDonChiTietServiceIblm.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/ServiceHoaDon.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewQuanLySanPham.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/impl/KhuyenMaiServiceIblm.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/ComboService.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/ViewModels/Ban_HoaDon.java</file>
         </group>

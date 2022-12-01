@@ -59,8 +59,13 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     }
 
     @Override
-    public String update(HoaDonModel hd, HoaDonChiTietModel hdct, String maHD) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String update(HoaDonModel hd, String maHD, String tinhTrang) {
+        boolean update = rps.update(hd, maHD, tinhTrang);
+        if (update) {
+            return "Thanh toán thành công";
+        } else {
+            return "Thanh toán thất bại";
+        }
     }
 
     @Override
