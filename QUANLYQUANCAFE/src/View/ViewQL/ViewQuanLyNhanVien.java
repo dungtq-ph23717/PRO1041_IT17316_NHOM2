@@ -798,12 +798,12 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                 row.createCell(3).setCellValue(NV.getNgaySinh());
                 row.createCell(4).setCellValue(NV.getSDT());
                 row.createCell(5).setCellValue(NV.getTenCV());
-                row.createCell(6).setCellValue(NV.isTrangThai());
-                row.createCell(7).setCellValue(NV.isGioiTinh());
+                row.createCell(6).setCellValue(NV.isTrangThai()==true?"ĐANG LÀM":"NGHỈ VIỆC");
+                row.createCell(7).setCellValue(NV.isGioiTinh()==true?"NAM":"NỮ");
                 row.createCell(8).setCellValue(NV.getDiaChi());
 
             }
-            FileOutputStream out = new FileOutputStream(new File("D:/nv1.xlsx"));
+            FileOutputStream out = new FileOutputStream(new File("D:/nv.xlsx"));
             workbook.write(out);
             out.close();
 
