@@ -288,7 +288,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
 
         setPreferredSize(new java.awt.Dimension(814, 678));
 
-        txtNgAYSINH.setBorder(javax.swing.BorderFactory.createTitledBorder("THIẾT KẾ THÔNG TIN NHÂN VIÊN"));
+        txtNgAYSINH.setBackground(new java.awt.Color(255, 255, 255));
+        txtNgAYSINH.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THIẾT KẾ THÔNG TIN NHÂN VIÊN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(2, 4, 5))); // NOI18N
 
         jLabel5.setText("ID");
 
@@ -394,7 +395,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                             .addComponent(txtDiachi, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(txtNgAYSINHLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(btXuatNV)
+                        .addComponent(btXuatNV, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTADD, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
@@ -404,8 +405,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                 .addGroup(txtNgAYSINHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(txtNgAYSINHLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(BTDELETE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addComponent(BTDELETE, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTCLEAR, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
                         .addComponent(BTRESET, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -415,7 +416,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                         .addGroup(txtNgAYSINHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(txtNgAYSINHLayout.createSequentialGroup()
                                 .addGroup(txtNgAYSINHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(47, 47, 47)
                                 .addGroup(txtNgAYSINHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -481,7 +482,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("LỌC"));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LỌC", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jLabel17.setText("LỌC CHỨC VỤ");
 
@@ -559,7 +561,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("THÔNG TIN NHÂN VIÊN"));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN NHÂN VIÊN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         tableNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

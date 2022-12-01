@@ -306,9 +306,15 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="txtNgAYSINH">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="THI&#x1ebe;T K&#x1ebe; TH&#xd4;NG TIN NH&#xc2;N VI&#xca;N"/>
+                <TitledBorder title="THI&#x1ebe;T K&#x1ebe; TH&#xd4;NG TIN NH&#xc2;N VI&#xca;N">
+                  <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+                  <Color PropertyName="color" blue="5" green="4" red="2" type="rgb"/>
+                </TitledBorder>
               </Border>
             </Property>
           </Properties>
@@ -338,7 +344,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Component id="btXuatNV" min="-2" max="-2" attributes="0"/>
+                              <Component id="btXuatNV" min="-2" pref="84" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="BTADD" min="-2" pref="76" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
@@ -350,8 +356,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="BTDELETE" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="BTDELETE" min="-2" pref="112" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="BTCLEAR" min="-2" pref="89" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                               <Component id="BTRESET" min="-2" pref="91" max="-2" attributes="0"/>
@@ -362,7 +368,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel14" max="32767" attributes="0"/>
+                                          <Component id="jLabel14" pref="152" max="32767" attributes="0"/>
                                           <Component id="jLabel13" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
@@ -610,9 +616,14 @@
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel4">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="L&#x1ecc;C"/>
+                <TitledBorder title="L&#x1ecc;C">
+                  <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+                </TitledBorder>
               </Border>
             </Property>
           </Properties>
@@ -729,9 +740,14 @@
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel7">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="TH&#xd4;NG TIN NH&#xc2;N VI&#xca;N"/>
+                <TitledBorder title="TH&#xd4;NG TIN NH&#xc2;N VI&#xca;N">
+                  <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+                </TitledBorder>
               </Border>
             </Property>
           </Properties>
