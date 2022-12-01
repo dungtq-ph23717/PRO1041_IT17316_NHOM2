@@ -18,7 +18,7 @@ public interface ServiceHoaDon {
     List<ViewModels.HoaDon> getAll();
 
     List<ViewModels.HoaDon> getAllTT();
-    
+
     List<ViewModels.HoaDon> getListHD();
 
     List<ViewModels.HoaDon> getAllTTViewHD(String id);
@@ -30,5 +30,7 @@ public interface ServiceHoaDon {
     String update(HoaDonModel hd, String maHD, String tinhTrang);
 
     String delete(String maHD);
+
+    List<ViewModels.HoaDon> search(String datehd);
 
 }

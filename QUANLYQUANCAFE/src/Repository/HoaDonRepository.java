@@ -86,6 +86,23 @@ public class HoaDonRepository {
         }
         return null;
     }
+      public List<HoaDon> search(String date) {
+        String query = "SELECT MaHD,NgayLapHD,ThanhTien FROM HoaDon\n"
+                + "WHERE NgayLapHD like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + date + "%");
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                 HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDouble(3));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
     
       public List<HoaDon> getListHD() {
         String query = "Select MaHD,NgayLapHD,ThanhTien\n"
