@@ -918,8 +918,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     } catch (PrinterException ex) {
                         Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, "In thất bại!", ex);
                     }
-                    JOptionPane.showMessageDialog(this, "Print done!");
-                    
+                    JOptionPane.showMessageDialog(this, "In thành công!");
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
