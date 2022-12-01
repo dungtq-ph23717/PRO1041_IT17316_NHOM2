@@ -121,7 +121,7 @@ public class HoaDon {
     }
 
     public Object[] toRowData() {
-        return new Object[]{maHD, ban.getTenBan(), tenNV.getTenCV(), ngayLapHD, phuongThucThanhToan, sp.getTenSP(), thanhTien, tinhTrang};
+        return new Object[]{maHD, ban.getTenBan(), "Nhân Viên A", ngayLapHD, "Tiền mặt", sp.getTenSP(), thanhTien, tinhTrang};
     }
 
     public String getTinhTrang() {
