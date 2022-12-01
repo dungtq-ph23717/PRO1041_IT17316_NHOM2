@@ -6,11 +6,8 @@ package Repository;
 
 import DomainModels.HoaDonModel;
 import Utilities.DBContext;
-import ViewModels.Ban;
 import ViewModels.HoaDon;
-import ViewModels.HoaDonChiTiet;
 import ViewModels.NhanVienViewModel;
-import ViewModels.SanPham;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,22 +21,16 @@ import java.util.List;
 public class HoaDonRepository {
 
     public List<HoaDon> getAll() {
-        String query = "SELECT        dbo.HoaDon.MaHD, dbo.HoaDon.NgayLapHD, dbo.HoaDon.PhuongThucThanhToan, dbo.NhanVien.TenNV, dbo.Ban.TenBan, dbo.SanPham.TenSP, dbo.HoaDon.TinhTrang, dbo.SanPham.Giaban, \n"
-                + "                         dbo.HoaDonChiTiet.Soluong\n"
-                + "FROM            dbo.HoaDon INNER JOIN\n"
-                + "                         dbo.HoaDonChiTiet ON dbo.HoaDon.ID = dbo.HoaDonChiTiet.IDHD INNER JOIN\n"
-                + "                         dbo.Ban ON dbo.HoaDon.IDBan = dbo.Ban.ID INNER JOIN\n"
-                + "                         dbo.NhanVien ON dbo.HoaDon.IDNV = dbo.NhanVien.ID INNER JOIN\n"
-                + "                         dbo.SanPham ON dbo.HoaDonChiTiet.IDSP = dbo.SanPham.ID";
+        String query = "SELECT dbo.HoaDon.ID, dbo.HoaDon.MaHD, dbo.HoaDon.NgayLapHD, dbo.HoaDon.ThanhTien, dbo.HoaDon.PhuongThucThanhToan, dbo.KhuyenMai.MaKM, dbo.NhanVien.MaNV, dbo.Ban.MaBan\n"
+                + "FROM   dbo.HoaDon INNER JOIN\n"
+                + "             dbo.KhuyenMai ON dbo.HoaDon.IDKM = dbo.KhuyenMai.ID INNER JOIN\n"
+                + "             dbo.NhanVien ON dbo.HoaDon.IDNV = dbo.NhanVien.ID INNER JOIN\n"
+                + "             dbo.Ban ON dbo.HoaDon.ID = dbo.Ban.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
-                NhanVienViewModel nv = new NhanVienViewModel(rs.getString(4));
-                Ban Ban = new Ban(rs.getString(5));
-                SanPham tensp = new SanPham(rs.getString(6), rs.getDouble(8));
-                HoaDonChiTiet soluong = new HoaDonChiTiet(rs.getInt(9));
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), nv, Ban, tensp, rs.getString(7), soluong);
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
                 list.add(hd);
             }
             return list;
@@ -156,6 +147,21 @@ public class HoaDonRepository {
         return check > 0;
     }
 
+    public boolean updateID(String id, String maHD) {
+        String query = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET [IDBan] = ?\n"
+                + " WHERE MaHD like ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, id);
+            ps.setObject(2, maHD);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public boolean delete(String ID) {
         String query = "DELETE FROM [dbo].[HoaDon]\n"
                 + "      WHERE  MaHD=?";
@@ -171,14 +177,13 @@ public class HoaDonRepository {
 
     public static void main(String[] args) {
 
-        List<HoaDon> rps = new HoaDonRepository().getAll();
-        for (HoaDon hoaDon : rps) {
-            System.out.println(new HoaDonRepository().getAll());    
-        
-        }
-//        HoaDonModel hd = new HoaDonModel("HD1", "1");
-//        boolean add = new HoaDonRepository().update(hd, "HD1", "Huỷ");
-//        System.out.println(add);
+//        List<HoaDon> rp = new HoaDonRepository().getAllTT();
+//        for (HoaDon hoaDon : rp) {
+//            System.out.println(hoaDon.toString());
+//        }
+        HoaDonModel hd = new HoaDonModel("HD1", "1");
+        boolean add = new HoaDonRepository().updateID("15d13f6e-71b8-44be-8560-213d2f84002a", "HD31");
+        System.out.println(add);
 //        HoaDon hd = new HoaDonRepository().getOne("HD2");
 //        System.out.println(hd);
     }

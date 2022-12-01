@@ -26,4 +26,5 @@ public interface ServiceHoaDonChiTiet {
 
     String delete(String idHD, String idSP);
 
+    String gopHD(String idHD, String idSP);
 }
