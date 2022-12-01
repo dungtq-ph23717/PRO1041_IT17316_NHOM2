@@ -685,9 +685,14 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTimKIEMActionPerformed
 
     private void BTADDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTADDActionPerformed
-        JOptionPane.showMessageDialog(this, nhanVienService.add(getdata()));
+        try {
+            JOptionPane.showMessageDialog(this, nhanVienService.add(getdata()));
         list = nhanVienService.getAll();
         showDATAnv(list);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "CÒN TRỐNG DỮ LIỆU !");
+        }
+
     }//GEN-LAST:event_BTADDActionPerformed
 
     private void btUPDATEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUPDATEActionPerformed
@@ -803,7 +808,13 @@ public class ViewQuanLyNhanVien extends javax.swing.JInternalFrame {
         }
     }
     private void btEXELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEXELActionPerformed
-      InhoaDon();
+        try {
+             InhoaDon();
+            JOptionPane.showMessageDialog(this, "XUẤT EXCEL THÀNH CÔNG !");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "XUẤT EXCEL THẤT BẠI ");
+        }
+       
     }//GEN-LAST:event_btEXELActionPerformed
 
 
