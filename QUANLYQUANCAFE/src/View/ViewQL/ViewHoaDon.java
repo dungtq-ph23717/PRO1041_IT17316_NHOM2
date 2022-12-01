@@ -34,7 +34,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         String header[] = {"Mã Hóa Đơn", "Tên Bàn", "Tên Nhân Viên", "Ngày Lập Hoá Đơn", "Phương Thức Thanh Toán", "Tên Sản Phẩm", "Thành Tiền", "Tình Trạng"};
         bangHD.setModel(dtm);
         dtm.setColumnIdentifiers(header);
-        listHD = iplmHD.getAllDaThanhToan();
+        listHD = iplmHD.getAll();
         showData(listHD);
         cbbSearchTT.setModel(box1);
         box1.addElement("Chưa thanh toán");
