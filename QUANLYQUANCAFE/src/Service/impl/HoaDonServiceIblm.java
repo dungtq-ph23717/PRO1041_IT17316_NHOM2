@@ -19,11 +19,10 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
 
     private HoaDonRepository rps = new HoaDonRepository();
 
-    @Override
-    public List<HoaDon> getAll() {
-        return rps.getAll();
-    }
-
+//    @Override
+//    public List<HoaDon> getAll() {
+//        return rps.getAll();
+//    }
     @Override
     public String delete(String maHD) {
         boolean delete = rps.delete(maHD);
@@ -62,6 +61,11 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         } else {
             return "Thanh toán thất bại";
         }
+    }
+
+    @Override
+    public List<HoaDon> getAll() {
+        return rps.getAll();
     }
 
     @Override
