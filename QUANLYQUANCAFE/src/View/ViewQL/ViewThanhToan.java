@@ -190,6 +190,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         updateSL = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        tachHD = new javax.swing.JMenuItem();
+        gopHD = new javax.swing.JMenuItem();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
@@ -274,6 +277,22 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             }
         });
         jPopupMenu1.add(jMenuItem1);
+
+        tachHD.setText("Tách HD");
+        tachHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tachHDActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(tachHD);
+
+        gopHD.setText("Gộp HD");
+        gopHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gopHDActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(gopHD);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -677,6 +696,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbHD.setComponentPopupMenu(jPopupMenu2);
         tbHD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbHDMouseClicked(evt);
@@ -1077,6 +1097,15 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         listHDCT = implHDCT.getAllviewGH(sp.getId());
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
+       ViewTachHD v = new ViewTachHD();
+       v.setVisible(true);
+    }//GEN-LAST:event_tachHDActionPerformed
+
+    private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gopHDActionPerformed
     
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
@@ -1108,6 +1137,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbbLocDanhMuc;
     private javax.swing.JComboBox<String> cbbPhuongThucThanhToan;
     private javax.swing.JMenuItem gopBan;
+    private javax.swing.JMenuItem gopHD;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1131,6 +1161,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1138,6 +1169,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu puBan;
     private javax.swing.JMenuItem tachBan;
+    private javax.swing.JMenuItem tachHD;
     private javax.swing.JTable tbBan;
     private javax.swing.JTable tbGH;
     private javax.swing.JTable tbHD;

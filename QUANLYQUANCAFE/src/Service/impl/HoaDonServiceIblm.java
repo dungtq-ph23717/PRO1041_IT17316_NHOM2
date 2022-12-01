@@ -65,7 +65,7 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
 
     @Override
     public List<HoaDon> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return rps.getAll();
     }
 
     @Override
