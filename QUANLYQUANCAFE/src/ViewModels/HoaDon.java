@@ -166,11 +166,23 @@ public class HoaDon {
         return tenNV;
     }
 
+    public Ban getBan() {
+        return Ban;
+    }
+
+    public SanPham getTensp() {
+        return tensp;
+    }
+
+    public HoaDonChiTiet getSoluong() {
+        return soluong;
+    }
+   
     public void setTenNV(NhanVienViewModel tenNV) {
         this.tenNV = tenNV;
     }
 
     public Object[] toRowData1() {
-        return new Object[]{maHD, ngayLapHD, Ban.getTenBan(), phuongThucThanhToan, tensp.getTenSP(),tensp.getGiaBan(),soluong.getSoLuong(), tenNV.getTenNV(), tinhTrang};
+        return new Object[]{maHD, ngayLapHD, Ban.getTenBan(),"Tiền mặt", tensp.getTenSP(),tensp.getGiaBan(),soluong.getSoLuong(), tenNV.getTenNV(), tinhTrang};
     }
 }
