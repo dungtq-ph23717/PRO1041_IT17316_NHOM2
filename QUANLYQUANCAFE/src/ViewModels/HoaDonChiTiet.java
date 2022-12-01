@@ -43,10 +43,6 @@ public class HoaDonChiTiet {
         return idSP;
     }
 
-    public HoaDonChiTiet(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
     public void setIdSP(SanPham idSP) {
         this.idSP = idSP;
     }

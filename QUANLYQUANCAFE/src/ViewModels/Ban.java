@@ -21,12 +21,8 @@ public class Ban {
     public Ban() {
     }
 
-//    public Ban(String id) {
-//        this.id = id;
-//    }
-
-    public Ban(String tenBan) {
-        this.tenBan = tenBan;
+    public Ban(String id) {
+        this.id = id;
     }
 
     public Ban(String tenBan, String loaiBan, String trangThai) {

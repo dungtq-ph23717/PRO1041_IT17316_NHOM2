@@ -268,12 +268,10 @@ public class ViewTachHD extends javax.swing.JFrame {
         }
         listHDCT = implHDCT.getAllviewGH(hd.getID());
         showDataHDCT1(listHDCT);
-
         String ma1 = cbbMaHD2.getSelectedItem().toString();
         HoaDon hd1 = implHD.getOne(ma1);
         listHDCT = implHDCT.getAllviewGH(hd1.getID());
         showDataHDCT2(listHDCT);
-        
         JOptionPane.showMessageDialog(this, implHD.delete(maHD));
         listHD = implHD.getAllTT();
         showDataHDCT1(listHDCT);

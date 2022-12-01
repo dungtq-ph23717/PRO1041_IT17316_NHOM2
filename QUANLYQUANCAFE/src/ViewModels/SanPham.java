@@ -29,16 +29,9 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String tenSP, double giaBan) {
-        this.tenSP = tenSP;
-        this.giaBan = giaBan;
+    public SanPham(String id) {
+        this.id = id;
     }
-
-   
-
-//    public SanPham(String id) {
-//        this.id = id;
-//    }
 
     public String getId() {
         return id;
