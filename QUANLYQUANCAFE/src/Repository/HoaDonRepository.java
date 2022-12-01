@@ -156,6 +156,21 @@ public class HoaDonRepository {
         return check > 0;
     }
 
+    public boolean updateID(String id, String maHD) {
+        String query = "UPDATE [dbo].[HoaDon]\n"
+                + "   SET [IDBan] = ?\n"
+                + " WHERE MaHD like ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, id);
+            ps.setObject(2, maHD);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public boolean delete(String ID) {
         String query = "DELETE FROM [dbo].[HoaDon]\n"
                 + "      WHERE  MaHD=?";
@@ -171,16 +186,13 @@ public class HoaDonRepository {
 
     public static void main(String[] args) {
 
-        List<HoaDon> rps = new HoaDonRepository().getAll();
-        for (HoaDon hoaDon : rps) {
-            System.out.println(new HoaDonRepository().getAll());    
-        
-        }
-//        HoaDonModel hd = new HoaDonModel("HD1", "1");
-//        boolean add = new HoaDonRepository().update(hd, "HD1", "Huỷ");
-//        System.out.println(add);
-//        HoaDon hd = new HoaDonRepository().getOne("HD2");
-//        System.out.println(hd);
+//        List<HoaDon> rp = new HoaDonRepository().getAllTT();
+//        for (HoaDon hoaDon : rp) {
+//            System.out.println(hoaDon.toString());
+//        }
+        HoaDonModel hd = new HoaDonModel("HD1", "1");
+        boolean add = new HoaDonRepository().updateID("15d13f6e-71b8-44be-8560-213d2f84002a", "HD31");
+        System.out.println(add);
     }
 
     public List<HoaDonModel> getListChuaThanhToan() {
