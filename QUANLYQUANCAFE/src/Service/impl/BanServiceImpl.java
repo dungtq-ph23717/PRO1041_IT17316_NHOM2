@@ -93,4 +93,14 @@ public class BanServiceImpl implements BanService {
         }
     }
 
+    @Override
+    public String gopBan(String ten) {
+        boolean gopBan = rp.gopBan(ten);
+        if (gopBan) {
+            return "Gộp bàn thành công";
+        } else {
+            return "Gộp bàn thất bại";
+        }
+    }
+
 }

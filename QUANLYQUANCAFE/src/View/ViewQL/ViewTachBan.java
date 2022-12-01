@@ -70,8 +70,8 @@ public class ViewTachBan extends javax.swing.JFrame {
             dtm2.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), x.getTinhTrang()});
         }
     }
-    
-    private void fillData(Ban ban){
+
+    private void fillData(Ban ban) {
         cbbBan2.setSelectedItem(ban.getTenBan());
     }
 
@@ -164,7 +164,12 @@ public class ViewTachBan extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Tách");
+        jButton1.setText("Gộp");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -236,6 +241,8 @@ public class ViewTachBan extends javax.swing.JFrame {
 
     private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
         this.dispose();
+        ViewQuanLy v = new ViewQuanLy();
+        v.setVisible(true);
     }//GEN-LAST:event_btCloseActionPerformed
 
     private void cbbBan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbBan1ActionPerformed
@@ -295,6 +302,34 @@ public class ViewTachBan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
         }
     }//GEN-LAST:event_btNextActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        for (int i = 0; i < tbHD1.getRowCount(); i++) {
+            String ten = cbbBan2.getSelectedItem().toString();
+            String maHD = (String) tbHD1.getValueAt(i, 0);
+            Ban b = implBan.getOne(ten);
+            implHD.updateID(b.getId(), maHD);
+        }
+        String ten1 = cbbBan1.getSelectedItem().toString();
+        Ban b1 = implBan.getOne(ten1);
+        listHD = implHD.getAllTTViewHD(b1.getId());
+        showDataHD1(listHD);
+
+        String ten2 = cbbBan2.getSelectedItem().toString();
+        Ban b2 = implBan.getOne(ten2);
+        listHD = implHD.getAllTTViewHD(b2.getId());
+        showDataHD2(listHD);
+
+        if (ten1.contains("-tách")) {
+            String tenGop = cbbBan1.getSelectedItem().toString();
+            JOptionPane.showMessageDialog(this, implBan.gopBan(tenGop));
+            listBan = implBan.getAllTT();
+            boxModel1.removeElement(ten1);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể gộp bàn gốc");
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -179,6 +179,19 @@ public class BanRepostory {
         return check > 0;
     }
 
+    public boolean gopBan(String ten) {
+        String query = "DELETE FROM [dbo].[Ban]\n"
+                + "      WHERE TenBan = ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ten);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public boolean delete(String ma) {
         String query = "DELETE FROM [dbo].[Ban]\n"
                 + "      WHERE MaBan = ?";
@@ -238,7 +251,7 @@ public class BanRepostory {
 //        Ban b = new BanRepostory().getOne("Bàn 1");
 //        System.out.println(b);
         BanModel b = new BanModel("Bàn 1", "Nhỏ", "Trống");
-        boolean add = new BanRepostory().add(b);
+        boolean add = new BanRepostory().gopBan("Bàn 4-tách");
         System.out.println(add);
     }
 }

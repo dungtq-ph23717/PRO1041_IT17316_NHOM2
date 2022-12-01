@@ -48,7 +48,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewThanhToan extends javax.swing.JInternalFrame {
-
+    
     private DefaultTableModel dtmBan = new DefaultTableModel();
     private DefaultTableModel dtmGioHang = new DefaultTableModel();
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
@@ -82,18 +82,18 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-
+        
         String[] headersBan = {"Tên bàn", "Loại bàn", "Trạng thái"};
         tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
         listBan = implBan.getAllTT();
         showDataBan(listBan);
-
+        
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
         showDataHD(listHoaDon);
-
+        
         tbSP.setModel(dtmSanPham);
         String[] headersSP = {"Mã SP", "Tên SP", "Giá Bán", "Danh Mục", "Trạng Thái", "Mô tả", "Size"};
         dtmSanPham.setColumnIdentifiers(headersSP);
@@ -110,7 +110,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         dtmGioHang.setColumnIdentifiers(headersGH);
 //        listHDCT = implHDCT.getAll();
         showDataHDCT(listHDCT);
-
+        
         listKhuyenMai = implKM.getAll();
         boxModelGG.addElement("Chọn");
         cbbGG.setModel(boxModelGG);
@@ -146,28 +146,28 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             dtmGioHang.addRow(new Object[]{x.getIdSP().getMaSP(), x.getIdSP().getTenSP(), x.getSoLuong(), x.getIdSP().getGiaBan(), x.getGiaTien()});
         }
     }
-
+    
     private void showDataCB(List<ComboModel> list) {
         dtmCB.setRowCount(0);
         for (ComboModel x : list) {
             dtmCB.addRow(x.toRowData());
         }
     }
-
+    
     private void showDataBan(List<Ban> list) {
         dtmBan.setRowCount(0);
         for (Ban x : list) {
             dtmBan.addRow(x.toRowDataTT());
         }
     }
-
+    
     private void showDataSP(List<SanPham> list) {
         dtmSanPham.setRowCount(0);
         for (SanPham sp : list) {
             dtmSanPham.addRow(new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getDanhMuc().getTenDanhMuc(), sp.getTrangThai(), sp.getMoTa(), sp.getSize().getSize()});
         }
     }
-
+    
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
@@ -851,7 +851,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     private void gopBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopBanActionPerformed
-
+        int row = tbBan.getSelectedRow();
+        Ban b = listBan.get(row);
+        ViewTachBan v = new ViewTachBan(b);
+        v.setVisible(true);
     }//GEN-LAST:event_gopBanActionPerformed
 
     private void txtSearchTenSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTenSPKeyReleased
@@ -896,7 +899,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                         Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, "In thất bại!", ex);
                     }
                     JOptionPane.showMessageDialog(this, "Print done!");
-
+                    
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
@@ -924,7 +927,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-
+            
         } else {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
@@ -961,7 +964,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-
+            
         }
     }//GEN-LAST:event_bltThanhToanActionPerformed
 
@@ -1002,7 +1005,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbbLocDanhMucActionPerformed
 
     private void btHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyDonActionPerformed
-
+        
         if (tbHD.getRowCount() <= 1) {
             String ma = txtMa.getText();
             HoaDonModel hd = new HoaDonModel(ma, ma);
@@ -1074,7 +1077,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         listHDCT = implHDCT.getAllviewGH(sp.getId());
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         SanPham sp = listSanPham.get(index);
@@ -1083,12 +1086,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         txtDonGia.setText(String.valueOf(sp.getGiaBan()));
         txtSoL.setText(String.valueOf(hdct.getSoLuong()));
     }
-
+    
     private void fillDataBan(int index) {
         Ban b = listBan.get(index);
         txtBan.setText(b.getTenBan());
     }
-
+    
     private void fillDataHD(int index) {
         HoaDon hd = listHoaDon.get(index);
         txtMa.setText(hd.getMaHD());
