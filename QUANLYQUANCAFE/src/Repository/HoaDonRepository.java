@@ -6,8 +6,10 @@ package Repository;
 
 import DomainModels.HoaDonModel;
 import Utilities.DBContext;
+import ViewModels.Ban;
 import ViewModels.HoaDon;
 import ViewModels.NhanVienViewModel;
+import ViewModels.SanPham;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,13 +22,41 @@ import java.util.List;
  */
 public class HoaDonRepository {
 
-    public List<HoaDon> getAll() {
-        String query = "";
+    public List<HoaDon> getAllDaThanhToan() {
+        String query = "SELECT MaHD, TenBan , TenNV  , NgayLapHD , PhuongThucThanhToan , TenSP, ThanhTien,HD.TinhTrang\n"
+                + "FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN \n"
+                + "SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID\n"
+                + "WHERE HD.TinhTrang LIKE N'Đã thanh toán'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                Ban ban = new Ban(rs.getString(2), "", "");
+                NhanVienViewModel tenNV = new NhanVienViewModel(rs.getString(3));
+                SanPham sp = new SanPham("", rs.getString(6));
+                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, rs.getDouble(7), rs.getString(8));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<HoaDon> getAllChuaThanhToan() {
+        String query = "SELECT MaHD, TenBan , TenNV  , NgayLapHD , PhuongThucThanhToan , TenSP, ThanhTien,HD.TinhTrang\n"
+                + "FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN \n"
+                + "SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID\n"
+                + "WHERE HD.TinhTrang LIKE N'Chờ'";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                Ban ban = new Ban(rs.getString(2), "", "");
+                NhanVienViewModel tenNV = new NhanVienViewModel(rs.getString(3));
+                SanPham sp = new SanPham("", rs.getString(6));
+                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, rs.getDouble(7), rs.getString(8));
                 list.add(hd);
             }
             return list;
@@ -181,36 +211,9 @@ public class HoaDonRepository {
 //        System.out.println(add);
 //        HoaDon hd = new HoaDonRepository().getOne("HD2");
 //        System.out.println(hd);
-        List<HoaDon> getall = new Repository.HoaDonRepository().getAll();
+        List<HoaDon> getall = new Repository.HoaDonRepository().getAllDaThanhToan();
         for (HoaDon x : getall) {
             System.out.println(x);
         }
     }
-
-    public List<HoaDonModel> getListChuaThanhToan() {
-        String query = "SELECT [ID]\n"
-                + "      ,[MaHD]\n"
-                + "      ,[NgayLapHD]\n"
-                + "      ,[ThanhTien]\n"
-                + "      ,[PhuongThucThanhToan]\n"
-                + "      ,[IDNV]\n"
-                + "      ,[IDKM]\n"
-                + "      ,[IDBan]\n"
-                + "      ,[TinhTrang]\n"
-                + "  FROM [dbo].[HoaDon]\n"
-                + "  where TinhTrang='Chưa thanh toán'";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
-            List<HoaDonModel> glistHD = new ArrayList<>();
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-
-                HoaDonModel hdm = new HoaDonModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
-            }
-            return glistHD;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 }

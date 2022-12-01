@@ -12,13 +12,12 @@ public class HoaDon {
 
     private String ID;
     private String maHD;
-    private String ngayLapHD;
-    private double thanhTien;
-    private String phuongThucThanhToan;
-    private String MAKM;
-    private String MANV;
-    private String MABan;
+    private Ban ban;
     private NhanVienViewModel tenNV;
+    private String ngayLapHD;
+    private String phuongThucThanhToan;
+    private SanPham sp;
+    private double thanhTien;
     private String tinhTrang;
 
     public HoaDon() {
@@ -33,16 +32,15 @@ public class HoaDon {
         this.tinhTrang = tinhTrang;
     }
 
-    public HoaDon(String ID, String maHD, String ngayLapHD, double thanhTien, String phuongThucThanhToan, String MAKM, String MANV, String MABan) {
-        this.ID = ID;
+    public HoaDon(String maHD, Ban ban, NhanVienViewModel tenNV, String ngayLapHD, String phuongThucThanhToan, SanPham sp, double thanhTien, String tinhTrang) {
         this.maHD = maHD;
-        this.ngayLapHD = ngayLapHD;
-        this.thanhTien = thanhTien;
-        this.phuongThucThanhToan = phuongThucThanhToan;
-        this.MAKM = MAKM;
-        this.MANV = MANV;
-        this.MABan = MABan;
+        this.ban = ban;
         this.tenNV = tenNV;
+        this.ngayLapHD = ngayLapHD;
+        this.phuongThucThanhToan = phuongThucThanhToan;
+        this.sp = sp;
+        this.thanhTien = thanhTien;
+        this.tinhTrang = tinhTrang;
     }
 
     public HoaDon(String ID, String maHD, String ngayLapHD, NhanVienViewModel tenNV, String tinhTrang) {
@@ -101,39 +99,29 @@ public class HoaDon {
         this.phuongThucThanhToan = phuongThucThanhToan;
     }
 
-    public String getMAKM() {
-        return MAKM;
+    public Ban getBan() {
+        return ban;
     }
 
-    public void setMAKM(String MAKM) {
-        this.MAKM = MAKM;
+    public void setBan(Ban ban) {
+        this.ban = ban;
     }
 
-    public String getMANV() {
-        return MANV;
+    public SanPham getSp() {
+        return sp;
     }
 
-    public void setMANV(String MANV) {
-        this.MANV = MANV;
-    }
-
-    public String getMABan() {
-        return MABan;
-    }
-
-    public void setMABan(String MABan) {
-        this.MABan = MABan;
+    public void setSp(SanPham sp) {
+        this.sp = sp;
     }
 
     @Override
     public String toString() {
-
-        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ngayLapHD=" + ngayLapHD + ", thanhTien=" + thanhTien + ", phuongThucThanhToan=" + phuongThucThanhToan + ", MAKM=" + MAKM + ", MANV=" + MANV + ", MABan=" + MABan + ", tenNV=" + tenNV + ", tinhTrang=" + tinhTrang + '}';
-
+        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ban=" + ban + ", tenNV=" + tenNV + ", ngayLapHD=" + ngayLapHD + ", phuongThucThanhToan=" + phuongThucThanhToan + ", sp=" + sp + ", thanhTien=" + thanhTien + ", tinhTrang=" + tinhTrang + '}';
     }
 
     public Object[] toRowData() {
-        return new Object[]{maHD, ngayLapHD, thanhTien, phuongThucThanhToan, tinhTrang, MAKM, MANV, MABan};
+        return new Object[]{maHD, ban.getTenBan(), tenNV.getTenCV(), ngayLapHD, phuongThucThanhToan, sp.getTenSP(), thanhTien, tinhTrang};
     }
 
     public String getTinhTrang() {
