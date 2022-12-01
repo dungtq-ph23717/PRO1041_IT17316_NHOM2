@@ -15,7 +15,9 @@ import java.util.List;
  */
 public interface ServiceHoaDon {
 
-    List<ViewModels.HoaDon> getAll();
+    List<ViewModels.HoaDon> getAllDaThanhToan();
+
+    List<ViewModels.HoaDon> getAllChuaThanhToan();
 
     List<ViewModels.HoaDon> getAllTT();
 

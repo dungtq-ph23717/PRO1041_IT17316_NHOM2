@@ -907,8 +907,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                             + "\tTên Sản Phẩm:\t\t" + txtTenSP.getText() + "\n\n"
                             + "\tĐơn Giá:\t\t\t" + txtDonGia.getText() + " " + "VND" + "\n"
                             + "              X\n\n"
-                            + "\t\n================================================================================\n\n"
                             + "\tSố Lượng:\t\t\t" + txtSoL.getText() + "\n\n"
+                            + "\t\n================================================================================\n\n"
                             + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n\n\n\n"
                             + "       +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++\n\n\n"
                     );

@@ -118,4 +118,5 @@ public class Ban {
     public Object[] toRowDataTT() {
         return new Object[]{tenBan, loaiBan, trangThai};
     }
+
 }

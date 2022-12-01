@@ -64,11 +64,6 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     }
 
     @Override
-    public List<HoaDon> getAll() {
-        return rps.getAll();
-    }
-
-    @Override
     public List<HoaDon> getAllTTViewHD(String id) {
         return rps.getAllTTViewHD(id);
     }
@@ -81,6 +76,16 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         } else {
             return "Update thất bại";
         }
+    }
+
+    @Override
+    public List<HoaDon> getAllDaThanhToan() {
+        return rps.getAllDaThanhToan();
+    }
+
+    @Override
+    public List<HoaDon> getAllChuaThanhToan() {
+        return rps.getAllChuaThanhToan();
     }
 
 }
