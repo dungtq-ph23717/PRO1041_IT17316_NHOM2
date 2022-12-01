@@ -9,7 +9,9 @@ import DomainModels.HoaDonModel;
 import Repository.HoaDonRepository;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import Service.impl.HoaDonServiceIblm;
+import ViewModels.HoaDon;
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  *
@@ -19,7 +21,9 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 
     private DefaultTableModel _DefaultTableModel1;
     private HoaDonServiceIblm _HoaDonService;
-    private String _idWhenClick;
+    private List<HoaDon> hoadon;
+
+    String strFind = "";
 
     /**
      * Creates new form ViewThongKe
@@ -31,7 +35,8 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         uI.setNorthPane(null);
         _HoaDonService = new HoaDonServiceIblm();
         LoadTable();
-//        TinhTong();
+        TinhTong();
+//        getSum();
 
     }
 
@@ -46,15 +51,42 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         }
     }
 
-    public void TinhTong() {
-        DecimalFormat x = new DecimalFormat("###,###,###");
-        int Tong = 0;
-        for (int i = 0; i < tbl_thongke.getRowCount(); i++) {
-            Tong += Integer.parseInt(tbl_thongke.getValueAt(i,3).toString());
-        }
-        lbl_Tong.setText("Tong Doanh Thu: "+x.format(Tong) + " " + "VNĐ");
-    }
+//    public void findHD() {
+//        _DefaultTableModel1 = (DefaultTableModel) tbl_thongke.getModel();
+//        _DefaultTableModel1.setRowCount(0);
+//        int stt = 1;
+//        for (HoaDon hd : _HoaDonService.getfindHD(strFind)) {
+//            Object dataRow[] = new Object[3];
+//            dataRow[0] = stt++;
+//            dataRow[1] = hd.getMaHD();
+//            dataRow[2] = hd.getNgayLapHD();
+//            dataRow[3] = hd.getThanhTien();
+//            _DefaultTableModel1.addRow(dataRow);
+//
+//        }
+//    
+//        };
+//    public void getSum() {
+//        int sum = 0;
+//        for (int i = 0; i < tbl_thongke.getRowCount(); i++) {
+//            sum = sum + Integer.parseInt(tbl_thongke.getValueAt(i, 3).toString());
+//        }
 
+//        jLabel4.setText(Integer.toString(sum));
+//    }
+
+    public void TinhTong() {
+//        _DefaultTableModel1 = (DefaultTableModel) tbl_thongke.getModel();
+//        _DefaultTableModel1.setRowCount(0);
+        DecimalFormat x = new DecimalFormat("###,###,###");
+        int TinhTong = 0;
+          for (int i = 0; i < tbl_thongke.getRowCount(); i++) {
+        String Tong1 = (tbl_thongke.getValueAt(i, 3).toString());
+        double Tong = Double.valueOf(Tong1);
+        TinhTong = (int) (TinhTong + Tong);
+          }
+        jLabel4.setText("Tong Doanh Thu: " + x.format(TinhTong) + " " + "VNĐ");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,26 +99,26 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtDate = new javax.swing.JTextField();
+        txt_maHD = new javax.swing.JTextField();
         btn_timkiem = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_thongke = new javax.swing.JTable();
-        lbl_Tong = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(814, 678));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel2.setText("Thống Kê Doanh Thu");
 
-        jLabel3.setText("Tim Kiem Theo Ngay");
+        jLabel3.setText("Tim Kiem Theo Ma HD");
 
-        txtDate.addMouseListener(new java.awt.event.MouseAdapter() {
+        txt_maHD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtDateMouseClicked(evt);
+                txt_maHDMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                txtDateMouseExited(evt);
+                txt_maHDMouseExited(evt);
             }
         });
 
@@ -98,6 +130,11 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Clear");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         tbl_thongke.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,8 +149,8 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tbl_thongke);
 
-        lbl_Tong.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbl_Tong.setText("Tong Doanh Thu:");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setText("Tong Doanh Thu:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,10 +161,6 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(270, 270, 270))
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(506, 506, 506)
@@ -136,16 +169,21 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_maHD, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
                                 .addComponent(btn_timkiem)
                                 .addGap(42, 42, 42)
                                 .addComponent(jButton2))
-                            .addComponent(jLabel3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(lbl_Tong, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3))))
                 .addContainerGap(419, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,29 +198,34 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_timkiem)
                     .addComponent(jButton2)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_maHD, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(lbl_Tong)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(jLabel4)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 1093, 735);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
-
+        strFind = txt_maHD.getText();
+        LoadTable();
     }//GEN-LAST:event_btn_timkiemActionPerformed
 
-    private void txtDateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDateMouseExited
-        txtDate.setText("Tìm Kiếm ....");
-        LoadTable();
-    }//GEN-LAST:event_txtDateMouseExited
+    private void txt_maHDMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_maHDMouseExited
 
-    private void txtDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDateMouseClicked
-        txtDate.setText("");
-    }//GEN-LAST:event_txtDateMouseClicked
+    }//GEN-LAST:event_txt_maHDMouseExited
+
+    private void txt_maHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_maHDMouseClicked
+
+    }//GEN-LAST:event_txt_maHDMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -194,10 +237,10 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbl_Tong;
     private javax.swing.JTable tbl_thongke;
-    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txt_maHD;
     // End of variables declaration//GEN-END:variables
 
 }
