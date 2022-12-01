@@ -27,10 +27,10 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     public List<KhuyenMai> searchTheoMaKM(String maKM) {
         return resKM.searchMaKM(maKM);
     }
-
+    
     @Override
     public String add(KhuyenMaiModel km) {
-        if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || String.valueOf(km.getMucGiam()).isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
+        if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || String.valueOf(km.getMucGiam()).isEmpty() || km.getMoTa().isEmpty()) {
             return "Không được để trống !";
         }
         KhuyenMaiModel ma = resKM.checkTrung(km.getMaKM());
@@ -47,7 +47,7 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
 
     @Override
     public String update(KhuyenMaiModel km, String IDKM) {
-        if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || String.valueOf(km.getMucGiam()).isEmpty() || km.getTgBatDau().isEmpty() || km.getTgKetThuc().isEmpty() || km.getMoTa().isEmpty()) {
+        if (km.getMaKM().isEmpty() || km.getTenKM().isEmpty() || km.getHinhThucGG().isEmpty() || String.valueOf(km.getMucGiam()).isEmpty() || km.getMoTa().isEmpty()) {
             return "Không được để trống !";
         }
         boolean update = resKM.update(km, IDKM);

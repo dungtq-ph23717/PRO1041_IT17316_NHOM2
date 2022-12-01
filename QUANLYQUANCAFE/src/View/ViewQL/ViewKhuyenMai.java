@@ -173,28 +173,28 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtID))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbbHinhThucGG, javax.swing.GroupLayout.Alignment.LEADING, 0, 206, Short.MAX_VALUE)
                             .addComponent(txtMaKM, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtMucGiam, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtMenhGia, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtTenKM, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(6, 6, 6))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-                        .addComponent(btClear)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(txtMucGiam, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtMenhGia, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtTenKM, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(6, 6, 6))
+                            .addComponent(btClear, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -456,54 +456,62 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bltAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltAddActionPerformed
-        String ma = txtMaKM.getText();
-        String ten = txtTenKM.getText();
-        String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
-        String mucG = txtMucGiam.getText();
+        try {
+            String ma = txtMaKM.getText();
+            String ten = txtTenKM.getText();
+            String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
+            String mucG = txtMucGiam.getText();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
-        String mota = txtMoTa.getText();
-        boolean status = rdoDangKichHoat.isSelected();
-        String tt = "";
-        if (status == true) {
-            tt = "Đang kích hoạt";
-        } else {
-            tt = "Hết hiệu lực sử dụng";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
+            String mota = txtMoTa.getText();
+            boolean status = rdoDangKichHoat.isSelected();
+            String tt = "";
+            if (status == true) {
+                tt = "Đang kích hoạt";
+            } else {
+                tt = "Hết hiệu lực sử dụng";
+            }
+            KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
+            JOptionPane.showMessageDialog(this, impl.add(km));
+            listKM = impl.getAll();
+            showData(listKM);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Không được để trống !");
         }
-        KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
-        JOptionPane.showMessageDialog(this, impl.add(km));
-        listKM = impl.getAll();
-        showData(listKM);
     }//GEN-LAST:event_bltAddActionPerformed
 
     private void bltUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltUpdateActionPerformed
-        String id = txtID.getText();
-        String ma = txtMaKM.getText();
-        String ten = txtTenKM.getText();
-        String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
-        String mucG = txtMucGiam.getText();
+        try {
+            String id = txtID.getText();
+            String ma = txtMaKM.getText();
+            String ten = txtTenKM.getText();
+            String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
+            String mucG = txtMucGiam.getText();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
-        String mota = txtMoTa.getText();
-        boolean status = rdoDangKichHoat.isSelected();
-        String tt = "";
-        if (status == true) {
-            tt = "Đang kích hoạt";
-        } else {
-            tt = "Hết hiệu lực sử dụng";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
+            String mota = txtMoTa.getText();
+            boolean status = rdoDangKichHoat.isSelected();
+            String tt = "";
+            if (status == true) {
+                tt = "Đang kích hoạt";
+            } else {
+                tt = "Hết hiệu lực sử dụng";
+            }
+            KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
+            JOptionPane.showMessageDialog(this, impl.update(km, id));
+            listKM = impl.getAll();
+            showData(listKM);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Không được để trống !");
         }
-        KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
-        JOptionPane.showMessageDialog(this, impl.update(km, id));
-        listKM = impl.getAll();
-        showData(listKM);
     }//GEN-LAST:event_bltUpdateActionPerformed
 
     private void bangKMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bangKMMouseClicked
