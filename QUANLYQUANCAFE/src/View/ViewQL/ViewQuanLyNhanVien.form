@@ -318,13 +318,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="BTADD" min="-2" pref="76" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                              <Component id="btUPDATE" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -342,6 +335,15 @@
                                   <Component id="txtTENNV" alignment="1" min="-2" pref="246" max="-2" attributes="0"/>
                                   <Component id="txtDiachi" alignment="1" min="-2" pref="246" max="-2" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                              <Component id="btXuatNV" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="BTADD" min="-2" pref="76" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <Component id="btUPDATE" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="btChucVu" min="-2" pref="34" max="-2" attributes="0"/>
@@ -439,6 +441,7 @@
                           <Component id="btUPDATE" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BTADD" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BTRESET" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btXuatNV" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
@@ -593,6 +596,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTRESETActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btXuatNV">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="xu&#x1ea5;t nv"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btXuatNVActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
