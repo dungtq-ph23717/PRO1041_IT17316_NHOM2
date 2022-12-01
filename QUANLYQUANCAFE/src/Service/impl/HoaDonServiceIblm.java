@@ -23,6 +23,7 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     public List<HoaDon> getAll() {
         return rps.getAll();
     }
+
     @Override
     public String delete(String maHD) {
         boolean delete = rps.delete(maHD);
@@ -62,12 +63,6 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
             return "Thanh toán thất bại";
         }
     }
-
-    @Override
-    public List<HoaDon> getAll() {
-        return rps.getAll();
-    }
-
 
     @Override
     public List<HoaDon> getAllTTViewHD(String id) {
