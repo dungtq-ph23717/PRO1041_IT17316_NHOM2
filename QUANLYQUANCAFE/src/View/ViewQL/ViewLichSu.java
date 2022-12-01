@@ -42,11 +42,12 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
        jlbma.setText(hd.getMaHD());
         jlbngay.setText(hd.getNgayLapHD());
         jlbban.setText((hd.getBan().getTenBan()));
-        jlbptt.setText(hd.getPhuongThucThanhToan());
+        jlbptt.setText("Tiền mặt");
        jlbsp.setText((hd.getTensp().getTenSP()));
        jlbgiaban.setText(String.valueOf(hd.getTensp().getGiaBan()));
        jlbsl.setText( String.valueOf(hd.getSoluong().getSoLuong()));
         jlbtennv.setText(hd.getTenNV().getTenNV());
+        jlbtinhtrang.setText(hd.getTinhTrang());
         
     }   
 
@@ -167,6 +168,7 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
 
         jlbtennv.setText("X");
 
+        jlbtinhtrang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlbtinhtrang.setText("X");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,7 +272,7 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jlbsp))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
