@@ -22,11 +22,10 @@ import java.util.List;
  */
 public class HoaDonRepository {
 
-    public List<HoaDon> getAllDaThanhToan() {
+    public List<HoaDon> getAll() {
         String query = "SELECT MaHD, TenBan , TenNV  , NgayLapHD , PhuongThucThanhToan , TenSP, ThanhTien,HD.TinhTrang\n"
                 + "FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN \n"
-                + "SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID\n"
-                + "WHERE HD.TinhTrang LIKE N'Đã thanh toán'";
+                + "SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID\n";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
@@ -211,7 +210,7 @@ public class HoaDonRepository {
 //        System.out.println(add);
 //        HoaDon hd = new HoaDonRepository().getOne("HD2");
 //        System.out.println(hd);
-        List<HoaDon> getall = new Repository.HoaDonRepository().getAllDaThanhToan();
+        List<HoaDon> getall = new Repository.HoaDonRepository().getAll();
         for (HoaDon x : getall) {
             System.out.println(x);
         }

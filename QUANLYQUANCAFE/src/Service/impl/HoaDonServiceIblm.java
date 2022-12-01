@@ -79,8 +79,8 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     }
 
     @Override
-    public List<HoaDon> getAllDaThanhToan() {
-        return rps.getAllDaThanhToan();
+    public List<HoaDon> getAll() {
+        return rps.getAll();
     }
 
     @Override
