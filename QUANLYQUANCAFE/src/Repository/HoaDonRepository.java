@@ -6,8 +6,11 @@ package Repository;
 
 import DomainModels.HoaDonModel;
 import Utilities.DBContext;
+import ViewModels.Ban;
 import ViewModels.HoaDon;
+import ViewModels.HoaDonChiTiet;
 import ViewModels.NhanVienViewModel;
+import ViewModels.SanPham;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,16 +24,22 @@ import java.util.List;
 public class HoaDonRepository {
 
     public List<HoaDon> getAll() {
-        String query = "SELECT dbo.HoaDon.ID, dbo.HoaDon.MaHD, dbo.HoaDon.NgayLapHD, dbo.HoaDon.ThanhTien, dbo.HoaDon.PhuongThucThanhToan, dbo.KhuyenMai.MaKM, dbo.NhanVien.MaNV, dbo.Ban.MaBan\n"
-                + "FROM   dbo.HoaDon INNER JOIN\n"
-                + "             dbo.KhuyenMai ON dbo.HoaDon.IDKM = dbo.KhuyenMai.ID INNER JOIN\n"
-                + "             dbo.NhanVien ON dbo.HoaDon.IDNV = dbo.NhanVien.ID INNER JOIN\n"
-                + "             dbo.Ban ON dbo.HoaDon.ID = dbo.Ban.ID";
+        String query = "SELECT        dbo.HoaDon.MaHD, dbo.HoaDon.NgayLapHD, dbo.HoaDon.PhuongThucThanhToan, dbo.NhanVien.TenNV, dbo.Ban.TenBan, dbo.SanPham.TenSP, dbo.HoaDon.TinhTrang, dbo.SanPham.Giaban, \n"
+                + "                         dbo.HoaDonChiTiet.Soluong\n"
+                + "FROM            dbo.HoaDon INNER JOIN\n"
+                + "                         dbo.HoaDonChiTiet ON dbo.HoaDon.ID = dbo.HoaDonChiTiet.IDHD INNER JOIN\n"
+                + "                         dbo.Ban ON dbo.HoaDon.IDBan = dbo.Ban.ID INNER JOIN\n"
+                + "                         dbo.NhanVien ON dbo.HoaDon.IDNV = dbo.NhanVien.ID INNER JOIN\n"
+                + "                         dbo.SanPham ON dbo.HoaDonChiTiet.IDSP = dbo.SanPham.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+                NhanVienViewModel nv = new NhanVienViewModel(rs.getString(4));
+                Ban Ban = new Ban(rs.getString(5));
+                SanPham tensp = new SanPham(rs.getString(6), rs.getDouble(8));
+                HoaDonChiTiet soluong = new HoaDonChiTiet(rs.getInt(9));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getString(3), nv, Ban, tensp, rs.getString(7), soluong);
                 list.add(hd);
             }
             return list;
@@ -184,8 +193,6 @@ public class HoaDonRepository {
         HoaDonModel hd = new HoaDonModel("HD1", "1");
         boolean add = new HoaDonRepository().updateID("15d13f6e-71b8-44be-8560-213d2f84002a", "HD31");
         System.out.println(add);
-//        HoaDon hd = new HoaDonRepository().getOne("HD2");
-//        System.out.println(hd);
     }
 
     public List<HoaDonModel> getListChuaThanhToan() {

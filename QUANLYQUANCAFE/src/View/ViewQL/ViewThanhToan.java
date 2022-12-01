@@ -125,7 +125,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         }
         cbbPhuongThucThanhToan.setModel(boxKM);
         boxKM.addElement("Tiền mặt");
-        boxKM.addElement("ATM");
         //
     }
 
