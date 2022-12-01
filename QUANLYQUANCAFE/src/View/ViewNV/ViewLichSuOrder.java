@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class ViewLichSu extends javax.swing.JInternalFrame {
+public class ViewLichSuOrder extends javax.swing.JInternalFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
     private HoaDonServiceIblm impl = new HoaDonServiceIblm();
@@ -24,7 +24,7 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu2
      */
-    public ViewLichSu() {
+    public ViewLichSuOrder() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();

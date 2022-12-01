@@ -456,54 +456,62 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bltAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltAddActionPerformed
-        String ma = txtMaKM.getText();
-        String ten = txtTenKM.getText();
-        String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
-        String mucG = txtMucGiam.getText();
+        try {
+            String ma = txtMaKM.getText();
+            String ten = txtTenKM.getText();
+            String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
+            String mucG = txtMucGiam.getText();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
-        String mota = txtMoTa.getText();
-        boolean status = rdoDangKichHoat.isSelected();
-        String tt = "";
-        if (status == true) {
-            tt = "Đang kích hoạt";
-        } else {
-            tt = "Hết hiệu lực sử dụng";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
+            String mota = txtMoTa.getText();
+            boolean status = rdoDangKichHoat.isSelected();
+            String tt = "";
+            if (status == true) {
+                tt = "Đang kích hoạt";
+            } else {
+                tt = "Hết hiệu lực sử dụng";
+            }
+            KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
+            JOptionPane.showMessageDialog(this, impl.add(km));
+            listKM = impl.getAll();
+            showData(listKM);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Không được để trống !");
         }
-        KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
-        JOptionPane.showMessageDialog(this, impl.add(km));
-        listKM = impl.getAll();
-        showData(listKM);
     }//GEN-LAST:event_bltAddActionPerformed
 
     private void bltUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltUpdateActionPerformed
-        String id = txtID.getText();
-        String ma = txtMaKM.getText();
-        String ten = txtTenKM.getText();
-        String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
-        String mucG = txtMucGiam.getText();
+        try {
+            String id = txtID.getText();
+            String ma = txtMaKM.getText();
+            String ten = txtTenKM.getText();
+            String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
+            String mucG = txtMucGiam.getText();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
-        String mota = txtMoTa.getText();
-        boolean status = rdoDangKichHoat.isSelected();
-        String tt = "";
-        if (status == true) {
-            tt = "Đang kích hoạt";
-        } else {
-            tt = "Hết hiệu lực sử dụng";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
+            String mota = txtMoTa.getText();
+            boolean status = rdoDangKichHoat.isSelected();
+            String tt = "";
+            if (status == true) {
+                tt = "Đang kích hoạt";
+            } else {
+                tt = "Hết hiệu lực sử dụng";
+            }
+            KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
+            JOptionPane.showMessageDialog(this, impl.update(km, id));
+            listKM = impl.getAll();
+            showData(listKM);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Không được để trống !");
         }
-        KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
-        JOptionPane.showMessageDialog(this, impl.update(km, id));
-        listKM = impl.getAll();
-        showData(listKM);
     }//GEN-LAST:event_bltUpdateActionPerformed
 
     private void bangKMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bangKMMouseClicked
