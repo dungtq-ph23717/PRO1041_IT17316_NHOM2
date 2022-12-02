@@ -287,7 +287,7 @@ public class ViewTachHD extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), slt, idSP.getId()));
             String maHD1 = (String) cbbMaHD2.getSelectedItem();
             HoaDon hd2 = implHD.getOne(maHD1);
-            Integer slAdd = sl - slt;
+            int slAdd = sl - slt;
 //            implHDCT.updateIDHD(hd2.getID(), slAdd, idSP.getId());
             HoaDonChiTietModel hdct = new HoaDonChiTietModel(idSP.getId(), hd2.getID(), slAdd);
             implHDCT.add(hdct);
