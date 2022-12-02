@@ -890,7 +890,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
             HoaDonChiTiet hd1 = implHDCT.getOne(maGH);
-            Double tien = hd1.getGiaTien();
+            Double tien = Double.valueOf(txtTongTien.getText());
             Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
             Double tienThua = tienKhach - tien;
             if (tienThua >= 0) {
@@ -930,8 +930,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     showDataHD(listHoaDon);
                     listBan = implBan.getAllTT();
                     showDataBan(listBan);
-                    listHDCT = implHDCT.getAllviewGH("");
-                    showDataHDCT(listHDCT);
+                    listHDCT.clear();
                 } else {
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
@@ -950,7 +949,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
             HoaDonChiTiet hd1 = implHDCT.getOne(maGH);
-            Double tien = hd1.getSoLuong() * hd1.getGiaTien();
+            Double tien = Double.valueOf(txtTongTien.getText());
             Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
             Double tienThua = tienKhach - tien;
             if (tienThua >= 0) {
@@ -978,6 +977,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     Ban b = implBan.getOne(ten);
                     listHoaDon = implHD.getAllTTViewHD(b.getId());
                     showDataHD(listHoaDon);
+                    listHDCT.clear();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
