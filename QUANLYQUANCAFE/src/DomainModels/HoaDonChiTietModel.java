@@ -25,6 +25,10 @@ public class HoaDonChiTietModel {
         this.soLuong = soLuong;
     }
 
+    public HoaDonChiTietModel(String IDSP) {
+        this.IDSP = IDSP;
+    }
+
     public HoaDonChiTietModel(int soLuong) {
         this.soLuong = soLuong;
     }

@@ -19,17 +19,17 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
 
     private HoaDonRepository rps = new HoaDonRepository();
 
-    @Override
-    public List<HoaDon> getAll() {
-        return rps.getAll();
-    }
+//    @Override
+//    public List<HoaDon> getAll() {
+//        return rps.getAll();
+//    }
     @Override
     public String delete(String maHD) {
         boolean delete = rps.delete(maHD);
         if (delete) {
-            return "delete thành công";
+            return "Gộp thành công";
         } else {
-            return "delete thất bại";
+            return "Gộp thất bại";
         }
     }
 
@@ -71,11 +71,44 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         }
     }
 
-   
-
     @Override
     public List<HoaDon> getAllTTViewHD(String id) {
         return rps.getAllTTViewHD(id);
+    }
+
+    @Override
+    public String updateID(String id, String maHD) {
+        boolean update = rps.updateID(id, maHD);
+        if (update) {
+            return "Update thành công";
+        } else {
+            return "Update thất bại";
+        }
+    }
+
+    @Override
+    public List<HoaDon> getAll() {
+        return rps.getAll();
+    }
+
+    @Override
+    public List<HoaDon> searchTheoTT(String tt) {
+        return rps.searchTheoTT(tt);
+    }
+
+    @Override
+    public List<HoaDon> searchTheoTenSP(String tenSP) {
+        return rps.searchTheoTenSP(tenSP);
+    }
+
+    @Override
+    public List<HoaDon> searchTheoMaHD(String maHD) {
+        return rps.searchTheoMaHD(maHD);
+    }
+
+    @Override
+    public List<HoaDon> searchTheoTenBan(String tenB) {
+        return rps.searchTheoTenBan(tenB);
     }
 
 }

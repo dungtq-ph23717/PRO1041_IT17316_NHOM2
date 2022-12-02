@@ -115,6 +115,52 @@ public class HoaDonChiTietRepository {
         return check > 0;
     }
 
+    public boolean updateIDHD(String idHD, int soLuong, String idSP) {
+        String query = "UPDATE [dbo].[HoaDonChiTiet]\n"
+                + "   SET [IDHD] = ?\n"
+                + "      ,[Soluong] = ?\n"
+                + " WHERE IDSP like ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, idHD);
+            ps.setObject(2, soLuong);
+            ps.setObject(3, idSP);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public boolean gopHD(String idHD, String idSP) {
+        String query = "UPDATE [dbo].[HoaDonChiTiet]\n"
+                + "   SET [IDHD] = ?\n"
+                + " WHERE IDSP like ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, idHD);
+            ps.setObject(2, idSP);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+       public HoaDonChiTietModel checkTrung(String idSp) {
+        String query = "SELECT idSP FROM SANPHAM WHERE idSp = ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, idSp);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HoaDonChiTietModel sp = new HoaDonChiTietModel(rs.getString(1));
+                return sp;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
     public boolean delete(String idHD, String idSP) {
         String query = "DELETE FROM [dbo].[HoaDonChiTiet]\n"
                 + "      WHERE IDHD like ? and IDSP like ?";
@@ -137,7 +183,7 @@ public class HoaDonChiTietRepository {
 //        HoaDonChiTiet hd = new HoaDonChiTietRepository().getOne("SP1");
 //        System.out.println(hd);
         HoaDonChiTietModel hd = new HoaDonChiTietModel(5);
-        boolean add = new HoaDonChiTietRepository().update(hd, "409f5ab4-4a0f-49e2-bba5-9f7ac0e199e6", "64e38e57-1447-483d-a82f-08c6dd36ae74");
+        boolean add = new HoaDonChiTietRepository().updateIDHD("eeaf53e9-e542-444a-86b5-f088b1bdff3e", 3, "6a0c96e8-fe13-4e56-80b8-1a294978cc7b");
         System.out.println(add);
     }
 }

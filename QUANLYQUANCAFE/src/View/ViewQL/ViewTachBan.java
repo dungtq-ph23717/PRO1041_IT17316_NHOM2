@@ -11,6 +11,7 @@ import ViewModels.HoaDon;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,7 +32,7 @@ public class ViewTachBan extends javax.swing.JFrame {
     /**
      * Creates new form ViewTachBan
      */
-    public ViewTachBan() {
+    public ViewTachBan(Ban ban) {
         initComponents();
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHD1.setModel(dtm1);
@@ -44,7 +45,7 @@ public class ViewTachBan extends javax.swing.JFrame {
         listHD = implHD.getAllTT();
         showDataHD2(listHD);
 
-        listBan = implBan.getAll();
+        listBan = implBan.getAllTT();
         cbbBan1.setModel(boxModel1);
         for (Ban b : listBan) {
             boxModel1.addElement(b.getTenBan());
@@ -53,6 +54,7 @@ public class ViewTachBan extends javax.swing.JFrame {
         for (Ban b : listBan) {
             boxModel2.addElement(b.getTenBan());
         }
+        fillData(ban);
     }
 
     private void showDataHD1(List<HoaDon> list) {
@@ -67,6 +69,10 @@ public class ViewTachBan extends javax.swing.JFrame {
         for (HoaDon x : list) {
             dtm2.addRow(new Object[]{x.getMaHD(), x.getNgayLapHD(), x.getTenNV().getTenNV(), x.getTinhTrang()});
         }
+    }
+
+    private void fillData(Ban ban) {
+        cbbBan2.setSelectedItem(ban.getTenBan());
     }
 
     /**
@@ -89,12 +95,18 @@ public class ViewTachBan extends javax.swing.JFrame {
         btClose = new javax.swing.JButton();
         btBack = new javax.swing.JButton();
         btNext = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Bàn");
+        jLabel1.setText("Bàn tách");
 
         cbbBan1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbBan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbBan1ActionPerformed(evt);
+            }
+        });
 
         tbHD1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,6 +122,11 @@ public class ViewTachBan extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbHD1);
 
         cbbBan2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbBan2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbBan2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Bàn");
 
@@ -134,8 +151,25 @@ public class ViewTachBan extends javax.swing.JFrame {
         });
 
         btBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/double-arrow (1).png"))); // NOI18N
+        btBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBackActionPerformed(evt);
+            }
+        });
 
         btNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/fast-forward-double-right-arrows-symbol (1).png"))); // NOI18N
+        btNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNextActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Gộp");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,6 +199,8 @@ public class ViewTachBan extends javax.swing.JFrame {
                                 .addComponent(cbbBan2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(btClose)))
                 .addContainerGap())
         );
@@ -193,7 +229,9 @@ public class ViewTachBan extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(btClose)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btClose)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -203,42 +241,130 @@ public class ViewTachBan extends javax.swing.JFrame {
 
     private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
         this.dispose();
+        ViewQuanLy v = new ViewQuanLy();
+        v.setVisible(true);
     }//GEN-LAST:event_btCloseActionPerformed
+
+    private void cbbBan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbBan1ActionPerformed
+        String ten = cbbBan1.getSelectedItem().toString();
+        Ban b = implBan.getOne(ten);
+        listHD = implHD.getAllTTViewHD(b.getId());
+        showDataHD1(listHD);
+    }//GEN-LAST:event_cbbBan1ActionPerformed
+
+    private void cbbBan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbBan2ActionPerformed
+        String ten = cbbBan2.getSelectedItem().toString();
+        Ban b = implBan.getOne(ten);
+        listHD = implHD.getAllTTViewHD(b.getId());
+        showDataHD2(listHD);
+    }//GEN-LAST:event_cbbBan2ActionPerformed
+
+    private void btBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackActionPerformed
+        try {
+            int row = tbHD2.getSelectedRow();
+            String ten = cbbBan1.getSelectedItem().toString();
+            String maHD = (String) tbHD2.getValueAt(row, 0);
+            Ban b = implBan.getOne(ten);
+            implHD.updateID(b.getId(), maHD);
+
+            String ten1 = cbbBan1.getSelectedItem().toString();
+            Ban b1 = implBan.getOne(ten1);
+            listHD = implHD.getAllTTViewHD(b1.getId());
+            showDataHD1(listHD);
+
+            String ten2 = cbbBan2.getSelectedItem().toString();
+            Ban b2 = implBan.getOne(ten2);
+            listHD = implHD.getAllTTViewHD(b2.getId());
+            showDataHD2(listHD);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+        }
+    }//GEN-LAST:event_btBackActionPerformed
+
+    private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
+        try {
+            int row = tbHD1.getSelectedRow();
+            String ten = cbbBan2.getSelectedItem().toString();
+            String maHD = (String) tbHD1.getValueAt(row, 0);
+            Ban b = implBan.getOne(ten);
+            implHD.updateID(b.getId(), maHD);
+
+            String ten1 = cbbBan1.getSelectedItem().toString();
+            Ban b1 = implBan.getOne(ten1);
+            listHD = implHD.getAllTTViewHD(b1.getId());
+            showDataHD1(listHD);
+
+            String ten2 = cbbBan2.getSelectedItem().toString();
+            Ban b2 = implBan.getOne(ten2);
+            listHD = implHD.getAllTTViewHD(b2.getId());
+            showDataHD2(listHD);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+        }
+    }//GEN-LAST:event_btNextActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        for (int i = 0; i < tbHD1.getRowCount(); i++) {
+            String ten = cbbBan2.getSelectedItem().toString();
+            String maHD = (String) tbHD1.getValueAt(i, 0);
+            Ban b = implBan.getOne(ten);
+            implHD.updateID(b.getId(), maHD);
+        }
+        String ten1 = cbbBan1.getSelectedItem().toString();
+        Ban b1 = implBan.getOne(ten1);
+        listHD = implHD.getAllTTViewHD(b1.getId());
+        showDataHD1(listHD);
+
+        String ten2 = cbbBan2.getSelectedItem().toString();
+        Ban b2 = implBan.getOne(ten2);
+        listHD = implHD.getAllTTViewHD(b2.getId());
+        showDataHD2(listHD);
+
+        if (ten1.contains("-tách")) {
+            String tenGop = cbbBan1.getSelectedItem().toString();
+            JOptionPane.showMessageDialog(this, implBan.gopBan(tenGop));
+            listBan = implBan.getAllTT();
+            boxModel1.removeElement(ten1);
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể gộp bàn gốc");
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewTachBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewTachBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewTachBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewTachBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewTachBan().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ViewTachBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ViewTachBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ViewTachBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ViewTachBan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ViewTachBan().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBack;
@@ -246,6 +372,7 @@ public class ViewTachBan extends javax.swing.JFrame {
     private javax.swing.JButton btNext;
     private javax.swing.JComboBox<String> cbbBan1;
     private javax.swing.JComboBox<String> cbbBan2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
