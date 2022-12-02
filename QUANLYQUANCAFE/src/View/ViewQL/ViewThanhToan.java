@@ -188,7 +188,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         tachBan = new javax.swing.JMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         updateSL = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        xoaSP = new javax.swing.JMenuItem();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         tachHD = new javax.swing.JMenuItem();
         gopHD = new javax.swing.JMenuItem();
@@ -269,13 +269,13 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         });
         jPopupMenu1.add(updateSL);
 
-        jMenuItem1.setText("Xoá sản phẩm");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        xoaSP.setText("Xoá sản phẩm");
+        xoaSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                xoaSPActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(jMenuItem1);
+        jPopupMenu1.add(xoaSP);
 
         tachHD.setText("Tách HD");
         tachHD.addActionListener(new java.awt.event.ActionListener() {
@@ -1086,7 +1086,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         v.setVisible(true);
     }//GEN-LAST:event_tachBanActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void xoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaSPActionPerformed
         HoaDon idHD = implHD.getOne(txtMa.getText());
         int rowSP = tbGH.getSelectedRow();
         String maSP = tbGH.getValueAt(rowSP, 0).toString();
@@ -1094,15 +1094,29 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         implHDCT.delete(idHD.getID(), sp.getId());
         listHDCT = implHDCT.getAllviewGH(sp.getId());
         showDataHDCT(listHDCT);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_xoaSPActionPerformed
 
     private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
+        Ban b = implBan.getOne(txtBan.getText());
+        Random r = new Random();
+        int x = r.nextInt(100);
+        long millis = System.currentTimeMillis();
+        String name;
+        HoaDonModel hd = new HoaDonModel(b.getId());
+        implHD.add(hd, x + "");
+        BanModel b2 = new BanModel("Đang sử dụng");
+        implBan.updateTT(b2, b.getId());
+        listBan = implBan.getAllTT();
+        showDataBan(listBan);
+        listHoaDon = implHD.getAllTTViewHD(b.getId());
+        showDataHD(listHoaDon);
         ViewTachHD v = new ViewTachHD();
         v.setVisible(true);
     }//GEN-LAST:event_tachHDActionPerformed
 
     private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
-        // TODO add your handling code here:
+        ViewTachHD v = new ViewTachHD();
+        v.setVisible(true);
     }//GEN-LAST:event_gopHDActionPerformed
 
     private void fillDataGH(int index) {
@@ -1151,7 +1165,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1186,5 +1199,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtTienThua;
     private javax.swing.JLabel txtTongTien;
     private javax.swing.JMenuItem updateSL;
+    private javax.swing.JMenuItem xoaSP;
     // End of variables declaration//GEN-END:variables
 }
