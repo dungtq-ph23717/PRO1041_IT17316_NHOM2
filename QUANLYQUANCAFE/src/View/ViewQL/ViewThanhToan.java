@@ -28,7 +28,19 @@ import ViewModels.KhuVuc;
 import ViewModels.KhuyenMai;
 import ViewModels.NhanVienViewModel;
 import ViewModels.SanPham;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.Dimension;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.awt.print.PrinterException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -36,19 +48,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.record.MulBlankRecord;
 
 /**
  *
  * @author Admin
  */
-public class ViewThanhToan extends javax.swing.JInternalFrame {
-    
+public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnable, ThreadFactory {
+
+    //----------webcam---------------||
+    private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private Executor executor=Executors.newSingleThreadExecutor(this);
+
     private DefaultTableModel dtmBan = new DefaultTableModel();
     private DefaultTableModel dtmGioHang = new DefaultTableModel();
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
@@ -79,21 +100,22 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
      */
     public ViewThanhToan() {
         initComponents();
+        initWebcam();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        
+
         String[] headersBan = {"Tên bàn", "Loại bàn", "Trạng thái"};
         tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
         listBan = implBan.getAllTT();
         showDataBan(listBan);
-        
+
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
         showDataHD(listHoaDon);
-        
+
         tbSP.setModel(dtmSanPham);
         String[] headersSP = {"Mã SP", "Tên SP", "Giá Bán", "Danh Mục", "Trạng Thái", "Mô tả", "Size"};
         dtmSanPham.setColumnIdentifiers(headersSP);
@@ -110,7 +132,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         dtmGioHang.setColumnIdentifiers(headersGH);
 //        listHDCT = implHDCT.getAll();
         showDataHDCT(listHDCT);
-        
+
         listKhuyenMai = implKM.getAll();
         boxModelGG.addElement("Chọn");
         cbbGG.setModel(boxModelGG);
@@ -146,28 +168,28 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             dtmGioHang.addRow(new Object[]{x.getIdSP().getMaSP(), x.getIdSP().getTenSP(), x.getSoLuong(), x.getIdSP().getGiaBan(), x.getGiaTien()});
         }
     }
-    
+
     private void showDataCB(List<ComboModel> list) {
         dtmCB.setRowCount(0);
         for (ComboModel x : list) {
             dtmCB.addRow(x.toRowData());
         }
     }
-    
+
     private void showDataBan(List<Ban> list) {
         dtmBan.setRowCount(0);
         for (Ban x : list) {
             dtmBan.addRow(x.toRowDataTT());
         }
     }
-    
+
     private void showDataSP(List<SanPham> list) {
         dtmSanPham.setRowCount(0);
         for (SanPham sp : list) {
             dtmSanPham.addRow(new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getDanhMuc().getTenDanhMuc(), sp.getTrangThai(), sp.getMoTa(), sp.getSize().getSize()});
         }
     }
-    
+
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
@@ -243,6 +265,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tbHD = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
 
         gopBan.setText("Gộp bàn");
         gopBan.setToolTipText("");
@@ -395,7 +419,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     .addComponent(txtSearchTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbLocDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -722,17 +746,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 212, Short.MAX_VALUE)
-        );
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 250, 160));
+        jPanel5.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 260, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -946,7 +964,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-            
+
         } else {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
@@ -983,7 +1001,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-            
+
         }
     }//GEN-LAST:event_bltThanhToanActionPerformed
 
@@ -1024,7 +1042,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbbLocDanhMucActionPerformed
 
     private void btHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyDonActionPerformed
-        
+
         if (tbHD.getRowCount() <= 1) {
             String ma = txtMa.getText();
             HoaDonModel hd = new HoaDonModel(ma, ma);
@@ -1098,14 +1116,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
-       ViewTachHD v = new ViewTachHD();
-       v.setVisible(true);
+        ViewTachHD v = new ViewTachHD();
+        v.setVisible(true);
     }//GEN-LAST:event_tachHDActionPerformed
 
     private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_gopHDActionPerformed
-    
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         SanPham sp = listSanPham.get(index);
@@ -1114,18 +1132,63 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         txtDonGia.setText(String.valueOf(sp.getGiaBan()));
         txtSoL.setText(String.valueOf(hdct.getSoLuong()));
     }
-    
+
     private void fillDataBan(int index) {
         Ban b = listBan.get(index);
         txtBan.setText(b.getTenBan());
     }
-    
+
     private void fillDataHD(int index) {
         HoaDon hd = listHoaDon.get(index);
         txtMa.setText(hd.getMaHD());
         txtNgay.setText(hd.getNgayLapHD());
         txtNhanVien.setText(hd.getTenNV().getTenNV());
     }
+
+    private void initWebcam() {
+        java.awt.Dimension size = WebcamResolution.QQVGA.getSize();
+        webcam = Webcam.getWebcams().get(0);
+        webcam.setViewSize(size);
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+      jPanel5.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 250, 160));
+        executor.execute(this);
+    }
+
+    @Override
+    public void run() {
+        do {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Result result = null;
+            BufferedImage image = null;
+            if (webcam.isOpen()) {
+                if ((image = webcam.getImage()) == null) {
+                    continue;
+                }
+            }
+            LuminanceSource source = new BufferedImageLuminanceSource(image);
+            BinaryBitmap bitmapew = new BinaryBitmap(new HybridBinarizer(source));
+            try {
+                result = new MultiFormatReader().decode(bitmapew);
+            } catch (NotFoundException ex) {
+                Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (result != null) {
+                txtTienKhachTra.setText(result.getText());
+            }
+
+        } while (true);
+
+    }
+
+  
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PHoaDon;
@@ -1158,6 +1221,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
@@ -1166,6 +1230,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPopupMenu puBan;
     private javax.swing.JMenuItem tachBan;
     private javax.swing.JMenuItem tachHD;
@@ -1188,4 +1253,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtTongTien;
     private javax.swing.JMenuItem updateSL;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public Thread newThread(Runnable r) {
+       Thread t= new Thread(r,"My Thread");
+            t.setDaemon(true);
+            return t;
+    }
 }
