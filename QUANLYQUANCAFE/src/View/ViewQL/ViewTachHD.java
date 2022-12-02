@@ -41,12 +41,12 @@ public class ViewTachHD extends javax.swing.JFrame {
     public ViewTachHD() {
         initComponents();
         String[] headersGH = {"Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Tổng tiền"};
-        tbGH1.setModel(dtm1);
+        tbGH2.setModel(dtm1);
         dtm1.setColumnIdentifiers(headersGH);
         listHDCT = implHDCT.getAll();
         showDataHDCT1(listHDCT);
 
-        tbGH2.setModel(dtm2);
+        tbGH1.setModel(dtm2);
         dtm2.setColumnIdentifiers(headersGH);
         listHDCT = implHDCT.getAll();
         showDataHDCT2(listHDCT);
@@ -86,19 +86,19 @@ public class ViewTachHD extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbGH1 = new javax.swing.JTable();
+        tbGH2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         cbbMaHD1 = new javax.swing.JComboBox<>();
         cbbMaHD2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbGH2 = new javax.swing.JTable();
+        tbGH1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tbGH1.setModel(new javax.swing.table.DefaultTableModel(
+        tbGH2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -109,12 +109,12 @@ public class ViewTachHD extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbGH1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbGH2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbGH1MouseClicked(evt);
+                tbGH2MouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbGH1);
+        jScrollPane1.setViewportView(tbGH2);
 
         jLabel1.setText("Mã HD");
 
@@ -134,7 +134,7 @@ public class ViewTachHD extends javax.swing.JFrame {
 
         jLabel2.setText("Mã HD tách");
 
-        tbGH2.setModel(new javax.swing.table.DefaultTableModel(
+        tbGH1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -145,12 +145,12 @@ public class ViewTachHD extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbGH2.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbGH1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbGH2MouseClicked(evt);
+                tbGH1MouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbGH2);
+        jScrollPane2.setViewportView(tbGH1);
 
         jButton1.setText("Close");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -195,12 +195,13 @@ public class ViewTachHD extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cbbMaHD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(cbbMaHD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(7, 7, 7)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -232,37 +233,80 @@ public class ViewTachHD extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        ViewQuanLy v = new ViewQuanLy();
-        v.dispose();
-        v.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void tbGH2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH2MouseClicked
+        int row = tbGH2.getSelectedRow();
+        String maSP = (String) tbGH2.getValueAt(row, 0);
+        SanPham idSP = implSP.getOne(maSP);
+        String maHD = (String) cbbMaHD1.getSelectedItem();
+        HoaDon hd = implHD.getOne(maHD);
+        Integer sl = (Integer) tbGH2.getValueAt(row, 2);
+        if (sl == 1) {
+            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), 1, idSP.getId()));
+        } else {
+            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+            if (slt <= 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), slt, idSP.getId()));
+            String maHD1 = (String) cbbMaHD2.getSelectedItem();
+            HoaDon hd2 = implHD.getOne(maHD1);
+            Integer slAdd = sl - slt;
+//            implHDCT.updateIDHD(hd2.getID(), slAdd, idSP.getId());
+            HoaDonChiTietModel hdct = new HoaDonChiTietModel(idSP.getId(), hd2.getID(), slAdd);
+            implHDCT.add(hdct);
+            String ma1 = cbbMaHD2.getSelectedItem().toString();
+            HoaDon hd1 = implHD.getOne(ma1);
+            listHDCT = implHDCT.getAllviewGH(hd1.getID());
+            showDataHDCT2(listHDCT);
+        }
+
+        listHDCT = implHDCT.getAllviewGH(hd.getID());
+        showDataHDCT1(listHDCT);
+    }//GEN-LAST:event_tbGH2MouseClicked
+
     private void tbGH1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH1MouseClicked
-//        int rowSP = tbGH1.getSelectedRow();
-//        String maSP = tbGH1.getValueAt(rowSP, 0).toString();
-//        HoaDonChiTiet sp = implHDCT.getOne(maSP);
-//        HoaDon idHD = implHD.getOne(cbbMaHD2.getSelectedItem().toString());
-//        SanPham id = sp.getIdSP();
-//        int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-//        if (slt <= 0) {
-//            JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-//            return;
+//
+//        int row = tbGH1.getSelectedRow();
+//        String maSP = (String) tbGH1.getValueAt(row, 0);
+//        SanPham idSP = implSP.getOne(maSP);
+//        String maHD = (String) cbbMaHD1.getSelectedItem();
+//        HoaDon hd = implHD.getOne(maHD);
+//        Integer sl = (Integer) tbGH1.getValueAt(row, 2);
+//        if (sl == 1) {
+//            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), 1, idSP.getId()));
+//        } else {
+//            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+//            if (slt <= 0) {
+//                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+//                return;
+//            }
+//
+//            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), slt, idSP.getId()));
+//            String maHD1 = (String) cbbMaHD2.getSelectedItem();
+//            HoaDon hd2 = implHD.getOne(maHD1);
+//            Integer slAdd = sl - slt;
+////            implHDCT.updateIDHD(hd2.getID(), slAdd, idSP.getId());
+//            HoaDonChiTietModel hdct = new HoaDonChiTietModel(idSP.getId(), hd2.getID(), slAdd);
+//            implHDCT.add(hdct);
+//            String ma1 = cbbMaHD2.getSelectedItem().toString();
+//            HoaDon hd1 = implHD.getOne(ma1);
+//            listHDCT = implHDCT.getAllviewGH(hd1.getID());
+//            showDataHDCT2(listHDCT);
 //        }
-//        HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt);
-//        implHDCT.update(hdct, idHD.getID(), id);
-//        listHDCT = implHDCT.getAllviewGH(idHD.getID());
+//
+//        listHDCT = implHDCT.getAllviewGH(hd.getID());
 //        showDataHDCT1(listHDCT);
     }//GEN-LAST:event_tbGH1MouseClicked
-
-    private void tbGH2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbGH2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String maHD = cbbMaHD1.getSelectedItem().toString();
         HoaDon hd = implHD.getOne(maHD);
-        for (int i = 0; i < tbGH2.getRowCount(); i++) {
-            String idSP = (String) tbGH2.getValueAt(i, 0);
+        for (int i = 0; i < tbGH1.getRowCount(); i++) {
+            String idSP = (String) tbGH1.getValueAt(i, 0);
             SanPham sp = implSP.getOne(idSP);
             implHDCT.gopHD(hd.getID(), sp.getId());
         }

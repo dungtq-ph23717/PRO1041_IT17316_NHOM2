@@ -115,6 +115,23 @@ public class HoaDonChiTietRepository {
         return check > 0;
     }
 
+    public boolean updateIDHD(String idHD, int soLuong, String idSP) {
+        String query = "UPDATE [dbo].[HoaDonChiTiet]\n"
+                + "   SET [IDHD] = ?\n"
+                + "      ,[Soluong] = ?\n"
+                + " WHERE IDSP like ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, idHD);
+            ps.setObject(2, soLuong);
+            ps.setObject(3, idSP);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public boolean gopHD(String idHD, String idSP) {
         String query = "UPDATE [dbo].[HoaDonChiTiet]\n"
                 + "   SET [IDHD] = ?\n"
@@ -152,7 +169,7 @@ public class HoaDonChiTietRepository {
 //        HoaDonChiTiet hd = new HoaDonChiTietRepository().getOne("SP1");
 //        System.out.println(hd);
         HoaDonChiTietModel hd = new HoaDonChiTietModel(5);
-        boolean add = new HoaDonChiTietRepository().gopHD("af44db7e-09c3-45e3-b135-a7443adb71d8", "b37bd35e-1327-49ff-8410-530346964d57");
+        boolean add = new HoaDonChiTietRepository().updateIDHD("eeaf53e9-e542-444a-86b5-f088b1bdff3e", 3, "6a0c96e8-fe13-4e56-80b8-1a294978cc7b");
         System.out.println(add);
     }
 }
