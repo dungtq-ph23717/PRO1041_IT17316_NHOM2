@@ -930,8 +930,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     showDataHD(listHoaDon);
                     listBan = implBan.getAllTT();
                     showDataBan(listBan);
-                    listHDCT = implHDCT.getAllviewGH("");
-                    showDataHDCT(listHDCT);
+                    listHDCT.clear();
                 } else {
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
@@ -978,6 +977,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     Ban b = implBan.getOne(ten);
                     listHoaDon = implHD.getAllTTViewHD(b.getId());
                     showDataHD(listHoaDon);
+                    listHDCT.clear();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
