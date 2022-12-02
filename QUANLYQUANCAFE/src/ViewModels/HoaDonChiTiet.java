@@ -25,6 +25,10 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
+    public HoaDonChiTiet(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
     public HoaDonChiTiet(SanPham idSP, int soLuong, double giaTien) {
         this.idSP = idSP;
         this.soLuong = soLuong;
