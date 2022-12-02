@@ -147,7 +147,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         }
         cbbPhuongThucThanhToan.setModel(boxKM);
         boxKM.addElement("Tiền mặt");
-        boxKM.addElement("ATM");
         //
     }
 
@@ -1179,7 +1178,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (result != null) {
-                txtTienKhachTra.setText(result.getText());
+                txtTienGiam.setText(result.getText());
             }
 
         } while (true);
