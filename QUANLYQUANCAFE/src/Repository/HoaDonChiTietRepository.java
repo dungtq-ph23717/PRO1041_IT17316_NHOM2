@@ -147,6 +147,20 @@ public class HoaDonChiTietRepository {
         return check > 0;
     }
 
+       public HoaDonChiTietModel checkTrung(String idSp) {
+        String query = "SELECT idSP FROM SANPHAM WHERE idSp = ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, idSp);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HoaDonChiTietModel sp = new HoaDonChiTietModel(rs.getString(1));
+                return sp;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
     public boolean delete(String idHD, String idSP) {
         String query = "DELETE FROM [dbo].[HoaDonChiTiet]\n"
                 + "      WHERE IDHD like ? and IDSP like ?";

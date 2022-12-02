@@ -27,9 +27,9 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     public String delete(String maHD) {
         boolean delete = rps.delete(maHD);
         if (delete) {
-            return "delete thành công";
+            return "Gộp thành công";
         } else {
-            return "delete thất bại";
+            return "Gộp thất bại";
         }
     }
 

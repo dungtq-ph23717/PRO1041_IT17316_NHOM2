@@ -13,6 +13,7 @@ import ViewModels.Ban;
 import ViewModels.HoaDon;
 import ViewModels.HoaDonChiTiet;
 import ViewModels.SanPham;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -201,12 +202,13 @@ public class ViewTachHD extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbbMaHD2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(cbbMaHD2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                 .addContainerGap())
@@ -299,22 +301,26 @@ public class ViewTachHD extends javax.swing.JFrame {
     }//GEN-LAST:event_tbGH2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String maHD = cbbMaHD1.getSelectedItem().toString();
+
+        String maHD = cbbMaHD2.getSelectedItem().toString();
         HoaDon hd = implHD.getOne(maHD);
-        for (int i = 0; i < tbGH2.getRowCount(); i++) {
-            String idSP = (String) tbGH2.getValueAt(i, 0);
+        for (int i = 0; i < tbGH1.getRowCount(); i++) {
+            String idSP = (String) tbGH1.getValueAt(i, 0);
             SanPham sp = implSP.getOne(idSP);
             implHDCT.gopHD(hd.getID(), sp.getId());
         }
-        listHDCT = implHDCT.getAllviewGH(hd.getID());
-        showDataHDCT1(listHDCT);
-        String ma1 = cbbMaHD2.getSelectedItem().toString();
+        String ma1 = cbbMaHD1.getSelectedItem().toString();
         HoaDon hd1 = implHD.getOne(ma1);
-        listHDCT = implHDCT.getAllviewGH(hd1.getID());
+        JOptionPane.showMessageDialog(this, implHD.delete(ma1));
+        boxModel1.removeElement(ma1);
+        listHDCT = implHDCT.getAllviewGH(hd.getID());
         showDataHDCT2(listHDCT);
-        JOptionPane.showMessageDialog(this, implHD.delete(maHD));
-        listHD = implHD.getAllTT();
+        listHDCT = implHDCT.getAllviewGH(hd1.getID());
         showDataHDCT1(listHDCT);
+
+//        listHDCT = implHDCT.getAllviewGH(hd.getID());
+//        showDataHDCT1(listHDCT);
+//        showDataHDCT1(listHDCT);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
