@@ -43,12 +43,82 @@ public class HoaDonRepository {
         return null;
     }
 
-    public List<HoaDon> getAllChuaThanhToan() {
+    public List<HoaDon> searchTheoTT(String tt) {
         String query = "SELECT MaHD, TenBan , TenNV  , NgayLapHD , PhuongThucThanhToan , TenSP, ThanhTien,HD.TinhTrang\n"
                 + "FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN \n"
                 + "SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID\n"
-                + "WHERE HD.TinhTrang LIKE N'Chờ'";
+                + "WHERE HD.TinhTrang LIKE ? ";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setString(1, tt);
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                Ban ban = new Ban(rs.getString(2), "", "");
+                NhanVienViewModel tenNV = new NhanVienViewModel(rs.getString(3));
+                SanPham sp = new SanPham("", rs.getString(6));
+                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, rs.getDouble(7), rs.getString(8));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<HoaDon> searchTheoTenBan(String tenB) {
+        String query = "SELECT MaHD, TenBan , TenNV  , NgayLapHD , PhuongThucThanhToan , TenSP, ThanhTien,HD.TinhTrang\n"
+                + "                 FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN \n"
+                + "                 SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID\n"
+                + "                 WHERE B.TenBan LIKE ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setString(1, "%" + tenB + "%");
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                Ban ban = new Ban(rs.getString(2), "", "");
+                NhanVienViewModel tenNV = new NhanVienViewModel(rs.getString(3));
+                SanPham sp = new SanPham("", rs.getString(6));
+                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, rs.getDouble(7), rs.getString(8));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<HoaDon> searchTheoTenSP(String tenSP) {
+        String query = "SELECT MaHD, TenBan , TenNV  , NgayLapHD , PhuongThucThanhToan , TenSP, ThanhTien,HD.TinhTrang\n"
+                + "                 FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN \n"
+                + "                 SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID\n"
+                + "                 WHERE SP.TenSP LIKE ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setString(1, "%" + tenSP + "%");
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                Ban ban = new Ban(rs.getString(2), "", "");
+                NhanVienViewModel tenNV = new NhanVienViewModel(rs.getString(3));
+                SanPham sp = new SanPham("", rs.getString(6));
+                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, rs.getDouble(7), rs.getString(8));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<HoaDon> searchTheoMaHD(String maHD) {
+        String query = "SELECT MaHD, TenBan , TenNV  , NgayLapHD , PhuongThucThanhToan , TenSP, ThanhTien,HD.TinhTrang\n"
+                + "                 FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN \n"
+                + "                 SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID\n"
+                + "                 WHERE HD.MaHD LIKE ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setString(1, "%" + maHD + "%");
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {

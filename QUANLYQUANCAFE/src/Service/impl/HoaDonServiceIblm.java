@@ -84,8 +84,23 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     }
 
     @Override
-    public List<HoaDon> getAllChuaThanhToan() {
-        return rps.getAllChuaThanhToan();
+    public List<HoaDon> searchTheoTT(String tt) {
+        return rps.searchTheoTT(tt);
+    }
+
+    @Override
+    public List<HoaDon> searchTheoTenSP(String tenSP) {
+        return rps.searchTheoTenSP(tenSP);
+    }
+
+    @Override
+    public List<HoaDon> searchTheoMaHD(String maHD) {
+        return rps.searchTheoMaHD(maHD);
+    }
+
+    @Override
+    public List<HoaDon> searchTheoTenBan(String tenB) {
+        return rps.searchTheoTenBan(tenB);
     }
 
 }
