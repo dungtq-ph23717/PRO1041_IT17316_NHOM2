@@ -890,7 +890,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
             HoaDonChiTiet hd1 = implHDCT.getOne(maGH);
-            Double tien = hd1.getGiaTien();
+            Double tien = Double.valueOf(txtTongTien.getText());
             Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
             Double tienThua = tienKhach - tien;
             if (tienThua >= 0) {
@@ -950,7 +950,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
             HoaDonChiTiet hd1 = implHDCT.getOne(maGH);
-            Double tien = hd1.getSoLuong() * hd1.getGiaTien();
+            Double tien = Double.valueOf(txtTongTien.getText());
             Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
             Double tienThua = tienKhach - tien;
             if (tienThua >= 0) {
