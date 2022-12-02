@@ -638,7 +638,7 @@ public class ViewQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLichSuOrder1MouseMoved
 
     private void txtLichSuOrder1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLichSuOrder1MouseClicked
-        ViewLichSu m = new ViewLichSu();
+        ViewHoaDon m = new ViewHoaDon();
         jDesktopPane1.removeAll();
         jDesktopPane1.add(m).setVisible(true);
     }//GEN-LAST:event_txtLichSuOrder1MouseClicked

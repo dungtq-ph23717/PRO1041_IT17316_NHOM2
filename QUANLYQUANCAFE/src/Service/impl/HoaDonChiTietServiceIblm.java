@@ -65,6 +65,10 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
 
     @Override
     public String gopHD(String idHD, String idSP) {
+        HoaDonChiTietModel hdct = rp.checkTrung(idSP);
+        if(hdct != null){
+            return "Trùng";
+        }
         boolean gopHD = rp.gopHD(idHD, idSP);
         if (gopHD) {
             return "Gộp hoá đơn thành công";
@@ -72,5 +76,16 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
             return "Gộp hoá đơn thất bại";
         }
     }
+
+    @Override
+    public String updateIDHD(String idHD, int soLuong, String idSP) {
+        boolean updateIDHD = rp.updateIDHD(idHD, soLuong, idSP);
+        if (updateIDHD) {
+            return "Chuyển sản phẩm thành công";
+        } else {
+            return "Chuyển sản phẩm thất bại";
+        }
+    }
+
 
 }

@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package View.ViewQL;
+package View.ViewNV;
 
-import View.ViewNV.*;
 import Service.impl.HoaDonServiceIblm;
 import ViewModels.HoaDon;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class ViewLichSu extends javax.swing.JInternalFrame {
+public class ViewLichSuOrder extends javax.swing.JInternalFrame {
 
     private DefaultTableModel dtm = new DefaultTableModel();
     private HoaDonServiceIblm impl = new HoaDonServiceIblm();
@@ -25,7 +24,7 @@ public class ViewLichSu extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu2
      */
-    public ViewLichSu() {
+    public ViewLichSuOrder() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();

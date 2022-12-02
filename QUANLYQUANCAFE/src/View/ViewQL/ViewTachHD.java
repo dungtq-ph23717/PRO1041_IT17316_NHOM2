@@ -13,6 +13,7 @@ import ViewModels.Ban;
 import ViewModels.HoaDon;
 import ViewModels.HoaDonChiTiet;
 import ViewModels.SanPham;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -116,7 +117,7 @@ public class ViewTachHD extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbGH1);
 
-        jLabel1.setText("Mã HD");
+        jLabel1.setText("Mã HD tách");
 
         cbbMaHD1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbbMaHD1.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +133,7 @@ public class ViewTachHD extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Mã HD tách");
+        jLabel2.setText("Mã HD");
 
         tbGH2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,17 +179,17 @@ public class ViewTachHD extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(cbbMaHD1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(31, 31, 31))
+                        .addGap(31, 203, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(cbbMaHD2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(29, 29, 29)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -197,18 +198,19 @@ public class ViewTachHD extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cbbMaHD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2)))
-                .addGap(7, 7, 7)
+                    .addComponent(cbbMaHD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbbMaHD2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(cbbMaHD2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -232,49 +234,93 @@ public class ViewTachHD extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        ViewQuanLy v = new ViewQuanLy();
-        v.dispose();
-        v.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbGH1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH1MouseClicked
-//        int rowSP = tbGH1.getSelectedRow();
-//        String maSP = tbGH1.getValueAt(rowSP, 0).toString();
-//        HoaDonChiTiet sp = implHDCT.getOne(maSP);
-//        HoaDon idHD = implHD.getOne(cbbMaHD2.getSelectedItem().toString());
-//        SanPham id = sp.getIdSP();
-//        int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-//        if (slt <= 0) {
-//            JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-//            return;
+//        int row = tbGH1.getSelectedRow();
+//        String maSP = (String) tbGH1.getValueAt(row, 0);
+//        SanPham idSP = implSP.getOne(maSP);
+//        String maHD = (String) cbbMaHD1.getSelectedItem();
+//        HoaDon hd = implHD.getOne(maHD);
+//        Integer sl = (Integer) tbGH1.getValueAt(row, 2);
+//        if (sl == 1) {
+//            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), 1, idSP.getId()));
+//        } else {
+//            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+//            if (slt <= 0) {
+//                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+//                return;
+//            }
+//
+//            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), slt, idSP.getId()));
+//            String maHD1 = (String) cbbMaHD2.getSelectedItem();
+//            HoaDon hd2 = implHD.getOne(maHD1);
+//            Integer slAdd = sl - slt;
+////            implHDCT.updateIDHD(hd2.getID(), slAdd, idSP.getId());
+//            HoaDonChiTietModel hdct = new HoaDonChiTietModel(idSP.getId(), hd2.getID(), slAdd);
+//            implHDCT.add(hdct);
+//            String ma1 = cbbMaHD2.getSelectedItem().toString();
+//            HoaDon hd1 = implHD.getOne(ma1);
+//            listHDCT = implHDCT.getAllviewGH(hd1.getID());
+//            showDataHDCT2(listHDCT);
 //        }
-//        HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt);
-//        implHDCT.update(hdct, idHD.getID(), id);
-//        listHDCT = implHDCT.getAllviewGH(idHD.getID());
+//
+//        listHDCT = implHDCT.getAllviewGH(hd.getID());
 //        showDataHDCT1(listHDCT);
     }//GEN-LAST:event_tbGH1MouseClicked
 
     private void tbGH2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbGH2MouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String maHD = cbbMaHD1.getSelectedItem().toString();
+        int row = tbGH2.getSelectedRow();
+        String maSP = (String) tbGH2.getValueAt(row, 0);
+        SanPham idSP = implSP.getOne(maSP);
+        String maHD = (String) cbbMaHD1.getSelectedItem();
         HoaDon hd = implHD.getOne(maHD);
-        for (int i = 0; i < tbGH2.getRowCount(); i++) {
-            String idSP = (String) tbGH2.getValueAt(i, 0);
-            SanPham sp = implSP.getOne(idSP);
-            implHDCT.gopHD(hd.getID(), sp.getId());
+        Integer sl = (Integer) tbGH2.getValueAt(row, 2);
+        if (sl == 1) {
+            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), 1, idSP.getId()));
+        } else {
+            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+            if (slt <= 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+                return;
+            }
+            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), slt, idSP.getId()));
+            String maHD1 = (String) cbbMaHD2.getSelectedItem();
+            HoaDon hd2 = implHD.getOne(maHD1);
+            int slAdd = sl - slt;
+//            implHDCT.updateIDHD(hd2.getID(), slAdd, idSP.getId());
+            HoaDonChiTietModel hdct = new HoaDonChiTietModel(idSP.getId(), hd2.getID(), slAdd);
+            implHDCT.add(hdct);
+            String ma1 = cbbMaHD2.getSelectedItem().toString();
+            HoaDon hd1 = implHD.getOne(ma1);
+            listHDCT = implHDCT.getAllviewGH(hd1.getID());
+            showDataHDCT2(listHDCT);
         }
         listHDCT = implHDCT.getAllviewGH(hd.getID());
         showDataHDCT1(listHDCT);
-        String ma1 = cbbMaHD2.getSelectedItem().toString();
+    }//GEN-LAST:event_tbGH2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        String maHD = cbbMaHD2.getSelectedItem().toString();
+        HoaDon hd = implHD.getOne(maHD);
+        for (int i = 0; i < tbGH1.getRowCount(); i++) {
+            String idSP = (String) tbGH1.getValueAt(i, 0);
+            SanPham sp = implSP.getOne(idSP);
+            implHDCT.gopHD(hd.getID(), sp.getId());
+        }
+        String ma1 = cbbMaHD1.getSelectedItem().toString();
         HoaDon hd1 = implHD.getOne(ma1);
-        listHDCT = implHDCT.getAllviewGH(hd1.getID());
+        JOptionPane.showMessageDialog(this, implHD.delete(ma1));
+        boxModel1.removeElement(ma1);
+        listHDCT = implHDCT.getAllviewGH(hd.getID());
         showDataHDCT2(listHDCT);
-        JOptionPane.showMessageDialog(this, implHD.delete(maHD));
-        listHD = implHD.getAllTT();
+        listHDCT = implHDCT.getAllviewGH(hd1.getID());
         showDataHDCT1(listHDCT);
+
+//        listHDCT = implHDCT.getAllviewGH(hd.getID());
+//        showDataHDCT1(listHDCT);
+//        showDataHDCT1(listHDCT);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
