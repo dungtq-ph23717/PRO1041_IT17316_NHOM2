@@ -38,6 +38,16 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     }
 
     @Override
+    public List<HoaDon> getListHD() {
+        return rps.getListHD();
+    }
+
+    @Override
+    public List<HoaDon> search(String datehd) {
+        return rps.search(datehd);
+    }
+
+    @Override
     public HoaDon getOne(String ma) {
         return rps.getOne(ma);
     }
