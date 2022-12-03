@@ -106,7 +106,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel2.setText("Thống Kê Doanh Thu");
 
-        jLabel3.setText("Tim Kiem Theo Ma HD");
+        jLabel3.setText("Tìm Kiếm Theo Ngày Đặt");
 
         txt_date.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -137,7 +137,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "STT", "Ma HD", "Ngày Đat", "Thành Tiên"
+                "STT", "Mã HD", "Ngày Đặt", "Thành Tiền"
             }
         ));
         jScrollPane1.setViewportView(tbl_thongke);
@@ -147,7 +147,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         jPanel7.setLayout(new java.awt.GridBagLayout());
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Tong Doanh Thu:");
+        jLabel5.setText("Tổng Doanh Thu ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.weightx = 0.1;

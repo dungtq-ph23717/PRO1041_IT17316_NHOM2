@@ -99,7 +99,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tim Kiem Theo Ma HD"/>
+        <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m Theo Ng&#xe0;y &#x110;&#x1eb7;t"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_date">
@@ -129,9 +129,9 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
                 <Column editable="true" title="STT" type="java.lang.Object"/>
-                <Column editable="true" title="Ma HD" type="java.lang.Object"/>
-                <Column editable="true" title="Ng&#xe0;y &#x110;at" type="java.lang.Object"/>
-                <Column editable="true" title="Th&#xe0;nh Ti&#xea;n" type="java.lang.Object"/>
+                <Column editable="true" title="M&#xe3; HD" type="java.lang.Object"/>
+                <Column editable="true" title="Ng&#xe0;y &#x110;&#x1eb7;t" type="java.lang.Object"/>
+                <Column editable="true" title="Th&#xe0;nh Ti&#x1ec1;n" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -180,7 +180,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Tong Doanh Thu:"/>
+            <Property name="text" type="java.lang.String" value="T&#x1ed5;ng Doanh Thu "/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
