@@ -36,6 +36,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
         _HoaDonService = new HoaDonServiceIblm();
+        
         LoadTable();
         TinhTong();
 //        getSum();
@@ -55,8 +56,9 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 
     public void findHD(List<HoaDon> list) {
         _DefaultTableModel1.setRowCount(0);
+        int stt = 1;
         for (HoaDon hd : list) {
-            _DefaultTableModel1.addRow(new Object[]{hd.getMaHD(), hd.getNgayLapHD(), hd.getThanhTien()});
+            _DefaultTableModel1.addRow(new Object[]{stt++,hd.getMaHD(), hd.getNgayLapHD(), hd.getThanhTien()});
         }
     }
 
@@ -142,6 +144,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tbl_thongke);
 
+        jPanel7.setBackground(new java.awt.Color(255, 0, 0));
         jPanel7.setForeground(new java.awt.Color(153, 102, 0));
         jPanel7.setOpaque(false);
         jPanel7.setLayout(new java.awt.GridBagLayout());
