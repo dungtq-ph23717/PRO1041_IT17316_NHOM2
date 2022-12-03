@@ -11,6 +11,7 @@ import ViewModels.HoaDon;
 import ViewModels.HoaDonChiTiet;
 import ViewModels.NhanVienViewModel;
 import ViewModels.SanPham;
+import ViewModels.Topping;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,9 +25,9 @@ import java.util.List;
 public class HoaDonRepository {
 
     public List<HoaDon> getAll() {
-        String query = "SELECT MaHD, TenBan , TenNV , NgayLapHD , PhuongThucThanhToan , TenSP,Giaban,HDCT.Soluong ,Giaban*Soluong As ThanhTien,HD.TinhTrang\n"
-                + "                FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN\n"
-                + "                SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID";
+        String query = "SELECT MaHD, TenBan , TenNV , NgayLapHD , PhuongThucThanhToan , TenSP,Giaban,HDCT.Soluong ,TP.Topping,(SP.Giaban*Soluong) + TP.GiaTien  As ThanhTien,HD.TinhTrang\n"
+                + "              FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN\n"
+                + "             SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID JOIN Topping TP ON HDCT.IDTopping = TP.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
@@ -35,7 +36,8 @@ public class HoaDonRepository {
                 NhanVienViewModel tenNV = new NhanVienViewModel(rs.getString(3));
                 SanPham sp = new SanPham(rs.getString(6), rs.getDouble(7));
                 HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(8));
-                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, hdct, rs.getDouble(9), rs.getString(10));
+                Topping tp = new Topping(rs.getString(9));
+                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, tp, hdct, rs.getDouble(10), rs.getString(11));
                 list.add(hd);
             }
             return list;
@@ -46,9 +48,9 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> getAllHD(String ma) {
-        String query = "SELECT MaHD, TenBan , TenNV , NgayLapHD , PhuongThucThanhToan , TenSP,Giaban,HDCT.Soluong ,Giaban*Soluong As ThanhTien,HD.TinhTrang\n"
-                + "                FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN\n"
-                + "                SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID"
+        String query = "SELECT MaHD, TenBan , TenNV , NgayLapHD , PhuongThucThanhToan , TenSP,Giaban,HDCT.Soluong ,TP.Topping,(SP.Giaban*Soluong) + TP.GiaTien  As ThanhTien,HD.TinhTrang\n"
+                + "              FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN\n"
+                + "             SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID JOIN Topping TP ON HDCT.IDTopping = TP.ID"
                 + "                 WHERE HD.MaHD LIKE ?";
 
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
@@ -60,7 +62,8 @@ public class HoaDonRepository {
                 NhanVienViewModel tenNV = new NhanVienViewModel(rs.getString(3));
                 SanPham sp = new SanPham(rs.getString(6), rs.getDouble(7));
                 HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(8));
-                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, hdct, rs.getDouble(9), rs.getString(10));
+                Topping tp = new Topping(rs.getString(9));
+                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, tp, hdct, rs.getDouble(10), rs.getString(11));
                 list.add(hd);
             }
             return list;
@@ -99,52 +102,6 @@ public class HoaDonRepository {
             while (rs.next()) {
                 NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
                 HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv, rs.getString(4));
-                list.add(hd);
-            }
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return null;
-    }
-
-    public List<HoaDon> searchTheoTenBan(String tenB) {
-        String query = "SELECT MaHD, TenBan , TenNV , NgayLapHD , PhuongThucThanhToan , TenSP,Giaban,HDCT.Soluong ,Giaban*Soluong As ThanhTien,HD.TinhTrang\n"
-                + "                FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN\n"
-                + "                SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID"
-                + "                 WHERE B.TenBan LIKE ?";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setString(1, "%" + tenB + "%");
-            ResultSet rs = ps.executeQuery();
-            List<HoaDon> list = new ArrayList<>();
-            while (rs.next()) {
-                Ban ban = new Ban(rs.getString(2), "", "");
-                NhanVienViewModel tenNV = new NhanVienViewModel(rs.getString(3));
-                SanPham sp = new SanPham("", rs.getString(6));
-                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, rs.getDouble(7), rs.getString(8));
-                list.add(hd);
-            }
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-        return null;
-    }
-
-    public List<HoaDon> searchTheoTenSP(String tenSP) {
-        String query = "SELECT MaHD, TenBan , TenNV , NgayLapHD , PhuongThucThanhToan , TenSP,Giaban,HDCT.Soluong ,Giaban*Soluong As ThanhTien,HD.TinhTrang\n"
-                + "                FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN\n"
-                + "                SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID"
-                + "                 WHERE SP.TenSP LIKE ?";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setString(1, "%" + tenSP + "%");
-            ResultSet rs = ps.executeQuery();
-            List<HoaDon> list = new ArrayList<>();
-            while (rs.next()) {
-                Ban ban = new Ban(rs.getString(2), "", "");
-                NhanVienViewModel tenNV = new NhanVienViewModel(rs.getString(3));
-                SanPham sp = new SanPham("", rs.getString(6));
-                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, rs.getDouble(7), rs.getString(8));
                 list.add(hd);
             }
             return list;
@@ -337,7 +294,7 @@ public class HoaDonRepository {
 //        System.out.println(add);
 //        HoaDon hd = new HoaDonRepository().getOne("HD2");
 //        System.out.println(hd);
-        List<HoaDon> getall = new Repository.HoaDonRepository().searchTheoTT("Chờ");
+        List<HoaDon> getall = new Repository.HoaDonRepository().getAll();
         for (HoaDon x : getall) {
             System.out.println(x);
         }

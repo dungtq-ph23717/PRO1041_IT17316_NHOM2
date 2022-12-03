@@ -17,6 +17,10 @@ public class Topping {
     public Topping() {
     }
 
+    public Topping(String topping) {
+        this.topping = topping;
+    }
+
     public Topping(String id, String topping, double gia) {
         this.id = id;
         this.topping = topping;
