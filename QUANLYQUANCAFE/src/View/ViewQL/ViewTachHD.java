@@ -5,15 +5,12 @@
 package View.ViewQL;
 
 import DomainModels.HoaDonChiTietModel;
-import Service.impl.BanServiceImpl;
 import Service.impl.HoaDonChiTietServiceIblm;
 import Service.impl.HoaDonServiceIblm;
 import Service.impl.SanPhamServiceImpl;
-import ViewModels.Ban;
 import ViewModels.HoaDon;
 import ViewModels.HoaDonChiTiet;
 import ViewModels.SanPham;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
