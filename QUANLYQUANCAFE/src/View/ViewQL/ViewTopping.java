@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ACER
  */
 public class ViewTopping extends javax.swing.JFrame {
-
+    
     private List<Topping> list = new ArrayList<>();
     private DefaultTableModel dtm = new DefaultTableModel();
     private ToppingServiceImpl impl = new ToppingServiceImpl();
@@ -33,14 +33,14 @@ public class ViewTopping extends javax.swing.JFrame {
         list = impl.getAll();
         showData(list);
     }
-
+    
     private void showData(List<Topping> list) {
         dtm.setRowCount(0);
         for (Topping tp : list) {
             dtm.addRow(new Object[]{tp.getId(), tp.getTopping(), tp.getGia(), tp.getTrangThai()});
         }
     }
-
+    
     private void fillData(int index) {
         Topping tp = list.get(index);
         txtID.setText(tp.getId());
@@ -309,6 +309,7 @@ public class ViewTopping extends javax.swing.JFrame {
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
         txtID.setText("");
+        txtTen.setText("");
         txtGiaBan.setText("");
         rdoDangBAn.setSelected(true);
     }//GEN-LAST:event_btnClearActionPerformed

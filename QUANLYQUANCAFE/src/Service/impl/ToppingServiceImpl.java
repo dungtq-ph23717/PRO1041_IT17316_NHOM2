@@ -36,15 +36,15 @@ public class ToppingServiceImpl implements ToppingService {
         }
     }
 
-    @Override
-    public String delete(String id) {
-        boolean delete = rps.delete(id);
-        if (delete) {
-            return "Xóa thành công!";
-        } else {
-            return "Xóa thất bại!";
-        }
-    }
+//    @Override
+//    public String delete(String id) {
+//        boolean delete = rps.delete(id);
+//        if (delete) {
+//            return "Xóa thành công!";
+//        } else {
+//            return "Xóa thất bại!";
+//        }
+//    }
 
     @Override
     public String update(ToppingModel tp, String id) {
