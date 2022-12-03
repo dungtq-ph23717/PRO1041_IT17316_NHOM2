@@ -32,7 +32,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        String header[] = {"Mã Hóa Đơn", "Tên Bàn", "Tên Nhân Viên", "Ngày Lập Hoá Đơn", "Phương Thức Thanh Toán", "Tên Sản Phẩm", "Giá Bán", "Số Lượng", "Thành Tiền", "Tình Trạng"};
+        String header[] = {"Mã Hóa Đơn", "Tên Bàn", "Tên Nhân Viên", "Ngày Lập Hoá Đơn", "Phương Thức Thanh Toán", "Tên Sản Phẩm", "Giá Bán", "Số Lượng", "Tên Topping", "Thành Tiền", "Tình Trạng"};
         bangHDCT.setModel(dtm);
         dtm.setColumnIdentifiers(header);
         listHD = iplmHD.getAll();

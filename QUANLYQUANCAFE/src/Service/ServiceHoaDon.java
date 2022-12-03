@@ -19,11 +19,7 @@ public interface ServiceHoaDon {
 
     List<ViewModels.HoaDon> searchTheoTT(String tt);
 
-    List<ViewModels.HoaDon> searchTheoTenSP(String tenSP);
-
     List<ViewModels.HoaDon> searchTheoMaHD(String maHD);
-
-    List<ViewModels.HoaDon> searchTheoTenBan(String tenB);
 
     List<ViewModels.HoaDon> getAllTT();
 
