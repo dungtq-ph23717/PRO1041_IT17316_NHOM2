@@ -5,9 +5,7 @@
 package Repository;
 
 import DomainModels.HoaDonChiTietModel;
-import DomainModels.HoaDonModel;
 import Utilities.DBContext;
-import ViewModels.HoaDon;
 import ViewModels.HoaDonChiTiet;
 import ViewModels.SanPham;
 import java.sql.Connection;

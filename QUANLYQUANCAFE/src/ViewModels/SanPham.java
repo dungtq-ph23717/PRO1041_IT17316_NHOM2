@@ -20,13 +20,18 @@ public class SanPham {
     private String trangThai;
     private Size size;
 
+    public SanPham() {
+    }
+
     public SanPham(String maSP, String tenSP, double giaBan) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.giaBan = giaBan;
     }
 
-    public SanPham() {
+    public SanPham(String tenSP, double giaBan) {
+        this.tenSP = tenSP;
+        this.giaBan = giaBan;
     }
 
     public SanPham(String id) {
@@ -158,7 +163,8 @@ public class SanPham {
     public Object[] toRowData() {
         return new Object[]{false, maSP, tenSP};
     }
-    public Object[] torowdata1(){
-        return new Object[] {false,maSP,tenSP};
+
+    public Object[] torowdata1() {
+        return new Object[]{false, maSP, tenSP};
     }
 }

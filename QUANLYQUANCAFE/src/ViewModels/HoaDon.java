@@ -19,6 +19,7 @@ public class HoaDon {
     private SanPham sp;
     private double thanhTien;
     private String tinhTrang;
+    private HoaDonChiTiet hdct;
 
     public HoaDon() {
     }
@@ -29,6 +30,26 @@ public class HoaDon {
 
     public HoaDon(String maHD, String tinhTrang) {
         this.maHD = maHD;
+        this.tinhTrang = tinhTrang;
+    }
+
+    public HoaDonChiTiet getHdct() {
+        return hdct;
+    }
+
+    public void setHdct(HoaDonChiTiet hdct) {
+        this.hdct = hdct;
+    }
+
+    public HoaDon(String maHD, Ban ban, NhanVienViewModel tenNV, String ngayLapHD, String phuongThucThanhToan, SanPham sp, HoaDonChiTiet hdct, double thanhTien, String tinhTrang) {
+        this.maHD = maHD;
+        this.ban = ban;
+        this.tenNV = tenNV;
+        this.ngayLapHD = ngayLapHD;
+        this.phuongThucThanhToan = phuongThucThanhToan;
+        this.sp = sp;
+        this.hdct = hdct;
+        this.thanhTien = thanhTien;
         this.tinhTrang = tinhTrang;
     }
 
@@ -117,11 +138,11 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ban=" + ban + ", tenNV=" + tenNV + ", ngayLapHD=" + ngayLapHD + ", phuongThucThanhToan=" + phuongThucThanhToan + ", sp=" + sp + ", thanhTien=" + thanhTien + ", tinhTrang=" + tinhTrang + '}';
+        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ban=" + ban + ", tenNV=" + tenNV + ", ngayLapHD=" + ngayLapHD + ", phuongThucThanhToan=" + phuongThucThanhToan + ", sp=" + sp + ", hdct=" + hdct + ", thanhTien=" + thanhTien + ", tinhTrang=" + tinhTrang + '}';
     }
 
     public Object[] toRowData() {
-        return new Object[]{maHD, ban.getTenBan(), "Nhân Viên A", ngayLapHD, "Tiền mặt", sp.getTenSP(), thanhTien, tinhTrang};
+        return new Object[]{maHD, ban.getTenBan(), "Nhân Viên A", ngayLapHD, "Tiền mặt", sp.getTenSP(), sp.getGiaBan(), hdct.getSoLuong(), thanhTien, tinhTrang};
     }
 
     public String getTinhTrang() {
