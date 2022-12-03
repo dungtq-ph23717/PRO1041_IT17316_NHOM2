@@ -4,6 +4,7 @@
  */
 package Service.impl;
 
+import DomainModels.HoaDonChiTietModel;
 import DomainModels.HoaDonModel;
 import Repository.HoaDonRepository;
 import Service.ServiceHoaDon;
@@ -36,7 +37,15 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     public List<HoaDon> getAllTT() {
         return rps.getAllTT();
     }
-
+    
+     @Override
+    public List<HoaDon> getListHD() {
+        return rps.getListHD();
+    }
+  @Override
+    public List<HoaDon> search(String datehd) {
+        return rps.search(datehd);
+    }
     @Override
     public HoaDon getOne(String ma) {
         return rps.getOne(ma);
@@ -100,11 +109,6 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     @Override
     public List<HoaDon> searchTheoTenBan(String tenB) {
         return rps.searchTheoTenBan(tenB);
-    }
-
-    @Override
-    public List<HoaDon> getAllHD(String ma) {
-        return rps.getAllHD(ma);
     }
 
 }
