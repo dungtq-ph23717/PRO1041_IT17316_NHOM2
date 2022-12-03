@@ -13,18 +13,25 @@ public class Topping {
     private String id;
     private String topping;
     private double gia;
+    private String trangThai;
 
     public Topping() {
     }
 
-    public Topping(String topping) {
-        this.topping = topping;
-    }
 
-    public Topping(String id, String topping, double gia) {
+    public Topping(String id, String topping, double gia, String trangThai) {
         this.id = id;
         this.topping = topping;
         this.gia = gia;
+        this.trangThai = trangThai;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
     }
 
     public String getId() {
