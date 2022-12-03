@@ -230,7 +230,8 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_dateMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        txt_date.setText("");
+        LoadTable();
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
