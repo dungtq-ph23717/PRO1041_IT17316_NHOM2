@@ -71,7 +71,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private Webcam webcam = null;
     private Executor executor=Executors.newSingleThreadExecutor(this);
 
-public class ViewThanhToan extends javax.swing.JInternalFrame {
+
 
 
     private DefaultTableModel dtmBan = new DefaultTableModel();
