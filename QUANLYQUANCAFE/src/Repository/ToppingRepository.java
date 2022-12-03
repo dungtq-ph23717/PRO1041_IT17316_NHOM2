@@ -35,6 +35,22 @@ public class ToppingRepository {
         return null;
     }
 
+    public Topping getOne(String topping) {
+        String query = "SELECT * FROM Topping\n"
+                + "where Topping like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, topping);
+            ResultSet rs = ps.executeQuery();
+            List<Topping> list = new ArrayList<>();
+            while (rs.next()) {
+                return new Topping(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4));
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public boolean add(ToppingModel tp) {
         String query = "INSERT INTO [dbo].[Topping]\n"
                 + "           ([Topping]\n"
@@ -85,12 +101,12 @@ public class ToppingRepository {
 //        }
 //        return check > 0;
 //    }
-
     public static void main(String[] args) {
-        List<Topping> show = new ToppingRepository().getAll();
-        for (Topping x : show) {
-            System.out.println(x);
-        }
-
+//        List<Topping> show = new ToppingRepository().getAll();
+//        for (Topping x : show) {
+//            System.out.println(x);
+//        }
+        Topping tp = new ToppingRepository().getOne("123");
+        System.out.println(tp);
     }
 }

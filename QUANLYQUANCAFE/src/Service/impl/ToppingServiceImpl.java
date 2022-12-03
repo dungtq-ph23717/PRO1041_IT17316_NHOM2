@@ -45,7 +45,6 @@ public class ToppingServiceImpl implements ToppingService {
 //            return "Xóa thất bại!";
 //        }
 //    }
-
     @Override
     public String update(ToppingModel tp, String id) {
         boolean update = rps.update(tp, id);
@@ -54,6 +53,11 @@ public class ToppingServiceImpl implements ToppingService {
         } else {
             return "Sủa thất bại!";
         }
+    }
+
+    @Override
+    public Topping getOne(String topping) {
+        return rps.getOne(topping);
     }
 
 }
