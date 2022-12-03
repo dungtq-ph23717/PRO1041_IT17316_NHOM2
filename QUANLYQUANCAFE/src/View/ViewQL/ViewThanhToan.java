@@ -5,15 +5,12 @@
 package View.ViewQL;
 
 import DomainModels.BanModel;
-import DomainModels.ComboModel;
 import DomainModels.HoaDonChiTietModel;
 import DomainModels.HoaDonModel;
 import DomainModels.KhuVucModel;
 import DomainModels.KhuyenMaiModel;
 import View.ViewNV.*;
 import Service.impl.BanServiceImpl;
-import Service.impl.ComBoSPServiceImpl;
-import Service.impl.ComboServiceImp;
 import Service.impl.DanhMucServiceImpl;
 import Service.impl.HoaDonChiTietServiceIblm;
 import Service.impl.HoaDonServiceIblm;
@@ -63,12 +60,16 @@ import org.apache.poi.hssf.record.MulBlankRecord;
  *
  * @author Admin
  */
+
 public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnable, ThreadFactory {
 
     //----------webcam---------------||
     private WebcamPanel panel = null;
     private Webcam webcam = null;
     private Executor executor = Executors.newSingleThreadExecutor(this);
+
+
+
 
     private DefaultTableModel dtmBan = new DefaultTableModel();
     private DefaultTableModel dtmGioHang = new DefaultTableModel();
@@ -79,7 +80,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private DefaultComboBoxModel boxModelDM = new DefaultComboBoxModel();
     private List<Ban> listBan = new ArrayList<>();
     private List<DanhMuc> listDM = new ArrayList<>();
-    private List<ComboModel> listCB = new ArrayList<>();
     private List<NhanVienViewModel> listNV = new ArrayList<>();
     private List<KhuyenMai> listKhuyenMai = new ArrayList<>();
     private List<HoaDon> listHoaDon = new ArrayList<>();
@@ -91,7 +91,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
     private NhanVienServiceImpl implNV = new NhanVienServiceImpl();
     private HoaDonChiTietServiceIblm implHDCT = new HoaDonChiTietServiceIblm();
-    private ComboServiceImp implCB = new ComboServiceImp();
     private DefaultComboBoxModel boxKM = new DefaultComboBoxModel();
     private DanhMucServiceImpl implDM = new DanhMucServiceImpl();
 
@@ -175,6 +174,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         }
     }
 
+
     private void showDataBan(List<Ban> list) {
         dtmBan.setRowCount(0);
         for (Ban x : list) {
@@ -217,6 +217,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
+        cbbTopping = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbSP = new javax.swing.JTable();
@@ -340,6 +341,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         });
         jScrollPane3.setViewportView(tbGH);
 
+        cbbTopping.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -348,12 +351,17 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 .addContainerGap()
                 .addComponent(jScrollPane3)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbbTopping, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addComponent(cbbTopping, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1152,9 +1160,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         v.setVisible(true);
     }//GEN-LAST:event_gopHDActionPerformed
 
+
     private void txtMaGGFakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaGGFakeActionPerformed
 
     }//GEN-LAST:event_txtMaGGFakeActionPerformed
+
 
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
@@ -1234,6 +1244,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JComboBox<String> cbbGG;
     private javax.swing.JComboBox<String> cbbLocDanhMuc;
     private javax.swing.JComboBox<String> cbbPhuongThucThanhToan;
+    private javax.swing.JComboBox<String> cbbTopping;
     private javax.swing.JMenuItem gopBan;
     private javax.swing.JMenuItem gopHD;
     private javax.swing.JButton jButton2;
