@@ -64,7 +64,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         cbbSearchTT.setModel(box1);
         box1.addElement("All");
         box1.addElement("Đã thanh toán");
-        box1.addElement("Chờ");
+        box1.addElement("Huỷ");
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         bangHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
