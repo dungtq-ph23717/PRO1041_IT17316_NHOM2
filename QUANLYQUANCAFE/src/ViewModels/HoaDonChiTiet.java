@@ -21,6 +21,7 @@ public class HoaDonChiTiet {
     private int soLuong;
     private double giaTien;
     private String ghiChu;
+    private Topping idTopping;
 
     public HoaDonChiTiet() {
     }
@@ -29,10 +30,19 @@ public class HoaDonChiTiet {
         this.soLuong = soLuong;
     }
 
-    public HoaDonChiTiet(SanPham idSP, int soLuong, double giaTien) {
+    public Topping getIdTopping() {
+        return idTopping;
+    }
+
+    public void setIdTopping(Topping idTopping) {
+        this.idTopping = idTopping;
+    }
+
+    public HoaDonChiTiet(SanPham idSP, int soLuong, Topping idTopping, double giaTien) {
         this.idSP = idSP;
         this.soLuong = soLuong;
         this.giaTien = giaTien;
+        this.idTopping = idTopping;
     }
 
     public HoaDonChiTiet(SanPham idSP, String idHD, int soLuong, double giaTien, String ghiChu) {
@@ -85,7 +95,7 @@ public class HoaDonChiTiet {
 
     @Override
     public String toString() {
-        return "HoaDonChiTiet{" + "idSP=" + idSP + ", idHD=" + idHD + ", soLuong=" + soLuong + ", giaTien=" + giaTien + ", ghiChu=" + ghiChu + '}';
+        return "HoaDonChiTiet{" + "idSP=" + idSP + ", idHD=" + idHD + ", soLuong=" + soLuong + ", giaTien=" + giaTien + ", ghiChu=" + ghiChu + ", idTopping=" + idTopping + '}';
     }
 
     public Object[] toRowdata() {

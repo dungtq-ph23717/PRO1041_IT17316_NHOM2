@@ -8,6 +8,7 @@ import DomainModels.HoaDonChiTietModel;
 import Utilities.DBContext;
 import ViewModels.HoaDonChiTiet;
 import ViewModels.SanPham;
+import ViewModels.Topping;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,15 +22,17 @@ import java.util.List;
 public class HoaDonChiTietRepository {
 
     public List<HoaDonChiTiet> getAll() {
-        String query = "select	MaSP,TenSP,Giaban,Soluong, Soluong * Giaban as Tongtien\n"
-                + "from HoaDonChiTiet \n"
-                + "inner join SanPham on SanPham.ID = HoaDonChiTiet.IDSP";
+        String query = "select MaSP,TenSP,Giaban,Soluong,Topping, (Soluong * Giaban) + Topping.GiaTien as Tongtien\n"
+                + "from HoaDonChiTiet\n"
+                + "inner join SanPham on SanPham.ID = HoaDonChiTiet.IDSP\n"
+                + "inner join Topping on Topping.ID = HoaDonChiTiet.IDTopping";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDonChiTiet> list = new ArrayList<>();
             while (rs.next()) {
+                Topping tp = new Topping(rs.getString(5));
                 SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3));
-                HoaDonChiTiet hdct = new HoaDonChiTiet(sp, rs.getInt(4), rs.getDouble(5));
+                HoaDonChiTiet hdct = new HoaDonChiTiet(sp, rs.getInt(4), tp, rs.getDouble(6));
                 list.add(hdct);
             }
             return list;
@@ -40,17 +43,19 @@ public class HoaDonChiTietRepository {
     }
 
     public List<HoaDonChiTiet> getAllviewGH(String id) {
-        String query = "select	MaSP,TenSP,Giaban,Soluong, Soluong * Giaban as Tongtien\n"
+        String query = "select MaSP,TenSP,Giaban,Soluong,Topping, (Soluong * Giaban) + Topping.GiaTien as Tongtien\n"
                 + "from HoaDonChiTiet\n"
                 + "inner join SanPham on SanPham.ID = HoaDonChiTiet.IDSP\n"
+                + "inner join Topping on Topping.ID = HoaDonChiTiet.IDTopping\n"
                 + "where IDHD like ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, id);
             ResultSet rs = ps.executeQuery();
             List<HoaDonChiTiet> list = new ArrayList<>();
             while (rs.next()) {
+                Topping tp = new Topping(rs.getString(5));
                 SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3));
-                HoaDonChiTiet hdct = new HoaDonChiTiet(sp, rs.getInt(4), rs.getDouble(5));
+                HoaDonChiTiet hdct = new HoaDonChiTiet(sp, rs.getInt(4), tp, rs.getDouble(6));
                 list.add(hdct);
             }
             return list;
@@ -61,16 +66,18 @@ public class HoaDonChiTietRepository {
     }
 
     public HoaDonChiTiet getOne(String ma) {
-        String query = "select	MaSP,TenSP,Giaban,Soluong, Soluong * Giaban as Tongtien\n"
+        String query = "select MaSP,TenSP,Giaban,Soluong,Topping, (Soluong * Giaban) + Topping.GiaTien as Tongtien\n"
                 + "from HoaDonChiTiet\n"
                 + "inner join SanPham on SanPham.ID = HoaDonChiTiet.IDSP\n"
+                + "inner join Topping on Topping.ID = HoaDonChiTiet.IDTopping\n"
                 + "where MaSP like ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                Topping tp = new Topping(rs.getString(5));
                 SanPham sp = new SanPham(rs.getString(1), rs.getString(2), rs.getDouble(3));
-                return new HoaDonChiTiet(sp, rs.getInt(4), rs.getDouble(5));
+                return new HoaDonChiTiet(sp, rs.getInt(4), tp, rs.getDouble(6));
             }
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -82,14 +89,15 @@ public class HoaDonChiTietRepository {
         String query = "INSERT INTO [dbo].[HoaDonChiTiet]\n"
                 + "           ([IDSP]\n"
                 + "           ,[IDHD]\n"
-                + "           ,[Soluong])\n"
-                + "     VALUES(?,?,?)";
+                + "           ,[Soluong]\n"
+                + "           ,[IDTopping])\n"
+                + "     VALUES(?,?,?,?)";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getIDSP());
             ps.setObject(2, hd.getIDHD());
             ps.setObject(3, hd.getSoLuong());
-
+            ps.setObject(4, hd.getTopping());
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -106,6 +114,21 @@ public class HoaDonChiTietRepository {
             ps.setObject(1, hd.getSoLuong());
             ps.setObject(2, idHD);
             ps.setObject(3, idSP);
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public boolean updateTP(HoaDonChiTietModel hd, String idSP) {
+        String query = "UPDATE [dbo].[HoaDonChiTiet]\n"
+                + "   SET [IDTopping] = ?\n"
+                + " WHERE IDSP like ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hd.getTopping());
+            ps.setObject(2, idSP);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -145,7 +168,7 @@ public class HoaDonChiTietRepository {
         return check > 0;
     }
 
-       public HoaDonChiTietModel checkTrung(String idSp) {
+    public HoaDonChiTietModel checkTrung(String idSp) {
         String query = "SELECT idSP FROM SANPHAM WHERE idSp = ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, idSp);
@@ -159,6 +182,7 @@ public class HoaDonChiTietRepository {
         }
         return null;
     }
+
     public boolean delete(String idHD, String idSP) {
         String query = "DELETE FROM [dbo].[HoaDonChiTiet]\n"
                 + "      WHERE IDHD like ? and IDSP like ?";
@@ -174,14 +198,14 @@ public class HoaDonChiTietRepository {
     }
 
     public static void main(String[] args) {
-//        List<HoaDonChiTiet> list = new HoaDonChiTietRepository().getAllviewGH("44a3f36c-64bb-4c28-9290-4b1e63ff7dd5");
+//        List<HoaDonChiTiet> list = new HoaDonChiTietRepository().getAllviewGH("b3e3cd4c-395d-411b-bd18-b088ab4769fa");
 //        for (HoaDonChiTiet x : list) {
 //            System.out.println(x.toString());
 //        }
-//        HoaDonChiTiet hd = new HoaDonChiTietRepository().getOne("SP1");
-//        System.out.println(hd);
-        HoaDonChiTietModel hd = new HoaDonChiTietModel(5);
-        boolean add = new HoaDonChiTietRepository().updateIDHD("eeaf53e9-e542-444a-86b5-f088b1bdff3e", 3, "6a0c96e8-fe13-4e56-80b8-1a294978cc7b");
-        System.out.println(add);
+        HoaDonChiTiet hd = new HoaDonChiTietRepository().getOne("SP1");
+        System.out.println(hd);
+//        HoaDonChiTietModel hd = new HoaDonChiTietModel("", "", 0, "b001ea99-ed1f-42b5-83f7-fcad487cdd40");
+//        boolean add = new HoaDonChiTietRepository().updateTP(hd, "64e38e57-1447-483d-a82f-08c6dd36ae74");
+//        System.out.println(add);
     }
 }
