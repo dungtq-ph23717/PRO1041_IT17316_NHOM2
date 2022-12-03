@@ -148,6 +148,8 @@ public class ViewDanhMuc extends javax.swing.JFrame {
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
+        bltClose.setBackground(new java.awt.Color(255, 0, 0));
+        bltClose.setForeground(new java.awt.Color(255, 255, 255));
         bltClose.setText("Close");
         bltClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
