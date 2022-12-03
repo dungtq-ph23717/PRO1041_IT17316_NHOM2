@@ -5,15 +5,12 @@
 package View.ViewQL;
 
 import DomainModels.BanModel;
-import DomainModels.ComboModel;
 import DomainModels.HoaDonChiTietModel;
 import DomainModels.HoaDonModel;
 import DomainModels.KhuVucModel;
 import DomainModels.KhuyenMaiModel;
 import View.ViewNV.*;
 import Service.impl.BanServiceImpl;
-import Service.impl.ComBoSPServiceImpl;
-import Service.impl.ComboServiceImp;
 import Service.impl.DanhMucServiceImpl;
 import Service.impl.HoaDonChiTietServiceIblm;
 import Service.impl.HoaDonServiceIblm;
@@ -48,7 +45,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewThanhToan extends javax.swing.JInternalFrame {
-    
+
     private DefaultTableModel dtmBan = new DefaultTableModel();
     private DefaultTableModel dtmGioHang = new DefaultTableModel();
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
@@ -58,7 +55,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private DefaultComboBoxModel boxModelDM = new DefaultComboBoxModel();
     private List<Ban> listBan = new ArrayList<>();
     private List<DanhMuc> listDM = new ArrayList<>();
-    private List<ComboModel> listCB = new ArrayList<>();
     private List<NhanVienViewModel> listNV = new ArrayList<>();
     private List<KhuyenMai> listKhuyenMai = new ArrayList<>();
     private List<HoaDon> listHoaDon = new ArrayList<>();
@@ -70,7 +66,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
     private NhanVienServiceImpl implNV = new NhanVienServiceImpl();
     private HoaDonChiTietServiceIblm implHDCT = new HoaDonChiTietServiceIblm();
-    private ComboServiceImp implCB = new ComboServiceImp();
     private DefaultComboBoxModel boxKM = new DefaultComboBoxModel();
     private DanhMucServiceImpl implDM = new DanhMucServiceImpl();
 
@@ -82,18 +77,18 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        
+
         String[] headersBan = {"Tên bàn", "Loại bàn", "Trạng thái"};
         tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
         listBan = implBan.getAllTT();
         showDataBan(listBan);
-        
+
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
         showDataHD(listHoaDon);
-        
+
         tbSP.setModel(dtmSanPham);
         String[] headersSP = {"Mã SP", "Tên SP", "Giá Bán", "Danh Mục", "Trạng Thái", "Mô tả", "Size"};
         dtmSanPham.setColumnIdentifiers(headersSP);
@@ -110,7 +105,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         dtmGioHang.setColumnIdentifiers(headersGH);
 //        listHDCT = implHDCT.getAll();
         showDataHDCT(listHDCT);
-        
+
         listKhuyenMai = implKM.getAll();
         boxModelGG.addElement("Chọn");
         cbbGG.setModel(boxModelGG);
@@ -145,28 +140,21 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             dtmGioHang.addRow(new Object[]{x.getIdSP().getMaSP(), x.getIdSP().getTenSP(), x.getSoLuong(), x.getIdSP().getGiaBan(), x.getGiaTien()});
         }
     }
-    
-    private void showDataCB(List<ComboModel> list) {
-        dtmCB.setRowCount(0);
-        for (ComboModel x : list) {
-            dtmCB.addRow(x.toRowData());
-        }
-    }
-    
+
     private void showDataBan(List<Ban> list) {
         dtmBan.setRowCount(0);
         for (Ban x : list) {
             dtmBan.addRow(x.toRowDataTT());
         }
     }
-    
+
     private void showDataSP(List<SanPham> list) {
         dtmSanPham.setRowCount(0);
         for (SanPham sp : list) {
             dtmSanPham.addRow(new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getDanhMuc().getTenDanhMuc(), sp.getTrangThai(), sp.getMoTa(), sp.getSize().getSize()});
         }
     }
-    
+
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
@@ -195,6 +183,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
+        cbbTopping = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbSP = new javax.swing.JTable();
@@ -316,6 +305,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tbGH);
 
+        cbbTopping.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -324,12 +315,17 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbbTopping, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addComponent(cbbTopping, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -784,7 +780,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     String ma = tbGH.getValueAt(row, 0).toString();
                     HoaDonChiTiet hd = implHDCT.getOne(ma);
                     Double tienGiam = Double.valueOf(x.getMucGiam());
-                    Double tien = Double.valueOf(txtTongTien.getText())  - tienGiam;
+                    Double tien = Double.valueOf(txtTongTien.getText()) - tienGiam;
                     Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
                     Double tienThua = tienKhach - tien;
                     txtTienThua.setText(String.valueOf(tienThua));
@@ -950,7 +946,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-            
+
         } else {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
@@ -988,7 +984,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-            
+
         }
     }//GEN-LAST:event_bltThanhToanActionPerformed
 
@@ -1029,7 +1025,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbbLocDanhMucActionPerformed
 
     private void btHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyDonActionPerformed
-        
+
         if (tbHD.getRowCount() <= 1) {
             String ma = txtMa.getText();
             HoaDonModel hd = new HoaDonModel(ma, ma);
@@ -1124,7 +1120,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         ViewTachHD v = new ViewTachHD();
         v.setVisible(true);
     }//GEN-LAST:event_gopHDActionPerformed
-    
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         SanPham sp = listSanPham.get(index);
@@ -1133,12 +1129,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         txtDonGia.setText(String.valueOf(sp.getGiaBan()));
         txtSoL.setText(String.valueOf(hdct.getSoLuong()));
     }
-    
+
     private void fillDataBan(int index) {
         Ban b = listBan.get(index);
         txtBan.setText(b.getTenBan());
     }
-    
+
     private void fillDataHD(int index) {
         HoaDon hd = listHoaDon.get(index);
         txtMa.setText(hd.getMaHD());
@@ -1154,6 +1150,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbbGG;
     private javax.swing.JComboBox<String> cbbLocDanhMuc;
     private javax.swing.JComboBox<String> cbbPhuongThucThanhToan;
+    private javax.swing.JComboBox<String> cbbTopping;
     private javax.swing.JMenuItem gopBan;
     private javax.swing.JMenuItem gopHD;
     private javax.swing.JButton jButton2;
