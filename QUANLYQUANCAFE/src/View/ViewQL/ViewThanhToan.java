@@ -126,7 +126,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
         listTP = implTP.getAll();
         cbbTopping.setModel(boxModelTP);
-        boxModelTP.addElement("Không topping");
         for (Topping tp : listTP) {
             boxModelTP.addElement(tp.getTopping());
         }
@@ -155,6 +154,19 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         for (Ban x : list) {
             dtmBan.addRow(x.toRowDataTT());
         }
+    }
+
+    private void clear() {
+        txtBan.setText("__");
+        txtMa.setText("__");
+        txtNgay.setText("__");
+        txtNhanVien.setText("__");
+        cbbGG.setSelectedIndex(0);
+        txtTongTien.setText("0");
+        txtTienGiam.setText("0");
+        txtTienKhachTra.setText("");
+        txtGiaTopping.setText("0");
+        txtTienThua.setText("0");
     }
 
     private void showDataSP(List<SanPham> list) {
@@ -817,7 +829,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     Double tienGiam = Double.valueOf(txtTienGiam.getText());
                     Double tien = Double.valueOf(txtTongTien.getText());
                     Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
-                    Double tienThua = tienKhach - tien - (tienGiam - tienGiam);
+                    Double tienThua = tienKhach - tien;
                     txtTienThua.setText(String.valueOf(tienThua));
                 } else if (cbbGG.getSelectedItem() == "Chọn") {
                     Double tienTP = Double.valueOf(txtGiaTopping.getText());
@@ -872,11 +884,17 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         int row = tbGH.getSelectedRow();
         fillDataGH(row);
         double tong = 0;
+        double tienTP = 0;
         for (int i = 0; i < tbGH.getRowCount(); i++) {
             Double tien = Double.valueOf(tbGH.getValueAt(i, 5).toString());
             tong += tien;
+            String tp = tbGH.getValueAt(i, 4).toString();
+            Topping top = implTP.getOne(tp);
+            tienTP += top.getGia();
         }
-        txtTongTien.setText(String.valueOf(tong));
+        double tongTien = tong + tienTP;
+        txtTongTien.setText(String.valueOf(tongTien));
+        txtGiaTopping.setText(String.valueOf(tienTP));
     }//GEN-LAST:event_tbGHMouseClicked
     private void tbBanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBanMouseClicked
         int row = tbBan.getSelectedRow();
@@ -954,11 +972,13 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                         Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, "In thất bại!", ex);
                     }
                     JOptionPane.showMessageDialog(this, "In thành công!");
+
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
                     int row = tbBan.getSelectedRow();
-                    String ten = tbBan.getValueAt(row, 0).toString();
+//                    String ten = tbBan.getValueAt(row, 0).toString();
+                    String ten = txtBan.getText();
                     Ban b = implBan.getOne(ten);
                     BanModel b2 = new BanModel("Trống");
                     implBan.updateTT(b2, b.getId());
@@ -967,15 +987,21 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     listBan = implBan.getAllTT();
                     showDataBan(listBan);
                     listHDCT.clear();
+                    showDataHDCT(listHDCT);
+                    clear();
                 } else {
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
                     int row = tbBan.getSelectedRow();
-                    String ten = tbBan.getValueAt(row, 0).toString();
+//                    String ten = tbBan.getValueAt(row, 0).toString();
+                    String ten = txtBan.getText();
                     Ban b = implBan.getOne(ten);
                     listHoaDon = implHD.getAllTTViewHD(b.getId());
                     showDataHD(listHoaDon);
+                    listHDCT.clear();
+                    showDataHDCT(listHDCT);
+                    clear();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
@@ -994,7 +1020,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
                     int row = tbBan.getSelectedRow();
-                    String ten = tbBan.getValueAt(row, 0).toString();
+//                    String ten = tbBan.getValueAt(row, 0).toString();
+                    String ten = txtBan.getText();
                     Ban b = implBan.getOne(ten);
                     BanModel b2 = new BanModel("Trống");
                     implBan.updateTT(b2, b.getId());
@@ -1002,18 +1029,22 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     showDataHD(listHoaDon);
                     listBan = implBan.getAllTT();
                     showDataBan(listBan);
-                    listHDCT = implHDCT.getAllviewGH("");
+                    listHDCT.clear();
                     showDataHDCT(listHDCT);
+                    clear();
                 } else {
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
                     int row = tbBan.getSelectedRow();
-                    String ten = tbBan.getValueAt(row, 0).toString();
+//                    String ten = tbBan.getValueAt(row, 0).toString();
+                    String ten = txtBan.getText();
                     Ban b = implBan.getOne(ten);
                     listHoaDon = implHD.getAllTTViewHD(b.getId());
                     showDataHD(listHoaDon);
                     listHDCT.clear();
+                    showDataHDCT(listHDCT);
+                    clear();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
@@ -1026,8 +1057,18 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         try {
             if (cbbGG.getSelectedItem().toString().equalsIgnoreCase("Chọn")) {
                 txtTienGiam.setText("0");
-                int row = tbGH.getSelectedRow();
-                fillDataGH(row);
+                double tong = 0;
+                double tienTP = 0;
+                for (int i = 0; i < tbGH.getRowCount(); i++) {
+                    Double tien = Double.valueOf(tbGH.getValueAt(i, 5).toString());
+                    tong += tien;
+                    String tp = tbGH.getValueAt(i, 4).toString();
+                    Topping top = implTP.getOne(tp);
+                    tienTP += top.getGia();
+                }
+                double tongTien = tong + tienTP;
+                txtTongTien.setText(String.valueOf(tongTien));
+                txtGiaTopping.setText(String.valueOf(tienTP));
             } else {
                 for (KhuyenMai x : listKhuyenMai) {
                     if (cbbGG.getSelectedItem() == x.getMaKM()) {
@@ -1037,8 +1078,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             }
             Double tongTien = Double.valueOf(txtTongTien.getText());
             Double tienGiam = Double.valueOf(txtTienGiam.getText());
-            Double tienTP = Double.valueOf(txtGiaTopping.getText());
-            Double tien = tongTien - tienGiam - tienTP;
+            Double tien = tongTien - tienGiam;
             txtTongTien.setText(String.valueOf(tien));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm");
@@ -1074,6 +1114,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             showDataBan(listBan);
             listHDCT.clear();
             showDataHDCT(listHDCT);
+            clear();
         } else {
             String ma = txtMa.getText();
             HoaDonModel hd = new HoaDonModel(ma, ma);
@@ -1086,6 +1127,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             showDataHD(listHoaDon);
             listHDCT.clear();
             showDataHDCT(listHDCT);
+            clear();
         }
     }//GEN-LAST:event_btHuyDonActionPerformed
 
@@ -1171,10 +1213,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         SanPham sp = listSanPham.get(index);
-//        txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
+
+        txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
         txtTenSP.setText(sp.getTenSP());
         txtDonGia.setText(String.valueOf(sp.getGiaBan()));
         txtSoL.setText(String.valueOf(hdct.getSoLuong()));
+
     }
 
     private void fillDataBan(int index) {
