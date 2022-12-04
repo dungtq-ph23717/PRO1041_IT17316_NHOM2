@@ -27,7 +27,17 @@ import ViewModels.KhuyenMai;
 import ViewModels.NhanVienViewModel;
 import ViewModels.SanPham;
 import ViewModels.Topping;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.awt.print.PrinterException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -35,6 +45,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -46,8 +59,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class ViewThanhToan extends javax.swing.JInternalFrame {
-
+public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnable,ThreadFactory{
+        //----------webcam---------------||
+    private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
+    
     private DefaultTableModel dtmBan = new DefaultTableModel();
     private DefaultTableModel dtmGioHang = new DefaultTableModel();
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
@@ -256,7 +273,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         tbHD = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        TXTMAFAKE = new javax.swing.JTextField();
 
         gopBan.setText("Gộp bàn");
         gopBan.setToolTipText("");
@@ -784,7 +801,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         );
 
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 170));
-        jPanel5.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 250, 10));
+        jPanel5.add(TXTMAFAKE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 250, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1241,9 +1258,46 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         txtNgay.setText(hd.getNgayLapHD());
         txtNhanVien.setText(hd.getTenNV().getTenNV());
     }
+     @Override
+    public void run() {
+        do {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Result result = null;
+            BufferedImage image = null;
+            if (webcam.isOpen()) {
+                if ((image = webcam.getImage()) == null) {
+                    continue;
+                }
+            }
+            LuminanceSource source = new BufferedImageLuminanceSource(image);
+            BinaryBitmap bitmapew = new BinaryBitmap(new HybridBinarizer(source));
+            try {
+                result = new MultiFormatReader().decode(bitmapew);
+            } catch (NotFoundException ex) {
+                Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (result != null) {
+              TXTMAFAKE.setText(result.getText());
+                MucGiam(result.getText());
+            }
+
+        } while (true);
+
+    }
+
+    private void MucGiam(String mucgiam) {
+        if (TXTMAFAKE.getText().equalsIgnoreCase("https://qrco.de/bdXusB")) {
+            cbbGG.setSelectedItem("M1");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PHoaDon;
+    private javax.swing.JTextField TXTMAFAKE;
     private javax.swing.JButton bltThanhToan;
     private javax.swing.JButton btDoi;
     private javax.swing.JButton btHuyDon;
@@ -1284,7 +1338,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPopupMenu puBan;
     private javax.swing.JMenuItem tachBan;
     private javax.swing.JMenuItem tachHD;
@@ -1309,4 +1362,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem updateSL;
     private javax.swing.JMenuItem xoaSP;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(r, "My Thread");
+        t.setDaemon(true);
+        return t;
+    } 
+    
+    
 }
+
