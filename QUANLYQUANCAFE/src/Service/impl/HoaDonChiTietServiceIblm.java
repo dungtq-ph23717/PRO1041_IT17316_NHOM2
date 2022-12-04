@@ -66,7 +66,7 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
     @Override
     public String gopHD(String idHD, String idSP) {
         HoaDonChiTietModel hdct = rp.checkTrung(idSP);
-        if(hdct != null){
+        if (hdct != null) {
             return "Trùng";
         }
         boolean gopHD = rp.gopHD(idHD, idSP);
@@ -87,5 +87,14 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
         }
     }
 
+    @Override
+    public String updateTP(HoaDonChiTietModel hd, String idSP) {
+        boolean updateTP = rp.updateTP(hd, idSP);
+        if (updateTP) {
+            return "Đổi topping thành công";
+        } else {
+            return "Đổi topping thất bại";
+        }
+    }
 
 }

@@ -27,7 +27,8 @@ public class HoaDonRepository {
     public List<HoaDon> getAll() {
         String query = "SELECT MaHD, TenBan , TenNV , NgayLapHD , PhuongThucThanhToan , TenSP,Giaban,HDCT.Soluong ,TP.Topping,(SP.Giaban*Soluong) + TP.GiaTien  As ThanhTien,HD.TinhTrang\n"
                 + "              FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN\n"
-                + "             SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID JOIN Topping TP ON HDCT.IDTopping = TP.ID";
+                + "             SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID JOIN Topping TP ON HDCT.IDTopping = TP.ID\n"
+                + "			 WHERE HD.TinhTrang LIKE N'Đã thanh toán' or HD.TinhTrang LIKE N'Hủy'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();

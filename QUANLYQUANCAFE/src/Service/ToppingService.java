@@ -19,6 +19,7 @@ public interface ToppingService {
     String add(ToppingModel tp);
 
 //    String delete(String id);
-
     String update(ToppingModel tp, String id);
+
+    Topping getOne(String topping);
 }

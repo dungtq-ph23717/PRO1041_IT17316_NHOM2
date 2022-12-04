@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package View.ViewQL;
+package View.ViewNV;
 
 import Service.impl.BanServiceImpl;
 import Service.impl.HoaDonChiTietServiceIblm;
@@ -32,7 +32,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Admin
  */
-public class ViewHoaDon extends javax.swing.JInternalFrame {
+public class ViewXemLichSuOder extends javax.swing.JInternalFrame {
 
     private DefaultTableModel dtmHoaDon = new DefaultTableModel();
     private DefaultTableModel dtm = new DefaultTableModel();
@@ -51,7 +51,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
     /**
      * Creates new form Menu2
      */
-    public ViewHoaDon() {
+    public ViewXemLichSuOder() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
@@ -64,7 +64,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         cbbSearchTT.setModel(box1);
         box1.addElement("All");
         box1.addElement("Đã thanh toán");
-        box1.addElement("Huỷ");
+        box1.addElement("Hủy");
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         bangHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
