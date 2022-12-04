@@ -15,6 +15,7 @@ public class HoaDonChiTietModel {
     private int soLuong;
     private double giaTien;
     private String ghiChu;
+    private String topping;
 
     public HoaDonChiTietModel() {
     }
@@ -25,12 +26,27 @@ public class HoaDonChiTietModel {
         this.soLuong = soLuong;
     }
 
+    public HoaDonChiTietModel(String IDSP, String IDHD, int soLuong, String topping) {
+        this.IDSP = IDSP;
+        this.IDHD = IDHD;
+        this.soLuong = soLuong;
+        this.topping = topping;
+    }
+
     public HoaDonChiTietModel(String IDSP) {
         this.IDSP = IDSP;
     }
 
     public HoaDonChiTietModel(int soLuong) {
         this.soLuong = soLuong;
+    }
+
+    public String getTopping() {
+        return topping;
+    }
+
+    public void setTopping(String topping) {
+        this.topping = topping;
     }
 
     public HoaDonChiTietModel(String IDSP, String IDHD, int soLuong, double giaTien, String ghiChu) {

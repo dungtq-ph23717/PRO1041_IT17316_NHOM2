@@ -4,13 +4,29 @@
  */
 package View.ViewQL;
 
+import Service.impl.BanServiceImpl;
+import Service.impl.HoaDonChiTietServiceIblm;
 import Service.impl.HoaDonServiceIblm;
+import Service.impl.SanPhamServiceImpl;
+import Service.impl.ToppingServiceImpl;
+import ViewModels.Ban;
 import ViewModels.HoaDon;
+import ViewModels.HoaDonChiTiet;
+import ViewModels.SanPham;
+import ViewModels.Topping;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -23,6 +39,14 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
     private HoaDonServiceIblm iplmHD = new HoaDonServiceIblm();
     private List<HoaDon> listHD = new ArrayList<>();
     private DefaultComboBoxModel box1 = new DefaultComboBoxModel();
+    private List<Ban> listB = new ArrayList<>();
+    private List<SanPham> listSP = new ArrayList<>();
+    private List<HoaDonChiTiet> listHDCT = new ArrayList<>();
+    private List<Topping> listTP = new ArrayList<>();
+    private Service.impl.BanServiceImpl iplmB = new BanServiceImpl();
+    private Service.impl.SanPhamServiceImpl iplmSP = new SanPhamServiceImpl();
+    private Service.impl.HoaDonChiTietServiceIblm iplmHDCT = new HoaDonChiTietServiceIblm();
+    private Service.impl.ToppingServiceImpl iplmTP = new ToppingServiceImpl();
 
     /**
      * Creates new form Menu2
@@ -32,7 +56,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        String header[] = {"Mã Hóa Đơn", "Tên Bàn", "Tên Nhân Viên", "Ngày Lập Hoá Đơn", "Phương Thức Thanh Toán", "Tên Sản Phẩm", "Giá Bán", "Số Lượng", "Thành Tiền", "Tình Trạng"};
+        String header[] = {"Mã Hóa Đơn", "Tên Bàn", "Tên Nhân Viên", "Ngày Lập Hoá Đơn", "Phương Thức Thanh Toán", "Tên Sản Phẩm", "Giá Bán", "Số Lượng", "Tên Topping", "Thành Tiền", "Tình Trạng"};
         bangHDCT.setModel(dtm);
         dtm.setColumnIdentifiers(header);
         listHD = iplmHD.getAll();
@@ -40,7 +64,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         cbbSearchTT.setModel(box1);
         box1.addElement("All");
         box1.addElement("Đã thanh toán");
-        box1.addElement("Chờ");
+        box1.addElement("Huỷ");
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         bangHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
@@ -193,6 +217,11 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Xuất Hóa Đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 12))); // NOI18N
 
         bltXuatHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icon.jpg"))); // NOI18N
+        bltXuatHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bltXuatHDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -310,10 +339,82 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         showData(listHD);
     }//GEN-LAST:event_bangHDMouseClicked
 
+    private void bltXuatHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltXuatHDActionPerformed
+        InhoaDon();
+    }//GEN-LAST:event_bltXuatHDActionPerformed
+
     private void showData(List<HoaDon> list) {
         dtm.setRowCount(0);
         for (HoaDon x : list) {
             dtm.addRow(x.toRowData());
+        }
+    }
+
+    public void InhoaDon() {
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet spreadSheet = workbook.createSheet("Hóa Đơn");
+
+            XSSFRow row = null;
+            Cell cell = null;
+            row = spreadSheet.createRow((short) 2);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+
+            cell.setCellValue("DANH SÁCH HÓA ĐƠN");
+
+            row = spreadSheet.createRow((short) 3);
+            row.setHeight((short) 500);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("MÃ HÓA ĐƠN");
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("TÊN BÀN");
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("TÊN NHÂN VIÊN");
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("NGÀY LẬP HÓA ĐƠN");
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("PHƯƠNG THỨC THANH TOÁN");
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellValue("TÊN SẢN PHẨM");
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellValue("GIÁ BÁN");
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue("SỐ LƯỢNG");
+            cell = row.createCell(8, CellType.STRING);
+            cell.setCellValue("TOPPING");
+            cell = row.createCell(9, CellType.STRING);
+            cell.setCellValue("THÀNH TIỀN");
+            cell = row.createCell(10, CellType.STRING);
+            cell.setCellValue("TRẠNG THÁI");
+            List<HoaDon> listHD = iplmHD.getAll();
+
+            for (int i = 0; i < listHD.size(); i++) {
+                HoaDon hd = listHD.get(i);
+//                Ban b = listB.get(i);
+//                SanPham sp = listSP.get(i);
+//                HoaDonChiTiet hdct = listHDCT.get(i);
+//                Topping tp = listTP.get(i);
+                row = spreadSheet.createRow((short) 4 + i);
+                row.setHeight((short) 400);
+                row.createCell(0).setCellValue(hd.getMaHD());
+                row.createCell(1).setCellValue(hd.getBan().getTenBan());
+                row.createCell(2).setCellValue("Nhân Viên A");
+                row.createCell(3).setCellValue(hd.getNgayLapHD());
+                row.createCell(4).setCellValue("Tiền mặt");
+                row.createCell(5).setCellValue(hd.getSp().getTenSP());
+                row.createCell(6).setCellValue(hd.getSp().getGiaBan());
+                row.createCell(7).setCellValue(hd.getHdct().getSoLuong());
+                row.createCell(8).setCellValue(hd.getTp().getTopping());
+                row.createCell(9).setCellValue(hd.getThanhTien());
+                row.createCell(10).setCellValue(hd.getTinhTrang());
+            }
+            FileOutputStream out = new FileOutputStream(new File("C:\\Users\\vietv\\Downloads\\excelHD\\hdct.xlsx"));
+            workbook.write(out);
+            out.close();
+            JOptionPane.showMessageDialog(this, "Xuất Hóa Đơn Excel Thành Công !");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
