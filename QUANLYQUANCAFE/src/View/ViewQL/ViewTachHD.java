@@ -49,7 +49,7 @@ public class ViewTachHD extends javax.swing.JFrame {
         listHDCT = implHDCT.getAll();
         showDataHDCT2(listHDCT);
 
-        listHD = implHD.getAllTT();
+        listHD = implHD.getAllHDCho();
         cbbMaHD1.setModel(boxModel1);
         for (HoaDon hd : listHD) {
             boxModel1.addElement(hd.getMaHD());
@@ -302,6 +302,9 @@ public class ViewTachHD extends javax.swing.JFrame {
         String maHD = cbbMaHD2.getSelectedItem().toString();
         HoaDon hd = implHD.getOne(maHD);
         for (int i = 0; i < tbGH1.getRowCount(); i++) {
+//            if (hd.getMaHD() == tbGH2.getValueAt(i, 0)) {
+//                JOptionPane.showMessageDialog(this, "Trùng mã");
+//            }
             String idSP = (String) tbGH1.getValueAt(i, 0);
             SanPham sp = implSP.getOne(idSP);
             implHDCT.gopHD(hd.getID(), sp.getId());

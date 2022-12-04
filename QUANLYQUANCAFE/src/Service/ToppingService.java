@@ -22,4 +22,6 @@ public interface ToppingService {
     String update(ToppingModel tp, String id);
 
     Topping getOne(String topping);
+    
+    List<Topping> searchTen(String tenTopping);
 }

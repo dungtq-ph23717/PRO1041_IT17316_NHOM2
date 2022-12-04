@@ -92,6 +92,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
+        listHoaDon = implHD.getAllHDCho();
         showDataHD(listHoaDon);
 
         tbSP.setModel(dtmSanPham);

@@ -41,4 +41,6 @@ public interface ServiceHoaDon {
 
     String delete(String maHD);
 
+    List<HoaDon> getAllHDCho();
+
 }
