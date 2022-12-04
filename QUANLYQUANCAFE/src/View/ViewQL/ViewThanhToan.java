@@ -976,7 +976,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
-                    int row = tbBan.getSelectedRow();
+//                    int row = tbBan.getSelectedRow();
 //                    String ten = tbBan.getValueAt(row, 0).toString();
                     String ten = txtBan.getText();
                     Ban b = implBan.getOne(ten);
@@ -993,7 +993,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
-                    int row = tbBan.getSelectedRow();
+//                    int row = tbBan.getSelectedRow();
 //                    String ten = tbBan.getValueAt(row, 0).toString();
                     String ten = txtBan.getText();
                     Ban b = implBan.getOne(ten);
@@ -1019,7 +1019,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
-                    int row = tbBan.getSelectedRow();
+//                    int row = tbBan.getSelectedRow();
 //                    String ten = tbBan.getValueAt(row, 0).toString();
                     String ten = txtBan.getText();
                     Ban b = implBan.getOne(ten);
@@ -1036,7 +1036,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
-                    int row = tbBan.getSelectedRow();
+//                    int row = tbBan.getSelectedRow();
 //                    String ten = tbBan.getValueAt(row, 0).toString();
                     String ten = txtBan.getText();
                     Ban b = implBan.getOne(ten);
@@ -1103,8 +1103,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             HoaDonModel hd = new HoaDonModel(ma, ma);
             implHD.update(hd, ma, "Huỷ");
             JOptionPane.showMessageDialog(this, "Huỷ thành công");
-            int row = tbBan.getSelectedRow();
-            String ten = tbBan.getValueAt(row, 0).toString();
+//            int row = tbBan.getSelectedRow();
+//            String ten = tbBan.getValueAt(row, 0).toString();
+            String ten = txtBan.getText();
             Ban b = implBan.getOne(ten);
             BanModel b2 = new BanModel("Trống");
             implBan.updateTT(b2, b.getId());
