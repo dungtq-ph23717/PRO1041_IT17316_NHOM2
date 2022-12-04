@@ -29,6 +29,7 @@ import ViewModels.SanPham;
 import ViewModels.Topping;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
@@ -99,7 +100,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-
+        initWebcam();
         String[] headersBan = {"Tên bàn", "Loại bàn", "Trạng thái"};
         tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
@@ -797,11 +798,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 180, Short.MAX_VALUE)
         );
 
-        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 170));
-        jPanel5.add(TXTMAFAKE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 250, 10));
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 180));
+        jPanel5.add(TXTMAFAKE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 250, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1235,7 +1236,16 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         listHDCT = implHDCT.getAllviewGH(hd1.getID());
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_btDoiActionPerformed
-
+  private void initWebcam() {
+        java.awt.Dimension size = WebcamResolution.QQVGA.getSize();
+        webcam = Webcam.getWebcams().get(0);
+        webcam.setViewSize(size);
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+        jPanel5.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 170));
+        executor.execute(this);
+    }
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         SanPham sp = listSanPham.get(index);
@@ -1283,6 +1293,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             if (result != null) {
               TXTMAFAKE.setText(result.getText());
                 MucGiam(result.getText());
+                break;
             }
 
         } while (true);
