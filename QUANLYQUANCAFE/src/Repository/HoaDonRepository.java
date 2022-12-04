@@ -74,8 +74,11 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> getListHD() {
-        String query = "Select MaHD,NgayLapHD,ThanhTien\n"
-                + "from HoaDon  \n";
+        String query = "select MaHD,NgayLapHD,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
+                + "inner join HoaDonChiTiet\n"
+                + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
@@ -191,7 +194,11 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> search(String date) {
-        String query = "SELECT MaHD,NgayLapHD,ThanhTien FROM HoaDon\n"
+        String query = "select MaHD,NgayLapHD,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
+                + "inner join HoaDonChiTiet\n"
+                + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID"
                 + "WHERE NgayLapHD like ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, "%" + date + "%");
