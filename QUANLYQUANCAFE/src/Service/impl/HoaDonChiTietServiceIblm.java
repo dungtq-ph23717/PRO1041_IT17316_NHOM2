@@ -65,10 +65,10 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
 
     @Override
     public String gopHD(String idHD, String idSP) {
-        HoaDonChiTietModel hdct = rp.checkTrung(idSP);
-        if (hdct != null) {
-            return "Trùng";
-        }
+//        HoaDonChiTietModel hdct = rp.checkTrung(idSP);
+//        if (hdct != null) {
+//            return "Trùng";
+//        }
         boolean gopHD = rp.gopHD(idHD, idSP);
         if (gopHD) {
             return "Gộp hoá đơn thành công";

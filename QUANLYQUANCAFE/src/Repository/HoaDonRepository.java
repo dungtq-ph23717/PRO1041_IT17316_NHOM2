@@ -169,6 +169,26 @@ public class HoaDonRepository {
         return null;
     }
 
+    public List<HoaDon> getAllHDCho() {
+        String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
+                + "from HoaDon\n"
+                + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
+                + "WHERE TinhTrang like N'Chờ'";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv, rs.getString(4));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<HoaDon> getAllTTViewHD(String id) {
         String query = "Select MaHD,NgayLapHD,TenNV, hoadon.TinhTrang\n"
                 + "from HoaDon\n"

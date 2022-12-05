@@ -60,4 +60,9 @@ public class ToppingServiceImpl implements ToppingService {
         return rps.getOne(topping);
     }
 
+    @Override
+    public List<Topping> searchTen(String tenTopping) {
+        return rps.searchTen(tenTopping);
+    }
+
 }

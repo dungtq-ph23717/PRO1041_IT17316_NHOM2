@@ -409,7 +409,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                 row.createCell(9).setCellValue(hd.getThanhTien());
                 row.createCell(10).setCellValue(hd.getTinhTrang());
             }
-            FileOutputStream out = new FileOutputStream(new File("D:\\hoadon.xlsx"));
+            FileOutputStream out = new FileOutputStream(new File("C:\\Users\\vietv\\Downloads\\excelHD\\hdct.xlsx"));
             workbook.write(out);
             out.close();
             JOptionPane.showMessageDialog(this, "Xuất Hóa Đơn Excel Thành Công !");
