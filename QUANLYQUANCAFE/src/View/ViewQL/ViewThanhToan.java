@@ -968,22 +968,35 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             Double tienThua = tienKhach - tien;
             if (tienThua >= 0) {
                 if (tbHD.getRowCount() <= 1) {
-                    txtPrint.append("\t\t HÓA ĐƠN THANH TOÁN \n\n\n\n"
+                    txtPrint.append("\t\tHÓA ĐƠN THANH TOÁN \n\n"
                             + "\t\t   Mã Hóa Đơn:  " + txtMa.getText() + "\n"
-                            + "\t\n+++--------------------------------------------------------------------------------------------------------+++\n\n"
-                            + "\tBàn:\t\t\t" + txtBan.getText() + "\n\n"
-                            + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n\n"
+                            + "+++--------------------------------------------------------------------------------------------------------+++\n"
+                            + "\tBàn:\t\t\t" + txtBan.getText() + "\n"
+                            + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n"
                             + "\tNgày:\t\t\t" + txtNgay.getText() + "\n\n"
-                            + "\tMã Giảm Giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n\n"
-                            + "\tMức Giảm:\t\t\t" + txtTienGiam.getText() + " " + "VND" + "\n\n"
-                            + "\tTên Sản Phẩm:\t\t" + txtTenSP.getText() + "\n\n"
-                            + "\tĐơn Giá:\t\t\t" + txtDonGia.getText() + " " + "VND" + "\n"
-                            + "              X\n\n"
-                            + "\tSố Lượng:\t\t\t" + txtSoL.getText() + "\n\n"
-                            + "\t\n================================================================================\n\n"
-                            + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n\n\n\n"
-                            + "       +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++\n\n\n"
+                            + "\tTên Mặt Hàng:  " + "\tĐơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
+                            + "\n_______________________________________________________________________________________________________________"
                     );
+
+                    DefaultTableModel mdpr = new DefaultTableModel();
+                    mdpr = (DefaultTableModel) tbGH.getModel();
+                    txtPrint.setText(txtPrint.getText());
+                    for (int i = 0; i < mdpr.getRowCount(); i++) {
+                        String tenSP = mdpr.getValueAt(i, 1).toString();
+                        String soL = mdpr.getValueAt(i, 2).toString();
+                        String donG = mdpr.getValueAt(i, 3).toString();
+                        String tenTP = mdpr.getValueAt(i, 4).toString();
+                        txtPrint.setText(txtPrint.getText() + "\t" + tenSP + "\t\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
+                    }
+
+                    txtPrint.setText(txtPrint.getText()
+                            + "________________________________________________________________________________________________\n"
+                            + "\tMã Giảm Giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n"
+                            + "\tMức Giảm:\t\t\t" + txtTienGiam.getText() + " " + "VND" + "\n"
+                            + "\tGiá Topping:\t\t\t" + txtGiaTopping.getText() + " " + "VND" + "\n"
+                            + "================================================================================\n"
+                            + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n"
+                            + "           +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++");
                     try {
                         txtPrint.print();
                     } catch (PrinterException ex) {
