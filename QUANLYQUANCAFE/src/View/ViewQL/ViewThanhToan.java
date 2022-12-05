@@ -967,12 +967,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 //                    }
                     txtPrint.append("\t\tHÓA ĐƠN THANH TOÁN \n\n"
                             + "\t\t   Mã Hóa Đơn:  " + txtMa.getText() + "\n"
-                            + "\t+++--------------------------------------------------------------------------------------------+++\n"
+                            + "+++----------------------------------------------------------------------------------------------------------+++\n"
                             + "\tBàn:\t\t\t" + txtBan.getText() + "\n"
                             + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n"
                             + "\tNgày:\t\t\t" + txtNgay.getText() + "\n"
                             + "\tTên hàng:\t" + "Giá:\t" + "SL:\t" + "TP:\t" + "\n"
-                            + "\t________________________________________________________________________________________________\n"
+                            + "________________________________________________________________________________________________\n"
                     );
                     DefaultTableModel mdpr = new DefaultTableModel();
                     mdpr = (DefaultTableModel) tbGH.getModel();
@@ -985,13 +985,13 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                         txtPrint.setText(txtPrint.getText() + "\t" + tenSP + "\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
                     }
                     txtPrint.setText(txtPrint.getText()
-                            + "\t________________________________________________________________________________________________\n"
+                            + "________________________________________________________________________________________________\n"
                             + "\tMã Giảm Giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n"
                             + "\tMức Giảm:\t\t\t" + txtTienGiam.getText() + " " + "VND" + "\n"
                             + "\tGiá Topping:\t\t\t" + txtGiaTopping.getText() + " " + "VND" + "\n"
                             + "================================================================================\n"
                             + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n"
-                            + "\t+++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++");
+                            + "           +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++");
                     try {
                         txtPrint.print();
                     } catch (PrinterException ex) {
