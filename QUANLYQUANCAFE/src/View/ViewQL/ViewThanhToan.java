@@ -833,7 +833,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     txtTienThua.setText(String.valueOf(tienThua));
                 } else if (cbbGG.getSelectedItem() == "Chọn") {
                     Double tienTP = Double.valueOf(txtGiaTopping.getText());
-                    Double tien = Double.valueOf(txtTongTien.getText()) - tienTP;
+                    Double tien = Double.valueOf(txtTongTien.getText());
                     Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
                     Double tienThua = tienKhach - tien;
                     txtTienThua.setText(String.valueOf(tienThua));
@@ -846,26 +846,43 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void tbSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSPMouseClicked
         try {
+            int rowSP = tbSP.getSelectedRow();
+            String maSP = tbSP.getValueAt(rowSP, 0).toString();
+            SanPham sp = implSP.getOne(maSP);
+            HoaDon idHD = implHD.getOne(txtMa.getText());
+            String id = sp.getId();
+            String tp = cbbTopping.getSelectedItem().toString();
+            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+            if (slt <= 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+                return;
+            }
+            for (int i = 0; i < tbGH.getRowCount(); i++) {
+                String maSPGH = tbGH.getValueAt(i, 0).toString();
+                Integer sl = Integer.valueOf(tbGH.getValueAt(i, 2).toString());
+                if (maSP.equalsIgnoreCase(maSPGH)) {
+                    HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt + sl);
+                    implHDCT.update(hdct, idHD.getID(), id);
+                    listHDCT = implHDCT.getAllviewGH(idHD.getID());
+                    showDataHDCT(listHDCT);
+                }
+            }
             if (txtMa.getText() == "__") {
                 JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
             } else {
-                int rowSP = tbSP.getSelectedRow();
-                String maSP = tbSP.getValueAt(rowSP, 0).toString();
-                SanPham sp = implSP.getOne(maSP);
-                HoaDon idHD = implHD.getOne(txtMa.getText());
-                String id = sp.getId();
-                String tp = cbbTopping.getSelectedItem().toString();
+//                    int rowSP = tbSP.getSelectedRow();
+//                    String maSP = tbSP.getValueAt(rowSP, 0).toString();
+//                    SanPham sp = implSP.getOne(maSP);
+//                    HoaDon idHD = implHD.getOne(txtMa.getText());
+//                    String id = sp.getId();
+//                    String tp = cbbTopping.getSelectedItem().toString();
                 Topping idtp = implTP.getOne(tp);
-                int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-                if (slt <= 0) {
-                    JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-                    return;
-                }
                 HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt, idtp.getId());
                 implHDCT.add(hdct);
                 listHDCT = implHDCT.getAllviewGH(idHD.getID());
                 showDataHDCT(listHDCT);
             }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Bỏ chọn sản phẩm");
         }
@@ -892,7 +909,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             Topping top = implTP.getOne(tp);
             tienTP += top.getGia();
         }
-        double tongTien = tong + tienTP;
+        double tongTien = tong;
         txtTongTien.setText(String.valueOf(tongTien));
         txtGiaTopping.setText(String.valueOf(tienTP));
     }//GEN-LAST:event_tbGHMouseClicked
@@ -1072,14 +1089,18 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 for (KhuyenMai x : listKhuyenMai) {
                     if (cbbGG.getSelectedItem() == x.getMaKM()) {
-                        txtTienGiam.setText(String.valueOf(x.getMucGiam()));
+                        if (txtTienGiam.getText().equalsIgnoreCase(String.valueOf(x.getMucGiam()))) {
+                            JOptionPane.showMessageDialog(this, "Đã áp dụng mã");
+                        } else {
+                            txtTienGiam.setText(String.valueOf(x.getMucGiam()));
+                            Double tienGiam = Double.valueOf(txtTienGiam.getText());
+                            Double tongTien = Double.valueOf(txtTongTien.getText());
+                            Double tien = tongTien - tienGiam;
+                            txtTongTien.setText(String.valueOf(tien));
+                        }
                     }
                 }
             }
-            Double tongTien = Double.valueOf(txtTongTien.getText());
-            Double tienGiam = Double.valueOf(txtTienGiam.getText());
-            Double tien = tongTien - tienGiam;
-            txtTongTien.setText(String.valueOf(tien));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm");
             txtTienGiam.setText("0");
@@ -1169,7 +1190,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         String maSP = tbGH.getValueAt(rowSP, 0).toString();
         SanPham sp = implSP.getOne(maSP);
         implHDCT.delete(idHD.getID(), sp.getId());
-        listHDCT = implHDCT.getAllviewGH(sp.getId());
+        listHDCT = implHDCT.getAllviewGH(idHD.getID());
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_xoaSPActionPerformed
 
