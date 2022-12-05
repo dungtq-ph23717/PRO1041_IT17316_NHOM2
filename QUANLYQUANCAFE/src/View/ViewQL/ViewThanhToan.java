@@ -1314,7 +1314,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             if (result != null) {
               TXTMAFAKE.setText(result.getText());
                 MucGiam(result.getText());
-                break;
             }
 
         } while (true);
