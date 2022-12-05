@@ -41,6 +41,11 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
     public List<HoaDon> getListHD() {
         return rps.getListHD();
     }
+    
+       @Override
+    public List<HoaDon> getListHDNow() {
+        return rps.getListHDNow();
+    }
 
     @Override
     public List<HoaDon> search(String datehd) {

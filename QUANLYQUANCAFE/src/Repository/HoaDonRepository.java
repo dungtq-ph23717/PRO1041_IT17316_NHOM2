@@ -94,6 +94,25 @@ public class HoaDonRepository {
         return null;
     }
 
+    public List<HoaDon> getListHDNow() {
+        String query = "ELECT MaHD,CONVERT(nvarchar, GETDATE(), 105),(Giaban * Soluong) + Topping.GiaTien as tong FROM HoaDon\n"
+                + "inner join HoaDonChiTiet on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "inner join SanPham on SanPham.ID = HoaDonChiTiet.IDSP\n"
+                + "inner join Topping on Topping.ID = HoaDonChiTiet.IDTopping";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDouble(3));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<HoaDon> searchTheoTT(String tt) {
         String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
                 + "from HoaDon \n"
