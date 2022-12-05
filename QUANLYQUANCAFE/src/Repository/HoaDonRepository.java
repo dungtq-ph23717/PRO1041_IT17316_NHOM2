@@ -216,11 +216,11 @@ public class HoaDonRepository {
 
     public List<HoaDon> search(String date) {
         String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
-                + "inner join HoaDonChiTiet\n"
-                + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
-                + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
-                + "inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID"
-                + "WHERE NgayLapHD like ?";
+                + "                inner join HoaDonChiTiet\n"
+                + "               on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "               inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "               inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID\n"
+                + "                WHERE MaHD like ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, "%" + date + "%");
             ResultSet rs = ps.executeQuery();
@@ -228,7 +228,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
                 SanPham sp = new SanPham(rs.getString(3));
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(4));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5));
                 list.add(hd);
             }
             return list;
@@ -315,18 +315,18 @@ public class HoaDonRepository {
     }
 
     public static void main(String[] args) {
-//        List<HoaDon> rp = new HoaDonRepository().getAllTT();
-//        for (HoaDon hoaDon : rp) {
-//            System.out.println(hoaDon.toString());
-//        }
+        List<HoaDon> rp = new HoaDonRepository().search("hd61");
+        for (HoaDon hoaDon : rp) {
+            System.out.println(hoaDon.toString());
+        }
 //        HoaDonModel hd = new HoaDonModel("HD1", "1");
 //        boolean add = new HoaDonRepository().updateID("15d13f6e-71b8-44be-8560-213d2f84002a", "HD31");
 //        System.out.println(add);
 //        HoaDon hd = new HoaDonRepository().getOne("HD2");
 //        System.out.println(hd);
-        List<HoaDon> getall = new Repository.HoaDonRepository().getAll();
-        for (HoaDon x : getall) {
-            System.out.println(x);
+//        List<HoaDon> getall = new Repository.HoaDonRepository().getAll();
+//        for (HoaDon x : getall) {
+//            System.out.println(x);
         }
     }
-}
+//}
