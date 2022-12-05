@@ -1089,14 +1089,18 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 for (KhuyenMai x : listKhuyenMai) {
                     if (cbbGG.getSelectedItem() == x.getMaKM()) {
-                        txtTienGiam.setText(String.valueOf(x.getMucGiam()));
+                        if (txtTienGiam.getText().equalsIgnoreCase(String.valueOf(x.getMucGiam()))) {
+                            JOptionPane.showMessageDialog(this, "Đã áp dụng mã");
+                        } else {
+                            txtTienGiam.setText(String.valueOf(x.getMucGiam()));
+                            Double tienGiam = Double.valueOf(txtTienGiam.getText());
+                            Double tongTien = Double.valueOf(txtTongTien.getText());
+                            Double tien = tongTien - tienGiam;
+                            txtTongTien.setText(String.valueOf(tien));
+                        }
                     }
                 }
             }
-            Double tongTien = Double.valueOf(txtTongTien.getText());
-            Double tienGiam = Double.valueOf(txtTienGiam.getText());
-            Double tien = tongTien - tienGiam;
-            txtTongTien.setText(String.valueOf(tien));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm");
             txtTienGiam.setText("0");
