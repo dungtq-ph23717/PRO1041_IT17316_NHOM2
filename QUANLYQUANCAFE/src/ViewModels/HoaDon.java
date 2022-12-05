@@ -17,6 +17,7 @@ public class HoaDon {
     private String ngayLapHD;
     private String phuongThucThanhToan;
     private SanPham sp;
+    private SanPham sl;
     private HoaDonChiTiet hdct;
     private Topping tp;
     private double thanhTien;
@@ -25,20 +26,30 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(String maHD, String ngayLapHD, double thanhTien) {
+    public HoaDon(String maHD, String ngayLapHD, SanPham sp, double thanhTien) {
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
+        this.sp = sp;
         this.thanhTien = thanhTien;
     }
 
-    public HoaDon(String maHD, NhanVienViewModel tenNV, SanPham sp, String tinhTrang) {
+    public SanPham getSl() {
+        return sl;
+    }
+
+    public void setSl(SanPham sl) {
+        this.sl = sl;
+    }
+
+  
+
+ 
+
+    public HoaDon(String maHD, NhanVienViewModel tenNV, String tinhTrang) {
         this.maHD = maHD;
         this.tenNV = tenNV;
-        this.sp = sp;
         this.tinhTrang = tinhTrang;
     }
-    
-    
 
     public HoaDon(String maHD) {
         this.maHD = maHD;
