@@ -909,7 +909,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             Topping top = implTP.getOne(tp);
             tienTP += top.getGia();
         }
-        double tongTien = tong + tienTP;
+        double tongTien = tong;
         txtTongTien.setText(String.valueOf(tongTien));
         txtGiaTopping.setText(String.valueOf(tienTP));
     }//GEN-LAST:event_tbGHMouseClicked
