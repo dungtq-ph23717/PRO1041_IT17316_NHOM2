@@ -75,17 +75,18 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> getListHD() {
-        String query = "Select MaHD,NgayLapHD,TenSP,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
-                + "                inner join HoaDonChiTiet\n"
-                + "                on HoaDon.ID = HoaDonChiTiet.IDHD\n"
-                + "               inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
-                + "                inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID";
+        String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
+                + "inner join HoaDonChiTiet\n"
+                + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
+                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
                 SanPham sp = new SanPham(rs.getString(3));
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, rs.getDouble(4));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5));
                 list.add(hd);
             }
             return list;
@@ -225,8 +226,9 @@ public class HoaDonRepository {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
+                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
                 SanPham sp = new SanPham(rs.getString(3));
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, rs.getDouble(4));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(4));
                 list.add(hd);
             }
             return list;

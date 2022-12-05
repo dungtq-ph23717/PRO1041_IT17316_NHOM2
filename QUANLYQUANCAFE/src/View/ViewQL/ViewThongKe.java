@@ -35,8 +35,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ViewThongKe extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel _DefaultTableModel1;
-    private HoaDonServiceIblm _HoaDonService;
+    private DefaultTableModel dtm = new DefaultTableModel();
+    private HoaDonServiceIblm _HoaDonService = new HoaDonServiceIblm();
     private List<HoaDon> listHoaDon = new ArrayList<>();
     private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
     private List<SanPham> ListSanPham = new ArrayList<>();
@@ -52,9 +52,13 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        _HoaDonService = new HoaDonServiceIblm();
-        LoadTable();
-           ListSanPham = implSP.getAllTT();
+//        _HoaDonService = new HoaDonServiceIblm();
+        String[] headers = {"STT", "Mã", "Ngày", "Tên", "Số lượng", "Tiền"};
+        tbl_thongke.setModel(dtm);
+        dtm.setColumnIdentifiers(headers);
+        ListSanPham = implSP.getAll();
+        listHoaDon = implHD.getListHD();
+        LoadTable(listHoaDon);
         LoadTable1();
         TinhTong();
 
@@ -68,33 +72,31 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 //            dtmThongKe.addRow(new Object[]{stt++, x.getMaHD(), x.getNgayLapHD(), x.getThanhTien()});
 //        }
 //    }
-    public void LoadTable() {
-        _DefaultTableModel1 = (DefaultTableModel) tbl_thongke.getModel();
-        _DefaultTableModel1.setRowCount(0);
-        ListSanPham = implSP.getAllTT();
+    public void LoadTable(List<HoaDon> list) {
+//        _DefaultTableModel1.setRowCount(0);
         int stt = 1;
-        for (var o : _HoaDonService.getListHD()) {
-            _DefaultTableModel1.addRow(new Object[]{
-                stt++, o.getMaHD(), o.getNgayLapHD(), o.getSp().getTenSP(), o.getThanhTien()
+        for (HoaDon hd : list) {
+            dtm.addRow(new Object[]{
+                stt++, hd.getMaHD(), hd.getNgayLapHD(),hd.getSp().getTenSP(), hd.getHdct().getSoLuong(), hd.getThanhTien()
             });
         }
     }
 
     public void LoadTable1() {
-        _DefaultTableModel1 = (DefaultTableModel) tbl_nhanvien.getModel();
-        _DefaultTableModel1.setRowCount(0);
+        dtm = (DefaultTableModel) tbl_nhanvien.getModel();
+        dtm.setRowCount(0);
         for (var o : _HoaDonService.getAllTT()) {
-            _DefaultTableModel1.addRow(new Object[]{
+            dtm.addRow(new Object[]{
                 o.getMaHD(), o.getTenNV().getTenNV(), o.getTinhTrang()
             });
         }
     }
 
     public void findHD(List<HoaDon> list) {
-        _DefaultTableModel1.setRowCount(0);
+        dtm.setRowCount(0);
         int stt = 1;
         for (HoaDon hd : list) {
-            _DefaultTableModel1.addRow(new Object[]{stt++, hd.getMaHD(), hd.getNgayLapHD(), hd.getThanhTien()});
+            dtm.addRow(new Object[]{stt++, hd.getMaHD(), hd.getNgayLapHD(), hd.getThanhTien()});
         }
     }
 
@@ -111,7 +113,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         DecimalFormat x = new DecimalFormat("###,###,###");
         int TinhTong = 0;
         for (int i = 0; i < tbl_thongke.getRowCount(); i++) {
-            String Tong1 = (tbl_thongke.getValueAt(i, 4).toString());
+            String Tong1 = (tbl_thongke.getValueAt(i, 5).toString());
             double Tong = Double.valueOf(Tong1);
             TinhTong = (int) (TinhTong + Tong);
         }
@@ -383,7 +385,8 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         txt_date.setText("");
-        LoadTable();
+        listHoaDon = implHD.getListHD();
+        LoadTable(listHoaDon);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
