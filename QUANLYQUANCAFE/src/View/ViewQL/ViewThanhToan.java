@@ -42,6 +42,7 @@ import java.awt.image.BufferedImage;
 import java.awt.print.PrinterException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -51,8 +52,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -993,27 +998,62 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             Double tienThua = tienKhach - tien;
             if (tienThua >= 0) {
                 if (tbHD.getRowCount() <= 1) {
-                    txtPrint.append("\t\t HÓA ĐƠN THANH TOÁN \n\n\n\n"
+//                    MessageFormat header = new MessageFormat(title);
+//                    MessageFormat footer = new MessageFormat("0,number,integer");
+//                    try {
+//                        PrintRequestAttributeSet set = new HashPrintRequestAttributeSet();
+//                        set.add(OrientationRequested.LANDSCAPE);
+//                        tbGH.print(JTable.PrintMode.FIT_WIDTH, header, footer, true, set, true);
+//                        JOptionPane.showMessageDialog(this, "In thành công !");
+//                    } catch (Exception e) {
+//                        JOptionPane.showMessageDialog(this, "In thất bại !");
+//                    }
+                    txtPrint.append("\t\tHÓA ĐƠN THANH TOÁN \n\n"
                             + "\t\t   Mã Hóa Đơn:  " + txtMa.getText() + "\n"
-                            + "\t\n+++--------------------------------------------------------------------------------------------------------+++\n\n"
-                            + "\tBàn:\t\t\t" + txtBan.getText() + "\n\n"
-                            + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n\n"
-                            + "\tNgày:\t\t\t" + txtNgay.getText() + "\n\n"
-                            + "\tMã Giảm Giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n\n"
-                            + "\tMức Giảm:\t\t\t" + txtTienGiam.getText() + " " + "VND" + "\n\n"
-                            + "\tTên Sản Phẩm:\t\t" + txtTenSP.getText() + "\n\n"
-                            + "\tĐơn Giá:\t\t\t" + txtDonGia.getText() + " " + "VND" + "\n"
-                            + "              X\n\n"
-                            + "\tSố Lượng:\t\t\t" + txtSoL.getText() + "\n\n"
-                            + "\t\n================================================================================\n\n"
-                            + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n\n\n\n"
-                            + "       +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++\n\n\n"
+                            + "+++----------------------------------------------------------------------------------------------------------+++\n"
+                            + "\tBàn:\t\t\t" + txtBan.getText() + "\n"
+                            + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n"
+                            + "\tNgày:\t\t\t" + txtNgay.getText() + "\n"
+                            + "\tTên hàng:\t" + "Giá:\t" + "SL:\t" + "TP:\t" + "\n"
+                            + "________________________________________________________________________________________________\n"
                     );
+                    DefaultTableModel mdpr = new DefaultTableModel();
+                    mdpr = (DefaultTableModel) tbGH.getModel();
+                    txtPrint.setText(txtPrint.getText());
+                    for (int i = 0; i < mdpr.getRowCount(); i++) {
+                        String tenSP = mdpr.getValueAt(i, 1).toString();
+                        String soL = mdpr.getValueAt(i, 2).toString();
+                        String donG = mdpr.getValueAt(i, 3).toString();
+                        String tenTP = mdpr.getValueAt(i, 4).toString();
+                        txtPrint.setText(txtPrint.getText() + "\t" + tenSP + "\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
+                    }
+                    txtPrint.setText(txtPrint.getText()
+                            + "________________________________________________________________________________________________\n"
+                            + "\tMã Giảm Giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n"
+                            + "\tMức Giảm:\t\t\t" + txtTienGiam.getText() + " " + "VND" + "\n"
+                            + "\tGiá Topping:\t\t\t" + txtGiaTopping.getText() + " " + "VND" + "\n"
+                            + "================================================================================\n"
+                            + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n"
+                            + "           +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++");
                     try {
                         txtPrint.print();
                     } catch (PrinterException ex) {
                         Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, "In thất bại!", ex);
                     }
+//                    txtPrint.append("\t\tHÓA ĐƠN THANH TOÁN \n\n\n\n"
+//                            + "\t\t   Mã Hóa Đơn:  " + txtMa.getText() + "\n"
+//                            + "\t\n+++--------------------------------------------------------------------------------------------------------+++\n\n"
+//                            + "\tBàn:\t\t\t" + txtBan.getText() + "\n\n"
+//                            + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n\n"
+//                            + "\tNgày:\t\t\t" + txtNgay.getText() + "\n\n\n"
+//                            + "\tMã Giảm Giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n\n"
+//                            + "\tMức Giảm:\t\t\t" + txtTienGiam.getText() + " " + "VND" + "\n\n"
+//                            + "\tGiá Topping:\t\t\t" + txtGiaTopping.getText() + " " + "VND" + "\n\n"
+//                            + "\t\n================================================================================\n\n"
+//                            + "\tTổng tiền:\t\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n\n\n\n"
+//                            + "       +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++\n\n\n"
+//                    );
+//                    
                     JOptionPane.showMessageDialog(this, "In thành công!");
 
                     String ma = txtMa.getText();
