@@ -27,7 +27,18 @@ import ViewModels.KhuyenMai;
 import ViewModels.NhanVienViewModel;
 import ViewModels.SanPham;
 import ViewModels.Topping;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.awt.print.PrinterException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -35,6 +46,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -46,8 +60,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class ViewThanhToan extends javax.swing.JInternalFrame {
-
+public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnable,ThreadFactory{
+        //----------webcam---------------||
+    private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
+    
     private DefaultTableModel dtmBan = new DefaultTableModel();
     private DefaultTableModel dtmGioHang = new DefaultTableModel();
     private DefaultTableModel dtmSanPham = new DefaultTableModel();
@@ -82,7 +100,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-
+        initWebcam();
         String[] headersBan = {"Tên bàn", "Loại bàn", "Trạng thái"};
         tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
@@ -255,6 +273,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tbHD = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        TXTMAFAKE = new javax.swing.JTextField();
 
         gopBan.setText("Gộp bàn");
         gopBan.setToolTipText("");
@@ -430,7 +450,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     .addComponent(txtSearchTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbLocDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -766,17 +786,23 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 168, Short.MAX_VALUE)
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
         );
+
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 180));
+        jPanel5.add(TXTMAFAKE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 250, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -795,7 +821,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -833,7 +859,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     txtTienThua.setText(String.valueOf(tienThua));
                 } else if (cbbGG.getSelectedItem() == "Chọn") {
                     Double tienTP = Double.valueOf(txtGiaTopping.getText());
-                    Double tien = Double.valueOf(txtTongTien.getText()) - tienTP;
+                    Double tien = Double.valueOf(txtTongTien.getText());
                     Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
                     Double tienThua = tienKhach - tien;
                     txtTienThua.setText(String.valueOf(tienThua));
@@ -846,26 +872,43 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void tbSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSPMouseClicked
         try {
+            int rowSP = tbSP.getSelectedRow();
+            String maSP = tbSP.getValueAt(rowSP, 0).toString();
+            SanPham sp = implSP.getOne(maSP);
+            HoaDon idHD = implHD.getOne(txtMa.getText());
+            String id = sp.getId();
+            String tp = cbbTopping.getSelectedItem().toString();
+            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+            if (slt <= 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+                return;
+            }
+            for (int i = 0; i < tbGH.getRowCount(); i++) {
+                String maSPGH = tbGH.getValueAt(i, 0).toString();
+                Integer sl = Integer.valueOf(tbGH.getValueAt(i, 2).toString());
+                if (maSP.equalsIgnoreCase(maSPGH)) {
+                    HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt + sl);
+                    implHDCT.update(hdct, idHD.getID(), id);
+                    listHDCT = implHDCT.getAllviewGH(idHD.getID());
+                    showDataHDCT(listHDCT);
+                }
+            }
             if (txtMa.getText() == "__") {
                 JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
             } else {
-                int rowSP = tbSP.getSelectedRow();
-                String maSP = tbSP.getValueAt(rowSP, 0).toString();
-                SanPham sp = implSP.getOne(maSP);
-                HoaDon idHD = implHD.getOne(txtMa.getText());
-                String id = sp.getId();
-                String tp = cbbTopping.getSelectedItem().toString();
+//                    int rowSP = tbSP.getSelectedRow();
+//                    String maSP = tbSP.getValueAt(rowSP, 0).toString();
+//                    SanPham sp = implSP.getOne(maSP);
+//                    HoaDon idHD = implHD.getOne(txtMa.getText());
+//                    String id = sp.getId();
+//                    String tp = cbbTopping.getSelectedItem().toString();
                 Topping idtp = implTP.getOne(tp);
-                int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-                if (slt <= 0) {
-                    JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-                    return;
-                }
                 HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt, idtp.getId());
                 implHDCT.add(hdct);
                 listHDCT = implHDCT.getAllviewGH(idHD.getID());
                 showDataHDCT(listHDCT);
             }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Bỏ chọn sản phẩm");
         }
@@ -892,7 +935,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             Topping top = implTP.getOne(tp);
             tienTP += top.getGia();
         }
-        double tongTien = tong + tienTP;
+        double tongTien = tong;
         txtTongTien.setText(String.valueOf(tongTien));
         txtGiaTopping.setText(String.valueOf(tienTP));
     }//GEN-LAST:event_tbGHMouseClicked
@@ -1072,14 +1115,18 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
             } else {
                 for (KhuyenMai x : listKhuyenMai) {
                     if (cbbGG.getSelectedItem() == x.getMaKM()) {
-                        txtTienGiam.setText(String.valueOf(x.getMucGiam()));
+                        if (txtTienGiam.getText().equalsIgnoreCase(String.valueOf(x.getMucGiam()))) {
+                            JOptionPane.showMessageDialog(this, "Đã áp dụng mã");
+                        } else {
+                            txtTienGiam.setText(String.valueOf(x.getMucGiam()));
+                            Double tienGiam = Double.valueOf(txtTienGiam.getText());
+                            Double tongTien = Double.valueOf(txtTongTien.getText());
+                            Double tien = tongTien - tienGiam;
+                            txtTongTien.setText(String.valueOf(tien));
+                        }
                     }
                 }
             }
-            Double tongTien = Double.valueOf(txtTongTien.getText());
-            Double tienGiam = Double.valueOf(txtTienGiam.getText());
-            Double tien = tongTien - tienGiam;
-            txtTongTien.setText(String.valueOf(tien));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm");
             txtTienGiam.setText("0");
@@ -1169,7 +1216,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         String maSP = tbGH.getValueAt(rowSP, 0).toString();
         SanPham sp = implSP.getOne(maSP);
         implHDCT.delete(idHD.getID(), sp.getId());
-        listHDCT = implHDCT.getAllviewGH(sp.getId());
+        listHDCT = implHDCT.getAllviewGH(idHD.getID());
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_xoaSPActionPerformed
 
@@ -1210,7 +1257,16 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         listHDCT = implHDCT.getAllviewGH(hd1.getID());
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_btDoiActionPerformed
-
+  private void initWebcam() {
+        java.awt.Dimension size = WebcamResolution.QQVGA.getSize();
+        webcam = Webcam.getWebcams().get(0);
+        webcam.setViewSize(size);
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+        jPanel5.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 170));
+        executor.execute(this);
+    }
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         SanPham sp = listSanPham.get(index);
@@ -1233,9 +1289,46 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         txtNgay.setText(hd.getNgayLapHD());
         txtNhanVien.setText(hd.getTenNV().getTenNV());
     }
+     @Override
+    public void run() {
+        do {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Result result = null;
+            BufferedImage image = null;
+            if (webcam.isOpen()) {
+                if ((image = webcam.getImage()) == null) {
+                    continue;
+                }
+            }
+            LuminanceSource source = new BufferedImageLuminanceSource(image);
+            BinaryBitmap bitmapew = new BinaryBitmap(new HybridBinarizer(source));
+            try {
+                result = new MultiFormatReader().decode(bitmapew);
+            } catch (NotFoundException ex) {
+                Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (result != null) {
+              TXTMAFAKE.setText(result.getText());
+                MucGiam(result.getText());
+            }
+
+        } while (true);
+
+    }
+
+    private void MucGiam(String mucgiam) {
+        if (TXTMAFAKE.getText().equalsIgnoreCase("https://qrco.de/bdXusB")) {
+            cbbGG.setSelectedItem("M1");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PHoaDon;
+    private javax.swing.JTextField TXTMAFAKE;
     private javax.swing.JButton bltThanhToan;
     private javax.swing.JButton btDoi;
     private javax.swing.JButton btHuyDon;
@@ -1267,6 +1360,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
@@ -1299,4 +1393,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem updateSL;
     private javax.swing.JMenuItem xoaSP;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public Thread newThread(Runnable r) {
+        Thread t = new Thread(r, "My Thread");
+        t.setDaemon(true);
+        return t;
+    } 
+    
+    
 }
+
