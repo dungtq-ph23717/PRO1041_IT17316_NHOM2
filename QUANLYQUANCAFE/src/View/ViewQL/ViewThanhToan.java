@@ -833,7 +833,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                     txtTienThua.setText(String.valueOf(tienThua));
                 } else if (cbbGG.getSelectedItem() == "Chọn") {
                     Double tienTP = Double.valueOf(txtGiaTopping.getText());
-                    Double tien = Double.valueOf(txtTongTien.getText()) - tienTP;
+                    Double tien = Double.valueOf(txtTongTien.getText());
                     Double tienKhach = Double.valueOf(txtTienKhachTra.getText());
                     Double tienThua = tienKhach - tien;
                     txtTienThua.setText(String.valueOf(tienThua));
