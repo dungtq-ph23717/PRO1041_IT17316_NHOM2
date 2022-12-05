@@ -846,26 +846,43 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
 
     private void tbSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSPMouseClicked
         try {
+            int rowSP = tbSP.getSelectedRow();
+            String maSP = tbSP.getValueAt(rowSP, 0).toString();
+            SanPham sp = implSP.getOne(maSP);
+            HoaDon idHD = implHD.getOne(txtMa.getText());
+            String id = sp.getId();
+            String tp = cbbTopping.getSelectedItem().toString();
+            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+            if (slt <= 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+                return;
+            }
+            for (int i = 0; i < tbGH.getRowCount(); i++) {
+                String maSPGH = tbGH.getValueAt(i, 0).toString();
+                Integer sl = Integer.valueOf(tbGH.getValueAt(i, 2).toString());
+                if (maSP.equalsIgnoreCase(maSPGH)) {
+                    HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt + sl);
+                    implHDCT.update(hdct, idHD.getID(), id);
+                    listHDCT = implHDCT.getAllviewGH(idHD.getID());
+                    showDataHDCT(listHDCT);
+                }
+            }
             if (txtMa.getText() == "__") {
                 JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
             } else {
-                int rowSP = tbSP.getSelectedRow();
-                String maSP = tbSP.getValueAt(rowSP, 0).toString();
-                SanPham sp = implSP.getOne(maSP);
-                HoaDon idHD = implHD.getOne(txtMa.getText());
-                String id = sp.getId();
-                String tp = cbbTopping.getSelectedItem().toString();
+//                    int rowSP = tbSP.getSelectedRow();
+//                    String maSP = tbSP.getValueAt(rowSP, 0).toString();
+//                    SanPham sp = implSP.getOne(maSP);
+//                    HoaDon idHD = implHD.getOne(txtMa.getText());
+//                    String id = sp.getId();
+//                    String tp = cbbTopping.getSelectedItem().toString();
                 Topping idtp = implTP.getOne(tp);
-                int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-                if (slt <= 0) {
-                    JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-                    return;
-                }
                 HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt, idtp.getId());
                 implHDCT.add(hdct);
                 listHDCT = implHDCT.getAllviewGH(idHD.getID());
                 showDataHDCT(listHDCT);
             }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Bỏ chọn sản phẩm");
         }
@@ -1169,7 +1186,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
         String maSP = tbGH.getValueAt(rowSP, 0).toString();
         SanPham sp = implSP.getOne(maSP);
         implHDCT.delete(idHD.getID(), sp.getId());
-        listHDCT = implHDCT.getAllviewGH(sp.getId());
+        listHDCT = implHDCT.getAllviewGH(idHD.getID());
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_xoaSPActionPerformed
 
