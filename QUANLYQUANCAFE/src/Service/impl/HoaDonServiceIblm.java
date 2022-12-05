@@ -107,4 +107,9 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         return rps.getAllHD(ma);
     }
 
+    @Override
+    public List<HoaDon> getAllHDCho() {
+        return rps.getAllHDCho();
+    }
+
 }

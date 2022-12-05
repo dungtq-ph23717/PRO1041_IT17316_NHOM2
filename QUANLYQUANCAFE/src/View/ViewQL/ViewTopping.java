@@ -222,6 +222,12 @@ public class ViewTopping extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -319,6 +325,12 @@ public class ViewTopping extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         fillData(row);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        List<Topping> listSearch = impl.searchTen(txtSearch.getText());
+        showData(listSearch);
+    }//GEN-LAST:event_txtSearchKeyReleased
 
     /**
      * @param args the command line arguments

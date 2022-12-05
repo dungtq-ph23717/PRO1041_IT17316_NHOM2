@@ -35,6 +35,28 @@ public class ToppingRepository {
         return null;
     }
 
+    public List<Topping> searchTen(String tenTopping) {
+        String query = "SELECT [ID]\n"
+                + "      ,[Topping]\n"
+                + "      ,[GiaTien]\n"
+                + "      ,[TrangThai]\n"
+                + "  FROM [dbo].[Topping]\n"
+                + "  WHERE Topping like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + tenTopping + "%");
+            ResultSet rs = ps.executeQuery();
+            List<Topping> list = new ArrayList<>();
+            while (rs.next()) {
+                Topping tp = new Topping(rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getString(4));
+                list.add(tp);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public Topping getOne(String topping) {
         String query = "SELECT * FROM Topping\n"
                 + "where Topping like ?";
