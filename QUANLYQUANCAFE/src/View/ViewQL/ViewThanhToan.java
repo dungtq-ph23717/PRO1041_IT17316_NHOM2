@@ -988,7 +988,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame {
                         String tenTP = mdpr.getValueAt(i, 4).toString();
                         txtPrint.setText(txtPrint.getText() + "\t" + tenSP + "\t\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
                     }
-
                     txtPrint.setText(txtPrint.getText()
                             + "________________________________________________________________________________________________\n"
                             + "\tMã Giảm Giá:\t\t\t" + cbbGG.getSelectedItem().toString() + "\n"
