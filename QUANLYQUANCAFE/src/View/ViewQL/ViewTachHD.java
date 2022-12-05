@@ -301,21 +301,27 @@ public class ViewTachHD extends javax.swing.JFrame {
 
         String maHD = cbbMaHD2.getSelectedItem().toString();
         HoaDon hd = implHD.getOne(maHD);
+        String ma1 = cbbMaHD1.getSelectedItem().toString();
+        HoaDon hd1 = implHD.getOne(ma1);
         for (int i = 0; i < tbGH1.getRowCount(); i++) {
-//            if (hd.getMaHD() == tbGH2.getValueAt(i, 0)) {
-//                JOptionPane.showMessageDialog(this, "Trùng mã");
-//            }
             String idSP = (String) tbGH1.getValueAt(i, 0);
             SanPham sp = implSP.getOne(idSP);
             implHDCT.gopHD(hd.getID(), sp.getId());
+            String idSp1 = tbGH2.getValueAt(i, 0).toString();
+            Integer sl = Integer.valueOf(tbGH1.getValueAt(i, 2).toString());
+            Integer slt = Integer.valueOf(tbGH2.getValueAt(i, 2).toString());
+            if (idSP.equalsIgnoreCase(idSp1)) {
+                HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt + sl);
+                implHDCT.update(hdct, hd.getID(), sp.getId());
+//                listHDCT = implHDCT.getAllviewGH(idHD.getID());
+//                showDataHDCT(listHDCT);
+            }
         }
-        String ma1 = cbbMaHD1.getSelectedItem().toString();
-        HoaDon hd1 = implHD.getOne(ma1);
-        JOptionPane.showMessageDialog(this, implHD.delete(ma1));
+        implHD.delete(ma1);
         boxModel1.removeElement(ma1);
         listHDCT = implHDCT.getAllviewGH(hd.getID());
         showDataHDCT2(listHDCT);
-        listHDCT = implHDCT.getAllviewGH(hd1.getID());
+        listHDCT.clear();
         showDataHDCT1(listHDCT);
 
 //        listHDCT = implHDCT.getAllviewGH(hd.getID());
