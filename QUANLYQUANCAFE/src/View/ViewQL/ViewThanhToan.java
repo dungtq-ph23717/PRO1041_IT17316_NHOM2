@@ -102,7 +102,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        initWebcam();
         String[] headersBan = {"Tên bàn", "Loại bàn", "Trạng thái"};
         tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
@@ -222,6 +221,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         jPopupMenu2 = new javax.swing.JPopupMenu();
         tachHD = new javax.swing.JMenuItem();
         gopHD = new javax.swing.JMenuItem();
+        jPopupMenu3 = new javax.swing.JPopupMenu();
+        btMo = new javax.swing.JMenuItem();
+        btDong = new javax.swing.JMenuItem();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbGH = new javax.swing.JTable();
@@ -328,6 +330,22 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             }
         });
         jPopupMenu2.add(gopHD);
+
+        btMo.setText("Mở");
+        btMo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMoActionPerformed(evt);
+            }
+        });
+        jPopupMenu3.add(btMo);
+
+        btDong.setText("Đóng");
+        btDong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDongActionPerformed(evt);
+            }
+        });
+        jPopupMenu3.add(btDong);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -791,6 +809,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel8.setComponentPopupMenu(jPopupMenu3);
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel5.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 170));
         jPanel5.add(TXTFake, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 260, 0));
@@ -1261,6 +1280,15 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         showDataHDCT(listHDCT);
     }//GEN-LAST:event_btDoiActionPerformed
 
+    private void btMoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoActionPerformed
+               initWebcam();
+
+    }//GEN-LAST:event_btMoActionPerformed
+
+    private void btDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDongActionPerformed
+      initComponents();
+    }//GEN-LAST:event_btDongActionPerformed
+
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         SanPham sp = listSanPham.get(index);
@@ -1336,7 +1364,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JTextField TXTFake;
     private javax.swing.JButton bltThanhToan;
     private javax.swing.JButton btDoi;
+    private javax.swing.JMenuItem btDong;
     private javax.swing.JButton btHuyDon;
+    private javax.swing.JMenuItem btMo;
     private javax.swing.JCheckBox cbInHD;
     private javax.swing.JComboBox<String> cbbGG;
     private javax.swing.JComboBox<String> cbbLocDanhMuc;
@@ -1369,6 +1399,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JPopupMenu jPopupMenu3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
