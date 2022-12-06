@@ -34,8 +34,8 @@ public class SanPham {
         this.giaBan = giaBan;
     }
 
-    public SanPham(String id) {
-        this.id = id;
+   public SanPham(String tenSP) {
+        this.tenSP = tenSP;
     }
 
     public String getId() {
