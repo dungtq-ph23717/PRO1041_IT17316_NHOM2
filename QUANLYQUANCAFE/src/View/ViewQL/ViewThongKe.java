@@ -112,6 +112,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 //        }
 //        jLabel4.setText(Integer.toString(sum));
 //    }
+  
     public void TinhTong() {
 //        _DefaultTableModel1 = (DefaultTableModel) tbl_thongke.getModel();
 //        _DefaultTableModel1.setRowCount(0);
