@@ -61,8 +61,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnable,ThreadFactory{
+public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnable, ThreadFactory {
 //----------webcam---------------||
+
     private WebcamPanel panel = null;
     private Webcam webcam = null;
     private Executor executor = Executors.newSingleThreadExecutor(this);
@@ -100,7 +101,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-       
+
         String[] headersBan = {"Tên bàn", "Loại bàn", "Trạng thái"};
         tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
@@ -1008,8 +1009,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                             + "\tBàn:\t\t\t" + txtBan.getText() + "\n"
                             + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n"
                             + "\tNgày:\t\t\t" + txtNgay.getText() + "\n\n"
-                            + "\tTên Mặt Hàng:  " + "\tĐơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
-                            + "\n_______________________________________________________________________________________________________________"
+                            + "\tTên Mặt Hàng:  " + "\tĐơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   " 
+                            + "\n_______________________________________________________________________________________________________________\n"
                     );
 
                     DefaultTableModel mdpr = new DefaultTableModel();
@@ -1284,8 +1285,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     }//GEN-LAST:event_btDongActionPerformed
 
     private void btMoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoActionPerformed
-       initWebcam();
-     
+        initWebcam();
+
     }//GEN-LAST:event_btMoActionPerformed
 
     private void fillDataGH(int index) {
@@ -1310,17 +1311,19 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         txtNgay.setText(hd.getNgayLapHD());
         txtNhanVien.setText(hd.getTenNV().getTenNV());
     }
+
     private void initWebcam() {
-         Dimension size = WebcamResolution.QQVGA.getSize();
-        webcam= webcam.getWebcams().get(0);
+        Dimension size = WebcamResolution.QQVGA.getSize();
+        webcam = webcam.getWebcams().get(0);
         webcam.setViewSize(size);
-         panel = new WebcamPanel(webcam);
+        panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
-    jPanel5.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 180));
-       executor.execute(this);
+        jPanel5.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 180));
+        executor.execute(this);
     }
-       @Override
+
+    @Override
     public void run() {
         do {
             try {
@@ -1343,7 +1346,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (result != null) {
-              txtFake.setText(result.getText());
+                txtFake.setText(result.getText());
                 MucGiam(result.getText());
             }
 
@@ -1428,13 +1431,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JMenuItem xoaSP;
     // End of variables declaration//GEN-END:variables
 
-       @Override
+    @Override
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "My Thread");
         t.setDaemon(true);
         return t;
     }
 
-    
 }
-
