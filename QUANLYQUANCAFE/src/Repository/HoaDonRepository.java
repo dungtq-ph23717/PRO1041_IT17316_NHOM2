@@ -74,7 +74,7 @@ public class HoaDonRepository {
         return null;
     }
 
-  public List<HoaDon> getListHD() {
+    public List<HoaDon> getListHD() {
         String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
                 + "inner join HoaDonChiTiet\n"
                 + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
@@ -159,6 +159,26 @@ public class HoaDonRepository {
         String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
                 + "from HoaDon \n"
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv, rs.getString(4));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<HoaDon> getAllViewHD() {
+        String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
+                + "from HoaDon \n"
+                + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
+                + "WHERE TinhTrang LIKE N'Đã thanh toán' or TinhTrang LIKE N'Hủy'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
