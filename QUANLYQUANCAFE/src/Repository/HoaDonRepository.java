@@ -74,14 +74,19 @@ public class HoaDonRepository {
         return null;
     }
 
-    public List<HoaDon> getListHD() {
-        String query = "Select MaHD,NgayLapHD,ThanhTien\n"
-                + "from HoaDon  \n";
+   public List<HoaDon> getListHD() {
+        String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
+                + "inner join HoaDonChiTiet\n"
+                + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDouble(3));
+                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
+                SanPham sp = new SanPham(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5));
                 list.add(hd);
             }
             return list;
@@ -211,15 +216,21 @@ public class HoaDonRepository {
         return null;
     }
 
-    public List<HoaDon> search(String date) {
-        String query = "SELECT MaHD,NgayLapHD,ThanhTien FROM HoaDon\n"
-                + "WHERE NgayLapHD like ?";
+   public List<HoaDon> search(String date) {
+        String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
+                + "                inner join HoaDonChiTiet\n"
+                + "               on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "               inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "               inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID\n"
+                + "                WHERE MaHD like ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, "%" + date + "%");
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDouble(3));
+                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
+                SanPham sp = new SanPham(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5));
                 list.add(hd);
             }
             return list;
