@@ -117,6 +117,29 @@ public class HoaDonRepository {
         return null;
     }
 
+    public List<HoaDon> searchTheoDate(String date1, String date2) {
+        String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
+                + "                from HoaDon \n"
+                + "                inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
+                + "                WHERE NOT TinhTrang LIKE N'Chờ' and  \n"
+                + "                NgayLapHD BETWEEN ? AND ? ";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setString(1, date1);
+            ps.setString(2, date2);
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv, rs.getString(4));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<HoaDon> searchTheoMaHD(String maHD) {
         String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
                 + "from HoaDon \n"
@@ -178,7 +201,7 @@ public class HoaDonRepository {
         String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
                 + "from HoaDon \n"
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
-                + "WHERE TinhTrang LIKE N'Đã thanh toán' or TinhTrang LIKE N'Hủy'";
+                + "WHERE TinhTrang LIKE N'Đã thanh toán' or TinhTrang LIKE N'Huỷ'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
