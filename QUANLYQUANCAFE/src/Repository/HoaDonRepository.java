@@ -75,7 +75,7 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> getListHD() {
-        String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
+        String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien,TinhTrang from HoaDon\n"
                 + "inner join HoaDonChiTiet\n"
                 + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
                 + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
@@ -86,7 +86,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
                 SanPham sp = new SanPham(rs.getString(3));
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5),rs.getString(6));
                 list.add(hd);
             }
             return list;
@@ -237,11 +237,11 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> search(String date) {
-        String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien from HoaDon\n"
-                + "                inner join HoaDonChiTiet\n"
-                + "               on HoaDon.ID = HoaDonChiTiet.IDHD\n"
-                + "               inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
-                + "               inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID\n"
+        String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien,TinhTrang from HoaDon\n"
+                + "inner join HoaDonChiTiet\n"
+                + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID\n"
                 + "                WHERE MaHD like ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, "%" + date + "%");
@@ -250,7 +250,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
                 SanPham sp = new SanPham(rs.getString(3));
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5),rs.getString(6));
                 list.add(hd);
             }
             return list;
@@ -346,7 +346,7 @@ public class HoaDonRepository {
 //        System.out.println(add);
 //        HoaDon hd = new HoaDonRepository().getOne("HD2");
 //        System.out.println(hd);
-        List<HoaDon> getall = new Repository.HoaDonRepository().getAll();
+        List<HoaDon> getall = new Repository.HoaDonRepository().getListHD();
         for (HoaDon x : getall) {
             System.out.println(x);
         }
