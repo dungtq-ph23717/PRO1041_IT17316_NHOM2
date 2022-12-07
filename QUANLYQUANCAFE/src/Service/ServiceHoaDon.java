@@ -23,6 +23,8 @@ public interface ServiceHoaDon {
 
     List<ViewModels.HoaDon> getAllTT();
 
+    List<ViewModels.HoaDon> getAllViewHD();
+
     List<ViewModels.HoaDon> getListHD();
 
     List<ViewModels.HoaDon> getAllTTViewHD(String id);
