@@ -178,7 +178,7 @@ public class HoaDonRepository {
         String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
                 + "from HoaDon \n"
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
-                + "WHERE TinhTrang LIKE N'Đã thanh toán' or TinhTrang LIKE N'Hủy'";
+                + "WHERE TinhTrang LIKE N'Đã thanh toán' or TinhTrang LIKE N'Huỷ'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
