@@ -117,4 +117,9 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         return rps.getAllViewHD();
     }
 
+    @Override
+    public List<HoaDon> searchTheoDate(String date1, String date2) {
+        return rps.searchTheoDate(date1, date2);
+    }
+
 }

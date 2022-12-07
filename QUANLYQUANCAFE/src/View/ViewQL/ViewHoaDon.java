@@ -107,7 +107,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         txtNgaybatDau = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         bltXuatBillPDF = new javax.swing.JButton();
-        txtNgaybatDau1 = new com.toedter.calendar.JDateChooser();
+        txtNgayCuoi = new com.toedter.calendar.JDateChooser();
         jPanel6 = new javax.swing.JPanel();
         txtMa = new javax.swing.JLabel();
         txtBan = new javax.swing.JLabel();
@@ -281,7 +281,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNgaybatDau1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNgayCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +323,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel5)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtNgaybatDau1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtNgayCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtNgaybatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -558,8 +558,12 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
     private void bltSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltSearchActionPerformed
         try {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            
+            String date1 = df.format(txtNgaybatDau.getDate());
+            String date2 = df.format(txtNgayCuoi.getDate());
+            List<HoaDon> searchTheoDate = iplmHD.searchTheoDate(date1, date2);
+            showDataHD(searchTheoDate);
         } catch (Exception e) {
+            JOptionPane.showConfirmDialog(this, "Tìm kiếm thất bại !");
         }
     }//GEN-LAST:event_bltSearchActionPerformed
     private void fillData(int index) {
@@ -690,8 +694,8 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtBan;
     private javax.swing.JLabel txtMa;
     private javax.swing.JLabel txtNgay;
+    private com.toedter.calendar.JDateChooser txtNgayCuoi;
     private com.toedter.calendar.JDateChooser txtNgaybatDau;
-    private com.toedter.calendar.JDateChooser txtNgaybatDau1;
     private javax.swing.JLabel txtNhanVien;
     private javax.swing.JTextArea txtPrintBill;
     private javax.swing.JLabel txtPttt;

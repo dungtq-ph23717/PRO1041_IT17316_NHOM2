@@ -146,7 +146,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtNgaybatDau1" min="-2" pref="158" max="-2" attributes="0"/>
+                      <Component id="txtNgayCuoi" min="-2" pref="158" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -198,7 +198,7 @@
                                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="txtNgaybatDau1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtNgayCuoi" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtNgaybatDau" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -312,7 +312,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="com.toedter.calendar.JDateChooser" name="txtNgaybatDau1">
+        <Component class="com.toedter.calendar.JDateChooser" name="txtNgayCuoi">
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel6">
 
