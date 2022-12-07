@@ -145,6 +145,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -624,9 +625,11 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
 
         txtID.setEnabled(false);
 
+        buttonGroup1.add(rdoDangBAn);
         rdoDangBAn.setSelected(true);
         rdoDangBAn.setText("Đang bán");
 
+        buttonGroup1.add(rdoNgungBan1);
         rdoNgungBan1.setText(" Ngừng bán");
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -945,6 +948,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JComboBox<String> cbbDanhMuc;
     private javax.swing.JComboBox<String> cbbLocDanhMuc;
     private javax.swing.JComboBox<String> cbbSize;
