@@ -25,6 +25,11 @@ public class Ban {
         this.id = id;
     }
 
+    public Ban(String maBan, String tenBan) {
+        this.maBan = maBan;
+        this.tenBan = tenBan;
+    }
+
     public Ban(String tenBan, String loaiBan, String trangThai) {
         this.tenBan = tenBan;
         this.loaiBan = loaiBan;
