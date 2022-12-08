@@ -1021,7 +1021,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                         String soL = mdpr.getValueAt(i, 2).toString();
                         String donG = mdpr.getValueAt(i, 3).toString();
                         String tenTP = mdpr.getValueAt(i, 4).toString();
-                        txtPrint.setText(txtPrint.getText() + "      " + tenSP + "\t\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
+                        txtPrint.setText(txtPrint.getText() + "\t" + tenSP + "\t\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
                     }
                     txtPrint.setText(txtPrint.getText()
                             + "________________________________________________________________________________________________\n"

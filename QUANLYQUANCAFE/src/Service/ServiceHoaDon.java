@@ -21,6 +21,8 @@ public interface ServiceHoaDon {
 
     List<ViewModels.HoaDon> searchTheoMaHD(String maHD);
 
+    List<ViewModels.HoaDon> searchTheoDate(String date1,String date2);
+
     List<ViewModels.HoaDon> getAllTT();
 
     List<ViewModels.HoaDon> getAllViewHD();
