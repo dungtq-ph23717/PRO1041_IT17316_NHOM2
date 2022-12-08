@@ -127,6 +127,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         bangHDCT = new javax.swing.JTable();
+        txtFake = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(871, 699));
 
@@ -290,7 +291,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(bltSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(cbbSearchTT, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -364,7 +365,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -422,31 +423,35 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(bangHDCT);
 
+        txtFake.setText("jLabel7");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtFake, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(467, 467, 467))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(txtFake, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(523, 523, 523)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,6 +463,10 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,13 +477,14 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
         );
 
-        setBounds(0, 0, 1055, 790);
+        setBounds(0, 0, 1055, 861);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchMaHDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchMaHDKeyReleased
@@ -503,6 +513,9 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         HoaDon hd = iplmHD.getOne(ma);
         listHD = iplmHD.getAllHD(ma);
         showData(listHD);
+        int row2 = bangHDCT.getSelectedRow();
+        txtFake.setText("check");
+        fillData(row2);
     }//GEN-LAST:event_bangHDMouseClicked
 
     private void bltXuatHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltXuatHDActionPerformed
@@ -510,47 +523,53 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bltXuatHDActionPerformed
 
     private void bltXuatBillPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltXuatBillPDFActionPerformed
-        txtPrintBill.append("\t\tHÓA ĐƠN THANH TOÁN \n\n"
-                + "\t\t   Mã Hóa Đơn:  " + txtMa.getText() + "\n"
-                + "+++--------------------------------------------------------------------------------------------------------+++\n"
-                + "\tBàn:\t\t\t" + txtBan.getText() + "\n"
-                + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n"
-                + "\tNgày:\t\t\t" + txtNgay.getText() + "\n"
-                + "\tPhương thức thanh toán:\t\t" + txtPttt.getText() + "\n\n"
-                + "\tTên Mặt Hàng:  " + "\tĐơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
-                + "\n_______________________________________________________________________________________________________________\n"
-        );
-        DefaultTableModel modelHDCT = new DefaultTableModel();
-        modelHDCT = (DefaultTableModel) bangHDCT.getModel();
-        for (int i = 0; i < modelHDCT.getRowCount(); i++) {
-            String maHD = modelHDCT.getValueAt(i, 0).toString();
-            String tenB = modelHDCT.getValueAt(i, 1).toString();
-            String tenNV = modelHDCT.getValueAt(i, 2).toString();
-            String ngayLap = modelHDCT.getValueAt(i, 3).toString();
-            String pttt = modelHDCT.getValueAt(i, 4).toString();
-            String tenSP = modelHDCT.getValueAt(i, 5).toString();
-            String donG = modelHDCT.getValueAt(i, 6).toString();
-            String soL = modelHDCT.getValueAt(i, 7).toString();
-            String tenTP = modelHDCT.getValueAt(i, 8).toString();
-            String tienT = modelHDCT.getValueAt(i, 9).toString();
-            String status = modelHDCT.getValueAt(i, 10).toString();
-            txtPrintBill.setText(txtPrintBill.getText() + "\t" + tenSP + "\t\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
+        if (txtFake.getText().equalsIgnoreCase("check")) {
+            txtPrintBill.append("\t\tHÓA ĐƠN THANH TOÁN \n\n"
+                    + "\t\t   Mã Hóa Đơn:  " + txtMa.getText() + "\n"
+                    + "+++--------------------------------------------------------------------------------------------------------+++\n"
+                    + "\tBàn:\t\t\t" + txtBan.getText() + "\n"
+                    + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n"
+                    + "\tNgày:\t\t\t" + txtNgay.getText() + "\n"
+                    + "\tPhương thức thanh toán:\t\t" + txtPttt.getText() + "\n\n"
+                    + "\tTên Mặt Hàng:  " + "\tĐơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
+                    + "\n_______________________________________________________________________________________________________________\n"
+            );
+            DefaultTableModel modelHDCT = new DefaultTableModel();
+            modelHDCT = (DefaultTableModel) bangHDCT.getModel();
+            for (int i = 0; i < modelHDCT.getRowCount(); i++) {
+                String maHD = modelHDCT.getValueAt(i, 0).toString();
+                String tenB = modelHDCT.getValueAt(i, 1).toString();
+                String tenNV = modelHDCT.getValueAt(i, 2).toString();
+                String ngayLap = modelHDCT.getValueAt(i, 3).toString();
+                String pttt = modelHDCT.getValueAt(i, 4).toString();
+                String tenSP = modelHDCT.getValueAt(i, 5).toString();
+                String donG = modelHDCT.getValueAt(i, 6).toString();
+                String soL = modelHDCT.getValueAt(i, 7).toString();
+                String tenTP = modelHDCT.getValueAt(i, 8).toString();
+                String tienT = modelHDCT.getValueAt(i, 9).toString();
+                String status = modelHDCT.getValueAt(i, 10).toString();
+                txtPrintBill.setText(txtPrintBill.getText() + "\t" + tenSP + "\t\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
+            }
+            txtPrintBill.setText(txtPrintBill.getText()
+                    + "================================================================================\n\n"
+                    + "\tTổng tiền:\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n\n\n"
+                    + "           +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++");
+
+            try {
+                txtPrintBill.print();
+                JOptionPane.showMessageDialog(this, "In thành công !");
+            } catch (PrinterException ex) {
+                Logger.getLogger(ViewHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "In thất bại !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hóa đơn !");
         }
-        txtPrintBill.setText(txtPrintBill.getText()
-                + "================================================================================\n\n"
-                + "\tTổng tiền:\t\t" + txtTongTien.getText() + " " + "VND" + "\n\n\n\n\n"
-                + "           +++++++=====CHÚC QUÝ KHÁCH 1 NGÀY TỐT LÀNH !=====+++++++");
-        try {
-            txtPrintBill.print();
-        } catch (PrinterException ex) {
-            Logger.getLogger(ViewThanhToan.class.getName()).log(Level.SEVERE, "In thất bại!", ex);
-            JOptionPane.showMessageDialog(this, "In thất bại !");
-        }
-        JOptionPane.showMessageDialog(this, "In thành công!");
     }//GEN-LAST:event_bltXuatBillPDFActionPerformed
 
     private void bangHDCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bangHDCTMouseClicked
         int row = bangHDCT.getSelectedRow();
+        txtFake.setText("check");
         fillData(row);
     }//GEN-LAST:event_bangHDCTMouseClicked
 
@@ -562,7 +581,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
             List<HoaDon> searchTheoDate = iplmHD.searchTheoDate(date1, date2);
             showDataHD(searchTheoDate);
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(this, "Tìm kiếm thất bại !");
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thất bại !");
         }
     }//GEN-LAST:event_bltSearchActionPerformed
     private void fillData(int index) {
@@ -691,6 +710,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel txtBan;
+    private javax.swing.JLabel txtFake;
     private javax.swing.JLabel txtMa;
     private javax.swing.JLabel txtNgay;
     private com.toedter.calendar.JDateChooser txtNgayCuoi;
