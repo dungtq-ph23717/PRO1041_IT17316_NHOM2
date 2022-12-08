@@ -16,6 +16,8 @@ public interface ServiceKhuyenMai {
 
     List<ViewModels.KhuyenMai> getAll();
 
+    List<ViewModels.KhuyenMai> getAllKMTT();
+
     KhuyenMai getOne(String ten);
 
     String add(KhuyenMaiModel km);
