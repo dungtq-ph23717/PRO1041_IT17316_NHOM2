@@ -30,6 +30,13 @@ public class BanServiceImpl implements BanService {
 
     @Override
     public String add(BanModel ban) {
+        if (ban.getTenBan().isEmpty() || ban.getMoTa().isEmpty() || ban.getMaBan().isEmpty()) {
+            return "Không được để trống";
+        }
+        BanModel b = rp.checkTrung(ban.getMaBan());
+        if (b != null) {
+            return "Trùng mã";
+        }
         boolean add = rp.add(ban);
         if (add) {
             return "Add thành công";
@@ -40,6 +47,13 @@ public class BanServiceImpl implements BanService {
 
     @Override
     public String update(BanModel ban, String ma) {
+        if (ban.getTenBan().isEmpty() || ban.getMoTa().isEmpty() || ban.getMaBan().isEmpty()) {
+            return "Không được để trống";
+        }
+        BanModel b = rp.checkTrung(ban.getMaBan());
+        if (b != null) {
+            return "Trùng mã";
+        }
         boolean update = rp.update(ban, ma);
         if (update) {
             return "update thành công";
