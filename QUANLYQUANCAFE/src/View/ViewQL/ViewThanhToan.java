@@ -130,7 +130,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
 //        listHDCT = implHDCT.getAll();
         showDataHDCT(listHDCT);
 
-        listKhuyenMai = implKM.getAll();
+        listKhuyenMai = implKM.getAllKMTT();
         boxModelGG.addElement("Chọn");
         cbbGG.setModel(boxModelGG);
         for (KhuyenMai x : listKhuyenMai) {

@@ -46,6 +46,32 @@ public class KhuyenMaiRepository {
         return null;
     }
 
+    public List<KhuyenMai> getAllKMTT() {
+        String query = "SELECT [ID]\n"
+                + "      ,[MaKM]\n"
+                + "      ,[TenKM]\n"
+                + "      ,[HinhThucGG]\n"
+                + "      ,[MucGiam]\n"
+                + "      ,[TGBatDau]\n"
+                + "      ,[TGKetThuc]\n"
+                + "      ,[TrangThai]\n"
+                + "      ,[Mota]\n"
+                + "  FROM [QuanLyQuanCafe].[dbo].[KhuyenMai]\n"
+                + "  WHERE [TrangThai] LIKE N'Đang kích hoạt'";
+        List<KhuyenMai> listKM = new ArrayList<>();
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                KhuyenMai km = new KhuyenMai(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                listKM.add(km);
+            }
+            return listKM;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public KhuyenMai getOne(String ten) {
         String query = "SELECT [ID]\n"
                 + "      ,[MaKM]\n"

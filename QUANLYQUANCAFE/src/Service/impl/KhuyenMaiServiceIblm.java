@@ -87,4 +87,9 @@ public class KhuyenMaiServiceIblm implements ServiceKhuyenMai {
     public List<SanPham> searchSPTheoTen(String tenSP) {
         return resKM.searchSP_KMTheoTen(tenSP);
     }
+
+    @Override
+    public List<KhuyenMai> getAllKMTT() {
+        return resKM.getAllKMTT();
+    }
 }
