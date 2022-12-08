@@ -67,7 +67,6 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         bangHDCT.setModel(dtm);
         dtm.setColumnIdentifiers(header);
         listHD = iplmHD.getAll();
-        showData(listHD);
         cbbSearchTT.setModel(box1);
         box1.addElement("All");
         box1.addElement("Đã thanh toán");
@@ -517,7 +516,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                 + "\tBàn:\t\t\t" + txtBan.getText() + "\n"
                 + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n"
                 + "\tNgày:\t\t\t" + txtNgay.getText() + "\n"
-                + "\tPhương thức thanh toán:\t\t\t" + txtPttt.getText() + "\n\n"
+                + "\tPhương thức thanh toán:\t\t" + txtPttt.getText() + "\n\n"
                 + "\tTên Mặt Hàng:  " + "\tĐơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
                 + "\n_______________________________________________________________________________________________________________\n"
         );
