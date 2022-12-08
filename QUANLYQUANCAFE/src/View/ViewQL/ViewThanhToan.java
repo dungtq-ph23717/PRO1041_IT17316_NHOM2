@@ -111,7 +111,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
-        listHoaDon = implHD.getAllHDCho();
         showDataHD(listHoaDon);
 
         tbSP.setModel(dtmSanPham);
@@ -471,7 +470,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                     .addComponent(txtSearchTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbLocDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -812,7 +811,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         jPanel6.setComponentPopupMenu(jPopupMenu3);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 180));
-        jPanel5.add(txtFake, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 260, 10));
+        jPanel5.add(txtFake, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 260, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1282,11 +1281,13 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     }//GEN-LAST:event_btDoiActionPerformed
 
     private void btDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDongActionPerformed
-        // TODO add your handling code here:
+        webcam.close();
     }//GEN-LAST:event_btDongActionPerformed
 
     private void btMoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoActionPerformed
+
         initWebcam();
+
 
     }//GEN-LAST:event_btMoActionPerformed
 
