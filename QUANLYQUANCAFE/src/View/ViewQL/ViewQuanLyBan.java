@@ -54,7 +54,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             boxModel1.addElement(x.getTenKV());
         }
         cbbKhuVuc1.setModel(boxModel2);
-        boxModel2.addElement("");
+        boxModel2.addElement("All");
         for (KhuVuc x : listKV) {
             boxModel2.addElement(x.getTenKV());
         }
@@ -253,8 +253,8 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(txtMaSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         btXoa.setText("Xoá");
@@ -294,7 +294,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             }
         });
 
-        cbbLoaiBan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Nhỏ", "Vừa", "Lớn" }));
+        cbbLoaiBan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Nhỏ", "Vừa", "Lớn" }));
         cbbLoaiBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbLoaiBanActionPerformed(evt);
@@ -326,9 +326,9 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9)
                     .addComponent(cbbLoaiBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(cbbKhuVuc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbKhuVuc1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -367,8 +367,8 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                .addGap(54, 54, 54))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -400,7 +400,6 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
-        // TODO add your handling code hereString id = txtId.getText();
         String ma = txtMa.getText();
         String ten = txtName.getText();
         String moTa = txtMota.getText();
@@ -428,13 +427,24 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbbLoaiBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLoaiBanActionPerformed
-        List<Ban> SearchTen = impl.SearchLoaiBan((String) cbbLoaiBan.getSelectedItem());
-        showData(SearchTen);
+        if (cbbLoaiBan.getSelectedItem().toString().equalsIgnoreCase("All")) {
+            listBan = impl.getAll();
+            showData(listBan);
+        } else {
+            List<Ban> SearchTen = impl.SearchLoaiBan((String) cbbLoaiBan.getSelectedItem());
+            showData(SearchTen);
+        }
     }//GEN-LAST:event_cbbLoaiBanActionPerformed
 
     private void cbbKhuVuc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhuVuc1ActionPerformed
-        List<Ban> SearchTen = impl.SearchKV((String) cbbKhuVuc1.getSelectedItem());
-        showData(SearchTen);
+        if (cbbKhuVuc1.getSelectedItem().toString().equalsIgnoreCase("All")) {
+            listBan = impl.getAll();
+            showData(listBan);
+        } else {
+            List<Ban> SearchTen = impl.SearchKV((String) cbbKhuVuc1.getSelectedItem());
+            showData(SearchTen);
+        }
+
     }//GEN-LAST:event_cbbKhuVuc1ActionPerformed
 
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed

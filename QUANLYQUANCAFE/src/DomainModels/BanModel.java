@@ -40,6 +40,11 @@ public class BanModel {
         this.trangThai = tinhTrang;
     }
 
+    public BanModel(String maBan, String tenBan) {
+        this.maBan = maBan;
+        this.tenBan = tenBan;
+    }
+
     public BanModel(String id, String maBan, String tenBan, String moTa, String loaiBan, String IDKV, KhuVucModel tenKV) {
         this.id = id;
         this.maBan = maBan;

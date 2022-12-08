@@ -50,6 +50,20 @@ public class BanRepostory {
         return null;
     }
 
+    public BanModel checkTrung(String ma) {
+        String query = "select MaBan from Ban where MaBan like ?";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ma);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new BanModel(rs.getString(1), "");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<Ban> getAllTT() {
         String query = "Select TenBan,Loaiban,TinhTrang\n"
                 + "From Ban \n";
@@ -248,10 +262,10 @@ public class BanRepostory {
 //        for (Ban x : list) {
 //            System.out.println(x.toString());
 //        }
-//        Ban b = new BanRepostory().getOne("Bàn 1");
-//        System.out.println(b);
-        BanModel b = new BanModel("Bàn 1", "Nhỏ", "Trống");
-        boolean add = new BanRepostory().gopBan("Bàn 4-tách");
-        System.out.println(add);
+        BanModel b = new BanRepostory().checkTrung("B1");
+        System.out.println(b);
+//        BanModel b = new BanModel("Bàn 1", "Nhỏ", "Trống");
+//        boolean add = new BanRepostory().gopBan("Bàn 4-tách");
+//        System.out.println(add);
     }
 }
