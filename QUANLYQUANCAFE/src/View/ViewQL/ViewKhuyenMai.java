@@ -439,28 +439,32 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
 
     private void bltAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltAddActionPerformed
         try {
-            String ma = txtMaKM.getText();
-            String ten = txtTenKM.getText();
-            String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
-            String mucG = txtMucGiam.getText();
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
-
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-            String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
-            String mota = txtMoTa.getText();
-            boolean status = rdoDangKichHoat.isSelected();
-            String tt = "";
-            if (status == true) {
-                tt = "Đang kích hoạt";
+            if (txtMucGiam.getText().matches("[a-z A-Z]+")) {
+                JOptionPane.showMessageDialog(this, "Mức giảm phải là số !");
             } else {
-                tt = "Hết hiệu lực sử dụng";
+                String ma = txtMaKM.getText();
+                String ten = txtTenKM.getText();
+                String hinhTGG = cbbHinhThucGG.getSelectedItem().toString();
+                String mucG = txtMucGiam.getText();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String ngaybatdau = sdf.format(txtNgaybatDau.getDate());
+
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                String ngayketthuc = sdf1.format(txtNgayKetThuc.getDate());
+                String mota = txtMoTa.getText();
+                boolean status = rdoDangKichHoat.isSelected();
+                String tt = "";
+                if (status == true) {
+                    tt = "Đang kích hoạt";
+                } else {
+                    tt = "Hết hiệu lực sử dụng";
+                }
+                KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
+                JOptionPane.showMessageDialog(this, impl.add(km));
+                listKM = impl.getAll();
+                showData(listKM);
             }
-            KhuyenMaiModel km = new KhuyenMaiModel(ma, ten, hinhTGG, Double.valueOf(mucG), ngaybatdau, ngayketthuc, tt, mota);
-            JOptionPane.showMessageDialog(this, impl.add(km));
-            listKM = impl.getAll();
-            showData(listKM);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Không được để trống !");
         }
