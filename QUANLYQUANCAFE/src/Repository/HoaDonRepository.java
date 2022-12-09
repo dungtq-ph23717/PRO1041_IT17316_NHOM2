@@ -86,7 +86,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
                 SanPham sp = new SanPham(rs.getString(3));
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5),rs.getString(6));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5), rs.getString(6));
                 list.add(hd);
             }
             return list;
@@ -131,6 +131,32 @@ public class HoaDonRepository {
             while (rs.next()) {
                 NhanVienViewModel nv = new NhanVienViewModel(rs.getString(3));
                 HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), nv, rs.getString(4));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
+    public List<HoaDon> searchTheoDate1(String date1, String date2) {
+        String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien,TinhTrang from HoaDon\n"
+                + "inner join HoaDonChiTiet\n"
+                + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID"
+                + "                WHERE NOT TinhTrang LIKE N'Chờ' and  \n"
+                + "                NgayLapHD BETWEEN ? AND ? ";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setString(1, date1);
+            ps.setString(2, date2);
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
+                SanPham sp = new SanPham(rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5), rs.getString(6));
                 list.add(hd);
             }
             return list;
@@ -216,8 +242,8 @@ public class HoaDonRepository {
         }
         return null;
     }
-    
-    public List<HoaDon> getAllSearchTheoDate(String date1,String date2) {
+
+    public List<HoaDon> getAllSearchTheoDate(String date1, String date2) {
         String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
                 + "from HoaDon \n"
                 + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
@@ -293,7 +319,7 @@ public class HoaDonRepository {
             while (rs.next()) {
                 HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(4));
                 SanPham sp = new SanPham(rs.getString(3));
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5),rs.getString(6));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), sp, hdct, rs.getDouble(5), rs.getString(6));
                 list.add(hd);
             }
             return list;
@@ -389,7 +415,7 @@ public class HoaDonRepository {
 //        System.out.println(add);
 //        HoaDon hd = new HoaDonRepository().getOne("HD2");
 //        System.out.println(hd);
-        List<HoaDon> getall = new Repository.HoaDonRepository().getListHD();
+        List<HoaDon> getall = new Repository.HoaDonRepository().searchTheoDate1("2022-12-04", "2022-12-05");
         for (HoaDon x : getall) {
             System.out.println(x);
         }

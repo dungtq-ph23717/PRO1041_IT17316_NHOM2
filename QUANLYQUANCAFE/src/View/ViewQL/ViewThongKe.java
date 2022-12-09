@@ -11,11 +11,13 @@ import Service.impl.SanPhamServiceImpl;
 import ViewModels.HoaDon;
 import ViewModels.SanPham;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -31,7 +33,6 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
     
     private DefaultTableModel dtm = new DefaultTableModel();
     private DefaultTableModel nhanvien;
-    private HoaDonServiceIblm _HoaDonService = new HoaDonServiceIblm();
     private List<HoaDon> listHoaDon = new ArrayList<>();
     private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
     private List<SanPham> ListSanPham = new ArrayList<>();
@@ -63,7 +64,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
 //        _HoaDonService = new HoaDonServiceIblm();
-        String[] headers = {"STT", "Mã", "Ngày", "Tên", "Số lượng", "Tiền", "Tình Trạng"};
+        String[] headers = {"STT", "Mã", "Ngày", "Tên SP", "Số lượng", "Tiền", "Tình Trạng"};
         tbl_thongke.setModel(dtm);
         dtm.setColumnIdentifiers(headers);
         ListSanPham = implSP.getAll();
@@ -72,16 +73,8 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         TinhTong();
         TinhTongSlDon();
 
-//        getSum();
     }
 
-//    private void showDataTK(List<HoaDon> list) {
-//        dtmThongKe.setRowCount(0);
-//        int stt = 1;
-//        for (HoaDon x : list) {
-//            dtmThongKe.addRow(new Object[]{stt++, x.getMaHD(), x.getNgayLapHD(), x.getThanhTien()});
-//        }
-//    }
     public void LoadTable(List<HoaDon> list) {
 //        _DefaultTableModel1.setRowCount(0);
         dtm.setRowCount(0);
@@ -101,16 +94,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         }
     }
 
-//    public void getSum() {
-//        int sum = 0;
-//        for (int i = 0; i < tbl_thongke.getRowCount(); i++) {
-//            sum = sum + Integer.parseInt(tbl_thongke.getValueAt(i, 3).toString());
-//        }
-//        jLabel4.setText(Integer.toString(sum));
-//    }
     public void TinhTong() {
-//        _DefaultTableModel1 = (DefaultTableModel) tbl_thongke.getModel();
-//        _DefaultTableModel1.setRowCount(0);
         DecimalFormat x = new DecimalFormat("###,###,###");
         int TinhTong = 0;
         for (int i = 0; i < tbl_thongke.getRowCount(); i++) {
@@ -152,6 +136,12 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         bltThongKe = new javax.swing.JButton();
         SortSL = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtNgaybatDau = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        txtNgayCuoi = new com.toedter.calendar.JDateChooser();
+        bltSearch = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_thongke = new javax.swing.JTable();
@@ -227,6 +217,19 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel8.setText("Thời gian đầu: ");
+
+        jLabel9.setText("Thời gian cuối: ");
+
+        jLabel10.setText("to");
+
+        bltSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/search_icon.jpg"))); // NOI18N
+        bltSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bltSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -244,8 +247,9 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(SortSL)
-                        .addGap(34, 34, 34)
+                        .addGap(29, 29, 29)
                         .addComponent(jButton1)))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -257,6 +261,22 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(bltXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(136, 136, 136))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtNgaybatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10))
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtNgayCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bltSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,6 +304,18 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(lblloi, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNgaybatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNgayCuoi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel10)
+                    .addComponent(bltSearch))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -330,7 +362,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Số Lượng Sản Phẩm:");
+        jLabel5.setText("Số Lượng Sản Phẩm Bán Ra:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.weightx = 0.1;
@@ -367,10 +399,10 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,6 +509,18 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bltSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltSearchActionPerformed
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String date1 = df.format(txtNgaybatDau.getDate());
+            String date2 = df.format(txtNgayCuoi.getDate());
+            List<HoaDon> searchTheoDate1 = implHD.searchTheoDate1(date1, date2);
+            LoadTable(searchTheoDate1);
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(this, "Tìm kiếm thất bại !");
+        }
+    }//GEN-LAST:event_bltSearchActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -534,16 +578,20 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SortSL;
+    private javax.swing.JButton bltSearch;
     private javax.swing.JButton bltThongKe;
     private javax.swing.JButton bltXuatHD;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -552,6 +600,8 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblloi;
     private javax.swing.JTable tbl_thongke;
+    private com.toedter.calendar.JDateChooser txtNgayCuoi;
+    private com.toedter.calendar.JDateChooser txtNgaybatDau;
     private javax.swing.JTextField txt_date;
     // End of variables declaration//GEN-END:variables
 
