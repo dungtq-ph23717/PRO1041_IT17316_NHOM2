@@ -439,8 +439,8 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
 
     private void bltAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltAddActionPerformed
         try {
-            if (txtMucGiam.getText().matches("[a-z A-Z]+")) {
-                JOptionPane.showMessageDialog(this, "Mức giảm phải là số !");
+            if (txtMucGiam.getText().matches("[a-z A-Z]+") || Double.valueOf(txtMucGiam.getText()) <= 0) {
+                JOptionPane.showMessageDialog(this, "Mức giảm phải là số và lớn hơn 0 !");
             } else {
                 String ma = txtMaKM.getText();
                 String ten = txtTenKM.getText();
@@ -472,8 +472,8 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
 
     private void bltUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltUpdateActionPerformed
         try {
-            if (txtMucGiam.getText().matches("[a-z A-Z]+")) {
-                JOptionPane.showMessageDialog(this, "Mức giảm phải là số !");
+            if (txtMucGiam.getText().matches("[a-z A-Z]+") || Double.valueOf(txtMucGiam.getText()) <= 0) {
+                JOptionPane.showMessageDialog(this, "Mức giảm phải là số và lớn hơn 0 !");
             } else {
                 String ma = txtMaKM.getText();
                 String ten = txtTenKM.getText();
