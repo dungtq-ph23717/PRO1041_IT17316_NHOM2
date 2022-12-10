@@ -40,6 +40,16 @@ public class HoaDon {
         this.thanhTien = thanhTien;
     }
 
+    public HoaDon(String maHD, String ngayLapHD, SanPham sp, HoaDonChiTiet hdct, double thanhTien, String tinhTrang) {
+        this.maHD = maHD;
+        this.ngayLapHD = ngayLapHD;
+        this.sp = sp;
+        this.hdct = hdct;
+        this.thanhTien = thanhTien;
+        this.tinhTrang = tinhTrang;
+    }
+
+    
     public HoaDon(String maHD, NhanVienViewModel tenNV, String tinhTrang) {
         this.maHD = maHD;
         this.tenNV = tenNV;
