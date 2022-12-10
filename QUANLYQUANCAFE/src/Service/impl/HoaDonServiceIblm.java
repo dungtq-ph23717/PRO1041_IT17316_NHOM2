@@ -122,4 +122,9 @@ public class HoaDonServiceIblm implements ServiceHoaDon {
         return rps.searchTheoDate(date1, date2);
     }
 
+    @Override
+    public List<HoaDon> searchTheoDate1(String date1, String date2) {
+        return rps.searchTheoDate1(date1, date2);
+    }
+
 }
