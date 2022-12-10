@@ -74,12 +74,13 @@ public class HoaDonRepository {
         return null;
     }
 
-     public List<HoaDon> getListHD() {
+    public List<HoaDon> getListHD() {
         String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien,TinhTrang from HoaDon\n"
-                + "inner join HoaDonChiTiet\n"
-                + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
-                + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
-                + "inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID";
+                + "                inner join HoaDonChiTiet\n"
+                + "                on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "                inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "                inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID\n"
+                + "				where TinhTrang like N'Đã thanh toán'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ResultSet rs = ps.executeQuery();
             List<HoaDon> list = new ArrayList<>();
@@ -142,11 +143,11 @@ public class HoaDonRepository {
 
     public List<HoaDon> searchTheoDate1(String date1, String date2) {
         String query = "Select MaHD,NgayLapHD,TenSP,Soluong,(Giaban*Soluong)  + TP.GiaTien  As ThanhTien,TinhTrang from HoaDon\n"
-                + "inner join HoaDonChiTiet\n"
-                + "on HoaDon.ID = HoaDonChiTiet.IDHD\n"
-                + "inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
-                + "inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID"
-                + "                WHERE NOT TinhTrang LIKE N'Chờ' and  \n"
+                + "                inner join HoaDonChiTiet\n"
+                + "                on HoaDon.ID = HoaDonChiTiet.IDHD\n"
+                + "                inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
+                + "                inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID\n"
+                + "		   where TinhTrang like N'Đã thanh toán'"
                 + "                NgayLapHD BETWEEN ? AND ? ";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setString(1, date1);
