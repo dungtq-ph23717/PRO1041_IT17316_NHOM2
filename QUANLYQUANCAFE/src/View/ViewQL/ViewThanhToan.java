@@ -960,6 +960,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (txtBan.getText() == "__") {
             JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
+        } else if (tbHD.getRowCount() >= 1) {
+            JOptionPane.showMessageDialog(this, "Bàn đang có người sử dụng");
         } else {
             Ban b = implBan.getOne(txtBan.getText());
             Random r = new Random();
@@ -1219,45 +1221,63 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     }//GEN-LAST:event_updateSLActionPerformed
 
     private void tachBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachBanActionPerformed
-        int row = tbBan.getSelectedRow();
-        String ten = txtBan.getText();
-        Ban idKV = implBan.getOne(ten);
-        BanModel ban = new BanModel(ten + "-tách", "Nhỏ", "Trống");
-        JOptionPane.showMessageDialog(this, "Tách bàn thành công");
-        implBan.add(ban);
-        listBan = implBan.getAllTT();
-        showDataBan(listBan);
-        Ban b = listBan.get(row);
-        ViewTachBan v = new ViewTachBan(b);
-        v.setVisible(true);
+        try {
+                int row = tbBan.getSelectedRow();
+                if (txtBan.getText().equalsIgnoreCase("__")) {
+                    JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
+                } else if (tbBan.getValueAt(row, 0).toString().contains(" - tách")) {
+                    JOptionPane.showMessageDialog(this, "Không thể tách thêm");
+                } else {
+                    String ten = txtBan.getText();
+                    Ban idKV = implBan.getOne(ten);
+                    BanModel ban = new BanModel(ten + " - tách", "Nhỏ", "Trống");
+                    implBan.tachBan(ban);
+                    listBan = implBan.getAllTT();
+                    showDataBan(listBan);
+                    Ban b = listBan.get(row);
+                    ViewTachBan v = new ViewTachBan(b);
+                    v.setVisible(true);
+                }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
+        }
     }//GEN-LAST:event_tachBanActionPerformed
 
     private void xoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaSPActionPerformed
-        HoaDon idHD = implHD.getOne(txtMa.getText());
-        int rowSP = tbGH.getSelectedRow();
-        String maSP = tbGH.getValueAt(rowSP, 0).toString();
-        SanPham sp = implSP.getOne(maSP);
-        implHDCT.delete(idHD.getID(), sp.getId());
-        listHDCT = implHDCT.getAllviewGH(idHD.getID());
-        showDataHDCT(listHDCT);
+        try {
+            HoaDon idHD = implHD.getOne(txtMa.getText());
+            int rowSP = tbGH.getSelectedRow();
+            String maSP = tbGH.getValueAt(rowSP, 0).toString();
+            SanPham sp = implSP.getOne(maSP);
+            implHDCT.delete(idHD.getID(), sp.getId());
+            listHDCT = implHDCT.getAllviewGH(idHD.getID());
+            showDataHDCT(listHDCT);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm");
+        }
     }//GEN-LAST:event_xoaSPActionPerformed
 
     private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
-        Ban b = implBan.getOne(txtBan.getText());
-        Random r = new Random();
-        int x = r.nextInt(100);
-        long millis = System.currentTimeMillis();
-        String name;
-        HoaDonModel hd = new HoaDonModel(b.getId());
-        implHD.add(hd, x + "");
-        BanModel b2 = new BanModel("Đang sử dụng");
-        implBan.updateTT(b2, b.getId());
-        listBan = implBan.getAllTT();
-        showDataBan(listBan);
-        listHoaDon = implHD.getAllTTViewHD(b.getId());
-        showDataHD(listHoaDon);
-        ViewTachHD v = new ViewTachHD();
-        v.setVisible(true);
+        try {
+            Ban b = implBan.getOne(txtBan.getText());
+            Random r = new Random();
+            int x = r.nextInt(100);
+            long millis = System.currentTimeMillis();
+            String name;
+            HoaDonModel hd = new HoaDonModel(b.getId());
+            implHD.add(hd, x + "");
+            BanModel b2 = new BanModel("Đang sử dụng");
+            implBan.updateTT(b2, b.getId());
+            listBan = implBan.getAllTT();
+            showDataBan(listBan);
+            listHoaDon = implHD.getAllTTViewHD(b.getId());
+            showDataHD(listHoaDon);
+            ViewTachHD v = new ViewTachHD();
+            v.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+        }
     }//GEN-LAST:event_tachHDActionPerformed
 
     private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
@@ -1266,18 +1286,22 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     }//GEN-LAST:event_gopHDActionPerformed
 
     private void btDoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoiActionPerformed
-        int rowSP = tbGH.getSelectedRow();
-        String maSP = tbGH.getValueAt(rowSP, 0).toString();
-        SanPham sp = implSP.getOne(maSP);
-        String tp = cbbTopping.getSelectedItem().toString();
-        Topping tp1 = implTP.getOne(tp);
-        HoaDonChiTietModel hd = new HoaDonChiTietModel("", "", 0, tp1.getId());
-        JOptionPane.showMessageDialog(this, implHDCT.updateTP(hd, sp.getId()));
-        int row = tbHD.getSelectedRow();
-        String ma = tbHD.getValueAt(row, 0).toString();
-        HoaDon hd1 = implHD.getOne(ma);
-        listHDCT = implHDCT.getAllviewGH(hd1.getID());
-        showDataHDCT(listHDCT);
+        try {
+            int rowSP = tbGH.getSelectedRow();
+            String maSP = tbGH.getValueAt(rowSP, 0).toString();
+            SanPham sp = implSP.getOne(maSP);
+            String tp = cbbTopping.getSelectedItem().toString();
+            Topping tp1 = implTP.getOne(tp);
+            HoaDonChiTietModel hd = new HoaDonChiTietModel("", "", 0, tp1.getId());
+            JOptionPane.showMessageDialog(this, implHDCT.updateTP(hd, sp.getId()));
+            int row = tbHD.getSelectedRow();
+            String ma = tbHD.getValueAt(row, 0).toString();
+            HoaDon hd1 = implHD.getOne(ma);
+            listHDCT = implHDCT.getAllviewGH(hd1.getID());
+            showDataHDCT(listHDCT);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn sản phẩm");
+        }
     }//GEN-LAST:event_btDoiActionPerformed
 
     private void btDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDongActionPerformed

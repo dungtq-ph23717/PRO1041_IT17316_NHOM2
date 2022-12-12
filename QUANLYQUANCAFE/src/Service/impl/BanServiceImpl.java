@@ -117,4 +117,19 @@ public class BanServiceImpl implements BanService {
         }
     }
 
+    @Override
+    public String tachBan(BanModel ban) {
+        boolean tachBan = rp.tachBan(ban);
+        if (tachBan) {
+            return "Tách bàn thành công";
+        } else {
+            return "Tách bàn thất bại";
+        }
+    }
+
+    @Override
+    public List<Ban> banTach() {
+        return rp.banTach();
+    }
+
 }

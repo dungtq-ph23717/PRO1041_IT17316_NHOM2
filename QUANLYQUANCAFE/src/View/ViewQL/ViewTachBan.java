@@ -4,6 +4,7 @@
  */
 package View.ViewQL;
 
+import DomainModels.HoaDonModel;
 import Service.impl.BanServiceImpl;
 import Service.impl.HoaDonServiceIblm;
 import ViewModels.Ban;
@@ -35,12 +36,12 @@ public class ViewTachBan extends javax.swing.JFrame {
     public ViewTachBan(Ban ban) {
         initComponents();
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
-        tbHD1.setModel(dtm1);
+        tbHDtach.setModel(dtm1);
         dtm1.setColumnIdentifiers(headersHD);
         listHD = implHD.getAllTT();
         showDataHD1(listHD);
 
-        tbHD2.setModel(dtm2);
+        tbHDgoc.setModel(dtm2);
         dtm2.setColumnIdentifiers(headersHD);
         listHD = implHD.getAllTT();
         showDataHD2(listHD);
@@ -49,10 +50,6 @@ public class ViewTachBan extends javax.swing.JFrame {
         cbbBan1.setModel(boxModel1);
         for (Ban b : listBan) {
             boxModel1.addElement(b.getTenBan());
-        }
-        cbbBan2.setModel(boxModel2);
-        for (Ban b : listBan) {
-            boxModel2.addElement(b.getTenBan());
         }
         fillData(ban);
     }
@@ -72,7 +69,13 @@ public class ViewTachBan extends javax.swing.JFrame {
     }
 
     private void fillData(Ban ban) {
-        cbbBan2.setSelectedItem(ban.getTenBan());
+        txtBan.setText(ban.getTenBan());
+    }
+
+    private void tachHD() {
+        HoaDonModel hd = new HoaDonModel();
+        ViewTachHD v = new ViewTachHD();
+        v.setVisible(true);
     }
 
     /**
@@ -84,20 +87,41 @@ public class ViewTachBan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        tachHD = new javax.swing.JMenuItem();
+        gopHD = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         cbbBan1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbHD1 = new javax.swing.JTable();
-        cbbBan2 = new javax.swing.JComboBox<>();
+        tbHDtach = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbHD2 = new javax.swing.JTable();
+        tbHDgoc = new javax.swing.JTable();
         btClose = new javax.swing.JButton();
         btBack = new javax.swing.JButton();
         btNext = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtBan = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        tachHD.setText("Tách hoá đơn");
+        tachHD.setToolTipText("");
+        tachHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tachHDActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(tachHD);
+
+        gopHD.setText("Gộp HD");
+        gopHD.setToolTipText("");
+        gopHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gopHDActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(gopHD);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Bàn tách");
 
@@ -108,7 +132,7 @@ public class ViewTachBan extends javax.swing.JFrame {
             }
         });
 
-        tbHD1.setModel(new javax.swing.table.DefaultTableModel(
+        tbHDtach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -119,18 +143,12 @@ public class ViewTachBan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbHD1);
-
-        cbbBan2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbbBan2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbBan2ActionPerformed(evt);
-            }
-        });
+        tbHDtach.setComponentPopupMenu(jPopupMenu1);
+        jScrollPane1.setViewportView(tbHDtach);
 
         jLabel2.setText("Bàn");
 
-        tbHD2.setModel(new javax.swing.table.DefaultTableModel(
+        tbHDgoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -141,23 +159,24 @@ public class ViewTachBan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tbHD2);
+        tbHDgoc.setComponentPopupMenu(jPopupMenu1);
+        jScrollPane2.setViewportView(tbHDgoc);
 
-        btClose.setText("Close");
+        btClose.setText("Tách");
         btClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCloseActionPerformed(evt);
             }
         });
 
-        btBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/double-arrow (1).png"))); // NOI18N
+        btBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/fast-forward-double-right-arrows-symbol (1).png"))); // NOI18N
         btBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBackActionPerformed(evt);
             }
         });
 
-        btNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/fast-forward-double-right-arrows-symbol (1).png"))); // NOI18N
+        btNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/double-arrow (1).png"))); // NOI18N
         btNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btNextActionPerformed(evt);
@@ -171,6 +190,8 @@ public class ViewTachBan extends javax.swing.JFrame {
             }
         });
 
+        txtBan.setText("Bàn 1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,55 +200,49 @@ public class ViewTachBan extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbbBan1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btBack, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbbBan2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btBack, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btClose)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btClose)))
-                .addContainerGap())
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(txtBan)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(cbbBan1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cbbBan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtBan))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(cbbBan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(btBack, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(cbbBan2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(btBack, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btClose)
@@ -240,6 +255,7 @@ public class ViewTachBan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
+        JOptionPane.showMessageDialog(this, "Tách bàn thành công");
         this.dispose();
         ViewQuanLy v = new ViewQuanLy();
         v.setVisible(true);
@@ -252,18 +268,11 @@ public class ViewTachBan extends javax.swing.JFrame {
         showDataHD1(listHD);
     }//GEN-LAST:event_cbbBan1ActionPerformed
 
-    private void cbbBan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbBan2ActionPerformed
-        String ten = cbbBan2.getSelectedItem().toString();
-        Ban b = implBan.getOne(ten);
-        listHD = implHD.getAllTTViewHD(b.getId());
-        showDataHD2(listHD);
-    }//GEN-LAST:event_cbbBan2ActionPerformed
-
     private void btBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackActionPerformed
         try {
-            int row = tbHD2.getSelectedRow();
+            int row = tbHDgoc.getSelectedRow();
             String ten = cbbBan1.getSelectedItem().toString();
-            String maHD = (String) tbHD2.getValueAt(row, 0);
+            String maHD = (String) tbHDgoc.getValueAt(row, 0);
             Ban b = implBan.getOne(ten);
             implHD.updateID(b.getId(), maHD);
 
@@ -272,7 +281,7 @@ public class ViewTachBan extends javax.swing.JFrame {
             listHD = implHD.getAllTTViewHD(b1.getId());
             showDataHD1(listHD);
 
-            String ten2 = cbbBan2.getSelectedItem().toString();
+            String ten2 = txtBan.getText();
             Ban b2 = implBan.getOne(ten2);
             listHD = implHD.getAllTTViewHD(b2.getId());
             showDataHD2(listHD);
@@ -283,9 +292,9 @@ public class ViewTachBan extends javax.swing.JFrame {
 
     private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
         try {
-            int row = tbHD1.getSelectedRow();
-            String ten = cbbBan2.getSelectedItem().toString();
-            String maHD = (String) tbHD1.getValueAt(row, 0);
+            int row = tbHDtach.getSelectedRow();
+            String ten = txtBan.getText();
+            String maHD = (String) tbHDtach.getValueAt(row, 0);
             Ban b = implBan.getOne(ten);
             implHD.updateID(b.getId(), maHD);
 
@@ -294,7 +303,7 @@ public class ViewTachBan extends javax.swing.JFrame {
             listHD = implHD.getAllTTViewHD(b1.getId());
             showDataHD1(listHD);
 
-            String ten2 = cbbBan2.getSelectedItem().toString();
+            String ten2 = txtBan.getText();
             Ban b2 = implBan.getOne(ten2);
             listHD = implHD.getAllTTViewHD(b2.getId());
             showDataHD2(listHD);
@@ -304,9 +313,9 @@ public class ViewTachBan extends javax.swing.JFrame {
     }//GEN-LAST:event_btNextActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        for (int i = 0; i < tbHD1.getRowCount(); i++) {
-            String ten = cbbBan2.getSelectedItem().toString();
-            String maHD = (String) tbHD1.getValueAt(i, 0);
+        for (int i = 0; i < tbHDtach.getRowCount(); i++) {
+            String ten = txtBan.getText();
+            String maHD = (String) tbHDtach.getValueAt(i, 0);
             Ban b = implBan.getOne(ten);
             implHD.updateID(b.getId(), maHD);
         }
@@ -315,21 +324,27 @@ public class ViewTachBan extends javax.swing.JFrame {
         listHD = implHD.getAllTTViewHD(b1.getId());
         showDataHD1(listHD);
 
-        String ten2 = cbbBan2.getSelectedItem().toString();
+        String ten2 = txtBan.getText();
         Ban b2 = implBan.getOne(ten2);
         listHD = implHD.getAllTTViewHD(b2.getId());
         showDataHD2(listHD);
 
-        if (ten1.contains("-tách")) {
-            String tenGop = cbbBan1.getSelectedItem().toString();
-            JOptionPane.showMessageDialog(this, implBan.gopBan(tenGop));
-            listBan = implBan.getAllTT();
-            boxModel1.removeElement(ten1);
-        } else {
-            JOptionPane.showMessageDialog(this, "Không thể gộp bàn gốc");
-        }
-
+        String tenGop = cbbBan1.getSelectedItem().toString();
+        JOptionPane.showMessageDialog(this, implBan.gopBan(tenGop));
+        listBan = implBan.getAllTT();
+        boxModel1.removeElement(ten1);
+        this.dispose();
+        ViewQuanLy v = new ViewQuanLy();
+        v.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
+        tachHD();
+    }//GEN-LAST:event_tachHDActionPerformed
+
+    private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
+        tachHD();
+    }//GEN-LAST:event_gopHDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,13 +386,16 @@ public class ViewTachBan extends javax.swing.JFrame {
     private javax.swing.JButton btClose;
     private javax.swing.JButton btNext;
     private javax.swing.JComboBox<String> cbbBan1;
-    private javax.swing.JComboBox<String> cbbBan2;
+    private javax.swing.JMenuItem gopHD;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tbHD1;
-    private javax.swing.JTable tbHD2;
+    private javax.swing.JMenuItem tachHD;
+    private javax.swing.JTable tbHDgoc;
+    private javax.swing.JTable tbHDtach;
+    private javax.swing.JLabel txtBan;
     // End of variables declaration//GEN-END:variables
 }
