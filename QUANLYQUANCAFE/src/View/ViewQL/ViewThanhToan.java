@@ -1222,23 +1222,22 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
 
     private void tachBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachBanActionPerformed
         try {
-                int row = tbBan.getSelectedRow();
-                if (txtBan.getText().equalsIgnoreCase("__")) {
-                    JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
-                } else if (tbBan.getValueAt(row, 0).toString().contains(" - tách")) {
-                    JOptionPane.showMessageDialog(this, "Không thể tách thêm");
-                } else {
-                    String ten = txtBan.getText();
-                    Ban idKV = implBan.getOne(ten);
-                    BanModel ban = new BanModel(ten + " - tách", "Nhỏ", "Trống");
-                    implBan.tachBan(ban);
-                    listBan = implBan.getAllTT();
-                    showDataBan(listBan);
-                    Ban b = listBan.get(row);
-                    ViewTachBan v = new ViewTachBan(b);
-                    v.setVisible(true);
-                }
-            
+            int row = tbBan.getSelectedRow();
+            if (txtBan.getText().equalsIgnoreCase("__")) {
+                JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
+            } else if (tbBan.getValueAt(row, 0).toString().contains(" - tách")) {
+                JOptionPane.showMessageDialog(this, "Không thể tách thêm");
+            } else {
+                String ten = txtBan.getText();
+                Ban idKV = implBan.getOne(ten);
+                BanModel ban = new BanModel(ten + " - tách", "Nhỏ", "Trống");
+                implBan.tachBan(ban);
+                listBan = implBan.getAllTT();
+                showDataBan(listBan);
+                Ban b = listBan.get(row);
+                ViewTachBan v = new ViewTachBan(b);
+                v.setVisible(true);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
         }

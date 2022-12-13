@@ -7,6 +7,8 @@
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewLogin.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewThongKe.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/impl/KhuVucServiceImpl.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewTachHD.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/ViewModels/Topping.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/ViewModels/HoaDon.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/DomainModels/SanPhamModel.java</file>
@@ -40,6 +42,7 @@
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/impl/HoaDonServiceIblm.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/impl/HoaDonChiTietServiceIblm.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/ServiceHoaDon.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Repository/ToppingRepository.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/View/ViewQL/ViewQuanLySanPham.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/Service/impl/KhuyenMaiServiceIblm.java</file>
             <file>file:/C:/Users/Admin/Documents/GitHub/PRO1041_IT17316_Nhom2/QUANLYQUANCAFE/src/ViewModels/Ban_HoaDon.java</file>
