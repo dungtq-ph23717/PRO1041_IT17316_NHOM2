@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package View.ViewQL;
 
@@ -23,8 +23,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class ViewTachHD extends javax.swing.JFrame {
-
+public class ViewTachHD extends javax.swing.JDialog {
+    
     private DefaultTableModel dtm1 = new DefaultTableModel();
     private DefaultTableModel dtm2 = new DefaultTableModel();
     private DefaultComboBoxModel boxModel1 = new DefaultComboBoxModel();
@@ -37,9 +37,10 @@ public class ViewTachHD extends javax.swing.JFrame {
     private ToppingServiceImpl implTP = new ToppingServiceImpl();
 
     /**
-     * Creates new form ViewTachHD
+     * Creates new form ViewTachHD1
      */
-    public ViewTachHD() {
+    public ViewTachHD(java.awt.Frame parent, boolean modal, HoaDon hd4) {
+        super(parent, modal);
         initComponents();
         String[] headersGH = {"Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Topping", "Tổng tiền"};
         tbGH1.setModel(dtm1);
@@ -48,19 +49,24 @@ public class ViewTachHD extends javax.swing.JFrame {
 //        HoaDon hd2 = implHD.getOne(ma);
 //        listHDCT = implHDCT.getAllviewGH(hd2.getID());
         showDataHDCT1(listHDCT);
-
+        
         tbGH2.setModel(dtm2);
         dtm2.setColumnIdentifiers(headersGH);
         String maHD = txtHD.getText();
         HoaDon hd1 = implHD.getOne(maHD);
         listHDCT = implHDCT.getAllviewGH(hd1.getID());
         showDataHDCT2(listHDCT);
-
+        
         listHD = implHD.getAllHDCho();
         cbbMaHD1.setModel(boxModel1);
         for (HoaDon hd : listHD) {
             boxModel1.addElement(hd.getMaHD());
         }
+        fillData(hd4);
+    }
+    
+    private void fillData(HoaDon hd) {
+        txtHD.setText(hd.getMaHD());
     }
 
     private void showDataHDCT1(List<HoaDonChiTiet> list) {
@@ -69,7 +75,7 @@ public class ViewTachHD extends javax.swing.JFrame {
             dtm1.addRow(new Object[]{x.getIdSP().getMaSP(), x.getIdSP().getTenSP(), x.getSoLuong(), x.getIdSP().getGiaBan(), x.getIdTopping().getTopping(), x.getGiaTien()});
         }
     }
-
+    
     private void showDataHDCT2(List<HoaDonChiTiet> list) {
         dtm2.setRowCount(0);
         for (HoaDonChiTiet x : list) {
@@ -86,9 +92,6 @@ public class ViewTachHD extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbGH1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         cbbMaHD1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -97,28 +100,11 @@ public class ViewTachHD extends javax.swing.JFrame {
         btGop = new javax.swing.JButton();
         txtHD = new javax.swing.JLabel();
         btHuy = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbGH1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        tbGH1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tbGH1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbGH1MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tbGH1);
-
-        jLabel1.setText("Mã HD tách");
 
         cbbMaHD1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbbMaHD1.addActionListener(new java.awt.event.ActionListener() {
@@ -170,6 +156,26 @@ public class ViewTachHD extends javax.swing.JFrame {
             }
         });
 
+        tbGH1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbGH1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbGH1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbGH1);
+
+        jLabel1.setText("Mã HD tách");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,7 +208,7 @@ public class ViewTachHD extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtHD))
@@ -217,7 +223,7 @@ public class ViewTachHD extends javax.swing.JFrame {
                     .addComponent(btHuy))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -231,49 +237,8 @@ public class ViewTachHD extends javax.swing.JFrame {
         showDataHDCT1(listHDCT);
     }//GEN-LAST:event_cbbMaHD1ActionPerformed
 
-    private void btTachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTachActionPerformed
-        JOptionPane.showMessageDialog(this, "Tách thành công");
-        this.dispose();
-        ViewQuanLy v = new ViewQuanLy();
-        v.setVisible(true);
-    }//GEN-LAST:event_btTachActionPerformed
-
-    private void tbGH1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH1MouseClicked
-//        int row = tbGH1.getSelectedRow();
-//        String maSP = (String) tbGH1.getValueAt(row, 0);
-//        SanPham idSP = implSP.getOne(maSP);
-//        String maHD = (String) cbbMaHD1.getSelectedItem();
-//        HoaDon hd = implHD.getOne(maHD);
-//        Integer sl = (Integer) tbGH1.getValueAt(row, 2);
-//        if (sl == 1) {
-//            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), 1, idSP.getId()));
-//        } else {
-//            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-//            if (slt <= 0) {
-//                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-//                return;
-//            }
-//
-//            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), slt, idSP.getId()));
-//            String maHD1 = (String) cbbMaHD2.getSelectedItem();
-//            HoaDon hd2 = implHD.getOne(maHD1);
-//            Integer slAdd = sl - slt;
-////            implHDCT.updateIDHD(hd2.getID(), slAdd, idSP.getId());
-//            HoaDonChiTietModel hdct = new HoaDonChiTietModel(idSP.getId(), hd2.getID(), slAdd);
-//            implHDCT.add(hdct);
-//            String ma1 = cbbMaHD2.getSelectedItem().toString();
-//            HoaDon hd1 = implHD.getOne(ma1);
-//            listHDCT = implHDCT.getAllviewGH(hd1.getID());
-//            showDataHDCT2(listHDCT);
-//        }
-//
-//        listHDCT = implHDCT.getAllviewGH(hd.getID());
-//        showDataHDCT1(listHDCT);
-    }//GEN-LAST:event_tbGH1MouseClicked
-
     private void tbGH2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH2MouseClicked
         int row = tbGH2.getSelectedRow();
-//        int row1 = tbGH1.getSelectedRow();
         String ma1 = txtHD.getText();
         HoaDon hd1 = implHD.getOne(ma1);
         String maSP = (String) tbGH2.getValueAt(row, 0);
@@ -321,6 +286,13 @@ public class ViewTachHD extends javax.swing.JFrame {
         listHDCT = implHDCT.getAllviewGH(hd.getID());
         showDataHDCT1(listHDCT);
     }//GEN-LAST:event_tbGH2MouseClicked
+
+    private void btTachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTachActionPerformed
+        JOptionPane.showMessageDialog(this, "Tách thành công");
+        this.dispose();
+        ViewQuanLy v = new ViewQuanLy();
+        v.setVisible(true);
+    }//GEN-LAST:event_btTachActionPerformed
 
     private void btGopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGopActionPerformed
         if (txtHD.getText().equalsIgnoreCase(cbbMaHD1.getSelectedItem().toString())) {
@@ -393,40 +365,80 @@ public class ViewTachHD extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btHuyActionPerformed
 
+    private void tbGH1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH1MouseClicked
+        //        int row = tbGH1.getSelectedRow();
+        //        String maSP = (String) tbGH1.getValueAt(row, 0);
+        //        SanPham idSP = implSP.getOne(maSP);
+        //        String maHD = (String) cbbMaHD1.getSelectedItem();
+        //        HoaDon hd = implHD.getOne(maHD);
+        //        Integer sl = (Integer) tbGH1.getValueAt(row, 2);
+        //        if (sl == 1) {
+        //            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), 1, idSP.getId()));
+        //        } else {
+        //            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+        //            if (slt <= 0) {
+        //                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
+        //                return;
+        //            }
+        //
+        //            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), slt, idSP.getId()));
+        //            String maHD1 = (String) cbbMaHD2.getSelectedItem();
+        //            HoaDon hd2 = implHD.getOne(maHD1);
+        //            Integer slAdd = sl - slt;
+        ////            implHDCT.updateIDHD(hd2.getID(), slAdd, idSP.getId());
+        //            HoaDonChiTietModel hdct = new HoaDonChiTietModel(idSP.getId(), hd2.getID(), slAdd);
+        //            implHDCT.add(hdct);
+        //            String ma1 = cbbMaHD2.getSelectedItem().toString();
+        //            HoaDon hd1 = implHD.getOne(ma1);
+        //            listHDCT = implHDCT.getAllviewGH(hd1.getID());
+        //            showDataHDCT2(listHDCT);
+        //        }
+        //
+        //        listHDCT = implHDCT.getAllviewGH(hd.getID());
+        //        showDataHDCT1(listHDCT);
+    }//GEN-LAST:event_tbGH1MouseClicked
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewTachHD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewTachHD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewTachHD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewTachHD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewTachHD().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ViewTachHD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ViewTachHD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ViewTachHD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ViewTachHD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                ViewTachHD dialog = new ViewTachHD(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btGop;
@@ -441,5 +453,4 @@ public class ViewTachHD extends javax.swing.JFrame {
     private javax.swing.JTable tbGH2;
     private javax.swing.JLabel txtHD;
     // End of variables declaration//GEN-END:variables
-
 }

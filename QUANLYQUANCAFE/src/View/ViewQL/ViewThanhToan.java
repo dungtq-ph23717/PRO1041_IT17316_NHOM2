@@ -981,7 +981,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private void gopBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopBanActionPerformed
         int row = tbBan.getSelectedRow();
         Ban b = listBan.get(row);
-        ViewTachBan v = new ViewTachBan(b);
+        ViewQuanLy v2 = new ViewQuanLy();
+        ViewTachBan v = new ViewTachBan(v2, true, b);
         v.setVisible(true);
     }//GEN-LAST:event_gopBanActionPerformed
 
@@ -1235,7 +1236,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 listBan = implBan.getAllTT();
                 showDataBan(listBan);
                 Ban b = listBan.get(row);
-                ViewTachBan v = new ViewTachBan(b);
+                ViewQuanLy v2 = new ViewQuanLy();
+                ViewTachBan v = new ViewTachBan(v2, true, b);
                 v.setVisible(true);
             }
         } catch (Exception e) {
@@ -1272,7 +1274,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             showDataBan(listBan);
             listHoaDon = implHD.getAllTTViewHD(b.getId());
             showDataHD(listHoaDon);
-            ViewTachHD v = new ViewTachHD();
+            int row = tbHD.getSelectedRow();
+            HoaDon h = listHoaDon.get(row);
+            ViewQuanLy v1 = new ViewQuanLy();
+            ViewTachHD v = new ViewTachHD(v1, true, h);
             v.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
@@ -1280,7 +1285,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     }//GEN-LAST:event_tachHDActionPerformed
 
     private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
-        ViewTachHD v = new ViewTachHD();
+        int row = tbHD.getSelectedRow();
+        HoaDon h = listHoaDon.get(row);
+        ViewQuanLy v1 = new ViewQuanLy();
+        ViewTachHD v = new ViewTachHD(v1, true, h);
         v.setVisible(true);
     }//GEN-LAST:event_gopHDActionPerformed
 
