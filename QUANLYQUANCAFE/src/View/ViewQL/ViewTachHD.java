@@ -283,13 +283,13 @@ public class ViewTachHD extends javax.swing.JFrame {
         String idTP = tbGH2.getValueAt(row, 4).toString();
         Topping tp = implTP.getOne(idTP);
         Integer sl = (Integer) tbGH2.getValueAt(row, 2);
-        if (sl == 1 && tbGH2.getRowCount() < 1) {
+        int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
+        if (sl == slt || tbGH2.getRowCount() < 1) {
             JOptionPane.showMessageDialog(this, "Không thể chuyển hết sản phẩm sang hoá đơn khác");
         } else {
             if (txtHD.getText().equalsIgnoreCase(cbbMaHD1.getSelectedItem().toString())) {
                 JOptionPane.showMessageDialog(this, "Trùng hoá đơn");
             } else {
-                int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
                 if (slt <= 0) {
                     JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
                     return;
@@ -362,30 +362,34 @@ public class ViewTachHD extends javax.swing.JFrame {
     }//GEN-LAST:event_btGopActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
-        String maHD = txtHD.getText();
-        HoaDon hd = implHD.getOne(maHD);
-        String ma1 = cbbMaHD1.getSelectedItem().toString();
-        HoaDon hd1 = implHD.getOne(ma1);
-        for (int i = 0; i < tbGH1.getRowCount(); i++) {
-            String idTP = tbGH2.getValueAt(i, 4).toString();
-            Topping tp = implTP.getOne(idTP);
-            String idSP = (String) tbGH1.getValueAt(i, 0);
-            SanPham sp = implSP.getOne(idSP);
-            String idSp1 = tbGH2.getValueAt(i, 0).toString();
-            Integer sl = Integer.valueOf(tbGH1.getValueAt(i, 2).toString());
-            Integer slt = Integer.valueOf(tbGH2.getValueAt(i, 2).toString());
-            if (idSP.equalsIgnoreCase(idSp1)) {
-                HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt + sl);
-                implHDCT.delete(hd.getID(), sp.getId());
-                implHDCT.updateIDHD(hd.getID(), sl + slt, tp.getId(), sp.getId());
-            } else {
-                HoaDonChiTietModel hdct1 = new HoaDonChiTietModel(sl);
-                implHDCT.updateIDHD(hd.getID(), sl, tp.getId(), sp.getId());
+        if (txtHD.getText().equalsIgnoreCase(cbbMaHD1.getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(this, "Trùng hoá đơn");
+        } else {
+            String maHD = txtHD.getText();
+            HoaDon hd = implHD.getOne(maHD);
+            String ma1 = cbbMaHD1.getSelectedItem().toString();
+            HoaDon hd1 = implHD.getOne(ma1);
+            for (int i = 0; i < tbGH1.getRowCount(); i++) {
+                String idTP = tbGH2.getValueAt(i, 4).toString();
+                Topping tp = implTP.getOne(idTP);
+                String idSP = (String) tbGH1.getValueAt(i, 0);
+                SanPham sp = implSP.getOne(idSP);
+                String idSp1 = tbGH2.getValueAt(i, 0).toString();
+                Integer sl = Integer.valueOf(tbGH1.getValueAt(i, 2).toString());
+                Integer slt = Integer.valueOf(tbGH2.getValueAt(i, 2).toString());
+                if (idSP.equalsIgnoreCase(idSp1)) {
+                    HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt + sl);
+                    implHDCT.delete(hd.getID(), sp.getId());
+                    implHDCT.updateIDHD(hd.getID(), sl + slt, tp.getId(), sp.getId());
+                } else {
+                    HoaDonChiTietModel hdct1 = new HoaDonChiTietModel(sl);
+                    implHDCT.updateIDHD(hd.getID(), sl, tp.getId(), sp.getId());
+                }
+                listHDCT = implHDCT.getAllviewGH(hd.getID());
+                showDataHDCT2(listHDCT);
+                listHDCT.clear();
+                showDataHDCT1(listHDCT);
             }
-            listHDCT = implHDCT.getAllviewGH(hd.getID());
-            showDataHDCT2(listHDCT);
-            listHDCT.clear();
-            showDataHDCT1(listHDCT);
         }
     }//GEN-LAST:event_btHuyActionPerformed
 
