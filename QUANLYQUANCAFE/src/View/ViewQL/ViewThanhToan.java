@@ -912,7 +912,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
 //                    String id = sp.getId();
 //                    String tp = cbbTopping.getSelectedItem().toString();
                 Topping idtp = implTP.getOne(tp);
-                HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt, idtp.getId());
+                HoaDonChiTietModel hdct = new HoaDonChiTietModel(id, idHD.getID(), slt, "2dfc770d-1309-4186-8497-a1770d96a2b3");
                 implHDCT.add(hdct);
                 listHDCT = implHDCT.getAllviewGH(idHD.getID());
                 showDataHDCT(listHDCT);
