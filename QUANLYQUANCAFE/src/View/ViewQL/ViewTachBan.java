@@ -33,7 +33,7 @@ public class ViewTachBan extends javax.swing.JDialog {
     /**
      * Creates new form ViewTachBan1
      */
-    public ViewTachBan(java.awt.Frame parent, boolean modal,Ban ban) {
+    public ViewTachBan(java.awt.Frame parent, boolean modal, Ban ban) {
         super(parent, modal);
         initComponents();
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
@@ -72,6 +72,13 @@ public class ViewTachBan extends javax.swing.JDialog {
         }
     }
 
+    private void tachHD(int row) {
+        HoaDon hd = listHD.get(row);
+        ViewQuanLy v1 = new ViewQuanLy();
+        ViewTachHD v = new ViewTachHD(v1, true, hd);
+        v.setVisible(true);
+    }
+
     private void fillData(Ban ban) {
         txtBan.setText(ban.getTenBan());
     }
@@ -85,6 +92,9 @@ public class ViewTachBan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        HD = new javax.swing.JPopupMenu();
+        tachHD = new javax.swing.JMenuItem();
+        gopHD = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbHDtach = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -97,6 +107,22 @@ public class ViewTachBan extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtBan = new javax.swing.JLabel();
         cbbBan1 = new javax.swing.JComboBox<>();
+
+        tachHD.setText("Tách HD");
+        tachHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tachHDActionPerformed(evt);
+            }
+        });
+        HD.add(tachHD);
+
+        gopHD.setText("Gộp HD");
+        gopHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gopHDActionPerformed(evt);
+            }
+        });
+        HD.add(gopHD);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -126,6 +152,7 @@ public class ViewTachBan extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbHDgoc.setComponentPopupMenu(HD);
         jScrollPane2.setViewportView(tbHDgoc);
 
         btClose.setText("Tách");
@@ -313,6 +340,16 @@ public class ViewTachBan extends javax.swing.JDialog {
         showDataHD1(listHD);
     }//GEN-LAST:event_cbbBan1ActionPerformed
 
+    private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
+        int row = tbHDgoc.getSelectedRow();
+        tachHD(row);
+    }//GEN-LAST:event_tachHDActionPerformed
+
+    private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
+        int row = tbHDgoc.getSelectedRow();
+        tachHD(row);
+    }//GEN-LAST:event_gopHDActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -356,15 +393,18 @@ public class ViewTachBan extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu HD;
     private javax.swing.JButton btBack;
     private javax.swing.JButton btClose;
     private javax.swing.JButton btNext;
     private javax.swing.JComboBox<String> cbbBan1;
+    private javax.swing.JMenuItem gopHD;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem tachHD;
     private javax.swing.JTable tbHDgoc;
     private javax.swing.JTable tbHDtach;
     private javax.swing.JLabel txtBan;
