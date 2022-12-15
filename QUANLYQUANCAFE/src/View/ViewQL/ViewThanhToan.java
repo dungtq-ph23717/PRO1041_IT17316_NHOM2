@@ -1223,24 +1223,28 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
 
     private void tachBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachBanActionPerformed
         try {
-            int row = tbBan.getSelectedRow();
-            if (txtBan.getText().equalsIgnoreCase("__")) {
-                JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
-            } else if (tbBan.getValueAt(row, 0).toString().contains(" - tách")) {
-                JOptionPane.showMessageDialog(this, "Không thể tách thêm");
-            } else if (tbBan.getValueAt(row, 1).toString().equalsIgnoreCase("Nhỏ")) {
-                JOptionPane.showMessageDialog(this, "Không thể tách bàn nhỏ");
+            if (tbHD.getRowCount() <= 0) {
+                JOptionPane.showMessageDialog(this, "Bàn không có người sử dụng");
             } else {
-                String ten = txtBan.getText();
-                Ban idKV = implBan.getOne(ten);
-                BanModel ban = new BanModel(ten + " - tách", "Nhỏ", "Trống");
-                implBan.tachBan(ban);
-                listBan = implBan.getAllTT();
-                showDataBan(listBan);
-                Ban b = new Ban("", txtBan.getText());
-                ViewQuanLy v2 = new ViewQuanLy();
-                ViewTachBan v = new ViewTachBan(v2, true, b);
-                v.setVisible(true);
+                int row = tbBan.getSelectedRow();
+                if (txtBan.getText().equalsIgnoreCase("__")) {
+                    JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
+                } else if (tbBan.getValueAt(row, 0).toString().contains(" - tách")) {
+                    JOptionPane.showMessageDialog(this, "Không thể tách thêm");
+                } else if (tbBan.getValueAt(row, 1).toString().equalsIgnoreCase("Nhỏ")) {
+                    JOptionPane.showMessageDialog(this, "Không thể tách bàn nhỏ");
+                } else {
+                    String ten = txtBan.getText();
+                    Ban idKV = implBan.getOne(ten);
+                    BanModel ban = new BanModel(ten + " - tách", "Nhỏ", "Trống");
+                    implBan.tachBan(ban);
+                    listBan = implBan.getAllTT();
+                    showDataBan(listBan);
+                    Ban b = new Ban("", txtBan.getText());
+                    ViewQuanLy v2 = new ViewQuanLy();
+                    ViewTachBan v = new ViewTachBan(v2, true, b);
+                    v.setVisible(true);
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Chưa chọn bàn");

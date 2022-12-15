@@ -111,6 +111,7 @@ public class ViewTachBan extends javax.swing.JDialog {
         cbbBan1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txtMa = new javax.swing.JLabel();
+        btClose1 = new javax.swing.JButton();
 
         tachHD.setText("Tách HD");
         tachHD.addActionListener(new java.awt.event.ActionListener() {
@@ -207,6 +208,13 @@ public class ViewTachBan extends javax.swing.JDialog {
 
         txtMa.setText("__");
 
+        btClose1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sync_25px.png"))); // NOI18N
+        btClose1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btClose1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,6 +236,8 @@ public class ViewTachBan extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(txtMa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btClose)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
@@ -262,13 +272,14 @@ public class ViewTachBan extends javax.swing.JDialog {
                         .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btClose)
                         .addComponent(jButton1))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(txtMa)))
+                        .addComponent(txtMa))
+                    .addComponent(btClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -384,6 +395,13 @@ public class ViewTachBan extends javax.swing.JDialog {
         fillMa(row);
     }//GEN-LAST:event_tbHDtachMouseClicked
 
+    private void btClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClose1ActionPerformed
+        String ten = txtBan.getText();
+        Ban b1 = implBan.getOne(ten);
+        listHD = implHD.getAllTTViewHD(b1.getId());
+        showDataHD2(listHD);
+    }//GEN-LAST:event_btClose1ActionPerformed
+
     private void fillMa(int index) {
         HoaDon h = listHD.get(index);
         txtMa.setText(h.getMaHD());
@@ -434,6 +452,7 @@ public class ViewTachBan extends javax.swing.JDialog {
     private javax.swing.JPopupMenu HD;
     private javax.swing.JButton btBack;
     private javax.swing.JButton btClose;
+    private javax.swing.JButton btClose1;
     private javax.swing.JButton btNext;
     private javax.swing.JComboBox<String> cbbBan1;
     private javax.swing.JMenuItem gopHD;
