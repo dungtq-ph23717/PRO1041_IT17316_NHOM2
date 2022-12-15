@@ -18,6 +18,8 @@ public interface BanService {
 
     List<Ban> getAllTT();
 
+    List<Ban> banTach();
+
     Ban getOne(String id);
 
     List<Ban> Search(String ma);
@@ -37,4 +39,6 @@ public interface BanService {
     String delete(String ma);
 
     String gopBan(String ten);
+
+    String tachBan(BanModel ban);
 }

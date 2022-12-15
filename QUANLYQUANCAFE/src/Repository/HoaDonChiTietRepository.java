@@ -136,16 +136,16 @@ public class HoaDonChiTietRepository {
         return check > 0;
     }
 
-    public boolean updateIDHD(String idHD, int soLuong, String idSP) {
+    public boolean updateIDHD(String idHD, int soLuong, String idTopping, String idSP) {
         String query = "UPDATE [dbo].[HoaDonChiTiet]\n"
-                + "   SET [IDHD] = ?\n"
-                + "      ,[Soluong] = ?\n"
-                + " WHERE IDSP like ?";
+                + "SET [IDHD] = ?,[Soluong] = ?,IDTopping = ?\n"
+                + "WHERE IDSP like ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, idHD);
             ps.setObject(2, soLuong);
-            ps.setObject(3, idSP);
+            ps.setObject(3, idTopping);
+            ps.setObject(4, idSP);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -182,7 +182,6 @@ public class HoaDonChiTietRepository {
 //        }
 //        return null;
 //    }
-
     public boolean delete(String idHD, String idSP) {
         String query = "DELETE FROM [dbo].[HoaDonChiTiet]\n"
                 + "      WHERE IDHD like ? and IDSP like ?";
@@ -202,10 +201,10 @@ public class HoaDonChiTietRepository {
 //        for (HoaDonChiTiet x : list) {
 //            System.out.println(x.toString());
 //        }
-        HoaDonChiTiet hd = new HoaDonChiTietRepository().getOne("SP1");
-        System.out.println(hd);
-//        HoaDonChiTietModel hd = new HoaDonChiTietModel("", "", 0, "b001ea99-ed1f-42b5-83f7-fcad487cdd40");
-//        boolean add = new HoaDonChiTietRepository().updateTP(hd, "64e38e57-1447-483d-a82f-08c6dd36ae74");
-//        System.out.println(add);
+//        HoaDonChiTiet hd = new HoaDonChiTietRepository().getOne("SP1");
+//        System.out.println(hd);
+        HoaDonChiTietModel hd = new HoaDonChiTietModel("", "", 0, "b001ea99-ed1f-42b5-83f7-fcad487cdd40");
+        boolean add = new HoaDonChiTietRepository().updateIDHD("dddae10e-2162-4eb7-9ce5-ad1adae81473", 3, "96b4e2de-ceb5-4683-be33-1b54382c317c", "ceeb3f9d-b646-4310-8780-53d502fc7065");
+        System.out.println(add);
     }
 }

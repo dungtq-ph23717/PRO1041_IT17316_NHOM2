@@ -28,7 +28,7 @@ public interface ServiceHoaDonChiTiet {
 
     String gopHD(String idHD, String idSP);
 
-    String updateIDHD(String idHD, int soLuong, String idSP);
+    String updateIDHD(String idHD, int soLuong, String idTopping, String idSP);
 
     String updateTP(HoaDonChiTietModel hd, String idSP);
 

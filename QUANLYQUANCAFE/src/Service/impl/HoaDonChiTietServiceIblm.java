@@ -78,8 +78,8 @@ public class HoaDonChiTietServiceIblm implements ServiceHoaDonChiTiet {
     }
 
     @Override
-    public String updateIDHD(String idHD, int soLuong, String idSP) {
-        boolean updateIDHD = rp.updateIDHD(idHD, soLuong, idSP);
+    public String updateIDHD(String idHD, int soLuong, String idTopping, String idSP) {
+        boolean updateIDHD = rp.updateIDHD(idHD, soLuong, idTopping, idSP);
         if (updateIDHD) {
             return "Chuyển sản phẩm thành công";
         } else {
