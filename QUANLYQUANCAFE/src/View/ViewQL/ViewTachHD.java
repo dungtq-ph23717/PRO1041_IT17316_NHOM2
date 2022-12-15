@@ -323,7 +323,7 @@ public class ViewTachHD extends javax.swing.JFrame {
 
     private void btGopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGopActionPerformed
         if (txtHD.getText().equalsIgnoreCase(cbbMaHD1.getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(this, "Không thể gộp hoá đơn trùng");
+            JOptionPane.showMessageDialog(this, "Trùng hoá đơn");
         } else {
             String maHD = txtHD.getText();
             HoaDon hd = implHD.getOne(maHD);
@@ -339,15 +339,11 @@ public class ViewTachHD extends javax.swing.JFrame {
                 Integer slt = Integer.valueOf(tbGH2.getValueAt(i, 2).toString());
                 if (idSP.equalsIgnoreCase(idSp1)) {
                     HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt + sl);
+                    implHDCT.delete(hd.getID(), sp.getId());
                     implHDCT.updateIDHD(hd.getID(), sl + slt, tp.getId(), sp.getId());
-                    implHDCT.delete(hd1.getID(), sp.getId());
-                    JOptionPane.showMessageDialog(this, implHD.delete(ma1));
-                    boxModel1.removeElement(ma1);
                 } else {
                     HoaDonChiTietModel hdct1 = new HoaDonChiTietModel(sl);
                     implHDCT.updateIDHD(hd.getID(), sl, tp.getId(), sp.getId());
-                    JOptionPane.showMessageDialog(this, implHD.delete(ma1));
-                    boxModel1.removeElement(ma1);
                 }
                 listHDCT = implHDCT.getAllviewGH(hd.getID());
                 showDataHDCT2(listHDCT);
@@ -355,9 +351,6 @@ public class ViewTachHD extends javax.swing.JFrame {
                 showDataHDCT1(listHDCT);
             }
         }
-        this.dispose();
-        ViewQuanLy v = new ViewQuanLy();
-        v.setVisible(true);
     }//GEN-LAST:event_btGopActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
