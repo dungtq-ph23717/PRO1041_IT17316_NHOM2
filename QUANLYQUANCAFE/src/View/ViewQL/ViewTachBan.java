@@ -42,10 +42,8 @@ public class ViewTachBan extends javax.swing.JDialog {
         tbHDtach.setModel(dtm1);
         dtm1.setColumnIdentifiers(headersHD);
 
-
         tbHDgoc.setModel(dtm2);
         dtm2.setColumnIdentifiers(headersHD);
-
 
         listBan = implBan.getAllTT();
         cbbBan1.setModel(boxModel1);

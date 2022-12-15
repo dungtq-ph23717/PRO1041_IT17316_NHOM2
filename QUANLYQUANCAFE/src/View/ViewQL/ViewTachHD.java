@@ -48,10 +48,10 @@ public class ViewTachHD extends javax.swing.JDialog {
 
         tbGH2.setModel(dtm2);
         dtm2.setColumnIdentifiers(headersGH);
-        String ma = txtHD.getText();
-        HoaDon hd1 = implHD.getOne(ma);
-        listHDCT = implHDCT.getAllviewGH(hd1.getID());
-        showDataHDCT2(listHDCT);
+//        String ma = txtHD.getText();
+//        HoaDon hd1 = implHD.getOne(ma);
+//        listHDCT = implHDCT.getAllviewGH(hd1.getID());
+//        showDataHDCT2(listHDCT);
 
         listHD = implHD.getAllHDCho();
         cbbMaHD1.setModel(boxModel1);
@@ -144,7 +144,7 @@ public class ViewTachHD extends javax.swing.JDialog {
             }
         });
 
-        txtHD.setText("HD61");
+        txtHD.setText("HD8");
 
         btHuy.setText("Huỷ");
         btHuy.addActionListener(new java.awt.event.ActionListener() {
