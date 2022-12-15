@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Admin
  */
 public class ViewTachHD extends javax.swing.JDialog {
-    
+
     private DefaultTableModel dtm1 = new DefaultTableModel();
     private DefaultTableModel dtm2 = new DefaultTableModel();
     private DefaultComboBoxModel boxModel1 = new DefaultComboBoxModel();
@@ -39,34 +39,30 @@ public class ViewTachHD extends javax.swing.JDialog {
     /**
      * Creates new form ViewTachHD1
      */
-    public ViewTachHD(java.awt.Frame parent, boolean modal, HoaDon hd4) {
+    public ViewTachHD(java.awt.Frame parent, boolean modal, HoaDon h) {
         super(parent, modal);
         initComponents();
         String[] headersGH = {"Mã SP", "Tên SP", "Số lượng", "Đơn giá", "Topping", "Tổng tiền"};
         tbGH1.setModel(dtm1);
         dtm1.setColumnIdentifiers(headersGH);
-//        String ma = cbbMaHD1.getSelectedItem().toString();
-//        HoaDon hd2 = implHD.getOne(ma);
-//        listHDCT = implHDCT.getAllviewGH(hd2.getID());
-        showDataHDCT1(listHDCT);
-        
+
         tbGH2.setModel(dtm2);
         dtm2.setColumnIdentifiers(headersGH);
-        String maHD = txtHD.getText();
-        HoaDon hd1 = implHD.getOne(maHD);
+        String ma = txtHD.getText();
+        HoaDon hd1 = implHD.getOne(ma);
         listHDCT = implHDCT.getAllviewGH(hd1.getID());
         showDataHDCT2(listHDCT);
-        
+
         listHD = implHD.getAllHDCho();
         cbbMaHD1.setModel(boxModel1);
         for (HoaDon hd : listHD) {
             boxModel1.addElement(hd.getMaHD());
         }
-        fillData(hd4);
+        fillData(h);
     }
-    
-    private void fillData(HoaDon hd) {
-        txtHD.setText(hd.getMaHD());
+
+    private void fillData(HoaDon h) {
+        txtHD.setText(h.getMaHD());
     }
 
     private void showDataHDCT1(List<HoaDonChiTiet> list) {
@@ -75,7 +71,7 @@ public class ViewTachHD extends javax.swing.JDialog {
             dtm1.addRow(new Object[]{x.getIdSP().getMaSP(), x.getIdSP().getTenSP(), x.getSoLuong(), x.getIdSP().getGiaBan(), x.getIdTopping().getTopping(), x.getGiaTien()});
         }
     }
-    
+
     private void showDataHDCT2(List<HoaDonChiTiet> list) {
         dtm2.setRowCount(0);
         for (HoaDonChiTiet x : list) {
@@ -103,6 +99,7 @@ public class ViewTachHD extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbGH1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -147,7 +144,7 @@ public class ViewTachHD extends javax.swing.JDialog {
             }
         });
 
-        txtHD.setText("HD67");
+        txtHD.setText("HD61");
 
         btHuy.setText("Huỷ");
         btHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -167,14 +164,16 @@ public class ViewTachHD extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbGH1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbGH1MouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tbGH1);
 
         jLabel1.setText("Mã HD tách");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sync_25px.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,19 +199,23 @@ public class ViewTachHD extends javax.swing.JDialog {
                                 .addComponent(btTach))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtHD)))
+                                .addComponent(txtHD)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 10, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtHD))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -223,7 +226,7 @@ public class ViewTachHD extends javax.swing.JDialog {
                     .addComponent(btHuy))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -249,7 +252,7 @@ public class ViewTachHD extends javax.swing.JDialog {
         Topping tp = implTP.getOne(idTP);
         Integer sl = (Integer) tbGH2.getValueAt(row, 2);
         int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-        if (sl == slt || tbGH2.getRowCount() < 1) {
+        if (sl == slt && tbGH2.getRowCount() <= 1) {
             JOptionPane.showMessageDialog(this, "Không thể chuyển hết sản phẩm sang hoá đơn khác");
         } else {
             if (txtHD.getText().equalsIgnoreCase(cbbMaHD1.getSelectedItem().toString())) {
@@ -365,38 +368,23 @@ public class ViewTachHD extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btHuyActionPerformed
 
-    private void tbGH1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH1MouseClicked
-        //        int row = tbGH1.getSelectedRow();
-        //        String maSP = (String) tbGH1.getValueAt(row, 0);
-        //        SanPham idSP = implSP.getOne(maSP);
-        //        String maHD = (String) cbbMaHD1.getSelectedItem();
-        //        HoaDon hd = implHD.getOne(maHD);
-        //        Integer sl = (Integer) tbGH1.getValueAt(row, 2);
-        //        if (sl == 1) {
-        //            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), 1, idSP.getId()));
-        //        } else {
-        //            int slt = Integer.parseInt(JOptionPane.showInputDialog("Mời bạn nhập số lượng:"));
-        //            if (slt <= 0) {
-        //                JOptionPane.showMessageDialog(this, "Bạn phải nhập đúng định dạng");
-        //                return;
-        //            }
-        //
-        //            JOptionPane.showMessageDialog(this, implHDCT.updateIDHD(hd.getID(), slt, idSP.getId()));
-        //            String maHD1 = (String) cbbMaHD2.getSelectedItem();
-        //            HoaDon hd2 = implHD.getOne(maHD1);
-        //            Integer slAdd = sl - slt;
-        ////            implHDCT.updateIDHD(hd2.getID(), slAdd, idSP.getId());
-        //            HoaDonChiTietModel hdct = new HoaDonChiTietModel(idSP.getId(), hd2.getID(), slAdd);
-        //            implHDCT.add(hdct);
-        //            String ma1 = cbbMaHD2.getSelectedItem().toString();
-        //            HoaDon hd1 = implHD.getOne(ma1);
-        //            listHDCT = implHDCT.getAllviewGH(hd1.getID());
-        //            showDataHDCT2(listHDCT);
-        //        }
-        //
-        //        listHDCT = implHDCT.getAllviewGH(hd.getID());
-        //        showDataHDCT1(listHDCT);
-    }//GEN-LAST:event_tbGH1MouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        listHD = implHD.getAllHDCho();
+        cbbMaHD1.setModel(boxModel1);
+        for (HoaDon hd2 : listHD) {
+           if(!hd2.getMaHD().contains(hd2.getMaHD())){
+                boxModel1.addElement(hd2.getMaHD());
+           }
+        }
+        String ma2 = cbbMaHD1.getSelectedItem().toString();
+        HoaDon hd = implHD.getOne(ma2);
+        listHDCT = implHDCT.getAllviewGH(hd.getID());
+        showDataHDCT1(listHDCT);
+        String ma1 = txtHD.getText();
+        HoaDon hd1 = implHD.getOne(ma1);
+        listHDCT = implHDCT.getAllviewGH(hd1.getID());
+        showDataHDCT2(listHDCT);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -445,6 +433,7 @@ public class ViewTachHD extends javax.swing.JDialog {
     private javax.swing.JButton btHuy;
     private javax.swing.JButton btTach;
     private javax.swing.JComboBox<String> cbbMaHD1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

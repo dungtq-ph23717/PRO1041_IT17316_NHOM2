@@ -781,6 +781,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             }
         ));
         tbHD.setComponentPopupMenu(jPopupMenu2);
+        tbHD.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tbHD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbHDMouseClicked(evt);
@@ -979,8 +980,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     private void gopBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopBanActionPerformed
-        int row = tbBan.getSelectedRow();
-        Ban b = listBan.get(row);
+        Ban b = new Ban("", txtBan.getText());
         ViewQuanLy v2 = new ViewQuanLy();
         ViewTachBan v = new ViewTachBan(v2, true, b);
         v.setVisible(true);
@@ -1194,7 +1194,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             implHD.update(hd, ma, "Huỷ");
             JOptionPane.showMessageDialog(this, "Huỷ thành công");
             int row = tbBan.getSelectedRow();
-            String ten = tbBan.getValueAt(row, 0).toString();
+            String ten = txtBan.getText();
             Ban b = implBan.getOne(ten);
             listHoaDon = implHD.getAllTTViewHD(b.getId());
             showDataHD(listHoaDon);
@@ -1228,6 +1228,8 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 JOptionPane.showMessageDialog(this, "Chưa chọn bàn");
             } else if (tbBan.getValueAt(row, 0).toString().contains(" - tách")) {
                 JOptionPane.showMessageDialog(this, "Không thể tách thêm");
+            } else if (tbBan.getValueAt(row, 1).toString().equalsIgnoreCase("Nhỏ")) {
+                JOptionPane.showMessageDialog(this, "Không thể tách bàn nhỏ");
             } else {
                 String ten = txtBan.getText();
                 Ban idKV = implBan.getOne(ten);
@@ -1235,7 +1237,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 implBan.tachBan(ban);
                 listBan = implBan.getAllTT();
                 showDataBan(listBan);
-                Ban b = listBan.get(row);
+                Ban b = new Ban("", txtBan.getText());
                 ViewQuanLy v2 = new ViewQuanLy();
                 ViewTachBan v = new ViewTachBan(v2, true, b);
                 v.setVisible(true);
@@ -1274,8 +1276,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             showDataBan(listBan);
             listHoaDon = implHD.getAllTTViewHD(b.getId());
             showDataHD(listHoaDon);
-            int row = tbHD.getSelectedRow();
-            HoaDon h = listHoaDon.get(row);
+            HoaDon h = new HoaDon(txtMa.getText());
             ViewQuanLy v1 = new ViewQuanLy();
             ViewTachHD v = new ViewTachHD(v1, true, h);
             v.setVisible(true);
@@ -1286,7 +1287,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
 
     private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
         int row = tbHD.getSelectedRow();
-        HoaDon h = listHoaDon.get(row);
+        HoaDon h = new HoaDon(txtMa.getText());
         ViewQuanLy v1 = new ViewQuanLy();
         ViewTachHD v = new ViewTachHD(v1, true, h);
         v.setVisible(true);

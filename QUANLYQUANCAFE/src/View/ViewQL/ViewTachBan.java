@@ -4,6 +4,7 @@
  */
 package View.ViewQL;
 
+import DomainModels.BanModel;
 import DomainModels.HoaDonModel;
 import Service.impl.BanServiceImpl;
 import Service.impl.HoaDonServiceIblm;
@@ -11,6 +12,7 @@ import ViewModels.Ban;
 import ViewModels.HoaDon;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -72,8 +74,8 @@ public class ViewTachBan extends javax.swing.JDialog {
         }
     }
 
-    private void tachHD(int row) {
-        HoaDon hd = listHD.get(row);
+    private void tachHD() {
+        HoaDon hd = new HoaDon(txtMa.getText());
         ViewQuanLy v1 = new ViewQuanLy();
         ViewTachHD v = new ViewTachHD(v1, true, hd);
         v.setVisible(true);
@@ -107,6 +109,8 @@ public class ViewTachBan extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         txtBan = new javax.swing.JLabel();
         cbbBan1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        txtMa = new javax.swing.JLabel();
 
         tachHD.setText("Tách HD");
         tachHD.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +141,12 @@ public class ViewTachBan extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbHDtach.setComponentPopupMenu(HD);
+        tbHDtach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbHDtachMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbHDtach);
 
         jLabel2.setText("Bàn");
@@ -152,7 +162,6 @@ public class ViewTachBan extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbHDgoc.setComponentPopupMenu(HD);
         jScrollPane2.setViewportView(tbHDgoc);
 
         btClose.setText("Tách");
@@ -194,6 +203,10 @@ public class ViewTachBan extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setText("Mã HD");
+
+        txtMa.setText("__");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,7 +224,10 @@ public class ViewTachBan extends javax.swing.JDialog {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 16, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btClose)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
@@ -246,9 +262,13 @@ public class ViewTachBan extends javax.swing.JDialog {
                         .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btClose)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btClose)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtMa)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -341,15 +361,33 @@ public class ViewTachBan extends javax.swing.JDialog {
     }//GEN-LAST:event_cbbBan1ActionPerformed
 
     private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
-        int row = tbHDgoc.getSelectedRow();
-        tachHD(row);
+        int row = tbHDtach.getSelectedRow();
+        Ban b = implBan.getOne(cbbBan1.getSelectedItem().toString());
+        Random r = new Random();
+        int x = r.nextInt(100);
+        long millis = System.currentTimeMillis();
+        String name;
+        HoaDonModel hd = new HoaDonModel(b.getId());
+        implHD.add(hd, x + "");
+        listHD = implHD.getAllTTViewHD(b.getId());
+        showDataHD1(listHD);
+        tachHD();
     }//GEN-LAST:event_tachHDActionPerformed
 
     private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
-        int row = tbHDgoc.getSelectedRow();
-        tachHD(row);
+        int row = tbHDtach.getSelectedRow();
+        tachHD();
     }//GEN-LAST:event_gopHDActionPerformed
 
+    private void tbHDtachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHDtachMouseClicked
+        int row = tbHDtach.getSelectedRow();
+        fillMa(row);
+    }//GEN-LAST:event_tbHDtachMouseClicked
+
+    private void fillMa(int index) {
+        HoaDon h = listHD.get(index);
+        txtMa.setText(h.getMaHD());
+    }
     /**
      * @param args the command line arguments
      */
@@ -402,11 +440,13 @@ public class ViewTachBan extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem tachHD;
     private javax.swing.JTable tbHDgoc;
     private javax.swing.JTable tbHDtach;
     private javax.swing.JLabel txtBan;
+    private javax.swing.JLabel txtMa;
     // End of variables declaration//GEN-END:variables
 }
