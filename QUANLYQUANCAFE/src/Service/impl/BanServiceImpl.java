@@ -50,10 +50,6 @@ public class BanServiceImpl implements BanService {
         if (ban.getTenBan().isEmpty() || ban.getMoTa().isEmpty() || ban.getMaBan().isEmpty()) {
             return "Không được để trống";
         }
-        BanModel b = rp.checkTrung(ban.getMaBan());
-        if (b != null) {
-            return "Trùng mã";
-        }
         boolean update = rp.update(ban, ma);
         if (update) {
             return "update thành công";
@@ -115,6 +111,21 @@ public class BanServiceImpl implements BanService {
         } else {
             return "Gộp bàn thất bại";
         }
+    }
+
+    @Override
+    public String tachBan(BanModel ban) {
+        boolean tachBan = rp.tachBan(ban);
+        if (tachBan) {
+            return "Tách bàn thành công";
+        } else {
+            return "Tách bàn thất bại";
+        }
+    }
+
+    @Override
+    public List<Ban> banTach() {
+        return rp.banTach();
     }
 
 }

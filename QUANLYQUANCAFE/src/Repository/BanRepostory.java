@@ -81,6 +81,24 @@ public class BanRepostory {
         return null;
     }
 
+    public List<Ban> banTach() {
+        String query = "Select TenBan,Loaiban,TinhTrang\n"
+                + "From Ban\n"
+                + "where TenBan like  N'% - tách' \n";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<Ban> list = new ArrayList<>();
+            while (rs.next()) {
+                Ban ban = new Ban(rs.getString(1), rs.getString(2), rs.getString(3));
+                list.add(ban);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+
     public List<Ban> Search(String ma) {
         String query = "Select MaBan,TenBan,Mota, Loaiban, TenKV,TinhTrang\n"
                 + "From Ban \n"
@@ -166,6 +184,34 @@ public class BanRepostory {
     }
 
     public boolean add(BanModel ban) {
+        String query = "INSERT INTO [dbo].[Ban]\n"
+                + "           ([MaBan]\n"
+                + "           ,[TenBan]\n"
+                + "           ,[Mota]\n"
+                + "           ,[Loaiban]\n"
+                + "           ,[IDKV],[TinhTrang])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?\n"
+                + "           ,?,?)";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, ban.getMaBan());
+            ps.setObject(2, ban.getTenBan());
+            ps.setObject(3, ban.getMoTa());
+            ps.setObject(4, ban.getLoaiBan());
+            ps.setObject(5, ban.getIDKV());
+            ps.setObject(6, ban.getTinhTrang());
+            check = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
+    public boolean tachBan(BanModel ban) {
         String query = "INSERT INTO [dbo].[Ban]\n"
                 + "           ([MaBan]\n"
                 + "           ,[TenBan]\n"

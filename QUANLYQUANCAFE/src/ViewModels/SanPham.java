@@ -19,8 +19,17 @@ public class SanPham {
     private DanhMuc danhMuc;
     private String trangThai;
     private Size size;
+    private HoaDonChiTiet hdct;
 
     public SanPham() {
+    }
+
+    public HoaDonChiTiet getHdct() {
+        return hdct;
+    }
+
+    public void setHdct(HoaDonChiTiet hdct) {
+        this.hdct = hdct;
     }
 
     public SanPham(String maSP, String tenSP, double giaBan) {
