@@ -15,7 +15,6 @@ import ViewModels.HoaDonChiTiet;
 import ViewModels.NhanVienViewModel;
 import ViewModels.SanPham;
 import ViewModels.Topping;
-import com.toedter.calendar.JDateChooser;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -666,8 +665,6 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
             cell = row.createCell(8, CellType.STRING);
             cell.setCellValue("TOPPING");
             cell = row.createCell(9, CellType.STRING);
-            cell.setCellValue("THÀNH TIỀN");
-            cell = row.createCell(10, CellType.STRING);
             cell.setCellValue("TRẠNG THÁI");
             List<HoaDon> listHD = iplmHD.getAll();
 
@@ -688,8 +685,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                 row.createCell(6).setCellValue(hd.getSp().getGiaBan());
                 row.createCell(7).setCellValue(hd.getHdct().getSoLuong());
                 row.createCell(8).setCellValue(hd.getTp().getTopping());
-                row.createCell(9).setCellValue(hd.getThanhTien());
-                row.createCell(10).setCellValue(hd.getTinhTrang());
+                row.createCell(9).setCellValue(hd.getTinhTrang());
             }
             FileOutputStream out = new FileOutputStream(new File("D:\\hdct.xlsx"));
             workbook.write(out);
