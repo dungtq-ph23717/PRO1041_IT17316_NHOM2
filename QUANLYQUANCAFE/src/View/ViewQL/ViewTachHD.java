@@ -273,7 +273,6 @@ public class ViewTachHD extends javax.swing.JFrame {
 
     private void tbGH2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGH2MouseClicked
         int row = tbGH2.getSelectedRow();
-//        int row1 = tbGH1.getSelectedRow();
         String ma1 = txtHD.getText();
         HoaDon hd1 = implHD.getOne(ma1);
         String maSP = (String) tbGH2.getValueAt(row, 0);
