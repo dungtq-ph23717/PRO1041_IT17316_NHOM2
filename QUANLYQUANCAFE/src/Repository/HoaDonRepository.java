@@ -9,6 +9,7 @@ import Utilities.DBContext;
 import ViewModels.Ban;
 import ViewModels.HoaDon;
 import ViewModels.HoaDonChiTiet;
+import ViewModels.KhuyenMai;
 import ViewModels.NhanVienViewModel;
 import ViewModels.SanPham;
 import ViewModels.Topping;
@@ -49,11 +50,16 @@ public class HoaDonRepository {
     }
 
     public List<HoaDon> getAllHD(String ma) {
-        String query = "SELECT MaHD, TenBan , TenNV , NgayLapHD , PhuongThucThanhToan , TenSP,Giaban,HDCT.Soluong ,TP.Topping,(SP.Giaban*Soluong) + TP.GiaTien  As ThanhTien,HD.TinhTrang\n"
-                + "              FROM  Ban B JOIN HoaDon HD ON B.ID = HD.IDBan JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD JOIN\n"
-                + "             SanPham SP ON HDCT.IDSP = SP.ID JOIN NhanVien NV ON HD.IDNV = NV.ID JOIN Topping TP ON HDCT.IDTopping = TP.ID"
-                + "                 WHERE HD.MaHD LIKE ?";
-
+        String query = "SELECT MaHD, TenBan , TenNV , NgayLapHD , PhuongThucThanhToan , TenSP,Giaban,HDCT.Soluong ,TP.Topping,(SP.Giaban*Soluong) + TP.GiaTien As ThanhTien,MucGiam,HD.TinhTrang\n"
+                + "FROM  Ban B \n"
+                + "inner JOIN HoaDon HD ON B.ID = HD.IDBan \n"
+                + "inner JOIN HoaDonChiTiet HDCT ON HD.ID = HDCT.IDHD \n"
+                + "inner JOIN SanPham SP ON HDCT.IDSP = SP.ID \n"
+                + "inner JOIN KhuyenMai_SanPham KM_SP ON SP.ID = KM_SP.IDSP \n"
+                + "inner JOIN NhanVien NV ON HD.IDNV = NV.ID \n"
+                + "inner JOIN Topping TP ON HDCT.IDTopping = TP.ID\n"
+                + "inner join KhuyenMai on KhuyenMai.ID = KM_SP.IDKM\n"
+                + "WHERE MaHD = ?";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setString(1, ma);
             ResultSet rs = ps.executeQuery();
@@ -64,7 +70,8 @@ public class HoaDonRepository {
                 SanPham sp = new SanPham(rs.getString(6), rs.getDouble(7));
                 HoaDonChiTiet hdct = new HoaDonChiTiet(rs.getInt(8));
                 Topping tp = new Topping(rs.getString(9));
-                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, tp, hdct, rs.getDouble(10), rs.getString(11));
+                KhuyenMai km = new KhuyenMai(rs.getDouble(11));
+                HoaDon hd = new HoaDon(rs.getString(1), ban, tenNV, rs.getString(4), rs.getString(5), sp, hdct, tp, rs.getDouble(10), km, rs.getString(12));
                 list.add(hd);
             }
             return list;
@@ -169,9 +176,9 @@ public class HoaDonRepository {
 
     public List<HoaDon> searchTheoMaHD(String maHD) {
         String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
-                + "from HoaDon \n"
-                + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
-                + "                 WHERE MaHD LIKE ?";
+                + "                from HoaDon \n"
+                + "                inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
+                + "                WHERE MaHD LIKE ? AND NOT TinhTrang LIKE N'Chờ'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setString(1, "%" + maHD + "%");
             ResultSet rs = ps.executeQuery();
@@ -414,11 +421,11 @@ public class HoaDonRepository {
 //        HoaDonModel hd = new HoaDonModel("HD1", "1");
 //        boolean add = new HoaDonRepository().updateID("15d13f6e-71b8-44be-8560-213d2f84002a", "HD31");
 //        System.out.println(add);
-        boolean hd = new HoaDonRepository().delete("HD40");
-        System.out.println(hd);
-//        List<HoaDon> getall = new Repository.HoaDonRepository().getAll();
-//        for (HoaDon x : getall) {
-//            System.out.println(x);
-//        }
+//        boolean hd = new HoaDonRepository().delete("HD40");
+//        System.out.println(hd);
+        List<HoaDon> getall = new Repository.HoaDonRepository().getAllHD("HD51");
+        for (HoaDon x : getall) {
+            System.out.println(x);
+        }
     }
 }
