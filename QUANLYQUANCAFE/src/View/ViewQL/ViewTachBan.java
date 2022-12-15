@@ -43,8 +43,9 @@ public class ViewTachBan extends javax.swing.JFrame {
 
         tbHDgoc.setModel(dtm2);
         dtm2.setColumnIdentifiers(headersHD);
-        listHD = implHD.getAllTT();
-        showDataHD2(listHD);
+        String ten2 = txtBan.getText();
+        Ban b2 = implBan.getOne(ten2);
+        listHD = implHD.getAllTTViewHD(b2.getId());
 
         listBan = implBan.getAllTT();
         cbbBan1.setModel(boxModel1);
@@ -73,8 +74,10 @@ public class ViewTachBan extends javax.swing.JFrame {
     }
 
     private void tachHD() {
+        int row = tbHDtach.getSelectedRow();
+        HoaDon h = listHD.get(row);
         HoaDonModel hd = new HoaDonModel();
-        ViewTachHD v = new ViewTachHD();
+        ViewTachHD v = new ViewTachHD(h);
         v.setVisible(true);
     }
 

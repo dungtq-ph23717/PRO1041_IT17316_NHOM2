@@ -1272,7 +1272,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             showDataBan(listBan);
             listHoaDon = implHD.getAllTTViewHD(b.getId());
             showDataHD(listHoaDon);
-            ViewTachHD v = new ViewTachHD();
+            int row = tbHD.getSelectedRow();
+            HoaDon h = listHoaDon.get(row);
+            ViewTachHD v = new ViewTachHD(h);
             v.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
@@ -1280,7 +1282,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     }//GEN-LAST:event_tachHDActionPerformed
 
     private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
-        ViewTachHD v = new ViewTachHD();
+        int row = tbHD.getSelectedRow();
+        HoaDon h = listHoaDon.get(row);
+        ViewTachHD v = new ViewTachHD(h);
         v.setVisible(true);
     }//GEN-LAST:event_gopHDActionPerformed
 
