@@ -203,7 +203,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="txtHD">
       <Properties>
-        <Property name="text" type="java.lang.String" value="HD67"/>
+        <Property name="text" type="java.lang.String" value="HD11"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btHuy">

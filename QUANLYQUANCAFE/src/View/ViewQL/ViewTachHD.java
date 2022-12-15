@@ -161,7 +161,7 @@ public class ViewTachHD extends javax.swing.JFrame {
             }
         });
 
-        txtHD.setText("HD67");
+        txtHD.setText("HD11");
 
         btHuy.setText("Huỷ");
         btHuy.addActionListener(new java.awt.event.ActionListener() {
