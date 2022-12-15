@@ -41,16 +41,11 @@ public class ViewTachBan extends javax.swing.JDialog {
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHDtach.setModel(dtm1);
         dtm1.setColumnIdentifiers(headersHD);
-        listHD = implHD.getAllTT();
-        showDataHD1(listHD);
+
 
         tbHDgoc.setModel(dtm2);
         dtm2.setColumnIdentifiers(headersHD);
-//        listHD = implHD.getAllTT();
-        String ten = txtBan.getText();
-        Ban b1 = implBan.getOne(ten);
-        listHD = implHD.getAllTTViewHD(b1.getId());
-        showDataHD2(listHD);
+
 
         listBan = implBan.getAllTT();
         cbbBan1.setModel(boxModel1);
