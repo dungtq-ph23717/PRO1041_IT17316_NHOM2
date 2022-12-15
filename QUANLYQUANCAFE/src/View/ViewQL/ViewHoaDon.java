@@ -497,7 +497,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
 
     private void txtSearchMaHDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchMaHDKeyReleased
         if (txtSearchMaHD.getText().equalsIgnoreCase("")) {
-            listHD = iplmHD.getAllTT();
+            listHD = iplmHD.getAllViewHD();
             showDataHD(listHD);
         } else {
             List<HoaDon> searchTheoMaHD = iplmHD.searchTheoMaHD(txtSearchMaHD.getText());
@@ -507,7 +507,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
 
     private void cbbSearchTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbSearchTTActionPerformed
         if (cbbSearchTT.getSelectedItem().toString().equalsIgnoreCase("All")) {
-            listHD = iplmHD.getAllTT();
+            listHD = iplmHD.getAllViewHD();
             showDataHD(listHD);
         } else {
             List<HoaDon> searchTheoTT = iplmHD.searchTheoTT(cbbSearchTT.getSelectedItem().toString());

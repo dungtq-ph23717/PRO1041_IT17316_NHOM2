@@ -162,6 +162,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         txtID.setEnabled(false);
 
         btClear.setBackground(new java.awt.Color(255, 0, 0));
+        btClear.setForeground(new java.awt.Color(255, 255, 255));
         btClear.setText("Clear form");
         btClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,6 +249,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         );
 
         bltAddSP.setBackground(new java.awt.Color(255, 0, 0));
+        bltAddSP.setForeground(new java.awt.Color(255, 255, 255));
         bltAddSP.setText("Áp dụng MGG");
         bltAddSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -432,6 +434,7 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         jLabel8.setText("Mô Tả: ");
 
         bltAdd.setBackground(new java.awt.Color(255, 0, 0));
+        bltAdd.setForeground(new java.awt.Color(255, 255, 255));
         bltAdd.setText("Lưu");
         bltAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -440,7 +443,8 @@ public class ViewKhuyenMai extends javax.swing.JInternalFrame {
         });
 
         bltUpdate.setBackground(new java.awt.Color(255, 0, 0));
-        bltUpdate.setText("Sửa");
+        bltUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        bltUpdate.setText("Update");
         bltUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bltUpdateActionPerformed(evt);

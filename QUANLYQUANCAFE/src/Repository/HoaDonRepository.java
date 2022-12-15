@@ -169,9 +169,9 @@ public class HoaDonRepository {
 
     public List<HoaDon> searchTheoMaHD(String maHD) {
         String query = "Select MaHD,NgayLapHD,TenNV,TinhTrang\n"
-                + "from HoaDon \n"
-                + "inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
-                + "                 WHERE MaHD LIKE ?";
+                + "                from HoaDon \n"
+                + "                inner join NhanVien on NhanVien.ID = HoaDon.IDNV\n"
+                + "                WHERE MaHD LIKE ? AND NOT TinhTrang LIKE N'Chờ'";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setString(1, "%" + maHD + "%");
             ResultSet rs = ps.executeQuery();
@@ -414,11 +414,11 @@ public class HoaDonRepository {
 //        HoaDonModel hd = new HoaDonModel("HD1", "1");
 //        boolean add = new HoaDonRepository().updateID("15d13f6e-71b8-44be-8560-213d2f84002a", "HD31");
 //        System.out.println(add);
-        boolean hd = new HoaDonRepository().delete("HD40");
-        System.out.println(hd);
-//        List<HoaDon> getall = new Repository.HoaDonRepository().getAll();
-//        for (HoaDon x : getall) {
-//            System.out.println(x);
-//        }
+//        boolean hd = new HoaDonRepository().delete("HD40");
+//        System.out.println(hd);
+        List<HoaDon> getall = new Repository.HoaDonRepository().searchTheoMaHD("9");
+        for (HoaDon x : getall) {
+            System.out.println(x);
+        }
     }
 }
