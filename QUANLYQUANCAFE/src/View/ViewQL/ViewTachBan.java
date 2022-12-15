@@ -372,22 +372,30 @@ public class ViewTachBan extends javax.swing.JDialog {
     }//GEN-LAST:event_cbbBan1ActionPerformed
 
     private void tachHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHDActionPerformed
-        int row = tbHDtach.getSelectedRow();
-        Ban b = implBan.getOne(cbbBan1.getSelectedItem().toString());
-        Random r = new Random();
-        int x = r.nextInt(100);
-        long millis = System.currentTimeMillis();
-        String name;
-        HoaDonModel hd = new HoaDonModel(b.getId());
-        implHD.add(hd, x + "");
-        listHD = implHD.getAllTTViewHD(b.getId());
-        showDataHD1(listHD);
-        tachHD();
+        if (txtMa.getText().contains("__")) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+        } else {
+            int row = tbHDtach.getSelectedRow();
+            Ban b = implBan.getOne(cbbBan1.getSelectedItem().toString());
+            Random r = new Random();
+            int x = r.nextInt(100);
+            long millis = System.currentTimeMillis();
+            String name;
+            HoaDonModel hd = new HoaDonModel(b.getId());
+            implHD.add(hd, x + "");
+            listHD = implHD.getAllTTViewHD(b.getId());
+            showDataHD1(listHD);
+            tachHD();
+        }
     }//GEN-LAST:event_tachHDActionPerformed
 
     private void gopHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gopHDActionPerformed
-        int row = tbHDtach.getSelectedRow();
-        tachHD();
+        if (txtMa.getText().contains("__")) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn hoá đơn");
+        } else {
+            int row = tbHDtach.getSelectedRow();
+            tachHD();
+        }
     }//GEN-LAST:event_gopHDActionPerformed
 
     private void tbHDtachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHDtachMouseClicked
