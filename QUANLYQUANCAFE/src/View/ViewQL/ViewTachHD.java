@@ -144,7 +144,7 @@ public class ViewTachHD extends javax.swing.JDialog {
             }
         });
 
-        txtHD.setText("HD8");
+        txtHD.setText("HD68");
 
         btHuy.setText("Huỷ");
         btHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -293,8 +293,6 @@ public class ViewTachHD extends javax.swing.JDialog {
     private void btTachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTachActionPerformed
         JOptionPane.showMessageDialog(this, "Tách thành công");
         this.dispose();
-        ViewQuanLy v = new ViewQuanLy();
-        v.setVisible(true);
     }//GEN-LAST:event_btTachActionPerformed
 
     private void btGopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGopActionPerformed
@@ -315,15 +313,17 @@ public class ViewTachHD extends javax.swing.JDialog {
                 Integer slt = Integer.valueOf(tbGH2.getValueAt(i, 2).toString());
                 if (idSP.equalsIgnoreCase(idSp1)) {
                     HoaDonChiTietModel hdct = new HoaDonChiTietModel(slt + sl);
-                    implHDCT.updateIDHD(hd.getID(), sl + slt, tp.getId(), sp.getId());
+                    implHDCT.update(hdct, hd.getID(), sp.getId());
                     implHDCT.delete(hd1.getID(), sp.getId());
                     JOptionPane.showMessageDialog(this, implHD.delete(ma1));
                     boxModel1.removeElement(ma1);
+                    this.dispose();
                 } else {
                     HoaDonChiTietModel hdct1 = new HoaDonChiTietModel(sl);
                     implHDCT.updateIDHD(hd.getID(), sl, tp.getId(), sp.getId());
                     JOptionPane.showMessageDialog(this, implHD.delete(ma1));
                     boxModel1.removeElement(ma1);
+                    this.dispose();
                 }
                 listHDCT = implHDCT.getAllviewGH(hd.getID());
                 showDataHDCT2(listHDCT);
@@ -331,9 +331,7 @@ public class ViewTachHD extends javax.swing.JDialog {
                 showDataHDCT1(listHDCT);
             }
         }
-        this.dispose();
-        ViewQuanLy v = new ViewQuanLy();
-        v.setVisible(true);
+
     }//GEN-LAST:event_btGopActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
@@ -372,9 +370,9 @@ public class ViewTachHD extends javax.swing.JDialog {
         listHD = implHD.getAllHDCho();
         cbbMaHD1.setModel(boxModel1);
         for (HoaDon hd2 : listHD) {
-           if(!hd2.getMaHD().contains(hd2.getMaHD())){
+            if (!hd2.getMaHD().contains(hd2.getMaHD())) {
                 boxModel1.addElement(hd2.getMaHD());
-           }
+            }
         }
         String ma2 = cbbMaHD1.getSelectedItem().toString();
         HoaDon hd = implHD.getOne(ma2);

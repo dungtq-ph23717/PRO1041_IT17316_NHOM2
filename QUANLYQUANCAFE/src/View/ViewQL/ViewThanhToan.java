@@ -214,6 +214,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         puBan = new javax.swing.JPopupMenu();
         gopBan = new javax.swing.JMenuItem();
         tachBan = new javax.swing.JMenuItem();
+        reset = new javax.swing.JMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         updateSL = new javax.swing.JMenuItem();
         xoaSP = new javax.swing.JMenuItem();
@@ -297,6 +298,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             }
         });
         puBan.add(tachBan);
+
+        reset.setText("Reset");
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
+        puBan.add(reset);
 
         updateSL.setText("Update số lượng");
         updateSL.addActionListener(new java.awt.event.ActionListener() {
@@ -1323,9 +1332,12 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private void btMoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoActionPerformed
 
         initWebcam();
-
-
     }//GEN-LAST:event_btMoActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        listBan = implBan.getAllTT();
+        showDataBan(listBan);
+    }//GEN-LAST:event_resetActionPerformed
 
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
@@ -1444,6 +1456,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu puBan;
+    private javax.swing.JMenuItem reset;
     private javax.swing.JMenuItem tachBan;
     private javax.swing.JMenuItem tachHD;
     private javax.swing.JTable tbBan;

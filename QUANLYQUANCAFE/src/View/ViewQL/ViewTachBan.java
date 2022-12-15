@@ -283,8 +283,6 @@ public class ViewTachBan extends javax.swing.JDialog {
     private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
         JOptionPane.showMessageDialog(this, "Tách bàn thành công");
         this.dispose();
-        ViewQuanLy v = new ViewQuanLy();
-        v.setVisible(true);
     }//GEN-LAST:event_btCloseActionPerformed
 
     private void btBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBackActionPerformed
@@ -353,8 +351,6 @@ public class ViewTachBan extends javax.swing.JDialog {
         listBan = implBan.getAllTT();
         boxModel1.removeElement(ten1);
         this.dispose();
-        ViewQuanLy v = new ViewQuanLy();
-        v.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbbBan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbBan1ActionPerformed
@@ -401,12 +397,16 @@ public class ViewTachBan extends javax.swing.JDialog {
         Ban b1 = implBan.getOne(ten);
         listHD = implHD.getAllTTViewHD(b1.getId());
         showDataHD2(listHD);
+        Ban b = implBan.getOne(cbbBan1.getSelectedItem().toString());
+        listHD = implHD.getAllTTViewHD(b.getId());
+        showDataHD1(listHD);
     }//GEN-LAST:event_btClose1ActionPerformed
 
     private void fillMa(int index) {
         HoaDon h = listHD.get(index);
         txtMa.setText(h.getMaHD());
     }
+
     /**
      * @param args the command line arguments
      */
