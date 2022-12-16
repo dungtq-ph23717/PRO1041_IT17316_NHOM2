@@ -46,6 +46,10 @@ public class KhuyenMai {
         this.moTa = moTa;
     }
 
+    public KhuyenMai(double mucGiam) {
+        this.mucGiam = mucGiam;
+    }
+
     public String getID() {
         return ID;
     }

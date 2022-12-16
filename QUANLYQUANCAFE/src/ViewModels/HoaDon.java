@@ -20,6 +20,7 @@ public class HoaDon {
     private HoaDonChiTiet hdct;
     private Topping tp;
     private double thanhTien;
+    private KhuyenMai km;
     private String tinhTrang;
 
     public HoaDon() {
@@ -30,14 +31,27 @@ public class HoaDon {
         this.ngayLapHD = ngayLapHD;
         this.thanhTien = thanhTien;
     }
-    
-    
+
     public HoaDon(String maHD, String ngayLapHD, SanPham sp, HoaDonChiTiet hdct, double thanhTien) {
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
         this.sp = sp;
         this.hdct = hdct;
         this.thanhTien = thanhTien;
+    }
+
+    public HoaDon(String maHD, Ban ban, NhanVienViewModel tenNV, String ngayLapHD, String phuongThucThanhToan, SanPham sp, HoaDonChiTiet hdct, Topping tp, double thanhTien, KhuyenMai km, String tinhTrang) {
+        this.maHD = maHD;
+        this.ban = ban;
+        this.tenNV = tenNV;
+        this.ngayLapHD = ngayLapHD;
+        this.phuongThucThanhToan = phuongThucThanhToan;
+        this.sp = sp;
+        this.hdct = hdct;
+        this.tp = tp;
+        this.thanhTien = thanhTien;
+        this.km = km;
+        this.tinhTrang = tinhTrang;
     }
 
     public HoaDon(String maHD, String ngayLapHD, SanPham sp, HoaDonChiTiet hdct, double thanhTien, String tinhTrang) {
@@ -49,7 +63,6 @@ public class HoaDon {
         this.tinhTrang = tinhTrang;
     }
 
-    
     public HoaDon(String maHD, NhanVienViewModel tenNV, String tinhTrang) {
         this.maHD = maHD;
         this.tenNV = tenNV;
@@ -168,7 +181,7 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ban=" + ban + ", tenNV=" + tenNV + ", ngayLapHD=" + ngayLapHD + ", phuongThucThanhToan=" + phuongThucThanhToan + ", sp=" + sp + ", tp=" + tp + ", thanhTien=" + thanhTien + ", tinhTrang=" + tinhTrang + ", hdct=" + hdct + '}';
+        return "HoaDon{" + "ID=" + ID + ", maHD=" + maHD + ", ban=" + ban + ", tenNV=" + tenNV + ", ngayLapHD=" + ngayLapHD + ", phuongThucThanhToan=" + phuongThucThanhToan + ", sp=" + sp + ", hdct=" + hdct + ", tp=" + tp + ", thanhTien=" + thanhTien + ", km=" + km + ", tinhTrang=" + tinhTrang + '}';
     }
 
     public Object[] toRowData() {
