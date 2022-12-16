@@ -520,6 +520,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
         showData(listHD);
         int row2 = bangHDCT.getSelectedRow();
         txtFake.setText("check");
+        
         fillData(row2);
         txtTTFAKE.setText(tt);
     }//GEN-LAST:event_bangHDMouseClicked
