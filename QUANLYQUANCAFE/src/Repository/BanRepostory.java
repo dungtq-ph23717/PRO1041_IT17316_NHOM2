@@ -272,6 +272,7 @@ public class BanRepostory {
                 + "      ,[Mota] = ?\n"
                 + "      ,[Loaiban] = ?\n"
                 + "      ,[IDKV] = ?\n"
+                + ",[TinhTrang] = ?"
                 + " WHERE MaBan like ?";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
@@ -280,7 +281,8 @@ public class BanRepostory {
             ps.setObject(3, ban.getMoTa());
             ps.setObject(4, ban.getLoaiBan());
             ps.setObject(5, ban.getIDKV());
-            ps.setObject(6, ma);
+            ps.setObject(6, ban.getTinhTrang());
+            ps.setObject(7, ma);
             check = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -308,10 +310,11 @@ public class BanRepostory {
 //        for (Ban x : list) {
 //            System.out.println(x.toString());
 //        }
-        BanModel b = new BanRepostory().checkTrung("B1");
-        System.out.println(b);
-//        BanModel b = new BanModel("Bàn 1", "Nhỏ", "Trống");
-//        boolean add = new BanRepostory().gopBan("Bàn 4-tách");
-//        System.out.println(add);
+//        BanModel b = new BanRepostory().checkTrung("B1");
+//        System.out.println(b);
+        KhuVucModel kv = new KhuVucModel("Tâng 5");
+        BanModel b = new BanModel("B5", "Bàn 5", "Tốt", "Lớn", "440fa864-3d5b-4b29-9c30-780fd44e60ff", kv, "Trống");
+        boolean add = new BanRepostory().update(b, "B5");
+        System.out.println(add);
     }
 }

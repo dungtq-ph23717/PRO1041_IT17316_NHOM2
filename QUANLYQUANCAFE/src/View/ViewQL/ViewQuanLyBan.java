@@ -43,7 +43,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-        String[] headers = {"Mã", "Tên", "Mô tả", "Loại bàn", "Khu vực"};
+        String[] headers = {"Mã", "Tên", "Mô tả", "Loại bàn", "Khu vực", "Trạng thái"};
         jTable1.setModel(dtm);
         dtm.setColumnIdentifiers(headers);
         listBan = impl.getAll();
@@ -74,6 +74,11 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         txtName.setText(ban.getTenBan());
         cbbBan.setSelectedItem(ban.getLoaiBan());
         cbbKhuVuc.setSelectedItem(ban.getIDKV().getTenKV());
+        if (ban.getTrangThai().contains("Đang sử dụng")) {
+            rbtDSD.setSelected(true);
+        } else {
+            rbtTrong.setSelected(true);
+        }
     }
 
     /**
@@ -86,6 +91,7 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -99,6 +105,9 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         cbbKhuVuc = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         btReset = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        rbtTrong = new javax.swing.JRadioButton();
+        rbtDSD = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -143,6 +152,15 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Trạng thái");
+
+        buttonGroup2.add(rbtTrong);
+        rbtTrong.setSelected(true);
+        rbtTrong.setText("Trống");
+
+        buttonGroup2.add(rbtDSD);
+        rbtDSD.setText("Đang sử dụng");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -173,7 +191,13 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtTrong)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtDSD)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -202,7 +226,12 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbbKhuVuc, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(90, 90, 90))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(rbtTrong)
+                            .addComponent(rbtDSD))
+                        .addGap(51, 51, 51))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btReset)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -287,14 +316,26 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         jLabel10.setText("Khu vực");
         jLabel10.setToolTipText("");
 
+        cbbKhuVuc1.setEditable(true);
         cbbKhuVuc1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbKhuVuc1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cbbKhuVuc1MouseEntered(evt);
+            }
+        });
         cbbKhuVuc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbKhuVuc1ActionPerformed(evt);
             }
         });
 
+        cbbLoaiBan.setEditable(true);
         cbbLoaiBan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Nhỏ", "Vừa", "Lớn" }));
+        cbbLoaiBan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cbbLoaiBanMouseEntered(evt);
+            }
+        });
         cbbLoaiBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbLoaiBanActionPerformed(evt);
@@ -382,7 +423,14 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         String khuVuc = cbbKhuVuc.getSelectedItem().toString();
         KhuVuc ten1 = impl1.getOne(cbbKhuVuc.getSelectedItem().toString());
         KhuVucModel kv = new KhuVucModel(khuVuc);
-        BanModel ban = new BanModel(ma, ten, moTa, loai, ten1.getId(), kv);
+        boolean tt = rbtDSD.isSelected();
+        String i = "";
+        if (tt) {
+            i = "Đang sử dụng";
+        } else {
+            i = "Trống";
+        }
+        BanModel ban = new BanModel(ma, ten, moTa, loai, ten1.getId(), kv, i);
         JOptionPane.showMessageDialog(this, impl.update(ban, ma));
         listBan = impl.getAll();
         listKV = impl1.getAll();
@@ -406,8 +454,15 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         String loai = (String) cbbBan.getSelectedItem();
         String khuVuc = cbbKhuVuc.getSelectedItem().toString();
         KhuVuc ten1 = impl1.getOne(cbbKhuVuc.getSelectedItem().toString());
+        boolean tt = rbtDSD.isSelected();
+        String i = "";
+        if (tt) {
+            i = "Đang sử dụng";
+        } else {
+            i = "Trống";
+        }
         KhuVucModel kv = new KhuVucModel(khuVuc);
-        BanModel ban = new BanModel(ma, ten, moTa, loai, ten1.getId(), kv);
+        BanModel ban = new BanModel(ma, ten, moTa, loai, ten1.getId(), kv, i);
         JOptionPane.showMessageDialog(this, impl.add(ban));
         listBan = impl.getAll();
         listKV = impl1.getAll();
@@ -460,6 +515,22 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
         listKV = impl1.getAll();
     }//GEN-LAST:event_btResetActionPerformed
 
+    private void cbbKhuVuc1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbKhuVuc1MouseEntered
+        List<Ban> SearchTen = impl.SearchKV((String) cbbKhuVuc1.getSelectedItem());
+        showData(SearchTen);
+        if (jTable1.getRowCount() < 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy khu vực");
+        }
+    }//GEN-LAST:event_cbbKhuVuc1MouseEntered
+
+    private void cbbLoaiBanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbLoaiBanMouseEntered
+        List<Ban> SearchTen = impl.SearchLoaiBan((String) cbbLoaiBan.getSelectedItem());
+        showData(SearchTen);
+        if (jTable1.getRowCount() < 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy loại bàn này");
+        }
+    }//GEN-LAST:event_cbbLoaiBanMouseEntered
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCapNhat;
@@ -467,11 +538,13 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbbBan;
     private javax.swing.JComboBox<String> cbbKhuVuc;
     private javax.swing.JComboBox<String> cbbKhuVuc1;
     private javax.swing.JComboBox<String> cbbLoaiBan;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -484,6 +557,8 @@ public class ViewQuanLyBan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JRadioButton rbtDSD;
+    private javax.swing.JRadioButton rbtTrong;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtMaSearch;
     private javax.swing.JTextField txtMota;

@@ -117,7 +117,7 @@ public class Ban {
     }
 
     public Object[] toRowData() {
-        return new Object[]{maBan, tenBan, moTa, loaiBan, IDKV.getTenKV()};
+        return new Object[]{maBan, tenBan, moTa, loaiBan, IDKV.getTenKV(),trangThai};
     }
 
     public Object[] toRowDataTT() {
