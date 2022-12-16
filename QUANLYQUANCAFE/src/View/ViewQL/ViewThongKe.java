@@ -33,6 +33,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 
 /**
  *
@@ -46,21 +54,39 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
     private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
     private List<SanPham> ListSanPham = new ArrayList<>();
     private SanPhamServiceImpl implSP = new SanPhamServiceImpl();
-
-    private static JFreeChart createChart(PieDataset dataset) {
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Đồ Uống Bán Chạy Nhất", dataset, true, true, true);
-        return chart;
+    
+    
+    public static JFreeChart createChart() {
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Đồ Uống Bán Chạy Nhất",
+                "Đồ Uống", "Số lượng",
+                createDataset(), PlotOrientation.VERTICAL, false, false, false);
+        return barChart;
     }
 
-    private static PieDataset createDataset() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Sinh tố dâu", new Double(5.0));
-        dataset.setValue("Cà Phê đen", new Double(10.0));
-        dataset.setValue("Bạc xỉu", new Double(3.0));
-        dataset.setValue("Trà hoa quả", new Double(0.0));
+    private static CategoryDataset createDataset() {
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(1, "Số người", "Sinh tố dâu");
+        dataset.addValue(10, "Số người", "Cà Phê đen");
+        dataset.addValue(100, "Số người", "Bạc xỉu");
+        dataset.addValue(1000, "Số người", "Trà hoa quả");
         return dataset;
     }
+
+//    private static JFreeChart createChart(PieDataset dataset) {
+//        JFreeChart chart = ChartFactory.createPieChart(
+//                "Đồ Uống Bán Chạy Nhất", dataset, true, true, true);
+//        return chart;
+//    }
+//
+//    private static PieDataset createDataset() {
+//        DefaultPieDataset dataset = new DefaultPieDataset();
+//        dataset.setValue("Sinh tố dâu", new Double(5.0));
+//        dataset.setValue("Cà Phê đen", new Double(10.0));
+//        dataset.setValue("Bạc xỉu", new Double(3.0));
+//        dataset.setValue("Trà hoa quả", new Double(0.0));
+//        return dataset;
+//    }
 
     String strFind = "";
 
@@ -263,22 +289,23 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                                 .addComponent(bltSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(SortSL)
-                                .addGap(29, 29, 29)
-                                .addComponent(jButton1))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(21, 21, 21)
+                                    .addComponent(jLabel3))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addComponent(SortSL)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(jButton1)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(txt_date, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(23, 23, 23)
                                 .addComponent(jButton2)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton3)))
-                        .addGap(3, 3, 3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblloi, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -569,8 +596,18 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_dateCaretUpdate
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        JFreeChart pieChart = createChart(createDataset());
-        ChartPanel chartPanel = new ChartPanel(pieChart);
+//        JFreeChart pieChart = createChart(createDataset());
+//        ChartPanel chartPanel = new ChartPanel(pieChart);
+//        JFrame frame = new JFrame();
+//        frame.add(chartPanel);
+//        frame.setTitle("Biểu đồ Doanh Thu Cafe");
+//        frame.setSize(600, 400);
+//        frame.setLocationRelativeTo(null);
+//        frame.setResizable(false);
+//        frame.setVisible(true);
+
+        ChartPanel chartPanel = new ChartPanel(createChart());
+        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
         JFrame frame = new JFrame();
         frame.add(chartPanel);
         frame.setTitle("Biểu đồ Doanh Thu Cafe");
@@ -578,6 +615,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
+ 
     }//GEN-LAST:event_jButton3ActionPerformed
     /**
      * @param args the command line arguments
@@ -636,6 +674,8 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SortSL;
+    private javax.swing.JButton bltDanhMuc;
+    private javax.swing.JButton bltDanhMuc1;
     private javax.swing.JButton bltSearch;
     private javax.swing.JButton bltXuatHD;
     private javax.swing.JButton jButton1;
