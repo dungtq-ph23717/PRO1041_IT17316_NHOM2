@@ -40,7 +40,7 @@ public class HoaDon {
         this.thanhTien = thanhTien;
     }
 
-    public HoaDon(String maHD, Ban ban, NhanVienViewModel tenNV, String ngayLapHD, String phuongThucThanhToan, SanPham sp, HoaDonChiTiet hdct, Topping tp, double thanhTien, KhuyenMai km, String tinhTrang) {
+    public HoaDon(String maHD, Ban ban, NhanVienViewModel tenNV, String ngayLapHD, String phuongThucThanhToan, SanPham sp, HoaDonChiTiet hdct, Topping tp, double thanhTien, String tinhTrang) {
         this.maHD = maHD;
         this.ban = ban;
         this.tenNV = tenNV;
@@ -50,7 +50,6 @@ public class HoaDon {
         this.hdct = hdct;
         this.tp = tp;
         this.thanhTien = thanhTien;
-        this.km = km;
         this.tinhTrang = tinhTrang;
     }
 
