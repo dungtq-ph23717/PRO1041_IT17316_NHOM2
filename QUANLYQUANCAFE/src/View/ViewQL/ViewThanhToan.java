@@ -94,7 +94,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     private DefaultComboBoxModel boxKM = new DefaultComboBoxModel();
     private DanhMucServiceImpl implDM = new DanhMucServiceImpl();
     private ToppingServiceImpl implTP = new ToppingServiceImpl();
-    private Color defaulColor = new Color(240,240,240);
+    private Color defaulColor = new Color(250, 250, 250);
 
     /**
      * Creates new form Menu1
@@ -104,18 +104,18 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
         uI.setNorthPane(null);
-
+        
         String[] headersBan = {"Tên bàn", "Loại bàn", "Trạng thái"};
         tbBan.setModel(dtmBan);
         dtmBan.setColumnIdentifiers(headersBan);
         listBan = implBan.getAllTT();
         showDataBan(listBan);
-
+        
         String[] headersHD = {"Mã HD", "Ngày lập", "Nhân viên", "Trạng thái"};
         tbHD.setModel(dtmHoaDon);
         dtmHoaDon.setColumnIdentifiers(headersHD);
         showDataHD(listHoaDon);
-
+        
         tbSP.setModel(dtmSanPham);
         String[] headersSP = {"Mã SP", "Tên SP", "Giá Bán", "Danh Mục", "Trạng Thái", "Mô tả", "Size"};
         dtmSanPham.setColumnIdentifiers(headersSP);
@@ -132,7 +132,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         dtmGioHang.setColumnIdentifiers(headersGH);
 //        listHDCT = implHDCT.getAll();
         showDataHDCT(listHDCT);
-
+        
         listKhuyenMai = implKM.getAllKMTT();
         boxModelGG.addElement("Chọn");
         cbbGG.setModel(boxModelGG);
@@ -145,7 +145,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         for (DanhMuc danhMuc : listDM) {
             boxModelDM.addElement(danhMuc.getTenDanhMuc());
         }
-
+        
         listTP = implTP.getAll();
         cbbTopping.setModel(boxModelTP);
         for (Topping tp : listTP) {
@@ -170,14 +170,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             dtmGioHang.addRow(new Object[]{x.getIdSP().getMaSP(), x.getIdSP().getTenSP(), x.getSoLuong(), x.getIdSP().getGiaBan(), x.getIdTopping().getTopping(), x.getGiaTien()});
         }
     }
-
+    
     private void showDataBan(List<Ban> list) {
         dtmBan.setRowCount(0);
         for (Ban x : list) {
             dtmBan.addRow(x.toRowDataTT());
         }
     }
-
+    
     private void clear() {
         txtBan.setText("__");
         txtMa.setText("__");
@@ -190,14 +190,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         txtGiaTopping.setText("0");
         txtTienThua.setText("0");
     }
-
+    
     private void showDataSP(List<SanPham> list) {
         dtmSanPham.setRowCount(0);
         for (SanPham sp : list) {
             dtmSanPham.addRow(new Object[]{sp.getMaSP(), sp.getTenSP(), sp.getGiaBan(), sp.getDanhMuc().getTenDanhMuc(), sp.getTrangThai(), sp.getMoTa(), sp.getSize().getSize()});
         }
     }
-
+    
     private void showDataHD(List<HoaDon> list) {
         dtmHoaDon.setRowCount(0);
         for (HoaDon x : list) {
@@ -358,9 +358,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         });
         jPopupMenu3.add(btDong);
 
-        setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Giỏ hàng"));
 
         tbGH.setModel(new javax.swing.table.DefaultTableModel(
@@ -386,6 +383,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
 
         jLabel1.setText("Chọn topping");
 
+        btDoi.setBackground(new java.awt.Color(255, 255, 255));
         btDoi.setText("Đổi");
         btDoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -422,7 +420,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 .addContainerGap())
         );
 
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Sản phẩm"));
 
         tbSP.setModel(new javax.swing.table.DefaultTableModel(
@@ -488,16 +485,10 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 .addContainerGap())
         );
 
-        PHoaDon.setBackground(new java.awt.Color(255, 255, 255));
         PHoaDon.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin thanh toán")));
         PHoaDon.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 PHoaDonMouseMoved(evt);
-            }
-        });
-        PHoaDon.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentMoved(java.awt.event.ComponentEvent evt) {
-                PHoaDonComponentMoved(evt);
             }
         });
 
@@ -530,8 +521,14 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         jLabel6.setText("Tiền thừa");
 
         bltThanhToan.setBackground(new java.awt.Color(255, 255, 255));
+        bltThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bltThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pay-per-click (1).png"))); // NOI18N
         bltThanhToan.setText("Thanh toán");
+        bltThanhToan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                bltThanhToanMouseMoved(evt);
+            }
+        });
         bltThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bltThanhToanActionPerformed(evt);
@@ -539,6 +536,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         });
 
         btHuyDon.setBackground(new java.awt.Color(255, 255, 255));
+        btHuyDon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btHuyDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/remove (2).png"))); // NOI18N
         btHuyDon.setText("Huỷ đơn");
         btHuyDon.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -553,6 +551,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         });
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/add (1) (1) (1).png"))); // NOI18N
         jButton2.setText("Tạo hoá đơn");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -579,6 +578,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
 
         jLabel10.setText("VND");
 
+        cbInHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cbInHD.setText("In hóa đơn");
 
         txtPrint.setColumns(20);
@@ -686,9 +686,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel16))))
                             .addGroup(PHoaDonLayout.createSequentialGroup()
-                                .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(bltThanhToan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btHuyDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(bltThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btHuyDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2)))
                         .addGap(50, 50, 50))
@@ -757,15 +757,15 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                             .addComponent(jButton2))
                         .addGap(18, 18, 18)
                         .addGroup(PHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bltThanhToan)
+                            .addComponent(bltThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbInHD))))
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Bàn"));
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         tbBan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -803,7 +803,6 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Hoá đơn"));
 
         tbHD.setModel(new javax.swing.table.DefaultTableModel(
@@ -843,11 +842,9 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 .addContainerGap())
         );
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setComponentPopupMenu(jPopupMenu3);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, 170));
@@ -870,7 +867,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -888,7 +885,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(PHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -957,7 +954,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 listHDCT = implHDCT.getAllviewGH(idHD.getID());
                 showDataHDCT(listHDCT);
             }
-
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Bỏ chọn sản phẩm");
         }
@@ -1053,7 +1050,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                             + "\tTên Mặt Hàng:  " + "\tĐơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
                             + "\n_______________________________________________________________________________________________________________\n"
                     );
-
+                    
                     DefaultTableModel mdpr = new DefaultTableModel();
                     mdpr = (DefaultTableModel) tbGH.getModel();
                     txtPrint.setText(txtPrint.getText());
@@ -1079,7 +1076,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                         JOptionPane.showMessageDialog(this, "In thất bại !");
                     }
                     JOptionPane.showMessageDialog(this, "In thành công!");
-
+                    
                     String ma = txtMa.getText();
                     HoaDonModel hd = new HoaDonModel(ma, ma);
                     JOptionPane.showMessageDialog(this, implHD.update(hd, ma, "Đã thanh toán"));
@@ -1113,7 +1110,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-
+            
         } else {
             int row1 = tbGH.getSelectedRow();
             String maGH = tbGH.getValueAt(row1, 0).toString();
@@ -1156,7 +1153,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
             } else {
                 JOptionPane.showMessageDialog(this, "Không đủ tiền");
             }
-
+            
         }
     }//GEN-LAST:event_bltThanhToanActionPerformed
 
@@ -1208,7 +1205,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     }//GEN-LAST:event_cbbLocDanhMucActionPerformed
 
     private void btHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyDonActionPerformed
-
+        
         if (tbHD.getRowCount() <= 1) {
             String ma = txtMa.getText();
             HoaDonModel hd = new HoaDonModel(ma, ma);
@@ -1360,7 +1357,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
     }//GEN-LAST:event_btDongActionPerformed
 
     private void btMoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoActionPerformed
-
+        
         initWebcam();
     }//GEN-LAST:event_btMoActionPerformed
 
@@ -1373,38 +1370,38 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         btHuyDon.setBackground(Color.red);
     }//GEN-LAST:event_btHuyDonMouseMoved
 
-    private void PHoaDonComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_PHoaDonComponentMoved
-
-        
-    }//GEN-LAST:event_PHoaDonComponentMoved
+    private void bltThanhToanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bltThanhToanMouseMoved
+        bltThanhToan.setBackground(Color.green);
+    }//GEN-LAST:event_bltThanhToanMouseMoved
 
     private void PHoaDonMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PHoaDonMouseMoved
-        btHuyDon.setBackground(defaulColor);
+         btHuyDon.setBackground(defaulColor);
+         bltThanhToan.setBackground(defaulColor);
     }//GEN-LAST:event_PHoaDonMouseMoved
-
+    
     private void fillDataGH(int index) {
         HoaDonChiTiet hdct = listHDCT.get(index);
         SanPham sp = listSanPham.get(index);
-
+        
         txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
         txtTenSP.setText(sp.getTenSP());
         txtDonGia.setText(String.valueOf(sp.getGiaBan()));
         txtSoL.setText(String.valueOf(hdct.getSoLuong()));
-
+        
     }
-
+    
     private void fillDataBan(int index) {
         Ban b = listBan.get(index);
         txtBan.setText(b.getTenBan());
     }
-
+    
     private void fillDataHD(int index) {
         HoaDon hd = listHoaDon.get(index);
         txtMa.setText(hd.getMaHD());
         txtNgay.setText(hd.getNgayLapHD());
         txtNhanVien.setText(hd.getTenNV().getTenNV());
     }
-
+    
     private void initWebcam() {
         Dimension size = WebcamResolution.QQVGA.getSize();
         webcam = webcam.getWebcams().get(0);
@@ -1415,7 +1412,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         jPanel5.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 180));
         executor.execute(this);
     }
-
+    
     @Override
     public void run() {
         do {
@@ -1442,11 +1439,11 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                 txtFake.setText(result.getText());
                 MucGiam(result.getText());
             }
-
+            
         } while (true);
-
+        
     }
-
+    
     private void MucGiam(String mucgiam) {
         if (txtFake.getText().equalsIgnoreCase("https://qrco.de/bdXusB")) {
             cbbGG.setSelectedItem("M1");
@@ -1531,5 +1528,5 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         t.setDaemon(true);
         return t;
     }
-
+    
 }

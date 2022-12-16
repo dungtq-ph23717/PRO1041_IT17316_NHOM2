@@ -53,15 +53,17 @@ public class BanModel {
         this.loaiBan = loaiBan;
         this.IDKV = IDKV;
         this.tenKV = tenKV;
+        
     }
 
-    public BanModel(String maBan, String tenBan, String moTa, String loaiBan, String IDKV, KhuVucModel tenKV) {
+    public BanModel(String maBan, String tenBan, String moTa, String loaiBan, String IDKV, KhuVucModel tenKV, String trangThai) {
         this.maBan = maBan;
         this.tenBan = tenBan;
         this.moTa = moTa;
         this.loaiBan = loaiBan;
         this.IDKV = IDKV;
         this.tenKV = tenKV;
+        this.trangThai = trangThai;
     }
 
     public String getId() {
