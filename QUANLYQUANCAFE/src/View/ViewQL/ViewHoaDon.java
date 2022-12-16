@@ -538,7 +538,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                         + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n"
                         + "\tNgày:\t\t\t" + txtNgay.getText() + "\n"
                         + "\tPhương thức thanh toán:\t\t" + txtPttt.getText() + "\n\n"
-                        + "\tTên Mặt Hàng:  " + "\tĐơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
+                        + "\tTên Mặt Hàng:  " + "  Đơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
                         + "\n_______________________________________________________________________________________________________________\n"
                 );
                 DefaultTableModel modelHDCT = new DefaultTableModel();
@@ -555,7 +555,7 @@ public class ViewHoaDon extends javax.swing.JInternalFrame {
                     String tenTP = modelHDCT.getValueAt(i, 8).toString();
                     String tienT = modelHDCT.getValueAt(i, 9).toString();
                     String status = modelHDCT.getValueAt(i, 10).toString();
-                    txtPrintBill.setText(txtPrintBill.getText() + "\t" + tenSP + "\t\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
+                    txtPrintBill.setText(txtPrintBill.getText() + "\t" + tenSP + "\t   " + donG + "\t" + soL + "\t" + tenTP + "\n");
                 }
                 txtPrintBill.setText(txtPrintBill.getText()
                         + "================================================================================\n\n"

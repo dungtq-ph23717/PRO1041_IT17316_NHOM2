@@ -1047,7 +1047,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                             + "\tBàn:\t\t\t" + txtBan.getText() + "\n"
                             + "\tNhân Viên:\t\t\t" + txtNhanVien.getText() + "\n"
                             + "\tNgày:\t\t\t" + txtNgay.getText() + "\n\n"
-                            + "\tTên Mặt Hàng:  " + "\tĐơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
+                            + "\tTên Mặt Hàng:" + "   Đơn Giá:   " + "\tSố Lượng:   " + "\tTopping:   "
                             + "\n_______________________________________________________________________________________________________________\n"
                     );
                     
@@ -1059,7 +1059,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                         String soL = mdpr.getValueAt(i, 2).toString();
                         String donG = mdpr.getValueAt(i, 3).toString();
                         String tenTP = mdpr.getValueAt(i, 4).toString();
-                        txtPrint.setText(txtPrint.getText() + "\t" + tenSP + "\t\t" + donG + "\t" + soL + "\t" + tenTP + "\n");
+                        txtPrint.setText(txtPrint.getText() + "\t" + tenSP + "\t   " + donG + "\t" + soL + "\t" + tenTP + "\n");
                     }
                     txtPrint.setText(txtPrint.getText()
                             + "________________________________________________________________________________________________\n"
