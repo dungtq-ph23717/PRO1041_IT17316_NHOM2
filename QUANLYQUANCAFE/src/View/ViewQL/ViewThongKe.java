@@ -1,7 +1,5 @@
 package View.ViewQL;
 
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
@@ -35,6 +33,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 
 /**
  *
@@ -48,21 +54,39 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
     private HoaDonServiceIblm implHD = new HoaDonServiceIblm();
     private List<SanPham> ListSanPham = new ArrayList<>();
     private SanPhamServiceImpl implSP = new SanPhamServiceImpl();
-
-    private static JFreeChart createChart(PieDataset dataset) {
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Đồ Uống Bán Chạy Nhất", dataset, true, true, true);
-        return chart;
+    
+    
+    public static JFreeChart createChart() {
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Đồ Uống Bán Chạy Nhất",
+                "Đồ Uống", "Số lượng",
+                createDataset(), PlotOrientation.VERTICAL, false, false, false);
+        return barChart;
     }
 
-    private static PieDataset createDataset() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Sinh tố dâu", new Double(5.0));
-        dataset.setValue("Cà Phê đen", new Double(10.0));
-        dataset.setValue("Bạc xỉu", new Double(3.0));
-        dataset.setValue("Trà hoa quả", new Double(0.0));
+    private static CategoryDataset createDataset() {
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(1, "Số người", "Sinh tố dâu");
+        dataset.addValue(10, "Số người", "Cà Phê đen");
+        dataset.addValue(100, "Số người", "Bạc xỉu");
+        dataset.addValue(1000, "Số người", "Trà hoa quả");
         return dataset;
     }
+
+//    private static JFreeChart createChart(PieDataset dataset) {
+//        JFreeChart chart = ChartFactory.createPieChart(
+//                "Đồ Uống Bán Chạy Nhất", dataset, true, true, true);
+//        return chart;
+//    }
+//
+//    private static PieDataset createDataset() {
+//        DefaultPieDataset dataset = new DefaultPieDataset();
+//        dataset.setValue("Sinh tố dâu", new Double(5.0));
+//        dataset.setValue("Cà Phê đen", new Double(10.0));
+//        dataset.setValue("Bạc xỉu", new Double(3.0));
+//        dataset.setValue("Trà hoa quả", new Double(0.0));
+//        return dataset;
+//    }
 
     String strFind = "";
 
@@ -143,7 +167,6 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lblloi = new javax.swing.JLabel();
-        bltThongKe = new javax.swing.JButton();
         SortSL = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -153,6 +176,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         bltXuatHD = new javax.swing.JButton();
         txtNgaybatDau = new com.toedter.calendar.JDateChooser();
         txtNgayCuoi = new com.toedter.calendar.JDateChooser();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_thongke = new javax.swing.JTable();
@@ -201,16 +225,6 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Tìm Kiếm Theo Hóa Đơn");
 
-        bltThongKe.setBackground(new java.awt.Color(0, 0, 0));
-        bltThongKe.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        bltThongKe.setForeground(new java.awt.Color(102, 255, 51));
-        bltThongKe.setText("+");
-        bltThongKe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bltThongKeActionPerformed(evt);
-            }
-        });
-
         SortSL.setText("Sắp Xếp Số Lượng");
         SortSL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,17 +259,19 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton3.setText("Biểu Đồ");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(360, 360, 360)
-                        .addComponent(bltThongKe)
-                        .addGap(29, 29, 29)
-                        .addComponent(bltXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,33 +289,37 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                                 .addComponent(bltSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(21, 21, 21)
+                                    .addComponent(jLabel3))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addComponent(SortSL)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(jButton1)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(txt_date, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(23, 23, 23)
-                                .addComponent(jButton2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(SortSL)
-                                .addGap(29, 29, 29)
-                                .addComponent(jButton1)))
-                        .addGap(96, 96, 96)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblloi, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(bltXuatHD, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(177, 177, 177))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(bltThongKe)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addComponent(bltXuatHD))
+                .addContainerGap()
+                .addComponent(bltXuatHD)
+                .addGap(1, 1, 1)
+                .addComponent(jLabel3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,7 +330,9 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jButton2))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(lblloi, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -329,7 +351,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                                 .addComponent(txtNgayCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel10)
                     .addComponent(bltSearch))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
@@ -523,8 +545,10 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
             List<HoaDon> searchTheoDate1 = implHD.searchTheoDate1(date1, date2);
             LoadTable(searchTheoDate1);
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(this, "Tìm kiếm thất bại !");
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thất bại !");
         }
+        TinhTong();
+        TinhTongSlDon();
     }//GEN-LAST:event_bltSearchActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -543,18 +567,6 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         Collections.sort(listHoaDon, (a, b) -> (int) (b.getHdct().getSoLuong() - a.getHdct().getSoLuong()));
         LoadTable(listHoaDon);
     }//GEN-LAST:event_SortSLActionPerformed
-
-    private void bltThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bltThongKeActionPerformed
-        JFreeChart pieChart = createChart(createDataset());
-        ChartPanel chartPanel = new ChartPanel(pieChart);
-        JFrame frame = new JFrame();
-        frame.add(chartPanel);
-        frame.setTitle("Biểu đồ Doanh Thu Cafe");
-        frame.setSize(600, 400);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
-    }//GEN-LAST:event_bltThongKeActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         txt_date.setText("");
@@ -582,11 +594,34 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
     private void txt_dateCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_dateCaretUpdate
 
     }//GEN-LAST:event_txt_dateCaretUpdate
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+//        JFreeChart pieChart = createChart(createDataset());
+//        ChartPanel chartPanel = new ChartPanel(pieChart);
+//        JFrame frame = new JFrame();
+//        frame.add(chartPanel);
+//        frame.setTitle("Biểu đồ Doanh Thu Cafe");
+//        frame.setSize(600, 400);
+//        frame.setLocationRelativeTo(null);
+//        frame.setResizable(false);
+//        frame.setVisible(true);
+
+        ChartPanel chartPanel = new ChartPanel(createChart());
+        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        JFrame frame = new JFrame();
+        frame.add(chartPanel);
+        frame.setTitle("Biểu đồ Doanh Thu Cafe");
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
+ 
+    }//GEN-LAST:event_jButton3ActionPerformed
     /**
      * @param args the command line arguments
      */
-    
-     public void InhoaDon1() {
+
+    public void InhoaDon1() {
         try {
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet spreadSheet = workbook.createSheet("THỐNG KÊ");
@@ -618,10 +653,6 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < listHD.size(); i++) {
                 HoaDon hd = listHD.get(i);
-//                Ban b = listB.get(i);
-//                SanPham sp = listSP.get(i);
-//                HoaDonChiTiet hdct = listHDCT.get(i);
-//                Topping tp = listTP.get(i);
                 row = spreadSheet.createRow((short) 4 + i);
                 row.setHeight((short) 400);
                 row.createCell(0).setCellValue(hd.getMaHD());
@@ -630,7 +661,7 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
                 row.createCell(3).setCellValue(hd.getHdct().getSoLuong());
                 row.createCell(4).setCellValue(hd.getThanhTien());
                 row.createCell(5).setCellValue(hd.getTinhTrang());
-         
+
             }
             FileOutputStream out = new FileOutputStream(new File("D:\\TK.xlsx"));
             workbook.write(out);
@@ -643,11 +674,13 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SortSL;
+    private javax.swing.JButton bltDanhMuc;
+    private javax.swing.JButton bltDanhMuc1;
     private javax.swing.JButton bltSearch;
-    private javax.swing.JButton bltThongKe;
     private javax.swing.JButton bltXuatHD;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
