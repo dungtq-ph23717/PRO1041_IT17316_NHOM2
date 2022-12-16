@@ -59,9 +59,7 @@ public class SanPhamServiceImpl implements SanPhamService {
         if (sp.getMaSP().isEmpty() || sp.getTenSP().isEmpty() || sp.getMoTa().isEmpty() || String.valueOf(sp.getGiaBan()).isEmpty()) {
             return "Không được để trống";
         }
-        if (sp.getTenSP().matches("[a-z A-Z]+") == false) {
-            return "Tên phải là chữ";
-        }
+        
         boolean add = rps.update(sp, ma);
         if (add) {
             return "Đã sửa thành công";
