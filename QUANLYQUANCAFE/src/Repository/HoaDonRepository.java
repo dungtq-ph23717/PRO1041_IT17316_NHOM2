@@ -147,7 +147,7 @@ public class HoaDonRepository {
                 + "                on HoaDon.ID = HoaDonChiTiet.IDHD\n"
                 + "                inner join SanPham ON HoaDonChiTiet.IDSP = SanPham.ID\n"
                 + "                inner join Topping TP ON HoaDonChiTiet.IDTopping = TP.ID\n"
-                + "		   where TinhTrang like N'Đã thanh toán'"
+                + "		   where TinhTrang like N'Đã thanh toán' and"
                 + "                NgayLapHD BETWEEN ? AND ? ";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setString(1, date1);

@@ -518,8 +518,10 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
             List<HoaDon> searchTheoDate1 = implHD.searchTheoDate1(date1, date2);
             LoadTable(searchTheoDate1);
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(this, "Tìm kiếm thất bại !");
+            JOptionPane.showMessageDialog(this, "Tìm kiếm thất bại !");
         }
+        TinhTong();
+        TinhTongSlDon();
     }//GEN-LAST:event_bltSearchActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
