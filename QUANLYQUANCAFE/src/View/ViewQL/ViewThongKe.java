@@ -572,6 +572,8 @@ public class ViewThongKe extends javax.swing.JInternalFrame {
         txt_date.setText("");
         listHoaDon = implHD.getListHD();
         LoadTable(listHoaDon);
+        TinhTong();
+        TinhTongSlDon();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txt_dateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dateKeyReleased
