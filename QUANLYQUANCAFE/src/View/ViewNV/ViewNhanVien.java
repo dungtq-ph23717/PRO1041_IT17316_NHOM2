@@ -93,7 +93,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
 
         txtQuanLyKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtQuanLyKhuyenMai.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtQuanLyKhuyenMai.setText("        Khuyến mãi");
+        txtQuanLyKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/promotion (1).png"))); // NOI18N
+        txtQuanLyKhuyenMai.setText("     Khuyến mãi");
         txtQuanLyKhuyenMai.setToolTipText("");
         txtQuanLyKhuyenMai.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -116,8 +117,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyKhuyenMaiLayout.createSequentialGroup()
-                    .addGap(0, 37, Short.MAX_VALUE)
-                    .addComponent(txtQuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 46, Short.MAX_VALUE)
+                    .addComponent(txtQuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         QuanLyKhuyenMaiLayout.setVerticalGroup(
             QuanLyKhuyenMaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +132,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
         txtSanPham.setBackground(new java.awt.Color(156, 132, 122));
         txtSanPham.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtSanPham.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtSanPham.setText("       Sản phẩm");
+        txtSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/combo (1).png"))); // NOI18N
+        txtSanPham.setText("     Sản phẩm");
         txtSanPham.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 txtSanPhamMouseMoved(evt);
@@ -165,7 +167,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
 
         txtThongKe.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtThongKe.setText("       Thống kê");
+        txtThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/bar-chart (1).png"))); // NOI18N
+        txtThongKe.setText("     Thống kê");
         txtThongKe.setToolTipText("");
         txtThongKe.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -186,7 +189,7 @@ public class ViewNhanVien extends javax.swing.JFrame {
         ThongKeLayout.setHorizontalGroup(
             ThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThongKeLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
                 .addComponent(txtThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         ThongKeLayout.setVerticalGroup(
@@ -200,7 +203,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
 
         txtDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtDangXuat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtDangXuat.setText("         Đăng xuất");
+        txtDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logout (1).png"))); // NOI18N
+        txtDangXuat.setText("     Đăng xuất");
         txtDangXuat.setToolTipText("");
         txtDangXuat.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -222,7 +226,7 @@ public class ViewNhanVien extends javax.swing.JFrame {
             DangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DangXuatLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         DangXuatLayout.setVerticalGroup(
             DangXuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +237,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
 
         txtQuanLyNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtQuanLyNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtQuanLyNhanVien.setText("         Nhân viên");
+        txtQuanLyNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/team (1).png"))); // NOI18N
+        txtQuanLyNhanVien.setText("     Nhân viên");
         txtQuanLyNhanVien.setToolTipText("");
         txtQuanLyNhanVien.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -256,8 +261,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(QuanLyNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyNhanVienLayout.createSequentialGroup()
-                    .addGap(0, 33, Short.MAX_VALUE)
-                    .addComponent(txtQuanLyNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 46, Short.MAX_VALUE)
+                    .addComponent(txtQuanLyNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         QuanLyNhanVienLayout.setVerticalGroup(
             QuanLyNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,13 +275,15 @@ public class ViewNhanVien extends javax.swing.JFrame {
 
         anh.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         anh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        anh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/zyro-image (1).png"))); // NOI18N
         anh.setText("CoffeeShop");
 
         QuanLyBan.setBackground(new java.awt.Color(156, 132, 122));
 
         txtQuanLyBan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtQuanLyBan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtQuanLyBan.setText("      Bàn");
+        txtQuanLyBan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/side-table (2).png"))); // NOI18N
+        txtQuanLyBan.setText("     Bàn");
         txtQuanLyBan.setToolTipText("");
         txtQuanLyBan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -297,7 +304,7 @@ public class ViewNhanVien extends javax.swing.JFrame {
         QuanLyBanLayout.setHorizontalGroup(
             QuanLyBanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, QuanLyBanLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
                 .addComponent(txtQuanLyBan, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         QuanLyBanLayout.setVerticalGroup(
@@ -309,7 +316,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
 
         txtLichSuOrder1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtLichSuOrder1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        txtLichSuOrder1.setText("      Lịch sử order");
+        txtLichSuOrder1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/bill (1).png"))); // NOI18N
+        txtLichSuOrder1.setText("     Hoá đơn");
         txtLichSuOrder1.setToolTipText("");
         txtLichSuOrder1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -330,8 +338,8 @@ public class ViewNhanVien extends javax.swing.JFrame {
         LichSuOrderLayout.setHorizontalGroup(
             LichSuOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LichSuOrderLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtLichSuOrder1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addComponent(txtLichSuOrder1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         LichSuOrderLayout.setVerticalGroup(
             LichSuOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,6 +353,7 @@ public class ViewNhanVien extends javax.swing.JFrame {
         txtThanhToan1.setBackground(new java.awt.Color(156, 132, 122));
         txtThanhToan1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtThanhToan1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtThanhToan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/wallet (1).png"))); // NOI18N
         txtThanhToan1.setText("     Bán hàng");
         txtThanhToan1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -366,7 +375,7 @@ public class ViewNhanVien extends javax.swing.JFrame {
             ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ThanhToanLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtThanhToan1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtThanhToan1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         ThanhToanLayout.setVerticalGroup(
             ThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,26 +393,26 @@ public class ViewNhanVien extends javax.swing.JFrame {
             .addComponent(QuanLyKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(DangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(QuanLyNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
             .addComponent(ThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(LichSuOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(QuanLyBan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(anh)
+                .addGap(50, 50, 50))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(anh)
-                .addGap(40, 40, 40)
+                .addGap(29, 29, 29)
+                .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(LichSuOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(QuanLyBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(QuanLySanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -411,9 +420,9 @@ public class ViewNhanVien extends javax.swing.JFrame {
                 .addComponent(QuanLyKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(QuanLyNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(33, 33, 33)
                 .addComponent(DangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(1079, 731));
@@ -441,8 +450,11 @@ public class ViewNhanVien extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -632,7 +644,7 @@ public class ViewNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLichSuOrder1MouseMoved
 
     private void txtLichSuOrder1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLichSuOrder1MouseClicked
-        ViewXemLichSuOder m = new ViewXemLichSuOder();
+        ViewHoaDon m = new ViewHoaDon();
         jDesktopPane1.removeAll();
         jDesktopPane1.add(m).setVisible(true);
     }//GEN-LAST:event_txtLichSuOrder1MouseClicked
