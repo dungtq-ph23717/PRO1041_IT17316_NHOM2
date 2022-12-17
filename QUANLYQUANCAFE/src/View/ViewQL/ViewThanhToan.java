@@ -847,7 +847,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
 
         jPanel6.setComponentPopupMenu(jPopupMenu3);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, 170));
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 300, 170));
         jPanel5.add(txtFake, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 260, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -885,7 +885,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(PHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -1409,7 +1409,7 @@ public class ViewThanhToan extends javax.swing.JInternalFrame implements Runnabl
         panel = new WebcamPanel(webcam);
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
-        jPanel5.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 180));
+       jPanel5.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 300, 170));
         executor.execute(this);
     }
     
