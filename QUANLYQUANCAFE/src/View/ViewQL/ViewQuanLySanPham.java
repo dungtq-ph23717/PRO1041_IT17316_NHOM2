@@ -251,6 +251,7 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         rdoNgungBan.setText("Ngừng bán");
 
         buttonGroup1.add(rdoDangBan);
+        rdoDangBan.setSelected(true);
         rdoDangBan.setText("Đang bán");
 
         bltLamMoiDM.setBackground(new java.awt.Color(255, 255, 255));
@@ -461,13 +462,13 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -636,7 +637,6 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
         txtID.setEnabled(false);
 
         buttonGroup1.add(rdoDangBAn);
-        rdoDangBAn.setSelected(true);
         rdoDangBAn.setText("Đang bán");
 
         buttonGroup1.add(rdoNgungBan1);
@@ -783,26 +783,30 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
-        String ma = txtMa.getText();
-        String ten = txtName.getText();
-        String gia = txtGia.getText();
-        String moTa = txtMota.getText();
-        String danhMuc = (String) cbbDanhMuc.getSelectedItem();
-        boolean tt = rdoDangBan.isSelected();
-        String status = "";
-        if (tt) {
-            status = "Đang bán";
-        } else {
-            status = "Ngừng bán";
+        try {
+            String ma = txtMa.getText();
+            String ten = txtName.getText();
+            String gia = txtGia.getText();
+            String moTa = txtMota.getText();
+            String danhMuc = (String) cbbDanhMuc.getSelectedItem();
+            boolean tt = rdoDangBan.isSelected();
+            String status = "";
+            if (tt) {
+                status = "Đang bán";
+            } else {
+                status = "Ngừng bán";
+            }
+            String size = (String) cbbSize.getSelectedItem();
+            Size sizeImpl = impl.getOne(cbbSize.getSelectedItem().toString());
+            DanhMuc dm = danhMucService.getOne(cbbDanhMuc.getSelectedItem().toString());
+            SanPhamModel sp = new SanPhamModel(ma, ten, Double.valueOf(gia), moTa, sizeImpl.getId(), dm.getId(), status);
+            JOptionPane.showMessageDialog(this, spService.update(sp, ma));
+            listDanhMuc = danhMucService.getAll();
+            listSanPham = spService.getAll();
+            showData(listSanPham);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Không được để trống !");
         }
-        String size = (String) cbbSize.getSelectedItem();
-        Size sizeImpl = impl.getOne(cbbSize.getSelectedItem().toString());
-        DanhMuc dm = danhMucService.getOne(cbbDanhMuc.getSelectedItem().toString());
-        SanPhamModel sp = new SanPhamModel(ma, ten, Double.valueOf(gia), moTa, sizeImpl.getId(), dm.getId(), status);
-        JOptionPane.showMessageDialog(this, spService.update(sp, ma));
-        listDanhMuc = danhMucService.getAll();
-        listSanPham = spService.getAll();
-        showData(listSanPham);
     }//GEN-LAST:event_btCapNhatActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
@@ -819,26 +823,30 @@ public class ViewQuanLySanPham extends javax.swing.JInternalFrame {
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code hereString id = txtId.getText();
-        String ma = txtMa.getText();
-        String ten = txtName.getText();
-        String gia = txtGia.getText();
-        String moTa = txtMota.getText();
-        String danhMuc = (String) cbbDanhMuc.getSelectedItem();
-        boolean tt = rdoDangBan.isSelected();
-        String status = "";
-        if (tt) {
-            status = "Đang bán";
-        } else {
-            status = "Ngừng bán";
+        try {
+            String ma = txtMa.getText();
+            String ten = txtName.getText();
+            String gia = txtGia.getText();
+            String moTa = txtMota.getText();
+            String danhMuc = (String) cbbDanhMuc.getSelectedItem();
+            boolean tt = rdoDangBan.isSelected();
+            String status = "";
+            if (tt) {
+                status = "Đang bán";
+            } else {
+                status = "Ngừng bán";
+            }
+            String size = (String) cbbSize.getSelectedItem();
+            Size sizeImpl = impl.getOne(cbbSize.getSelectedItem().toString());
+            DanhMuc dm = danhMucService.getOne(cbbDanhMuc.getSelectedItem().toString());
+            SanPhamModel sp = new SanPhamModel(ma, ten, Double.valueOf(gia), moTa, sizeImpl.getId(), dm.getId(), status);
+            JOptionPane.showMessageDialog(this, spService.add(sp));
+            listDanhMuc = danhMucService.getAll();
+            listSanPham = spService.getAll();
+            showData(listSanPham);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Không được để trống !");
         }
-        String size = (String) cbbSize.getSelectedItem();
-        Size sizeImpl = impl.getOne(cbbSize.getSelectedItem().toString());
-        DanhMuc dm = danhMucService.getOne(cbbDanhMuc.getSelectedItem().toString());
-        SanPhamModel sp = new SanPhamModel(ma, ten, Double.valueOf(gia), moTa, sizeImpl.getId(), dm.getId(), status);
-        JOptionPane.showMessageDialog(this, spService.add(sp));
-        listDanhMuc = danhMucService.getAll();
-        listSanPham = spService.getAll();
-        showData(listSanPham);
     }//GEN-LAST:event_btThemActionPerformed
 
     private void btnXoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoasActionPerformed
